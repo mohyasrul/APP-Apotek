@@ -36,6 +36,7 @@ export default function Settings() {
     sia_expiry_date: profile?.sia_expiry_date || '',
     sipa_expiry_date: profile?.sipa_expiry_date || '',
     stra_expiry_date: profile?.stra_expiry_date || '',
+    receipt_width: (profile?.receipt_width || '58mm') as '58mm' | '80mm' | 'A4',
   });
   const [saving, setSaving] = useState(false);
   const [logoFile, setLogoFile] = useState<File | null>(null);
@@ -111,6 +112,7 @@ export default function Settings() {
           sia_expiry_date: form.sia_expiry_date || null,
           sipa_expiry_date: form.sipa_expiry_date || null,
           stra_expiry_date: form.stra_expiry_date || null,
+          receipt_width: form.receipt_width || '58mm',
         })
         .eq('id', profile.id);
 
@@ -446,6 +448,29 @@ export default function Settings() {
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Receipt Settings */}
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <Storefront weight="fill" className="w-5 h-5 text-blue-500" />
+              Pengaturan Struk
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">Lebar Kertas Struk</label>
+                <select
+                  value={form.receipt_width}
+                  onChange={e => setForm(f => ({ ...f, receipt_width: e.target.value as '58mm' | '80mm' | 'A4' }))}
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                >
+                  <option value="58mm">58mm — Printer Termal Kecil (paling umum)</option>
+                  <option value="80mm">80mm — Printer Termal Besar</option>
+                  <option value="A4">A4 — Printer Biasa / Inkjet</option>
+                </select>
+                <p className="text-xs text-slate-400 mt-1">Sesuaikan dengan tipe printer yang digunakan di apotek Anda.</p>
+              </div>
             </div>
           </div>
 

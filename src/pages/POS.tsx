@@ -49,6 +49,7 @@ export default function POS() {
     customerPhone: string;
   } | null>(null);
   const [medicineCategories, setMedicineCategories] = useState<Record<string, string>>({});
+  const [showShortcutHelp, setShowShortcutHelp] = useState(false);
 
   // Receipt
   const [lastReceipt, setLastReceipt] = useState<ReceiptData | null>(null);
@@ -115,7 +116,12 @@ export default function POS() {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger shortcuts when typing in input fields
+      const tag = (e.target as HTMLElement).tagName;
+      const isInput = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+
       if (e.key === 'F2') { e.preventDefault(); searchInputRef.current?.focus(); }
+      if (e.key === 'F4') { e.preventDefault(); setShowScanner(s => !s); }
       if (e.key === 'F8' || (e.ctrlKey && e.key === 'Enter')) {
         e.preventDefault();
         if (cartRef.current.length > 0) setShowCheckoutModal(true);
@@ -124,7 +130,13 @@ export default function POS() {
         setShowCheckoutModal(false);
         setShowReceiptModal(false);
         setShowMobileCart(false);
+        setShowShortcutHelp(false);
         if (showScannerRef.current) setShowScanner(false);
+      }
+      // ? key = show shortcut help (only when not typing in an input)
+      if (e.key === '?' && !isInput) {
+        e.preventDefault();
+        setShowShortcutHelp(s => !s);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -624,6 +636,36 @@ export default function POS() {
             setActiveShiftId(null);
           }}
         />
+      )}
+
+      {/* Keyboard Shortcut Help Overlay */}
+      {showShortcutHelp && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm" onClick={() => setShowShortcutHelp(false)}>
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
+            <h3 className="font-bold text-lg text-slate-800 dark:text-slate-100 mb-4">⌨️ Keyboard Shortcuts</h3>
+            <div className="space-y-2 text-sm">
+              {[
+                { key: 'F2', desc: 'Cari obat / fokus pencarian' },
+                { key: 'F4', desc: 'Toggle scanner barcode' },
+                { key: 'F8', desc: 'Buka checkout / bayar' },
+                { key: 'Ctrl+Enter', desc: 'Buka checkout / bayar' },
+                { key: 'Esc', desc: 'Tutup modal / batal' },
+                { key: '?', desc: 'Tampilkan bantuan ini' },
+              ].map(s => (
+                <div key={s.key} className="flex items-center justify-between py-1.5 border-b border-slate-100 dark:border-slate-800 last:border-0">
+                  <span className="text-slate-600 dark:text-slate-300">{s.desc}</span>
+                  <kbd className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-2 py-0.5 rounded text-xs font-mono font-bold">{s.key}</kbd>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowShortcutHelp(false)}
+              className="mt-4 w-full bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 py-2 rounded-xl text-sm font-medium transition-colors"
+            >
+              Tutup
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -72,6 +72,8 @@ export type UserProfile = {
   sia_expiry_date?: string | null;
   sipa_expiry_date?: string | null;
   stra_expiry_date?: string | null;
+  /** Lebar kertas struk: 58mm, 80mm, atau A4 */
+  receipt_width?: '58mm' | '80mm' | 'A4' | null;
   /** Jika kasir, ini adalah ID user owner apoteknya. NULL = user ini adalah owner. */
   pharmacy_owner_id?: string | null;
   created_at?: string;

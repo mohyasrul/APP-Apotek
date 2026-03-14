@@ -9,6 +9,7 @@ import { useAuth } from "../lib/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { formatRupiah, getExpiryStatus, getGreeting, getLicenseExpiryStatus } from "../lib/types";
+import { OnboardingWizard } from "../components/OnboardingWizard";
 
 type ChartDataItem = { name: string; sales: number; isToday?: boolean };
 type TopSellingItem = { name: string; category: string; totalQty: number; unit: string };
@@ -27,8 +28,21 @@ const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<
 };
 
 export default function Dashboard() {
-  const { user, profile, effectiveUserId } = useAuth();
+  const { user, profile, effectiveUserId, refreshProfile } = useAuth();
   const navigate = useNavigate();
+
+  // ── Onboarding: tampilkan wizard jika owner baru belum setup pharmacy_name ──
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  useEffect(() => {
+    if (profile && profile.role === 'owner' && !profile.pharmacy_name) {
+      setShowOnboarding(true);
+    }
+  }, [profile]);
+
+  const handleOnboardingComplete = async () => {
+    await refreshProfile();
+    setShowOnboarding(false);
+  };
 
   const [metrics, setMetrics] = useState({
     totalSales: 0, itemsSold: 0, totalTransactions: 0,
@@ -257,6 +271,11 @@ export default function Dashboard() {
   const periodLabel = dateFilter === 'week' ? '7 Hari' : dateFilter === 'month' ? '30 Hari' : 'Periode';
 
   return (
+    <>
+    {showOnboarding && (
+      <OnboardingWizard onComplete={handleOnboardingComplete} />
+    )}
+    {!showOnboarding && (
     <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 md:pb-0">
       <main className="flex-1 p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
         {/* Header */}
@@ -590,5 +609,7 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
+    )}
+    </>
   );
 }

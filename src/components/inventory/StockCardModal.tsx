@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 import { 
   X, ClockCounterClockwise, ArrowUpRight, ArrowDownLeft, 
-  Tag, Info, Warning, Flask
+  Tag, Info, Warning, Flask, Printer
 } from '@phosphor-icons/react';
 import { type Medicine, type StockMovement } from '../../lib/types';
+import { useAuth } from '../../lib/AuthContext';
 
 type Props = {
   medicine: Medicine;
@@ -20,6 +21,7 @@ type StockCardEntry = StockMovement & {
 };
 
 export function StockCardModal({ medicine, onClose }: Props) {
+  const { profile } = useAuth();
   const [entries, setEntries] = useState<StockCardEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -82,6 +84,105 @@ export function StockCardModal({ medicine, onClose }: Props) {
     return labels[type] || type;
   };
 
+  /** Cetak Kartu Stok sesuai format PMK 73/2016 */
+  const handlePrint = () => {
+    const pharmacyName = profile?.pharmacy_name || 'Apotek';
+    const apotekerName = profile?.apoteker_name || '';
+    const siaNumber = profile?.sia_number || '';
+
+    const escapeHtml = (str: string) => str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+
+    const rowsHTML = entries.map(entry => {
+      const date = new Date(entry.created_at).toLocaleDateString('id-ID', {
+        day: '2-digit', month: '2-digit', year: 'numeric'
+      });
+      const batchNum = entry.batch?.batch_number || '-';
+      const expiryDate = entry.batch?.expiry_date
+        ? new Date(entry.batch.expiry_date).toLocaleDateString('id-ID', { month: 'short', year: 'numeric' })
+        : '-';
+      const masuk = entry.quantity > 0 ? entry.quantity.toString() : '';
+      const keluar = entry.quantity < 0 ? Math.abs(entry.quantity).toString() : '';
+      const notes = escapeHtml(entry.notes || getMovementLabel(entry.type));
+      const refId = entry.reference_id ? entry.reference_id.slice(0, 8) : '-';
+
+      return `<tr>
+        <td>${date}</td>
+        <td>${escapeHtml(notes)}</td>
+        <td>${escapeHtml(batchNum)}</td>
+        <td>${expiryDate}</td>
+        <td>${refId}</td>
+        <td class="center">${masuk}</td>
+        <td class="center">${keluar}</td>
+      </tr>`;
+    }).join('');
+
+    const html = `<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  body { font-family: Arial, sans-serif; margin: 10mm; font-size: 11px; color: #000; }
+  h2 { text-align: center; margin: 0 0 4px; font-size: 16px; }
+  .sub { text-align: center; font-size: 11px; color: #555; margin-bottom: 12px; }
+  .info { margin-bottom: 12px; font-size: 11px; }
+  .info td { padding: 2px 8px 2px 0; vertical-align: top; }
+  table.stock { width: 100%; border-collapse: collapse; font-size: 10px; }
+  table.stock th, table.stock td { border: 1px solid #333; padding: 4px 6px; }
+  table.stock th { background: #f0f0f0; font-weight: bold; text-align: center; }
+  .center { text-align: center; }
+  .footer { margin-top: 24px; display: flex; justify-content: flex-end; }
+  .sign { text-align: center; width: 160px; }
+  @media print { body { margin: 5mm; } }
+</style>
+</head>
+<body>
+  <h2>KARTU STOK OBAT</h2>
+  <div class="sub">${escapeHtml(pharmacyName)}${siaNumber ? ' — SIA: ' + escapeHtml(siaNumber) : ''}</div>
+  <table class="info">
+    <tr><td><b>Nama Obat</b></td><td>: ${escapeHtml(medicine.name)}</td></tr>
+    <tr><td><b>Satuan</b></td><td>: ${escapeHtml(medicine.unit)}</td></tr>
+    <tr><td><b>Stok Saat Ini</b></td><td>: ${medicine.stock}</td></tr>
+    <tr><td><b>Tanggal Cetak</b></td><td>: ${new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })}</td></tr>
+  </table>
+  <table class="stock">
+    <thead>
+      <tr>
+        <th>Tanggal</th>
+        <th>Keterangan</th>
+        <th>No. Batch</th>
+        <th>Kadaluarsa</th>
+        <th>No. Dokumen</th>
+        <th>Masuk</th>
+        <th>Keluar</th>
+      </tr>
+    </thead>
+    <tbody>${rowsHTML}</tbody>
+  </table>
+  <div class="footer">
+    <div class="sign">
+      <div style="margin-top:40px; border-bottom:1px solid #000; margin-bottom:4px;"></div>
+      <div style="font-size:10px;">${apotekerName ? escapeHtml(apotekerName) : 'Apoteker Penanggung Jawab'}</div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.top = '-9999px';
+    document.body.appendChild(iframe);
+    iframe.contentDocument?.write(html);
+    iframe.contentDocument?.close();
+    iframe.contentWindow?.focus();
+    const removeIframe = () => { if (document.body.contains(iframe)) document.body.removeChild(iframe); };
+    if (iframe.contentWindow) iframe.contentWindow.onafterprint = removeIframe;
+    iframe.contentWindow?.print();
+    setTimeout(removeIframe, 60_000);
+  };
+
   return (
     <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm shadow-2xl">
       <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
@@ -97,9 +198,19 @@ export function StockCardModal({ medicine, onClose }: Props) {
               </p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
-            <X weight="bold" className="w-6 h-6" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handlePrint}
+              disabled={entries.length === 0}
+              className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-full transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              title="Cetak Kartu Stok"
+            >
+              <Printer weight="bold" className="w-5 h-5" />
+            </button>
+            <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+              <X weight="bold" className="w-6 h-6" />
+            </button>
+          </div>
         </div>
 
         <div className="flex-1 overflow-y-auto p-2 custom-scrollbar">

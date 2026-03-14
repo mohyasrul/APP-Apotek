@@ -39,6 +39,8 @@ export type ReceiptData = {
   siaNumber?: string;
   sipaNumber?: string;
   logoUrl?: string | null;
+  /** Lebar kertas struk: 58mm (default), 80mm, atau A4 */
+  receiptWidth?: '58mm' | '80mm' | 'A4';
 };
 
 export type ApographItem = {
@@ -46,6 +48,8 @@ export type ApographItem = {
   quantity: number;
   dispensed_quantity: number;
   signa?: string;
+  /** Jumlah iterasi (pengulangan) resep jika ada */
+  iter?: number | null;
 };
 
 export type ApographData = {
@@ -64,7 +68,7 @@ export type ApographData = {
   siaNumber?: string;
   sipaNumber?: string;
 };
-/** Hasilkan HTML receipt siap print (lebar 58mm, font monospace) */
+/** Hasilkan HTML receipt siap print (lebar configurable: 58mm/80mm/A4) */
 export function generateReceiptHTML(receipt: ReceiptData): string {
   const {
     transactionNumber,
@@ -81,7 +85,15 @@ export function generateReceiptHTML(receipt: ReceiptData): string {
     siaNumber,
     sipaNumber,
     logoUrl,
+    receiptWidth = '58mm',
   } = receipt;
+
+  // Determine CSS width and font size based on paper width
+  const widthCSS = receiptWidth === 'A4' ? '210mm' : receiptWidth;
+  const fontSize = receiptWidth === 'A4' ? '14px' : receiptWidth === '80mm' ? '13px' : '12px';
+  const titleSize = receiptWidth === 'A4' ? '18px' : receiptWidth === '80mm' ? '16px' : '14px';
+  const totalSize = receiptWidth === 'A4' ? '18px' : receiptWidth === '80mm' ? '16px' : '14px';
+  const logoHeight = receiptWidth === 'A4' ? '80px' : '56px';
 
   const paymentLabel: Record<string, string> = {
     cash: 'Tunai',
@@ -122,8 +134,8 @@ export function generateReceiptHTML(receipt: ReceiptData): string {
 <style>
   body {
     font-family: monospace;
-    font-size: 12px;
-    width: 58mm;
+    font-size: ${fontSize};
+    width: ${widthCSS};
     margin: 0;
     padding: 8px;
   }
@@ -137,8 +149,8 @@ export function generateReceiptHTML(receipt: ReceiptData): string {
 </style>
 </head>
 <body>
-  ${logoUrl && /^(https?:\/\/|data:image\/)/.test(logoUrl) ? `<div class="center" style="margin-bottom:6px;"><img src="${escapeHtml(logoUrl)}" alt="" style="max-height:56px; max-width:90%; object-fit:contain;"/></div>` : ''}
-  <div class="center bold" style="font-size:14px;">${safeName}</div>
+  ${logoUrl && /^(https?:\/\/|data:image\/)/.test(logoUrl) ? `<div class="center" style="margin-bottom:6px;"><img src="${escapeHtml(logoUrl)}" alt="" style="max-height:${logoHeight}; max-width:90%; object-fit:contain;"/></div>` : ''}
+  <div class="center bold" style="font-size:${titleSize};">${safeName}</div>
   ${safeAddress ? `<div class="center small">${safeAddress}</div>` : ''}
   ${safePhone   ? `<div class="center small">Telp: ${safePhone}</div>` : ''}
   ${safeApt     ? `<div class="center small">Apt: ${safeApt}${safeSipa ? `, SIPA: ${safeSipa}` : ''}</div>` : ''}
@@ -151,7 +163,7 @@ export function generateReceiptHTML(receipt: ReceiptData): string {
   <table>${itemsHTML}</table>
   <hr/>
   ${discount > 0 ? `<div>Diskon: -Rp ${discount.toLocaleString('id-ID')}</div>` : ''}
-  <div class="right bold" style="font-size:14px;">TOTAL: Rp ${total.toLocaleString('id-ID')}</div>
+  <div class="right bold" style="font-size:${totalSize};">TOTAL: Rp ${total.toLocaleString('id-ID')}</div>
   ${cashReceived ? `<div>Tunai : Rp ${cashReceived.toLocaleString('id-ID')}</div>` : ''}
   ${changeAmount > 0 ? `<div>Kembali: Rp ${changeAmount.toLocaleString('id-ID')}</div>` : ''}
   <hr/>
@@ -323,6 +335,9 @@ export function generateApographHTML(data: ApographData): string {
       statusText = '<i>nedet</i>';
     }
 
+    // iter (pengulangan resep)
+    const iterText = i.iter && i.iter > 0 ? `<div style="font-size:11px; margin-top:2px; color:#555;"><i>iter ${i.iter}x</i></div>` : '';
+
     return `
       <tr>
         <td style="width:24px; padding-top:4px;"><span style="font-family:serif; font-size:16px; font-weight:bold; font-style:italic;">R/</span></td>
@@ -330,6 +345,7 @@ export function generateApographHTML(data: ApographData): string {
           <div style="font-weight:bold; font-size:13px;">${escapeHtml(i.medicine_name)}</div>
           <div style="font-size:11px; margin-top:2px;">No: ${i.quantity}</div>
           <div style="font-size:11px; margin-top:2px;">S: ${escapeHtml(i.signa || '-')}</div>
+          ${iterText}
         </td>
       </tr>
       <tr>
@@ -408,7 +424,9 @@ export function generateApographHTML(data: ApographData): string {
       <div class="signature">
         <div class="pcc">p.c.c</div>
         <div style="margin-top:50px; border-bottom:1px solid #000; margin-bottom:4px;"></div>
-        <div style="font-size:10px;">stempel & tanda tangan</div>
+        ${safeApt ? `<div style="font-size:11px; font-weight:bold;">${safeApt}</div>` : ''}
+        ${safeSipa ? `<div style="font-size:9px;">SIPA: ${safeSipa}</div>` : ''}
+        <div style="font-size:10px;">Apoteker Penanggung Jawab</div>
       </div>
     </div>
   </div>
