@@ -407,3 +407,118 @@ export type PBFInvoicePayment = {
   notes?: string | null;
   created_at: string;
 };
+
+// ── SIPNAP & Narkotika/Psikotropika Types ──
+
+/** Item laporan SIPNAP (satu baris per obat narkotika/psikotropika) */
+export type SipnapReportItem = {
+  medicine_id: string;
+  medicine_name: string;
+  unit: string;
+  saldo_awal: number;
+  penerimaan: number;
+  pengeluaran: number;
+  saldo_akhir: number;
+  keterangan: string;
+};
+
+/** Laporan SIPNAP bulanan */
+export type SipnapReport = {
+  id?: string;
+  user_id: string;
+  periode_bulan: number;    // 1-12
+  periode_tahun: number;
+  jenis: 'narkotika' | 'psikotropika';  // Form A vs Form B
+  items: SipnapReportItem[];
+  status: 'draft' | 'submitted';
+  submitted_at?: string | null;
+  created_at?: string;
+};
+
+/** Item buku harian narkotika/psikotropika */
+export type BukuHarianItem = {
+  tanggal: string;
+  no_dokumen: string;
+  keterangan: string;
+  masuk: number;
+  keluar: number;
+  saldo: number;
+};
+
+// ── Pemusnahan Obat Types ──
+
+export type DrugDestructionStatus = 'draft' | 'scheduled' | 'completed';
+
+export type DrugDestructionItem = {
+  medicine_id: string;
+  medicine_name: string;
+  batch_number: string;
+  expiry_date: string;
+  quantity: number;
+  unit: string;
+  alasan: string;
+};
+
+export type DrugDestruction = {
+  id?: string;
+  user_id: string;
+  destruction_number: string;
+  destruction_date: string;
+  status: DrugDestructionStatus;
+  penanggung_jawab: string;
+  saksi_1: string;
+  saksi_2: string;
+  metode: string;
+  items: DrugDestructionItem[];
+  notes?: string | null;
+  created_at?: string;
+};
+
+// ── Skrining Resep Types ──
+
+export type ScreeningChecklist = {
+  // Skrining Administratif
+  adm_nama_pasien: boolean;
+  adm_umur_bb: boolean;
+  adm_nama_dokter: boolean;
+  adm_sip_dokter: boolean;
+  adm_tanggal_resep: boolean;
+  adm_paraf_dokter: boolean;
+  adm_alamat_dokter: boolean;
+  // Skrining Farmasetik
+  far_bentuk_sediaan: boolean;
+  far_dosis: boolean;
+  far_stabilitas: boolean;
+  far_kompatibilitas: boolean;
+  far_cara_pemberian: boolean;
+  // Skrining Klinis
+  kli_ketepatan_indikasi: boolean;
+  kli_dosis_tepat: boolean;
+  kli_interaksi_obat: boolean;
+  kli_efek_samping: boolean;
+  kli_kontraindikasi: boolean;
+  kli_alergi: boolean;
+};
+
+export type PrescriptionScreening = {
+  id?: string;
+  prescription_id: string;
+  screened_by: string;
+  screened_at: string;
+  checklist: ScreeningChecklist;
+  catatan: string;
+  hasil: 'layak' | 'perlu_konfirmasi' | 'tidak_layak';
+};
+
+// ── Bukti Penyerahan Narkotika ──
+
+export type NarcoticHandover = {
+  id?: string;
+  transaction_id: string;
+  user_id: string;
+  penerima_nama: string;
+  penerima_nik: string;
+  hubungan_pasien: string;    // 'sendiri' | 'keluarga' | 'wali'
+  items: { medicine_name: string; quantity: number; unit: string }[];
+  created_at?: string;
+};

@@ -1,4 +1,4 @@
-import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck } from "@phosphor-icons/react";
+import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck, FileText, Book, Trash } from "@phosphor-icons/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../lib/AuthContext";
 import { supabase } from "../../lib/supabase";
@@ -302,6 +302,29 @@ export function TopNavigation() {
                   >
                     <CreditCard weight="bold" className="w-4 h-4" />
                     Langganan
+                  </button>
+                  <div className="border-t border-slate-100 my-1" />
+                  <p className="px-4 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kepatuhan</p>
+                  <button
+                    onClick={() => { setShowDropdown(false); navigate('/sipnap'); }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                  >
+                    <FileText weight="bold" className="w-4 h-4" />
+                    Laporan SIPNAP
+                  </button>
+                  <button
+                    onClick={() => { setShowDropdown(false); navigate('/buku-harian-narkotika'); }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                  >
+                    <Book weight="bold" className="w-4 h-4" />
+                    Buku Harian Narkotika
+                  </button>
+                  <button
+                    onClick={() => { setShowDropdown(false); navigate('/pemusnahan-obat'); }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                  >
+                    <Trash weight="bold" className="w-4 h-4" />
+                    Pemusnahan Obat
                   </button>
                 </>
               )}

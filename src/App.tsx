@@ -27,6 +27,9 @@ const StockOpname  = lazy(() => import('./pages/StockOpname'));
 const Billing      = lazy(() => import('./pages/Billing'));
 const KebijakanPrivasi = lazy(() => import('./pages/KebijakanPrivasi'));
 const SyaratKetentuan  = lazy(() => import('./pages/SyaratKetentuan'));
+const Sipnap           = lazy(() => import('./pages/Sipnap'));
+const BukuHarianNarkotika = lazy(() => import('./pages/BukuHarianNarkotika'));
+const PemusnahanObat   = lazy(() => import('./pages/PemusnahanObat'));
 
 // Fallback loading UI untuk route publik (Login, ResetPassword)
 function PageLoader() {
@@ -156,6 +159,9 @@ function App() {
                 <Route path="/settings"       element={<ProtectedRoute><Settings /></ProtectedRoute>} />
                 <Route path="/stock-opname"   element={<ProtectedRoute allowedRoles={['owner']}><StockOpname /></ProtectedRoute>} />
                 <Route path="/billing"        element={<ProtectedRoute allowedRoles={['owner']}><Billing /></ProtectedRoute>} />
+                <Route path="/sipnap"         element={<ProtectedRoute allowedRoles={['owner']}><Sipnap /></ProtectedRoute>} />
+                <Route path="/buku-harian-narkotika" element={<ProtectedRoute allowedRoles={['owner']}><BukuHarianNarkotika /></ProtectedRoute>} />
+                <Route path="/pemusnahan-obat" element={<ProtectedRoute allowedRoles={['owner']}><PemusnahanObat /></ProtectedRoute>} />
                 <Route path="*"               element={<NotFound />} />
               </Routes>
             </Suspense>

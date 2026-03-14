@@ -21,6 +21,7 @@ import { BarcodeScanner } from '../components/pos/BarcodeScanner';
 import { ApotekerApprovalModal, hasRestrictedMedicines } from '../components/pos/ApotekerApproval';
 import { ShiftModal } from '../components/pos/ShiftModal';
 import { CloseShiftModal } from '../components/pos/CloseShiftModal';
+import { NarcoticHandoverModal, type NarcoticHandoverData } from '../components/NarcoticHandoverModal';
 
 export default function POS() {
   const { user, profile, effectiveUserId } = useAuth();
@@ -50,6 +51,7 @@ export default function POS() {
   } | null>(null);
   const [medicineCategories, setMedicineCategories] = useState<Record<string, string>>({});
   const [showShortcutHelp, setShowShortcutHelp] = useState(false);
+  const [showNarcoticHandover, setShowNarcoticHandover] = useState(false);
 
   // Receipt
   const [lastReceipt, setLastReceipt] = useState<ReceiptData | null>(null);
@@ -485,6 +487,34 @@ export default function POS() {
   const handleApotekerApproval = () => {
     if (!pendingCheckoutData) return;
     setShowApotekerApproval(false);
+
+    // Check if cart has specifically narkotika items → require handover proof
+    const narcoticItems = cart.filter(item => medicineCategories[item.id] === 'narkotika');
+    if (narcoticItems.length > 0) {
+      setShowNarcoticHandover(true);
+      return;
+    }
+
+    executeCheckout(
+      pendingCheckoutData.paymentMethod,
+      pendingCheckoutData.cashReceived,
+      pendingCheckoutData.customerName,
+      pendingCheckoutData.customerPhone
+    );
+    setPendingCheckoutData(null);
+  };
+
+  // ── Handler: narcotic handover confirmed ──
+  const handleNarcoticHandoverConfirm = (data: NarcoticHandoverData) => {
+    if (!pendingCheckoutData || !effectiveUserId) return;
+    setShowNarcoticHandover(false);
+
+    // Store handover record in localStorage
+    const storedHandovers = localStorage.getItem(`narcotic_handovers_${effectiveUserId}`);
+    const handovers: NarcoticHandoverData[] = storedHandovers ? JSON.parse(storedHandovers) : [];
+    handovers.unshift(data);
+    localStorage.setItem(`narcotic_handovers_${effectiveUserId}`, JSON.stringify(handovers.slice(0, 500)));
+
     executeCheckout(
       pendingCheckoutData.paymentMethod,
       pendingCheckoutData.cashReceived,
@@ -496,6 +526,7 @@ export default function POS() {
 
   const handleApotekerCancel = () => {
     setShowApotekerApproval(false);
+    setShowNarcoticHandover(false);
     setPendingCheckoutData(null);
     setShowCheckoutModal(true);
   };
@@ -624,6 +655,20 @@ export default function POS() {
           onApprove={handleApotekerApproval}
           onCancel={handleApotekerCancel}
           apotekerName={profile?.apoteker_name || profile?.full_name}
+        />
+      )}
+
+      {showNarcoticHandover && (
+        <NarcoticHandoverModal
+          narcoticItems={cart
+            .filter(item => medicineCategories[item.id] === 'narkotika')
+            .map(item => ({ medicine_name: item.name, quantity: item.quantity, unit: item.unit }))}
+          onConfirm={handleNarcoticHandoverConfirm}
+          onClose={() => {
+            setShowNarcoticHandover(false);
+            setPendingCheckoutData(null);
+            setShowCheckoutModal(true);
+          }}
         />
       )}
 

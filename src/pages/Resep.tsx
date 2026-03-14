@@ -7,8 +7,9 @@ import {
 import { toast } from 'sonner';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../lib/AuthContext';
-import type { Prescription, PrescriptionItem } from '../lib/types';
+import type { Prescription, PrescriptionItem, PrescriptionScreening } from '../lib/types';
 import { printApograph, type ApographData } from '../lib/receipt';
+import { PrescriptionScreeningModal } from '../components/PrescriptionScreeningModal';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 type StatusFilter = 'all' | 'pending' | 'dispensed' | 'cancelled';
@@ -46,6 +47,31 @@ export default function Resep() {
 
   // cancel state
   const [isCancelling, setIsCancelling] = useState(false);
+
+  // screening state
+  const [showScreening, setShowScreening] = useState(false);
+  const [screeningTarget, setScreeningTarget] = useState<Prescription | null>(null);
+  const [screenings, setScreenings] = useState<Record<string, PrescriptionScreening>>({});
+
+  // Load screenings from localStorage
+  useEffect(() => {
+    if (!effectiveUserId) return;
+    const stored = localStorage.getItem(`screenings_${effectiveUserId}`);
+    if (stored) {
+      try { setScreenings(JSON.parse(stored)); } catch { /* ignore */ }
+    }
+  }, [effectiveUserId]);
+
+  const handleSaveScreening = (screening: PrescriptionScreening) => {
+    const updated = { ...screenings, [screening.prescription_id]: screening };
+    setScreenings(updated);
+    if (effectiveUserId) {
+      localStorage.setItem(`screenings_${effectiveUserId}`, JSON.stringify(updated));
+    }
+    setShowScreening(false);
+    setScreeningTarget(null);
+    toast.success(`Skrining resep: ${screening.hasil === 'layak' ? 'Layak dilayani' : screening.hasil === 'perlu_konfirmasi' ? 'Perlu konfirmasi dokter' : 'Tidak layak'}`);
+  };
 
   // create-modal state
   const [showCreate, setShowCreate] = useState(false);
@@ -421,12 +447,29 @@ export default function Resep() {
               )}
             </div>
             <div className="flex gap-2 p-5 border-t border-slate-100 dark:border-slate-800 flex-wrap">
-              <button
-                onClick={() => handlePrintApograph(selected)}
-                className="w-full mb-2 flex items-center justify-center gap-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 py-2.5 rounded-xl text-sm font-semibold border border-emerald-100 dark:border-emerald-800"
-              >
-                <Printer weight="bold" className="w-4 h-4" /> Cetak Salinan (Apograph)
-              </button>
+              <div className="w-full flex gap-2 mb-2">
+                <button
+                  onClick={() => handlePrintApograph(selected)}
+                  className="flex-1 flex items-center justify-center gap-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 py-2.5 rounded-xl text-sm font-semibold border border-emerald-100 dark:border-emerald-800"
+                >
+                  <Printer weight="bold" className="w-4 h-4" /> Cetak Salinan (Apograph)
+                </button>
+                <button
+                  onClick={() => { setScreeningTarget(selected); setShowScreening(true); }}
+                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold border ${
+                    screenings[selected.id]
+                      ? screenings[selected.id].hasil === 'layak'
+                        ? 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-800'
+                        : screenings[selected.id].hasil === 'perlu_konfirmasi'
+                          ? 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800'
+                          : 'bg-red-50 text-red-600 border-red-100 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800'
+                      : 'bg-blue-50 text-blue-600 border-blue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800'
+                  }`}
+                >
+                  <ClipboardText weight="bold" className="w-4 h-4" />
+                  {screenings[selected.id] ? 'Skrining ✓' : 'Skrining Resep'}
+                </button>
+              </div>
               {selected.status === 'pending' && (
                 <>
                   <button
@@ -658,6 +701,18 @@ export default function Resep() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* ── Screening Modal ──────────────────────────────────────────────── */}
+      {showScreening && screeningTarget && (
+        <PrescriptionScreeningModal
+          prescriptionId={screeningTarget.id}
+          patientName={screeningTarget.patient_name}
+          screenerName={profile?.apoteker_name || profile?.full_name || ''}
+          existingScreening={screenings[screeningTarget.id] || null}
+          onSave={handleSaveScreening}
+          onClose={() => { setShowScreening(false); setScreeningTarget(null); }}
+        />
       )}
     </div>
   );
