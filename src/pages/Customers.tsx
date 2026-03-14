@@ -44,7 +44,7 @@ export default function Customers() {
 
       // Ambil statistik transaksi per customer
       const customerIds = (data || []).map(c => c.id);
-      let statsMap: Record<string, { count: number; total: number }> = {};
+      const statsMap: Record<string, { count: number; total: number }> = {};
 
       if (customerIds.length > 0) {
         const { data: txData } = await supabase

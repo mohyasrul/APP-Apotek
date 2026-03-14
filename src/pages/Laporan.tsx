@@ -60,7 +60,7 @@ export default function Laporan() {
 
   const getDateRange = () => {
     const today = new Date();
-    let startDate = new Date();
+    const startDate = new Date();
 
     if (dateFilter === 'today') {
       startDate.setHours(0, 0, 0, 0);

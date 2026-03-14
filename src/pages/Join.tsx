@@ -78,7 +78,7 @@ export default function Join() {
 
       // Pre-fill email field with hint if invite has an email restriction
       // (don't set it as value — just use as placeholder hint)
-    } catch (err: unknown) {
+    } catch {
       setPageState({ status: 'error', reason: 'not_found' });
     }
   };
