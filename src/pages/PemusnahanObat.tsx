@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
-  Trash, Plus, Printer, Warning, X, FloppyDisk,
-  CalendarBlank, ClipboardText, CheckCircle
+  Trash, Plus, Printer, X, FloppyDisk,
+  ClipboardText, CheckCircle
 } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { supabase } from '../lib/supabase';
@@ -108,6 +108,8 @@ export default function PemusnahanObat() {
     const validItems = draftItems.filter(i => i.medicine_name.trim() && i.quantity > 0);
     if (validItems.length === 0) { toast.error('Tambahkan minimal 1 obat'); return; }
 
+    setSaving(true);
+
     // Check if any narcotic items
     const hasNarcotic = validItems.some(item => {
       const med = medicines.find(m => m.id === item.medicine_id);
@@ -132,6 +134,7 @@ export default function PemusnahanObat() {
     };
 
     saveRecords([record, ...records]);
+    setSaving(false);
     setShowCreate(false);
     setDraftItems([{ medicine_id: '', medicine_name: '', batch_number: '', expiry_date: '', quantity: 0, unit: '', alasan: 'kadaluarsa' }]);
     toast.success('Berita Acara Pemusnahan berhasil dibuat');

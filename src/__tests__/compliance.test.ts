@@ -4,7 +4,6 @@ import type {
   SipnapReport,
   BukuHarianItem,
   DrugDestruction,
-  DrugDestructionItem,
   ScreeningChecklist,
   PrescriptionScreening,
   NarcoticHandover,
