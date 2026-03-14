@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="96" fill="#3B82F6"/>
+  <g transform="translate(128, 128) rotate(45, 128, 128)">
+    <rect x="96" y="32" width="64" height="192" rx="16" fill="white"/>
+    <rect x="32" y="96" width="192" height="64" rx="16" fill="white"/>
+  </g>
+  <text x="256" y="420" font-family="system-ui, sans-serif" font-size="72" font-weight="700" fill="white" text-anchor="middle">MediSir</text>
+</svg>

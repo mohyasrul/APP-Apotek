@@ -1,0 +1,73 @@
+name: Database Migration Check
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/migrations/**'
+
+jobs:
+  migration-review:
+    name: Migration Safety Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for dangerous operations
+        run: |
+          echo "Checking migrations for dangerous operations..."
+
+          DANGEROUS_PATTERNS=(
+            "DROP TABLE"
+            "TRUNCATE"
+            "DELETE FROM.*WHERE 1"
+            "DROP COLUMN"
+            "ALTER.*TYPE"
+          )
+
+          WARNINGS=0
+
+          for file in supabase/migrations/*.sql; do
+            if [ -f "$file" ]; then
+              echo "Checking: $file"
+              for pattern in "${DANGEROUS_PATTERNS[@]}"; do
+                if grep -qi "$pattern" "$file"; then
+                  echo "::warning file=$file::Found potentially dangerous operation: $pattern"
+                  WARNINGS=$((WARNINGS + 1))
+                fi
+              done
+            fi
+          done
+
+          if [ $WARNINGS -gt 0 ]; then
+            echo "::warning::Found $WARNINGS potentially dangerous operations. Please review carefully."
+          else
+            echo "No dangerous operations found."
+          fi
+
+      - name: Check migration naming convention
+        run: |
+          for file in supabase/migrations/*.sql; do
+            filename=$(basename "$file")
+            if ! [[ $filename =~ ^[0-9]{8}_.*\.sql$ ]]; then
+              echo "::error file=$file::Migration file does not follow naming convention: YYYYMMDD_description.sql"
+              exit 1
+            fi
+          done
+          echo "All migrations follow naming convention."
+
+      - name: Generate migration summary
+        run: |
+          echo "## Migration Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          git diff --name-only origin/main...HEAD -- 'supabase/migrations/*.sql' | while read file; do
+            if [ -f "$file" ]; then
+              echo "### $(basename $file)" >> $GITHUB_STEP_SUMMARY
+              echo '```sql' >> $GITHUB_STEP_SUMMARY
+              head -50 "$file" >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          done

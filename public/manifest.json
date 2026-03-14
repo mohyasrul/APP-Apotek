@@ -1,0 +1,46 @@
+{
+  "name": "MediSir — Kasir Apotek",
+  "short_name": "MediSir",
+  "description": "Aplikasi kasir POS dan manajemen stok apotek yang simpel, cepat, dan terjangkau.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f8fafc",
+  "theme_color": "#3b82f6",
+  "lang": "id",
+  "categories": ["medical", "business", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Kasir / POS",
+      "short_name": "Kasir",
+      "description": "Buka halaman kasir",
+      "url": "/pos"
+    },
+    {
+      "name": "Stok Obat",
+      "short_name": "Stok",
+      "description": "Lihat dan kelola stok obat",
+      "url": "/medicines"
+    }
+  ]
+}
