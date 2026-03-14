@@ -90,7 +90,7 @@ export default function PemusnahanObat() {
         .select('id, name, unit, batch_number, expiry_date, stock, category')
         .eq('user_id', effectiveUserId)
         .order('name');
-      setMedicines(data || []);
+      setMedicines((data as Medicine[]) || []);
     })();
   }, [effectiveUserId, showCreate]);
 

@@ -45,7 +45,7 @@ export default function BukuHarianNarkotika() {
         .eq('user_id', effectiveUserId)
         .eq('category', category)
         .order('name');
-      setMedicines(data || []);
+      setMedicines((data as Medicine[]) || []);
       if (data && data.length > 0 && !selectedMedicineId) {
         setSelectedMedicineId(data[0].id);
       }

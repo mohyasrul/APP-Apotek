@@ -159,7 +159,7 @@ describe('generateApographHTML — iter and APJ', () => {
     prescriptionNumber: 'RSP/2026/03/0001',
     prescriptionDate: '14 Mar 2026',
     patientName: 'Ahmad',
-    patientAge: '45',
+    patientAge: 45,
     doctorName: 'dr. Siti',
     doctorSip: 'SIP-001',
     items: [
