@@ -197,7 +197,6 @@ export function getLicenseExpiryStatus(dateStr: string | null | undefined): {
   const daysRemaining = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
 
   if (daysRemaining < 0) return { status: 'expired', daysRemaining, label: `Sudah kadaluarsa ${Math.abs(daysRemaining)} hari lalu` };
-  if (daysRemaining <= 7) return { status: 'critical', daysRemaining, label: `Kadaluarsa dalam ${daysRemaining} hari` };
   if (daysRemaining <= 30) return { status: 'critical', daysRemaining, label: `Kadaluarsa dalam ${daysRemaining} hari` };
   if (daysRemaining <= 90) return { status: 'warning', daysRemaining, label: `Kadaluarsa dalam ${daysRemaining} hari` };
   return { status: 'safe', daysRemaining, label: `Berlaku ${daysRemaining} hari lagi` };
