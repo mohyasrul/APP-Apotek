@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { Cross, EnvelopeSimple, LockKey, X } from '@phosphor-icons/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../lib/AuthContext';
 
 export default function Login() {
@@ -15,6 +15,7 @@ export default function Login() {
   const [forgotEmail, setForgotEmail] = useState('');
   const [forgotLoading, setForgotLoading] = useState(false);
   const [forgotSent, setForgotSent] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -168,9 +169,32 @@ export default function Login() {
             </div>
           )}
 
+          {isSignUp && (
+            <div className="flex items-start gap-2.5 mb-4">
+              <input
+                type="checkbox"
+                id="agree-terms"
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                className="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-500 focus:ring-blue-500/20"
+              />
+              <label htmlFor="agree-terms" className="text-xs text-slate-500 leading-relaxed">
+                Saya menyetujui{' '}
+                <Link to="/syarat-ketentuan" className="text-blue-500 hover:underline font-semibold" target="_blank">
+                  Syarat dan Ketentuan
+                </Link>{' '}
+                dan{' '}
+                <Link to="/kebijakan-privasi" className="text-blue-500 hover:underline font-semibold" target="_blank">
+                  Kebijakan Privasi
+                </Link>{' '}
+                MediSir, termasuk pemrosesan data pribadi sesuai UU PDP.
+              </label>
+            </div>
+          )}
+
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || (isSignUp && !agreedToTerms)}
             className="w-full py-3 bg-blue-500 text-white rounded-xl font-semibold text-sm hover:bg-blue-600 active:bg-blue-700 transition-all disabled:opacity-60 mb-4"
           >
             {loading ? 'Memproses...' : isSignUp ? 'Daftar' : 'Masuk'}
@@ -196,6 +220,12 @@ export default function Login() {
             Jika Anda kasir, gunakan <span className="font-semibold text-slate-500">link undangan</span> dari pemilik apotek.
           </p>
         )}
+
+        <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-center gap-3 text-xs text-slate-400">
+          <Link to="/kebijakan-privasi" className="hover:text-slate-600 transition-colors">Kebijakan Privasi</Link>
+          <span>·</span>
+          <Link to="/syarat-ketentuan" className="hover:text-slate-600 transition-colors">Syarat & Ketentuan</Link>
+        </div>
 
       </div>
 

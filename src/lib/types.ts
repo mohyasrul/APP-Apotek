@@ -69,6 +69,9 @@ export type UserProfile = {
   sia_number?: string | null;
   sipa_number?: string | null;
   apoteker_name?: string | null;
+  sia_expiry_date?: string | null;
+  sipa_expiry_date?: string | null;
+  stra_expiry_date?: string | null;
   /** Jika kasir, ini adalah ID user owner apoteknya. NULL = user ini adalah owner. */
   pharmacy_owner_id?: string | null;
   created_at?: string;
@@ -176,6 +179,28 @@ export function getExpiryStatus(dateStr: string | null | undefined): 'expired' |
   if (diffDays < 0) return 'expired';
   if (diffDays <= 90) return 'near-expiry';
   return 'safe';
+}
+
+// Utility: check license/permit expiry status with configurable thresholds
+export function getLicenseExpiryStatus(dateStr: string | null | undefined): {
+  status: 'expired' | 'critical' | 'warning' | 'safe';
+  daysRemaining: number | null;
+  label: string;
+} {
+  if (!dateStr) return { status: 'safe', daysRemaining: null, label: 'Belum diisi' };
+  const expiryDate = new Date(dateStr);
+  if (isNaN(expiryDate.getTime())) return { status: 'safe', daysRemaining: null, label: 'Tanggal tidak valid' };
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  expiryDate.setHours(0, 0, 0, 0);
+  const diffMs = expiryDate.getTime() - today.getTime();
+  const daysRemaining = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+
+  if (daysRemaining < 0) return { status: 'expired', daysRemaining, label: `Sudah kadaluarsa ${Math.abs(daysRemaining)} hari lalu` };
+  if (daysRemaining <= 7) return { status: 'critical', daysRemaining, label: `Kadaluarsa dalam ${daysRemaining} hari` };
+  if (daysRemaining <= 30) return { status: 'critical', daysRemaining, label: `Kadaluarsa dalam ${daysRemaining} hari` };
+  if (daysRemaining <= 90) return { status: 'warning', daysRemaining, label: `Kadaluarsa dalam ${daysRemaining} hari` };
+  return { status: 'safe', daysRemaining, label: `Berlaku ${daysRemaining} hari lagi` };
 }
 
 // Utility: validate phone number (Indonesian format)

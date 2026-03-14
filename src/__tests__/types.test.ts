@@ -5,6 +5,7 @@ import {
   getGreeting,
   isValidPhone,
   normalizePhone,
+  getLicenseExpiryStatus,
 } from '../lib/types';
 
 describe('getExpiryStatus', () => {
@@ -105,5 +106,59 @@ describe('normalizePhone', () => {
 
   it('strips non-digit characters', () => {
     expect(normalizePhone('+62-812-345-6789')).toBe('628123456789');
+  });
+});
+
+describe('getLicenseExpiryStatus', () => {
+  it('returns safe with "Belum diisi" for null/undefined/empty', () => {
+    expect(getLicenseExpiryStatus(null)).toEqual({ status: 'safe', daysRemaining: null, label: 'Belum diisi' });
+    expect(getLicenseExpiryStatus(undefined)).toEqual({ status: 'safe', daysRemaining: null, label: 'Belum diisi' });
+    expect(getLicenseExpiryStatus('')).toEqual({ status: 'safe', daysRemaining: null, label: 'Belum diisi' });
+  });
+
+  it('handles invalid date strings', () => {
+    expect(getLicenseExpiryStatus('not-a-date')).toEqual({ status: 'safe', daysRemaining: null, label: 'Tanggal tidak valid' });
+  });
+
+  it('returns expired for past dates', () => {
+    const result = getLicenseExpiryStatus('2020-01-01');
+    expect(result.status).toBe('expired');
+    expect(result.daysRemaining).toBeLessThan(0);
+    expect(result.label).toContain('Sudah kadaluarsa');
+  });
+
+  it('returns critical for dates within 7 days', () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 5);
+    const result = getLicenseExpiryStatus(date.toISOString().split('T')[0]);
+    expect(result.status).toBe('critical');
+    expect(result.daysRemaining).toBeLessThanOrEqual(7);
+    expect(result.label).toContain('Kadaluarsa dalam');
+  });
+
+  it('returns critical for dates within 30 days', () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 20);
+    const result = getLicenseExpiryStatus(date.toISOString().split('T')[0]);
+    expect(result.status).toBe('critical');
+    expect(result.daysRemaining).toBeLessThanOrEqual(30);
+    expect(result.label).toContain('Kadaluarsa dalam');
+  });
+
+  it('returns warning for dates within 90 days', () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 60);
+    const result = getLicenseExpiryStatus(date.toISOString().split('T')[0]);
+    expect(result.status).toBe('warning');
+    expect(result.label).toContain('Kadaluarsa dalam');
+  });
+
+  it('returns safe for dates more than 90 days away', () => {
+    const date = new Date();
+    date.setDate(date.getDate() + 180);
+    const result = getLicenseExpiryStatus(date.toISOString().split('T')[0]);
+    expect(result.status).toBe('safe');
+    expect(result.daysRemaining).toBeGreaterThan(90);
+    expect(result.label).toContain('Berlaku');
   });
 });

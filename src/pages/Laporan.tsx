@@ -383,6 +383,53 @@ export default function Laporan() {
     toast.success('Laporan berhasil di-export ke CSV!');
   };
 
+  // Export Excel (.xlsx via XML spreadsheet)
+  const handleExportExcel = () => {
+    if (transactions.length === 0) {
+      toast.info('Tidak ada data untuk di-export');
+      return;
+    }
+
+    const pharmacyName = profile?.pharmacy_name || 'Apotek';
+    const periodLabel = dateFilter === 'today' ? 'Hari Ini' : dateFilter === 'week' ? '7 Hari Terakhir' : dateFilter === 'month' ? '30 Hari Terakhir' : 'Semua Data';
+
+    const escapeXml = (str: string) => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+    const headerRow = `<tr><td><b>${escapeXml(pharmacyName)} — Laporan Penjualan</b></td></tr><tr><td>Periode: ${escapeXml(periodLabel)} | Dicetak: ${new Date().toLocaleString('id-ID')}</td></tr><tr></tr>`;
+
+    const tableHeader = '<tr>' +
+      ['No. Nota', 'Tanggal', 'Metode Bayar', 'Jumlah Item', 'Laba Kotor (Rp)', 'Total (Rp)', 'Status', 'Pelanggan']
+        .map(h => `<th style="font-weight:bold;background-color:#f1f5f9;border:1px solid #ccc;padding:6px">${h}</th>`)
+        .join('') +
+      '</tr>';
+
+    const tableRows = transactions.map(trx => {
+      const nota = escapeXml(trx.transaction_number || trx.id);
+      const tanggal = new Date(trx.created_at).toLocaleString('id-ID');
+      const metode = getPaymentLabel(trx.payment_method || 'cash').label;
+      const items = trx.itemsCount;
+      const laba = trx.laba;
+      const total = trx.total_amount;
+      const status = trx.status === 'voided' ? 'VOID' : 'Aktif';
+      const pelanggan = escapeXml(trx.customer_name || '-');
+
+      return `<tr><td style="border:1px solid #ccc;padding:4px">${nota}</td><td style="border:1px solid #ccc;padding:4px">${tanggal}</td><td style="border:1px solid #ccc;padding:4px">${metode}</td><td style="border:1px solid #ccc;padding:4px;text-align:right">${items}</td><td style="border:1px solid #ccc;padding:4px;text-align:right">${laba.toLocaleString('id-ID')}</td><td style="border:1px solid #ccc;padding:4px;text-align:right">${total.toLocaleString('id-ID')}</td><td style="border:1px solid #ccc;padding:4px">${status}</td><td style="border:1px solid #ccc;padding:4px">${pelanggan}</td></tr>`;
+    }).join('');
+
+    const summaryRow = `<tr><td colspan="4" style="border:1px solid #ccc;padding:6px;text-align:right;font-weight:bold">Total:</td><td style="border:1px solid #ccc;padding:6px;text-align:right;font-weight:bold">${metrics.labaKotor.toLocaleString('id-ID')}</td><td style="border:1px solid #ccc;padding:6px;text-align:right;font-weight:bold">${metrics.omset.toLocaleString('id-ID')}</td><td colspan="2" style="border:1px solid #ccc;padding:6px"></td></tr>`;
+
+    const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Laporan</x:Name></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>${headerRow}${tableHeader}${tableRows}${summaryRow}</table></body></html>`;
+
+    const blob = new Blob([html], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `laporan-${dateFilter}-${Date.now()}.xls`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Laporan berhasil di-export ke Excel!');
+  };
+
   // Print Report
   const handlePrintReport = () => {
     const pharmacyName = profile?.pharmacy_name || 'Apotek';
@@ -465,7 +512,11 @@ export default function Laporan() {
             </button>
             <button onClick={handleExportCSV}
               className="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
-              <DownloadSimple weight="bold" className="w-4 h-4" /> Export CSV
+              <DownloadSimple weight="bold" className="w-4 h-4" /> CSV
+            </button>
+            <button onClick={handleExportExcel}
+              className="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-emerald-600 hover:bg-emerald-50 transition-colors shadow-sm border-emerald-200">
+              <DownloadSimple weight="bold" className="w-4 h-4" /> Excel
             </button>
           </div>
         </div>
