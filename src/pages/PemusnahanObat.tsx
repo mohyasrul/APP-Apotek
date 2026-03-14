@@ -126,7 +126,7 @@ export default function PemusnahanObat() {
       metode: form.metode,
       items: validItems,
       notes: hasNarcotic
-        ? 'PERHATIAN: Mengandung narkotika/psikotropika — pemusnahan WAJIB disaksikan petugas BPOM. ' + form.notes
+        ? `PERHATIAN: Mengandung narkotika/psikotropika — pemusnahan WAJIB disaksikan petugas BPOM.${form.notes ? ' ' + form.notes : ''}`
         : form.notes,
       created_at: new Date().toISOString(),
     };

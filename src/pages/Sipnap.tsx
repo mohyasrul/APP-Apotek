@@ -251,7 +251,7 @@ export default function Sipnap() {
           <div>
             <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">Deadline Pelaporan SIPNAP</p>
             <p className="text-xs text-amber-600 dark:text-amber-400">
-              Laporan bulan {MONTHS[bulan]} {tahun} harus dilaporkan ke BPOM paling lambat <b>tanggal 10 {MONTHS[bulan + 1 > 11 ? 0 : bulan + 1]}</b> ({daysToDeadline} hari lagi)
+              Laporan bulan {MONTHS[bulan]} {tahun} harus dilaporkan ke BPOM paling lambat <b>tanggal 10 {MONTHS[(bulan + 1) % 12]} {bulan === 11 ? tahun + 1 : tahun}</b> ({daysToDeadline} hari lagi)
             </p>
           </div>
         </div>

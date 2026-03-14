@@ -25,6 +25,27 @@ const defaultChecklist = (): ScreeningChecklist => ({
   kli_alergi: false,
 });
 
+const SECTION_STYLES = {
+  blue: {
+    heading: 'text-blue-700 dark:text-blue-400',
+    dot: 'bg-blue-500',
+  },
+  purple: {
+    heading: 'text-purple-700 dark:text-purple-400',
+    dot: 'bg-purple-500',
+  },
+  emerald: {
+    heading: 'text-emerald-700 dark:text-emerald-400',
+    dot: 'bg-emerald-500',
+  },
+} as const;
+
+const RESULT_STYLES = {
+  emerald: 'bg-emerald-500 text-white shadow-sm',
+  amber: 'bg-amber-500 text-white shadow-sm',
+  red: 'bg-red-500 text-white shadow-sm',
+} as const;
+
 const SECTIONS = [
   {
     title: 'Skrining Administratif',
@@ -148,8 +169,8 @@ export function PrescriptionScreeningModal({
         <div className="flex-1 overflow-y-auto p-5 space-y-5">
           {SECTIONS.map(section => (
             <div key={section.title}>
-              <h4 className={`text-sm font-bold text-${section.color}-700 dark:text-${section.color}-400 mb-2 flex items-center gap-2`}>
-                <span className={`w-2 h-2 rounded-full bg-${section.color}-500`} />
+              <h4 className={`text-sm font-bold ${SECTION_STYLES[section.color].heading} mb-2 flex items-center gap-2`}>
+                <span className={`w-2 h-2 rounded-full ${SECTION_STYLES[section.color].dot}`} />
                 {section.title}
               </h4>
               <div className="space-y-1.5">
@@ -195,8 +216,8 @@ export function PrescriptionScreeningModal({
                   onClick={() => setHasil(opt.value)}
                   className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                     hasil === opt.value
-                      ? `bg-${opt.color}-500 text-white shadow-sm`
-                      : `bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700`
+                      ? RESULT_STYLES[opt.color]
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                   }`}
                 >
                   <opt.icon weight="bold" className="w-4 h-4" />

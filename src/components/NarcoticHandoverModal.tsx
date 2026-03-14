@@ -14,6 +14,8 @@ type Props = {
   onClose: () => void;
 };
 
+const NIK_PATTERN = /^\d{16}$/;
+
 export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Props) {
   const [form, setForm] = useState({
     penerima_nama: '',
@@ -26,7 +28,7 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
     const errs: Record<string, string> = {};
     if (!form.penerima_nama.trim()) errs.penerima_nama = 'Nama penerima wajib diisi';
     if (!form.penerima_nik.trim()) errs.penerima_nik = 'NIK wajib diisi';
-    else if (!/^\d{16}$/.test(form.penerima_nik.trim())) errs.penerima_nik = 'NIK harus 16 digit';
+    else if (!NIK_PATTERN.test(form.penerima_nik.trim())) errs.penerima_nik = 'NIK harus 16 digit';
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
