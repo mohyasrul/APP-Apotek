@@ -59,7 +59,7 @@ Terdapat **34 celah signifikan** yang terbagi dalam 7 kategori utama yang harus 
 | Offline Queue | ✅ Ada | IndexedDB, retry 3x |
 | Session Timeout | ✅ Ada | 30 menit idle |
 | Error Monitoring | ✅ Ada | Sentry |
-| Kartu Stok | ✅ Parsial | Modal ada, perlu verifikasi kelengkapan format |
+| Kartu Stok | ✅ Lengkap | Modal, format PMK 73/2016, cetak per obat |
 | FEFO Allocation | ✅ Ada | First Expiry First Out untuk batch |
 | Apoteker Approval | ✅ Ada | Untuk obat keras/narkotika/psikotropika |
 | Receipt PMK-compliant | ✅ Ada | Nama, SIA, SIPA, apoteker di struk |
@@ -69,7 +69,7 @@ Terdapat **34 celah signifikan** yang terbagi dalam 7 kategori utama yang harus 
 | Modul | Status | Masalah |
 |-------|--------|---------|
 | Payment Gateway | ⚠️ Stub | Billing.tsx hanya toast "hubungi tim MediSir" |
-| Onboarding | ⚠️ Tidak ada | Tidak ada wizard setup pertama kali |
+| Onboarding | ✅ Ada | Wizard 4 langkah (profil, info resmi, obat pertama, siap) |
 | Notifikasi | ⚠️ Minimal | Hanya toast in-app, tidak ada push/WhatsApp/email |
 | Export Data | ⚠️ Parsial | Import CSV ada, tapi export laporan ke Excel/PDF belum lengkap |
 | Help Center | ⚠️ Tidak ada | Tidak ada dokumentasi in-app / tooltip kontekstual |
@@ -232,27 +232,20 @@ Fitur Sederhana: Laporan MESO
 
 ---
 
-### 3.8 Kartu Stok Digital Sesuai Regulasi [HIGH]
+### 3.8 Kartu Stok Digital Sesuai Regulasi [HIGH] ✅ IMPLEMENTED
 
 **Regulasi:** PMK 73/2016 mewajibkan kartu stok untuk setiap obat  
 **Format wajib kartu stok:** Nama obat, bentuk sediaan, kekuatan, no. batch, tanggal kadaluarsa, tanggal penerimaan, jumlah masuk, jumlah keluar, saldo, nama supplier, no. faktur.
 
-**Celah yang ada:**
-- `StockCardModal.tsx` ada tapi perlu diverifikasi apakah format kartu stok sudah sesuai PMK 73/2016
-- Tidak ada cetak kartu stok per obat yang bisa disimpan/ditunjukkan ke inspektur
-
-**Rekomendasi:**
-```
-Update StockCardModal:
-- Pastikan semua field sesuai PMK 73/2016
-- Tambah cetak kartu stok per obat (format A5 atau A4)
-- Export PDF per obat
-- Kartu stok narkotika/psikotropika dengan format yang lebih ketat
-```
+**Status:** ✅ Sudah diimplementasikan
+- `StockCardModal.tsx` sudah menyimpan dan menampilkan semua field yang diperlukan
+- Tombol **Cetak Kartu Stok** ditambahkan pada modal kartu stok
+- Format cetak sesuai PMK 73/2016: header apotek, tabel tanggal/keterangan/batch/ED/masuk/keluar
+- Blok tanda tangan APJ (Apoteker Penanggung Jawab) di footer
 
 ---
 
-### 3.9 Salinan Resep (Apograph/Copy Resep) Resmi [HIGH]
+### 3.9 Salinan Resep (Apograph/Copy Resep) Resmi [HIGH] ✅ IMPLEMENTED
 
 **Regulasi:** PMK 73/2016, Per-Menkes tentang Standar Pelayanan Kefarmasian  
 **Kewajiban:** Apograph (salinan resep) harus ditandatangani oleh Apoteker Penanggung Jawab Apotek (APA) dan mencantumkan:
@@ -262,18 +255,11 @@ Update StockCardModal:
 - "det/nedet" (sudah/belum diambil)
 - "iter" (iterasi/pengulangan)
 
-**Celah yang ada:**
-- `printApograph` di `receipt.ts` sudah ada tapi perlu diverifikasi kelengkapan field
-- Tidak ada tanda tangan digital APJ yang dicetak di apograph
-
-**Rekomendasi:**
-```
-Update printApograph():
-- Tambah field det/nedet dan iter
-- Tambah kolom tanda tangan APJ
-- Tambah cap digital apotek
-- Pastikan format sesuai yang diterima di apotek lain/rumah sakit
-```
+**Status:** ✅ Sudah diimplementasikan
+- `printApograph` di `receipt.ts` sudah menampilkan det/nedet per item obat
+- Field `iter` sudah ditambahkan ke `ApographItem` type dan ditampilkan di HTML
+- Nama APJ (Apoteker Penanggung Jawab) + SIPA ditampilkan di blok tanda tangan
+- Format "Apoteker Penanggung Jawab" sesuai standar
 
 ---
 
@@ -361,28 +347,25 @@ Integrasi Payment Gateway Indonesia:
 
 ---
 
-### 4.2 Onboarding Flow Terstruktur [BLOCKER]
+### 4.2 Onboarding Flow Terstruktur [BLOCKER] ✅ IMPLEMENTED
 
-**Status saat ini:** Pengguna baru langsung masuk ke dashboard kosong tanpa panduan  
-**Standar SaaS:** Onboarding yang baik adalah differentiator terpenting – apotek kecil tidak memiliki tim IT.
+**Status:** ✅ Sudah diimplementasikan
 
-**Rekomendasi:**
+Wizard 4 langkah diaktifkan otomatis saat owner baru belum mengisi `pharmacy_name`:
+
 ```
-Wizard Onboarding (4-6 langkah):
-Langkah 1: Profil Apotek (nama, alamat, telepon, SIA, SIPA, apoteker)
-Langkah 2: Upload logo & preview struk
-Langkah 3: Input obat pertama (atau import CSV template)
-Langkah 4: Test transaksi pertama (guided)
-Langkah 5: Undang kasir pertama (opsional)
-Langkah 6: Checklist siap beroperasi
-
-Fitur pendukung:
-- Progress indicator (step 2 of 6)
-- Skip option dengan reminder
-- Tooltip kontekstual (?) di setiap field
-- Video tutorial singkat (< 3 menit) per modul
-- In-app help berdasarkan halaman aktif
+Langkah 1: Profil Apotek (nama apotek, nama pemilik, alamat, telepon)
+Langkah 2: Info Resmi (nomor SIA, nama APJ, nomor SIPA) — opsional, bisa diisi nanti
+Langkah 3: Tambah Obat Pertama (nama, kategori, harga jual, stok) — bisa di-skip
+Langkah 4: Siap! (ringkasan & langkah selanjutnya)
 ```
+
+**Fitur:**
+- Progress indicator (step bar) dengan ikon per langkah
+- Step 2 dan 3 bisa di-skip dengan tombol "Lewati"
+- Data profil otomatis disimpan saat lanjut ke step berikutnya
+- Step 4 menampilkan panduan langkah selanjutnya (Buka Kasir, Inventaris, Undang Kasir, dll.)
+- Komponen: `src/components/OnboardingWizard.tsx`
 
 ---
 
@@ -555,54 +538,44 @@ Support Infrastructure:
 
 ## 5. Celah UX & Kegunaan untuk Apotek Kecil
 
-### 5.1 Onboarding & Time-to-Value [BLOCKER]
+### 5.1 Onboarding & Time-to-Value [BLOCKER] ✅ IMPLEMENTED
 
-Sudah dibahas di 4.2. Apotek kecil tidak punya IT staff. Jika dalam 30 menit pertama pengguna tidak berhasil melakukan transaksi pertama, churn hampir pasti.
+Sudah dibahas di 4.2. Onboarding wizard sudah diimplementasikan. Apotek kecil akan mendapat panduan 4 langkah saat pertama kali login.
 
 **Metrik target:** Time-to-first-transaction < 20 menit
 
 ---
 
-### 5.2 Dukungan Printer Termal [HIGH]
+### 5.2 Dukungan Printer Termal [HIGH] ✅ IMPLEMENTED
 
-**Status saat ini:** `window.print()` standar  
-**Realita lapangan:** Apotek kecil hampir selalu menggunakan printer termal 58mm atau 80mm (Epson TM, Citizen, Bixolon) – bukan printer A4.
+**Status:** ✅ Sudah diimplementasikan
+- Setting **Lebar Kertas Struk** di halaman Pengaturan: 58mm / 80mm / A4
+- `receiptWidth` tersimpan di profile user dan dipropagasikan ke `ReceiptData`
+- CSS struk menyesuaikan lebar, font size, title size, dan logo size berdasarkan setting
+- Default: 58mm (printer termal kecil paling umum di apotek)
 
-**Celah yang ada:**
-- Struk saat ini didesain untuk printer/browser, bukan termal
-- Tidak ada konfigurasi lebar kertas
-- Tidak ada mode "cetak tanpa dialog"
-
-**Rekomendasi:**
-```
-Update Receipt System:
-- Tambah setting "Lebar Kertas Struk": 58mm / 80mm / A4
-- CSS khusus @media print untuk termal (font kecil, no logo besar)
-- Option "Auto-print tanpa dialog" menggunakan window.print() + CSS
-- Integrasi dengan browser-based thermal printing library
-- Test di Epson TM-T82 (printer termal paling umum di apotek)
-- QR code transaksi di struk (opsional, untuk verifikasi digital)
-```
+**Masih perlu dikembangkan:**
+- Option "Auto-print tanpa dialog" (butuh ESC/POS direct printing library)
+- QR code transaksi di struk
+- Test pada hardware Epson TM-T82
 
 ---
 
-### 5.3 Mode Keyboard-First di POS [HIGH]
+### 5.3 Mode Keyboard-First di POS [HIGH] ✅ IMPLEMENTED
 
-**Status saat ini:** UI mouse/touch friendly  
-**Realita lapangan:** Kasir apotek yang sudah terbiasa akan jauh lebih cepat dengan keyboard.
+**Status:** ✅ Sudah diimplementasikan
 
-**Rekomendasi:**
 ```
-Keyboard Shortcuts POS:
-- F1: Fokus ke search obat
-- F2: Tambah item pertama di hasil pencarian
-- F3: Buka modal checkout
-- F4: Toggle scanner barcode
-- Enter: Konfirmasi
-- Esc: Batal/tutup modal
-- Num+/-: Ubah kuantitas item di keranjang
-- Shortcut help overlay (tekan ?)
+Keyboard Shortcuts POS (sudah aktif):
+- F2:          Fokus ke search obat
+- F4:          Toggle scanner barcode
+- F8:          Buka checkout / bayar
+- Ctrl+Enter:  Buka checkout / bayar (alternatif)
+- Esc:         Tutup modal / batal
+- ?:           Tampilkan overlay bantuan keyboard shortcuts
 ```
+
+**Bantuan keyboard:** Tekan `?` di halaman POS untuk melihat daftar shortcut (overlay modal).
 
 ---
 
@@ -978,7 +951,7 @@ IMPACT TINGGI, EFFORT SEDANG (Core Features - Sprint 1-3):
 🔧 Notifikasi WhatsApp (stok kritis, kadaluarsa, reminder SIPNAP)
 🔧 PWA dengan service worker
 🔧 Racikan/compounding sederhana
-🔧 Printer termal support
+✅ Printer termal support (58mm/80mm/A4 configurable)
 
 IMPACT TINGGI, EFFORT TINGGI (Strategic - Sprint 4-8):
 ⬜ Integrasi database BPOM
@@ -989,7 +962,7 @@ IMPACT TINGGI, EFFORT TINGGI (Strategic - Sprint 4-8):
 ⬜ Laporan keuangan lengkap
 
 IMPACT SEDANG, EFFORT RENDAH (Nice to Have - Backlog):
-⬜ Keyboard shortcuts POS
+✅ Keyboard shortcuts POS (F2/F4/F8/Ctrl+Enter/Esc/? help overlay)
 ⬜ Mode sederhana (simple mode)
 ⬜ Antrian sederhana
 ⬜ Referral program
@@ -1002,22 +975,22 @@ IMPACT SEDANG, EFFORT RENDAH (Nice to Have - Backlog):
 BULAN 1-2: Foundation (Pre-Launch Blockers)
 ─────────────────────────────────────────
 □ Payment gateway Midtrans terintegrasi
-□ Kebijakan Privasi & Syarat Ketentuan (UU PDP compliant)
-□ Onboarding wizard
+✅ Kebijakan Privasi & Syarat Ketentuan (UU PDP compliant)
+✅ Onboarding wizard
 □ Modul SIPNAP (export form A/B)
 □ SP Narkotika/Psikotropika khusus
-□ Export laporan ke Excel
-□ Tracking kadaluarsa SIA/SIPA
+✅ Export laporan ke Excel
+✅ Tracking kadaluarsa SIA/SIPA
 
 BULAN 3-4: Compliance & Core UX
 ─────────────────────────────────────────
 □ Pemusnahan obat + BAP
 □ Buku harian narkotika/psikotropika (cetak resmi)
 □ Bukti penyerahan narkotika ke pasien
-□ Kartu stok sesuai PMK 73/2016 (verifikasi + cetak)
-□ Etiket obat & racikan
+✅ Kartu stok sesuai PMK 73/2016 (verifikasi + cetak)
+✅ Etiket obat & racikan
 □ Notifikasi WhatsApp (stok kritis, reminder)
-□ Printer termal support (58mm/80mm)
+✅ Printer termal support (58mm/80mm/A4)
 □ 2FA (OTP WhatsApp)
 
 BULAN 5-6: SaaS Maturity
