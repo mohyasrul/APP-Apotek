@@ -8,7 +8,8 @@ import { supabase } from "../lib/supabase";
 import { useAuth } from "../lib/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { formatRupiah, getExpiryStatus, getGreeting } from "../lib/types";
+import { formatRupiah, getExpiryStatus, getGreeting, getLicenseExpiryStatus } from "../lib/types";
+import { OnboardingWizard } from "../components/OnboardingWizard";
 
 type ChartDataItem = { name: string; sales: number; isToday?: boolean };
 type TopSellingItem = { name: string; category: string; totalQty: number; unit: string };
@@ -27,8 +28,21 @@ const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<
 };
 
 export default function Dashboard() {
-  const { user, profile, effectiveUserId } = useAuth();
+  const { user, profile, effectiveUserId, refreshProfile } = useAuth();
   const navigate = useNavigate();
+
+  // ── Onboarding: tampilkan wizard jika owner baru belum setup pharmacy_name ──
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  useEffect(() => {
+    if (profile && profile.role === 'owner' && !profile.pharmacy_name) {
+      setShowOnboarding(true);
+    }
+  }, [profile]);
+
+  const handleOnboardingComplete = async () => {
+    await refreshProfile();
+    setShowOnboarding(false);
+  };
 
   const [metrics, setMetrics] = useState({
     totalSales: 0, itemsSold: 0, totalTransactions: 0,
@@ -257,6 +271,11 @@ export default function Dashboard() {
   const periodLabel = dateFilter === 'week' ? '7 Hari' : dateFilter === 'month' ? '30 Hari' : 'Periode';
 
   return (
+    <>
+    {showOnboarding && (
+      <OnboardingWizard onComplete={handleOnboardingComplete} />
+    )}
+    {!showOnboarding && (
     <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 md:pb-0">
       <main className="flex-1 p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
         {/* Header */}
@@ -289,6 +308,48 @@ export default function Dashboard() {
             </button>
           </div>
         </div>
+
+        {/* License Expiry Warnings */}
+        {profile?.role === 'owner' && (() => {
+          const licenseChecks = [
+            { label: 'SIA', date: profile.sia_expiry_date },
+            { label: 'SIPA', date: profile.sipa_expiry_date },
+            { label: 'STRA', date: profile.stra_expiry_date },
+          ];
+          const alerts = licenseChecks
+            .map(l => ({ ...l, info: getLicenseExpiryStatus(l.date) }))
+            .filter(l => l.date && (l.info.status === 'expired' || l.info.status === 'critical' || l.info.status === 'warning'));
+
+          if (alerts.length === 0) return null;
+
+          return (
+            <div className="mb-6 space-y-2">
+              {alerts.map(alert => (
+                <div
+                  key={alert.label}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium ${
+                    alert.info.status === 'expired'
+                      ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                      : alert.info.status === 'critical'
+                      ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                      : 'bg-yellow-50 text-yellow-700 border border-yellow-200'
+                  }`}
+                >
+                  <Warning weight="fill" className="w-4 h-4 flex-shrink-0" />
+                  <span>
+                    <strong>{alert.label}:</strong> {alert.info.label}.{' '}
+                    <button
+                      onClick={() => navigate('/settings')}
+                      className="underline hover:no-underline font-semibold"
+                    >
+                      Perbarui di Pengaturan
+                    </button>
+                  </span>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
 
         {showStats && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
@@ -548,5 +609,7 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
+    )}
+    </>
   );
 }

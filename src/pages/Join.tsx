@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../lib/AuthContext';
 import type { InvitePreview } from '../lib/types';
@@ -41,6 +41,7 @@ export default function Join() {
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState('');
   const [confirmEmail, setConfirmEmail] = useState(false); // email confirmation required
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   // ── Load invite preview on mount ─────────────────────────
   useEffect(() => {
@@ -260,9 +261,32 @@ export default function Join() {
           <p className="text-xs text-rose-500 bg-rose-50 rounded-lg px-3 py-2">{authError}</p>
         )}
 
+        {authMode === 'register' && (
+          <div className="flex items-start gap-2.5">
+            <input
+              type="checkbox"
+              id="agree-terms-join"
+              checked={agreedToTerms}
+              onChange={(e) => setAgreedToTerms(e.target.checked)}
+              className="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-500 focus:ring-blue-500/20"
+            />
+            <label htmlFor="agree-terms-join" className="text-xs text-slate-500 leading-relaxed">
+              Saya menyetujui{' '}
+              <Link to="/syarat-ketentuan" className="text-blue-500 hover:underline font-semibold" target="_blank">
+                Syarat dan Ketentuan
+              </Link>{' '}
+              dan{' '}
+              <Link to="/kebijakan-privasi" className="text-blue-500 hover:underline font-semibold" target="_blank">
+                Kebijakan Privasi
+              </Link>{' '}
+              MediSir.
+            </label>
+          </div>
+        )}
+
         <button
           type="submit"
-          disabled={authLoading}
+          disabled={authLoading || (authMode === 'register' && !agreedToTerms)}
           className="w-full py-2.5 bg-blue-500 text-white rounded-xl font-semibold text-sm hover:bg-blue-600 disabled:opacity-60 flex items-center justify-center gap-2 transition-all"
         >
           {authLoading
