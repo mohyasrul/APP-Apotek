@@ -284,7 +284,7 @@ export default function StockOpname() {
 
   if (!hasFeature) {
     return (
-      <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 md:pb-0">
+      <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 lg:pb-0">
         <main className="flex-1 p-6 lg:p-8 max-w-[1200px] mx-auto w-full">
           <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-12 text-center">
             <Warning weight="fill" className="w-16 h-16 text-amber-400 mx-auto mb-4" />
@@ -302,7 +302,7 @@ export default function StockOpname() {
   }
 
   return (
-    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 md:pb-0">
+    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 lg:pb-0">
       <main className="flex-1 p-6 lg:p-8 max-w-[1200px] mx-auto w-full">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">

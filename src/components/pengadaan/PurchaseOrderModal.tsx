@@ -6,6 +6,9 @@ import { toast } from 'sonner';
 import { formatRupiah } from '../../lib/types';
 import type { Supplier } from './SupplierList';
 
+// SP types that require an Apoteker (owner) per Permenkes 3/2015
+const RESTRICTED_SP_TYPES = ['narkotika', 'psikotropika', 'prekursor', 'oot'] as const;
+
 type MedicineOption = {
   id: string;
   name: string;
@@ -115,8 +118,7 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
     if (items.length === 0) return toast.error('Pilih minimal 1 obat untuk dipesan');
 
     // Regulasi: SP Narkotika/Psikotropika/Prekursor/OOT hanya boleh dibuat oleh Apoteker (owner)
-    const restrictedTypes = ['narkotika', 'psikotropika', 'prekursor', 'oot'];
-    if (restrictedTypes.includes(orderType) && profile?.role !== 'owner') {
+    if ((RESTRICTED_SP_TYPES as readonly string[]).includes(orderType) && profile?.role !== 'owner') {
       toast.error('SP ' + orderType.toUpperCase() + ' hanya dapat dibuat oleh Apoteker (Pemilik). Hubungi APJ Anda.');
       return;
     }

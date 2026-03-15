@@ -149,7 +149,7 @@ export default function Meso() {
   const labelClass = 'block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1';
 
   return (
-    <div className="flex-1 p-4 lg:p-8 max-w-5xl mx-auto w-full pb-20 md:pb-0">
+    <div className="flex-1 p-4 lg:p-8 max-w-5xl mx-auto w-full pb-20 lg:pb-0">
       {/* Header */}
       <div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
         <div>

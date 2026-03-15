@@ -530,7 +530,7 @@ export default function Medicines() {
   };
 
   return (
-    <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 pb-20 md:pb-0">
+    <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 pb-20 lg:pb-0">
 
       <main className="flex-1 p-6 lg:p-8 max-w-[1400px] mx-auto w-full">
         {/* Header */}
