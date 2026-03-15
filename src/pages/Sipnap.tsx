@@ -238,8 +238,8 @@ export default function Sipnap() {
             <FileText weight="duotone" className="w-6 h-6 text-red-600 dark:text-red-400" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">Laporan SIPNAP</h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">Pelaporan Narkotika & Psikotropika ke BPOM</p>
+            <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Laporan SIPNAP</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Pelaporan Narkotika & Psikotropika ke BPOM</p>
           </div>
         </div>
       </div>
@@ -266,16 +266,16 @@ export default function Sipnap() {
       )}
 
       {/* Filters */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 mb-4">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 p-4 mb-4">
         <div className="flex flex-wrap items-center gap-3">
           {/* Jenis */}
-          <div className="flex bg-slate-100 dark:bg-slate-800 rounded-xl p-0.5">
+          <div className="flex bg-gray-100 dark:bg-zinc-800 rounded-xl p-0.5">
             <button
               onClick={() => setJenis('narkotika')}
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                 jenis === 'narkotika'
                   ? 'bg-red-500 text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
               }`}
             >
               Form A — Narkotika
@@ -285,7 +285,7 @@ export default function Sipnap() {
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                 jenis === 'psikotropika'
                   ? 'bg-purple-500 text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
               }`}
             >
               Form B — Psikotropika
@@ -294,18 +294,18 @@ export default function Sipnap() {
 
           {/* Bulan & Tahun */}
           <div className="flex items-center gap-2 ml-auto">
-            <CalendarBlank weight="bold" className="w-4 h-4 text-slate-400" />
+            <CalendarBlank weight="bold" className="w-4 h-4 text-gray-400" />
             <select
               value={bulan}
               onChange={e => setBulan(Number(e.target.value))}
-              className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             >
               {MONTHS.map((m, i) => <option key={i} value={i}>{m}</option>)}
             </select>
             <select
               value={tahun}
               onChange={e => setTahun(Number(e.target.value))}
-              className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             >
               {[tahun - 1, tahun, tahun + 1].map(y => <option key={y} value={y}>{y}</option>)}
             </select>
@@ -323,7 +323,7 @@ export default function Sipnap() {
           <button
             onClick={handlePrint}
             disabled={items.length === 0}
-            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-semibold disabled:opacity-50 transition-colors"
           >
             <FileText weight="bold" className="w-4 h-4" />
             Cetak
@@ -332,29 +332,29 @@ export default function Sipnap() {
       </div>
 
       {/* Report Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-        <div className="px-5 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-          <h3 className="font-semibold text-slate-700 dark:text-slate-200">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 overflow-hidden">
+        <div className="px-5 py-3 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
+          <h3 className="font-semibold text-gray-700 dark:text-gray-200">
             {jenis === 'narkotika' ? 'Form A — Narkotika' : 'Form B — Psikotropika'}
-            <span className="text-slate-400 dark:text-slate-500 font-normal ml-2">
+            <span className="text-gray-400 dark:text-gray-500 font-normal ml-2">
               {MONTHS[bulan]} {tahun}
             </span>
           </h3>
-          <span className="text-xs text-slate-400">{items.length} obat</span>
+          <span className="text-xs text-gray-400">{items.length} obat</span>
         </div>
 
         {loading ? (
           <div className="p-12 text-center">
-            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-sm text-slate-400">Menggenerate laporan...</p>
+            <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <p className="text-sm text-gray-400">Menggenerate laporan...</p>
           </div>
         ) : items.length === 0 ? (
           <div className="p-12 text-center">
-            <Pill weight="duotone" className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
-            <p className="text-sm text-slate-500 dark:text-slate-400">
+            <Pill weight="duotone" className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               Tidak ada obat {jenis} yang terdaftar di sistem
             </p>
-            <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
               Tambahkan obat dengan kategori "{jenis}" di menu Inventaris
             </p>
           </div>
@@ -362,40 +362,40 @@ export default function Sipnap() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-800/50 text-left">
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 w-10">No</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400">Nama Obat</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 text-center">Satuan</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 text-right">Saldo Awal</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 text-right">Penerimaan</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 text-right">Pengeluaran</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 text-right">Saldo Akhir</th>
+                <tr className="bg-gray-50 dark:bg-zinc-800/50 text-left">
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 w-10">No</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400">Nama Obat</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 text-center">Satuan</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 text-right">Saldo Awal</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 text-right">Penerimaan</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 text-right">Pengeluaran</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 text-right">Saldo Akhir</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {items.map((item, i) => (
-                  <tr key={item.medicine_id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                    <td className="px-4 py-3 text-slate-500 text-center">{i + 1}</td>
-                    <td className="px-4 py-3 font-medium text-slate-800 dark:text-slate-200">{item.medicine_name}</td>
-                    <td className="px-4 py-3 text-center text-slate-500 dark:text-slate-400">{item.unit}</td>
-                    <td className="px-4 py-3 text-right text-slate-600 dark:text-slate-300">{item.saldo_awal}</td>
+                  <tr key={item.medicine_id} className="hover:bg-gray-50 dark:hover:bg-zinc-800/30 transition-colors">
+                    <td className="px-4 py-3 text-gray-500 text-center">{i + 1}</td>
+                    <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-200">{item.medicine_name}</td>
+                    <td className="px-4 py-3 text-center text-gray-500 dark:text-gray-400">{item.unit}</td>
+                    <td className="px-4 py-3 text-right text-gray-600 dark:text-gray-300">{item.saldo_awal}</td>
                     <td className="px-4 py-3 text-right text-emerald-600 dark:text-emerald-400 font-medium">
                       {item.penerimaan > 0 ? `+${item.penerimaan}` : '0'}
                     </td>
                     <td className="px-4 py-3 text-right text-red-600 dark:text-red-400 font-medium">
                       {item.pengeluaran > 0 ? `-${item.pengeluaran}` : '0'}
                     </td>
-                    <td className="px-4 py-3 text-right font-semibold text-slate-800 dark:text-slate-200">{item.saldo_akhir}</td>
+                    <td className="px-4 py-3 text-right font-semibold text-gray-900 dark:text-gray-200">{item.saldo_akhir}</td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
-                <tr className="bg-slate-50 dark:bg-slate-800/50 font-semibold">
-                  <td colSpan={3} className="px-4 py-3 text-slate-600 dark:text-slate-300">Total</td>
-                  <td className="px-4 py-3 text-right text-slate-700 dark:text-slate-200">{items.reduce((s, i) => s + i.saldo_awal, 0)}</td>
+                <tr className="bg-gray-50 dark:bg-zinc-800/50 font-semibold">
+                  <td colSpan={3} className="px-4 py-3 text-gray-600 dark:text-gray-300">Total</td>
+                  <td className="px-4 py-3 text-right text-gray-700 dark:text-gray-200">{items.reduce((s, i) => s + i.saldo_awal, 0)}</td>
                   <td className="px-4 py-3 text-right text-emerald-600 dark:text-emerald-400">{items.reduce((s, i) => s + i.penerimaan, 0)}</td>
                   <td className="px-4 py-3 text-right text-red-600 dark:text-red-400">{items.reduce((s, i) => s + i.pengeluaran, 0)}</td>
-                  <td className="px-4 py-3 text-right text-slate-700 dark:text-slate-200">{items.reduce((s, i) => s + i.saldo_akhir, 0)}</td>
+                  <td className="px-4 py-3 text-right text-gray-700 dark:text-gray-200">{items.reduce((s, i) => s + i.saldo_akhir, 0)}</td>
                 </tr>
               </tfoot>
             </table>
@@ -404,9 +404,9 @@ export default function Sipnap() {
       </div>
 
       {/* Info SIPNAP */}
-      <div className="mt-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
-        <h4 className="text-sm font-semibold text-blue-800 dark:text-blue-200 mb-2">📋 Panduan Pelaporan SIPNAP</h4>
-        <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
+      <div className="mt-4 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4">
+        <h4 className="text-sm font-semibold text-indigo-800 dark:text-indigo-200 mb-2">📋 Panduan Pelaporan SIPNAP</h4>
+        <ul className="text-xs text-indigo-700 dark:text-indigo-300 space-y-1">
           <li>• Laporan wajib disampaikan ke BPOM <b>paling lambat tanggal 10</b> bulan berikutnya</li>
           <li>• Upload melalui portal <b>sipnap.bpom.go.id</b></li>
           <li>• Form A: Narkotika (Gol. II & III) — Form B: Psikotropika (Gol. IV)</li>

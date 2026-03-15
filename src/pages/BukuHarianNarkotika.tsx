@@ -256,23 +256,23 @@ export default function BukuHarianNarkotika() {
             <Book weight="duotone" className="w-6 h-6 text-amber-600 dark:text-amber-400" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">Buku Harian Narkotika/Psikotropika</h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">Per-BPOM No. 4/2018 & PMK 3/2015</p>
+            <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Buku Harian Narkotika/Psikotropika</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Per-BPOM No. 4/2018 & PMK 3/2015</p>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 mb-4">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 p-4 mb-4">
         <div className="flex flex-wrap items-end gap-3">
           {/* Category */}
-          <div className="flex bg-slate-100 dark:bg-slate-800 rounded-xl p-0.5">
+          <div className="flex bg-gray-100 dark:bg-zinc-800 rounded-xl p-0.5">
             <button
               onClick={() => { setCategory('narkotika'); setSelectedMedicineId(''); }}
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                 category === 'narkotika'
                   ? 'bg-red-500 text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
               }`}
             >
               Narkotika
@@ -282,7 +282,7 @@ export default function BukuHarianNarkotika() {
               className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                 category === 'psikotropika'
                   ? 'bg-purple-500 text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
               }`}
             >
               Psikotropika
@@ -291,11 +291,11 @@ export default function BukuHarianNarkotika() {
 
           {/* Medicine select */}
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-xs text-slate-400 dark:text-slate-500 mb-1">Pilih Obat</label>
+            <label className="block text-xs text-gray-400 dark:text-gray-500 mb-1">Pilih Obat</label>
             <select
               value={selectedMedicineId}
               onChange={e => setSelectedMedicineId(e.target.value)}
-              className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="w-full border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             >
               <option value="">— Pilih obat —</option>
               {medicines.map(m => <option key={m.id} value={m.id}>{m.name} ({m.unit})</option>)}
@@ -304,18 +304,18 @@ export default function BukuHarianNarkotika() {
 
           {/* Period */}
           <div className="flex items-center gap-2">
-            <CalendarBlank weight="bold" className="w-4 h-4 text-slate-400" />
+            <CalendarBlank weight="bold" className="w-4 h-4 text-gray-400" />
             <select
               value={bulan}
               onChange={e => setBulan(Number(e.target.value))}
-              className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             >
               {MONTHS.map((m, i) => <option key={i} value={i}>{m}</option>)}
             </select>
             <select
               value={tahun}
               onChange={e => setTahun(Number(e.target.value))}
-              className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             >
               {[tahun - 1, tahun, tahun + 1].map(y => <option key={y} value={y}>{y}</option>)}
             </select>
@@ -333,7 +333,7 @@ export default function BukuHarianNarkotika() {
           <button
             onClick={handlePrint}
             disabled={entries.length === 0}
-            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold disabled:opacity-50"
+            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-semibold disabled:opacity-50"
           >
             <Printer weight="bold" className="w-4 h-4" />
             Cetak
@@ -342,56 +342,56 @@ export default function BukuHarianNarkotika() {
       </div>
 
       {/* Table */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-        <div className="px-5 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-          <h3 className="font-semibold text-slate-700 dark:text-slate-200">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 overflow-hidden">
+        <div className="px-5 py-3 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
+          <h3 className="font-semibold text-gray-700 dark:text-gray-200">
             {selectedMedicine ? selectedMedicine.name : 'Pilih obat untuk melihat buku harian'}
-            {selectedMedicine && <span className="text-slate-400 font-normal ml-2">({selectedMedicine.unit})</span>}
+            {selectedMedicine && <span className="text-gray-400 font-normal ml-2">({selectedMedicine.unit})</span>}
           </h3>
-          <span className="text-xs text-slate-400">{entries.length} entri</span>
+          <span className="text-xs text-gray-400">{entries.length} entri</span>
         </div>
 
         {!selectedMedicineId ? (
           <div className="p-12 text-center">
-            <Pill weight="duotone" className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
-            <p className="text-sm text-slate-500 dark:text-slate-400">Pilih obat {category} dari dropdown di atas</p>
+            <Pill weight="duotone" className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
+            <p className="text-sm text-gray-500 dark:text-gray-400">Pilih obat {category} dari dropdown di atas</p>
           </div>
         ) : loading ? (
           <div className="p-12 text-center">
-            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-sm text-slate-400">Memuat data...</p>
+            <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <p className="text-sm text-gray-400">Memuat data...</p>
           </div>
         ) : entries.length === 0 ? (
           <div className="p-12 text-center">
-            <Book weight="duotone" className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
-            <p className="text-sm text-slate-500 dark:text-slate-400">Tidak ada pergerakan stok untuk obat ini di bulan {MONTHS[bulan]} {tahun}</p>
+            <Book weight="duotone" className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
+            <p className="text-sm text-gray-500 dark:text-gray-400">Tidak ada pergerakan stok untuk obat ini di bulan {MONTHS[bulan]} {tahun}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-800/50 text-left">
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400">Tanggal</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400">No. Dokumen</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400">Keterangan</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 text-right">Masuk</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 text-right">Keluar</th>
-                  <th className="px-4 py-3 text-xs font-semibold text-slate-500 dark:text-slate-400 text-right">Saldo</th>
+                <tr className="bg-gray-50 dark:bg-zinc-800/50 text-left">
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400">Tanggal</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400">No. Dokumen</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400">Keterangan</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 text-right">Masuk</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 text-right">Keluar</th>
+                  <th className="px-4 py-3 text-xs font-semibold text-gray-500 dark:text-gray-400 text-right">Saldo</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {entries.map((entry, i) => (
-                  <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                    <td className="px-4 py-3 text-slate-600 dark:text-slate-300 whitespace-nowrap">{entry.tanggal}</td>
-                    <td className="px-4 py-3 text-slate-500 dark:text-slate-400 font-mono text-xs">{entry.no_dokumen}</td>
-                    <td className="px-4 py-3 text-slate-700 dark:text-slate-200">{entry.keterangan}</td>
+                  <tr key={i} className="hover:bg-gray-50 dark:hover:bg-zinc-800/30 transition-colors">
+                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300 whitespace-nowrap">{entry.tanggal}</td>
+                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400 font-mono text-xs">{entry.no_dokumen}</td>
+                    <td className="px-4 py-3 text-gray-700 dark:text-gray-200">{entry.keterangan}</td>
                     <td className="px-4 py-3 text-right text-emerald-600 dark:text-emerald-400 font-medium">
                       {entry.masuk > 0 ? `+${entry.masuk}` : '-'}
                     </td>
                     <td className="px-4 py-3 text-right text-red-600 dark:text-red-400 font-medium">
                       {entry.keluar > 0 ? `-${entry.keluar}` : '-'}
                     </td>
-                    <td className="px-4 py-3 text-right font-bold text-slate-800 dark:text-slate-200">{entry.saldo}</td>
+                    <td className="px-4 py-3 text-right font-bold text-gray-900 dark:text-gray-200">{entry.saldo}</td>
                   </tr>
                 ))}
               </tbody>

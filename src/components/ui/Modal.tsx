@@ -58,7 +58,7 @@ export function Modal({
     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-black/40 dark:bg-black/60 animate-fade-in"
+        className="absolute inset-0 bg-black/50 dark:bg-black/70 animate-fade-in"
         onClick={onClose}
         aria-hidden
       />
@@ -71,7 +71,7 @@ export function Modal({
         aria-describedby={description ? 'modal-description' : undefined}
         tabIndex={-1}
         className={cn(
-          'relative w-full rounded-2xl bg-white dark:bg-slate-900 shadow-e4 border border-slate-200 dark:border-slate-800 animate-zoom-in-95',
+          'relative w-full rounded-xl bg-white dark:bg-zinc-900 shadow-e4 border border-gray-200 dark:border-zinc-700 animate-zoom-in-95',
           'max-h-[90vh] flex flex-col focus:outline-none',
           sizeClasses[size],
           className
@@ -80,15 +80,15 @@ export function Modal({
       >
         {/* Header - always rendered for close button */}
         {(title || description) && (
-          <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-zinc-800 shrink-0">
             <div>
               {title && (
-                <h2 id="modal-title" className="text-lg font-semibold text-slate-800 dark:text-slate-100">
+                <h2 id="modal-title" className="text-base font-semibold text-gray-900 dark:text-zinc-100">
                   {title}
                 </h2>
               )}
               {description && (
-                <p id="modal-description" className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                <p id="modal-description" className="text-sm text-gray-500 dark:text-zinc-400 mt-0.5">
                   {description}
                 </p>
               )}
@@ -96,7 +96,7 @@ export function Modal({
             <button
               onClick={onClose}
               aria-label="Tutup"
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              className="p-1.5 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800 dark:hover:text-zinc-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
             >
               <X weight="bold" className="w-4 h-4" />
             </button>

@@ -249,14 +249,14 @@ export default function Settings() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-20 lg:pb-0">
+    <div className="min-h-screen bg-gray-50 dark:bg-zinc-950 pb-20 lg:pb-0">
       <div className="flex flex-col lg:flex-row min-h-screen">
 
         {/* ── Settings Sidebar (desktop) ── */}
-        <aside className="hidden lg:flex flex-col w-56 xl:w-64 flex-shrink-0 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 p-4 min-h-full">
+        <aside className="hidden lg:flex flex-col w-56 xl:w-64 flex-shrink-0 bg-white dark:bg-zinc-900 border-r border-gray-100 dark:border-zinc-800 p-4 min-h-full">
           <div className="mb-6">
-            <h1 className="text-lg font-bold text-slate-800 dark:text-slate-100">Pengaturan</h1>
-            <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Apotek &amp; Akun</p>
+            <h1 className="text-base font-semibold text-gray-900 dark:text-gray-100">Pengaturan</h1>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Apotek &amp; Akun</p>
           </div>
           <nav className="space-y-1">
             {settingsTabs.map(tab => (
@@ -265,8 +265,8 @@ export default function Settings() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left ${
                   activeTab === tab.id
-                    ? 'bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 font-semibold border-l-2 border-blue-500'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100'
+                    ? 'bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 font-semibold border-l-2 border-indigo-600'
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-800 hover:text-gray-900 dark:hover:text-gray-100'
                 }`}
               >
                 <tab.icon weight={activeTab === tab.id ? 'fill' : 'bold'} className="w-4 h-4 flex-shrink-0" />
@@ -279,14 +279,14 @@ export default function Settings() {
         {/* ── Main Content ── */}
         <main className="flex-1 p-5 lg:p-8 max-w-full lg:max-w-4xl">
           <div className="mb-5 lg:hidden">
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1">Pengaturan Apotek</h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">Kelola profil apotek, tim kasir, dan informasi resmi.</p>
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">Pengaturan Apotek</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Kelola profil apotek, tim kasir, dan informasi resmi.</p>
           </div>
           <div className="hidden lg:block mb-7">
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
               {settingsTabs.find(t => t.id === activeTab)?.label}
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
               {activeTab === 'profil' && 'Kelola informasi apotek, lisensi, dan preferensi tampilan.'}
               {activeTab === 'tim' && 'Undang kasir, kelola anggota tim, dan atur izin akses.'}
               {activeTab === 'log' && 'Pantau semua aktivitas perubahan data di apotek Anda.'}
@@ -294,12 +294,12 @@ export default function Settings() {
           </div>
 
           {/* Mobile tab pills */}
-          <div className="flex gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl mb-6 w-fit lg:hidden">
+          <div className="flex gap-1 bg-gray-100 dark:bg-zinc-800 p-1 rounded-xl mb-6 w-fit lg:hidden">
             {settingsTabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${activeTab === tab.id ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'}`}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${activeTab === tab.id ? 'bg-white dark:bg-zinc-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}`}
               >
                 <tab.icon weight={activeTab === tab.id ? 'fill' : 'bold'} className="w-4 h-4" />
                 {tab.label}
@@ -311,22 +311,22 @@ export default function Settings() {
         {activeTab === 'profil' && (
           <form onSubmit={handleSave} className="space-y-6">
           {/* Logo Section */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
-              <ImageIcon weight="fill" className="w-5 h-5 text-blue-500" />
+          <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm p-6">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <ImageIcon weight="fill" className="w-5 h-5 text-indigo-600" />
               Logo Apotek
             </h2>
             <div className="flex items-center gap-6">
-              <div className="w-24 h-24 rounded-2xl bg-slate-100 border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden flex-shrink-0">
+              <div className="w-24 h-24 rounded-xl bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center overflow-hidden flex-shrink-0">
                 {logoPreview ? (
                   <img src={logoPreview} alt="Logo" className="w-full h-full object-cover" />
                 ) : (
-                  <Storefront className="w-10 h-10 text-slate-300" />
+                  <Storefront className="w-10 h-10 text-gray-300" />
                 )}
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-3">
-                  <label className="px-4 py-2 bg-blue-50 text-blue-600 text-sm font-semibold rounded-xl cursor-pointer hover:bg-blue-100 transition-colors">
+                  <label className="px-4 py-2 bg-indigo-50 text-indigo-600 text-sm font-semibold rounded-xl cursor-pointer hover:bg-indigo-100 transition-colors">
                     Pilih Gambar
                     <input type="file" accept="image/png,image/jpeg,image/webp" className="hidden" onChange={handleLogoChange} />
                   </label>
@@ -340,105 +340,105 @@ export default function Settings() {
                     </button>
                   )}
                 </div>
-                <p className="text-xs text-slate-400 mt-2">PNG, JPG, atau WebP. Maks 2MB. Akan tampil di struk.</p>
+                <p className="text-xs text-gray-400 mt-2">PNG, JPG, atau WebP. Maks 2MB. Akan tampil di struk.</p>
               </div>
             </div>
           </div>
 
           {/* Profile Info */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
-              <User weight="fill" className="w-5 h-5 text-blue-500" />
+          <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm p-6">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <User weight="fill" className="w-5 h-5 text-indigo-600" />
               Informasi Profil
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Nama Pemilik / Apoteker</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nama Pemilik / Apoteker</label>
                 <input
                   required
                   type="text"
                   value={form.full_name}
                   onChange={(e) => setForm({ ...form, full_name: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                   placeholder="Dr. Ahmad Fauzi, S.Farm"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Nama Apotek</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nama Apotek</label>
                 <input
                   required
                   type="text"
                   value={form.pharmacy_name}
                   onChange={(e) => setForm({ ...form, pharmacy_name: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                   placeholder="Apotek Sehat Selalu"
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 mb-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                <label className="flex items-center gap-1.5 text-sm font-semibold text-gray-700 mb-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-gray-400" />
                   Alamat Apotek
                 </label>
                 <input
                   type="text"
                   value={form.pharmacy_address}
                   onChange={(e) => setForm({ ...form, pharmacy_address: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                   placeholder="Jl. Kesehatan No. 123, Jakarta"
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 mb-1.5">
-                  <Phone className="w-3.5 h-3.5 text-slate-400" />
+                <label className="flex items-center gap-1.5 text-sm font-semibold text-gray-700 mb-1.5">
+                  <Phone className="w-3.5 h-3.5 text-gray-400" />
                   Nomor Telepon / WhatsApp
                 </label>
                 <input
                   type="tel"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                   placeholder="628123456789"
                 />
-                <p className="text-xs text-slate-400 mt-1.5">Format: 628xxx (tanpa +). Juga digunakan sebagai default nomor WA untuk kirim struk.</p>
+                <p className="text-xs text-gray-400 mt-1.5">Format: 628xxx (tanpa +). Juga digunakan sebagai default nomor WA untuk kirim struk.</p>
               </div>
             </div>
           </div>
 
           {/* Informasi Resmi Apotek */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1 flex items-center gap-2">
-              <IdentificationCard weight="fill" className="w-5 h-5 text-blue-500" />
+          <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm p-6">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1 flex items-center gap-2">
+              <IdentificationCard weight="fill" className="w-5 h-5 text-indigo-600" />
               Informasi Resmi Apotek
             </h2>
-            <p className="text-xs text-slate-400 mb-4">Akan tampil di struk cetak sesuai regulasi PMK 73/2016.</p>
+            <p className="text-xs text-gray-400 mb-4">Akan tampil di struk cetak sesuai regulasi PMK 73/2016.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Nomor SIA</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nomor SIA</label>
                 <input
                   type="text"
                   value={form.sia_number}
                   onChange={(e) => setForm({ ...form, sia_number: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                   placeholder="503/SIA/XII/2024/001"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Nama Apoteker Penanggung Jawab</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nama Apoteker Penanggung Jawab</label>
                 <input
                   type="text"
                   value={form.apoteker_name}
                   onChange={(e) => setForm({ ...form, apoteker_name: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                   placeholder="apt. Siti Rahayu, S.Farm."
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Nomor SIPA Apoteker</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Nomor SIPA Apoteker</label>
                 <input
                   type="text"
                   value={form.sipa_number}
                   onChange={(e) => setForm({ ...form, sipa_number: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                   placeholder="503/SIPA/XII/2024/001"
                 />
               </div>
@@ -446,12 +446,12 @@ export default function Settings() {
           </div>
 
           {/* Masa Berlaku Izin */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1 flex items-center gap-2">
-              <CalendarBlank weight="fill" className="w-5 h-5 text-blue-500" />
+          <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm p-6">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1 flex items-center gap-2">
+              <CalendarBlank weight="fill" className="w-5 h-5 text-indigo-600" />
               Masa Berlaku Izin
             </h2>
-            <p className="text-xs text-slate-400 mb-4">Sistem akan mengingatkan Anda sebelum izin kadaluarsa (H-90, H-30, H-7).</p>
+            <p className="text-xs text-gray-400 mb-4">Sistem akan mengingatkan Anda sebelum izin kadaluarsa (H-90, H-30, H-7).</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {([
                 { key: 'sia_expiry_date' as const, label: 'Kadaluarsa SIA' },
@@ -461,12 +461,12 @@ export default function Settings() {
                 const expiryInfo = getLicenseExpiryStatus(form[key]);
                 return (
                   <div key={key}>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5">{label}</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">{label}</label>
                     <input
                       type="date"
                       value={form[key]}
                       onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                      className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                      className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                     />
                     {form[key] && (
                       <p className={`text-xs mt-1.5 font-medium ${
@@ -487,45 +487,45 @@ export default function Settings() {
           </div>
 
           {/* Receipt Settings */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
-              <Storefront weight="fill" className="w-5 h-5 text-blue-500" />
+          <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm p-6">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <Storefront weight="fill" className="w-5 h-5 text-indigo-600" />
               Pengaturan Struk
             </h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1">Lebar Kertas Struk</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Lebar Kertas Struk</label>
                 <select
                   value={form.receipt_width}
                   onChange={e => setForm(f => ({ ...f, receipt_width: e.target.value as '58mm' | '80mm' | 'A4' }))}
-                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                 >
                   <option value="58mm">58mm — Printer Termal Kecil (paling umum)</option>
                   <option value="80mm">80mm — Printer Termal Besar</option>
                   <option value="A4">A4 — Printer Biasa / Inkjet</option>
                 </select>
-                <p className="text-xs text-slate-400 mt-1">Sesuaikan dengan tipe printer yang digunakan di apotek Anda.</p>
+                <p className="text-xs text-gray-400 mt-1">Sesuaikan dengan tipe printer yang digunakan di apotek Anda.</p>
               </div>
             </div>
           </div>
 
           {/* Receipt Preview */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
-              <Storefront weight="fill" className="w-5 h-5 text-blue-500" />
+          <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm p-6">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <Storefront weight="fill" className="w-5 h-5 text-indigo-600" />
               Preview Header Struk
             </h2>
-            <div className="bg-slate-50 rounded-xl p-6 font-mono text-xs text-center border border-slate-200 max-w-[300px] mx-auto">
+            <div className="bg-gray-50 rounded-xl p-6 font-mono text-xs text-center border border-gray-200 max-w-[300px] mx-auto">
               {logoPreview && (
                 <img src={logoPreview} alt="Logo" className="w-12 h-12 object-cover rounded-lg mx-auto mb-2" />
               )}
               <p className="font-bold text-sm">{form.pharmacy_name || 'NAMA APOTEK'}</p>
-              <p className="text-slate-500">{form.pharmacy_address || 'Alamat Apotek'}</p>
-              <p className="text-slate-500">Telp: {form.phone || '-'}</p>
-              {form.apoteker_name && <p className="text-slate-500">Apt: {form.apoteker_name}{form.sipa_number ? `, SIPA: ${form.sipa_number}` : ''}</p>}
-              {form.sia_number && <p className="text-slate-500">SIA: {form.sia_number}</p>}
-              <div className="border-t border-dashed border-slate-300 mt-3 pt-2">
-                <p className="text-slate-400 italic">... detail transaksi ...</p>
+              <p className="text-gray-500">{form.pharmacy_address || 'Alamat Apotek'}</p>
+              <p className="text-gray-500">Telp: {form.phone || '-'}</p>
+              {form.apoteker_name && <p className="text-gray-500">Apt: {form.apoteker_name}{form.sipa_number ? `, SIPA: ${form.sipa_number}` : ''}</p>}
+              {form.sia_number && <p className="text-gray-500">SIA: {form.sia_number}</p>}
+              <div className="border-t border-dashed border-gray-300 mt-3 pt-2">
+                <p className="text-gray-400 italic">... detail transaksi ...</p>
               </div>
             </div>
           </div>
@@ -535,7 +535,7 @@ export default function Settings() {
             <button
               type="submit"
               disabled={saving}
-              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)] disabled:opacity-50"
+              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)] disabled:opacity-50"
             >
               {saving ? (
                 <>
@@ -557,9 +557,9 @@ export default function Settings() {
         {activeTab === 'tim' && (
           <div className="space-y-6">
             {/* Info box */}
-            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 flex gap-3">
-              <Warning weight="fill" className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-blue-800">
+            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4 flex gap-3">
+              <Warning weight="fill" className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-indigo-800">
                 <p className="font-semibold mb-1">Cara menambah kasir baru:</p>
                 <ol className="list-decimal list-inside space-y-0.5">
                   <li>Klik <strong>Undang Kasir</strong>, masukkan email kasir</li>
@@ -570,15 +570,15 @@ export default function Settings() {
             </div>
 
             {/* Active team members */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+            <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-                  <Users weight="fill" className="w-5 h-5 text-blue-500" />
+                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                  <Users weight="fill" className="w-5 h-5 text-indigo-600" />
                   Kasir Aktif
                 </h2>
                 <button
                   onClick={() => { setShowInviteModal(true); setInviteResult(null); }}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-xl transition-colors"
+                  className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl transition-colors"
                 >
                   <UserPlus className="w-4 h-4" />
                   Undang Kasir
@@ -586,23 +586,23 @@ export default function Settings() {
               </div>
 
               {loadingTeam ? (
-                <div className="text-center py-8 text-slate-400 text-sm">Memuat...</div>
+                <div className="text-center py-8 text-gray-400 text-sm">Memuat...</div>
               ) : teamMembers.length === 0 ? (
-                <div className="text-center py-8 text-slate-400 text-sm">
+                <div className="text-center py-8 text-gray-400 text-sm">
                   Belum ada kasir terdaftar.<br />
                   Undang kasir menggunakan tombol di atas.
                 </div>
               ) : (
                 <div className="space-y-3">
                   {teamMembers.map((member) => (
-                    <div key={member.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
+                    <div key={member.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center">
-                          <User weight="fill" className="w-5 h-5 text-blue-500" />
+                        <div className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center">
+                          <User weight="fill" className="w-5 h-5 text-indigo-600" />
                         </div>
                         <div>
-                          <p className="font-semibold text-sm text-slate-800">{member.full_name}</p>
-                          <p className="text-xs text-slate-400 capitalize">{member.role} · Bergabung {new Date(member.created_at!).toLocaleDateString('id-ID')}</p>
+                          <p className="font-semibold text-sm text-gray-900">{member.full_name}</p>
+                          <p className="text-xs text-gray-400 capitalize">{member.role} · Bergabung {new Date(member.created_at!).toLocaleDateString('id-ID')}</p>
                         </div>
                       </div>
                       <button
@@ -619,16 +619,16 @@ export default function Settings() {
 
             {/* Pending invitations */}
             {invitations.length > 0 && (
-              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
-                <h2 className="text-base font-bold text-slate-800 mb-4">Undangan Tertunda</h2>
+              <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm p-6">
+                <h2 className="text-sm font-semibold text-gray-900 mb-4">Undangan Tertunda</h2>
                 <div className="space-y-3">
                   {invitations.map((inv) => (
                     <div key={inv.id} className="flex items-center justify-between p-4 bg-amber-50 rounded-xl border border-amber-100">
                       <div>
-                        <p className="text-sm font-semibold text-slate-800">
-                          {inv.email ?? <span className="text-slate-400 italic">Open invite</span>}
+                        <p className="text-sm font-semibold text-gray-900">
+                          {inv.email ?? <span className="text-gray-400 italic">Open invite</span>}
                         </p>
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-gray-500">
                           Kadaluarsa {new Date(inv.expires_at).toLocaleDateString('id-ID')}
                         </p>
                       </div>
@@ -638,7 +638,7 @@ export default function Settings() {
                             const link = `${window.location.origin}/join?token=${inv.token}`;
                             navigator.clipboard.writeText(link).then(() => toast.success('Link disalin')).catch(() => toast.error('Gagal menyalin link'));
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 text-slate-600 text-xs font-semibold rounded-lg hover:bg-slate-50 transition-colors"
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-semibold rounded-lg hover:bg-gray-50 transition-colors"
                         >
                           <Link className="w-3.5 h-3.5" />
                           Salin Link
@@ -679,51 +679,51 @@ export default function Settings() {
         {activeTab === 'log' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-gray-500">
                 Menampilkan 100 aktivitas terbaru dari semua pengguna apotek ini.
               </p>
               <button onClick={fetchAuditLogs}
-                className="text-xs text-blue-500 font-semibold hover:underline">
+                className="text-xs text-indigo-600 font-semibold hover:underline">
                 Muat Ulang
               </button>
             </div>
 
-            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm overflow-hidden">
               {loadingLogs ? (
-                <div className="py-12 text-center text-slate-400 text-sm">Memuat log aktivitas...</div>
+                <div className="py-12 text-center text-gray-400 text-sm">Memuat log aktivitas...</div>
               ) : auditLogs.length === 0 ? (
                 <div className="py-12 text-center">
-                  <ClockCounterClockwise className="w-10 h-10 text-slate-200 mx-auto mb-2" />
-                  <p className="text-slate-400 text-sm">Belum ada log aktivitas tercatat</p>
+                  <ClockCounterClockwise className="w-10 h-10 text-gray-200 mx-auto mb-2" />
+                  <p className="text-gray-400 text-sm">Belum ada log aktivitas tercatat</p>
                 </div>
               ) : (
-                <div className="divide-y divide-slate-50">
+                <div className="divide-y divide-gray-50">
                   {auditLogs.map((log) => {
                     const actionConfig = {
                       create: { label: 'Tambah', color: 'text-emerald-600 bg-emerald-50' },
-                      update: { label: 'Ubah',   color: 'text-blue-600 bg-blue-50' },
+                      update: { label: 'Ubah',   color: 'text-indigo-600 bg-indigo-50' },
                       delete: { label: 'Hapus',  color: 'text-rose-600 bg-rose-50' },
                     } as const;
-                    const cfg = actionConfig[log.action] ?? { label: log.action, color: 'text-slate-600 bg-slate-100' };
+                    const cfg = actionConfig[log.action] ?? { label: log.action, color: 'text-gray-600 bg-gray-100' };
                     const entityLabel: Record<string, string> = {
                       medicine: 'Obat', transaction: 'Transaksi',
                       prescription: 'Resep', customer: 'Pelanggan',
                     };
                     return (
-                      <div key={log.id} className="flex items-start gap-4 px-5 py-3.5 hover:bg-slate-50 transition-colors">
+                      <div key={log.id} className="flex items-start gap-4 px-5 py-3.5 hover:bg-gray-50 transition-colors">
                         <span className={`mt-0.5 text-xs font-semibold px-2 py-0.5 rounded-full shrink-0 ${cfg.color}`}>
                           {cfg.label}
                         </span>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-slate-700">
+                          <p className="text-sm text-gray-700">
                             <span className="font-semibold">{log.users?.full_name || 'Sistem'}</span>
                             {' '}{cfg.label.toLowerCase()}{' '}
-                            <span className="text-slate-500">{entityLabel[log.entity_type] || log.entity_type}</span>
+                            <span className="text-gray-500">{entityLabel[log.entity_type] || log.entity_type}</span>
                             {log.entity_name && (
-                              <span className="font-medium text-slate-800"> "{log.entity_name}"</span>
+                              <span className="font-medium text-gray-900"> "{log.entity_name}"</span>
                             )}
                           </p>
-                          <p className="text-xs text-slate-400 mt-0.5">
+                          <p className="text-xs text-gray-400 mt-0.5">
                             {new Date(log.created_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}
                           </p>
                         </div>
@@ -742,33 +742,33 @@ export default function Settings() {
       {showInviteModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           role="dialog" aria-modal="true" aria-labelledby="invite-modal-title">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 id="invite-modal-title" className="text-lg font-bold">Undang Kasir Baru</h2>
-              <button onClick={() => { setShowInviteModal(false); setInviteResult(null); }} className="p-1.5 hover:bg-slate-100 rounded-lg">
+              <h2 id="invite-modal-title" className="text-base font-semibold">Undang Kasir Baru</h2>
+              <button onClick={() => { setShowInviteModal(false); setInviteResult(null); }} className="p-1.5 hover:bg-gray-100 rounded-lg">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {inviteResult ? (
               <div className="space-y-4">
-                <div className="flex items-center gap-2 text-green-700 bg-green-50 p-3 rounded-xl">
+                <div className="flex items-center gap-2 text-emerald-700 bg-emerald-50 p-3 rounded-xl">
                   <CheckCircle weight="fill" className="w-5 h-5 flex-shrink-0" />
                   <p className="text-sm font-semibold">Undangan berhasil dibuat!</p>
                 </div>
-                <p className="text-sm text-slate-600">Bagikan link ini kepada kasir. Link berlaku 7 hari.</p>
-                <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl p-3">
-                  <span className="flex-1 text-xs font-mono text-slate-700 truncate">
+                <p className="text-sm text-gray-600">Bagikan link ini kepada kasir. Link berlaku 7 hari.</p>
+                <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl p-3">
+                  <span className="flex-1 text-xs font-mono text-gray-700 truncate">
                     {`${window.location.origin}/join?token=${inviteResult.token}`}
                   </span>
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(`${window.location.origin}/join?token=${inviteResult.token}`).then(() => toast.success('Link disalin')).catch(() => toast.error('Gagal menyalin link'));
                     }}
-                    className="p-1.5 hover:bg-slate-200 rounded-lg transition-colors flex-shrink-0"
+                    className="p-1.5 hover:bg-zinc-200 rounded-lg transition-colors flex-shrink-0"
                     title="Salin link"
                   >
-                    <Copy className="w-4 h-4 text-slate-500" />
+                    <Copy className="w-4 h-4 text-gray-500" />
                   </button>
                 </div>
                 <a
@@ -780,18 +780,18 @@ export default function Settings() {
                   <WhatsappLogo className="w-5 h-5" />
                   Kirim via WhatsApp
                 </a>
-                <details className="text-xs text-slate-400">
-                  <summary className="cursor-pointer hover:text-slate-600 transition-colors">Kode manual (fallback)</summary>
-                  <div className="mt-2 flex items-center gap-2 bg-slate-100 rounded-lg p-2">
-                    <span className="flex-1 font-mono font-bold text-slate-700 text-base tracking-widest text-center">{inviteResult.code}</span>
-                    <button onClick={() => navigator.clipboard.writeText(inviteResult.code).then(() => toast.success('Kode disalin')).catch(() => toast.error('Gagal menyalin kode'))} className="p-1 hover:bg-slate-200 rounded">
-                      <Copy className="w-3.5 h-3.5 text-slate-500" />
+                <details className="text-xs text-gray-400">
+                  <summary className="cursor-pointer hover:text-gray-600 transition-colors">Kode manual (fallback)</summary>
+                  <div className="mt-2 flex items-center gap-2 bg-gray-100 rounded-lg p-2">
+                    <span className="flex-1 font-mono font-bold text-gray-700 text-base tracking-widest text-center">{inviteResult.code}</span>
+                    <button onClick={() => navigator.clipboard.writeText(inviteResult.code).then(() => toast.success('Kode disalin')).catch(() => toast.error('Gagal menyalin kode'))} className="p-1 hover:bg-zinc-200 rounded">
+                      <Copy className="w-3.5 h-3.5 text-gray-500" />
                     </button>
                   </div>
                 </details>
                 <button
                   onClick={() => setInviteResult(null)}
-                  className="w-full px-4 py-2 text-slate-500 hover:bg-slate-50 text-sm rounded-xl transition-colors"
+                  className="w-full px-4 py-2 text-gray-500 hover:bg-gray-50 text-sm rounded-xl transition-colors"
                 >
                   Undang kasir lain
                 </button>
@@ -799,29 +799,29 @@ export default function Settings() {
             ) : (
               <form onSubmit={handleCreateInvite} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1.5">Email Kasir <span className="text-slate-400 font-normal">(opsional)</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email Kasir <span className="text-gray-400 font-normal">(opsional)</span></label>
                   <input
                     type="email"
                     autoFocus
                     value={inviteEmail}
                     onChange={(e) => setInviteEmail(e.target.value)}
                     placeholder="kasir@email.com"
-                    className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
                   />
-                  <p className="text-xs text-slate-400 mt-1.5">Kosongkan untuk membuat link terbuka yang bisa dipakai siapa saja.</p>
+                  <p className="text-xs text-gray-400 mt-1.5">Kosongkan untuk membuat link terbuka yang bisa dipakai siapa saja.</p>
                 </div>
                 <div className="flex gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setShowInviteModal(false)}
-                    className="flex-1 py-2.5 border border-slate-200 text-slate-600 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors"
+                    className="flex-1 py-2.5 border border-gray-200 text-gray-600 rounded-xl text-sm font-semibold hover:bg-gray-50 transition-colors"
                   >
                     Batal
                   </button>
                   <button
                     type="submit"
                     disabled={sendingInvite}
-                    className="flex-1 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-semibold transition-colors disabled:opacity-50"
+                    className="flex-1 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold transition-colors disabled:opacity-50"
                   >
                     {sendingInvite ? 'Membuat...' : 'Buat Undangan'}
                   </button>
@@ -836,16 +836,16 @@ export default function Settings() {
       {deactivateTarget && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           role="dialog" aria-modal="true" aria-label="Konfirmasi Lepas Kasir">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 text-center">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm p-6 text-center">
             <Warning weight="fill" className="w-10 h-10 text-amber-500 mx-auto mb-3" />
-            <h2 className="text-lg font-bold mb-2">Lepas Kasir?</h2>
-            <p className="text-sm text-slate-500 mb-6">
+            <h2 className="text-base font-semibold mb-2">Lepas Kasir?</h2>
+            <p className="text-sm text-gray-500 mb-6">
               <strong>{deactivateTarget.full_name}</strong> akan dilepas dari tim apotek ini dan tidak dapat lagi menggunakan aplikasi sebagai kasir Anda.
             </p>
             <div className="flex gap-3">
               <button
                 onClick={() => setDeactivateTarget(null)}
-                className="flex-1 py-2.5 border border-slate-200 text-slate-600 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-colors"
+                className="flex-1 py-2.5 border border-gray-200 text-gray-600 rounded-xl text-sm font-semibold hover:bg-gray-50 transition-colors"
               >
                 Batal
               </button>

@@ -107,33 +107,33 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
   }).length;
 
   return (
-    <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Manajemen Batch/Lot</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">{medicineName}</p>
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">Manajemen Batch/Lot</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{medicineName}</p>
           </div>
-          <button onClick={onClose} className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+          <button onClick={onClose} className="p-1.5 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Summary */}
-        <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800 border-b border-slate-100 dark:border-slate-700">
+        <div className="px-6 py-4 bg-gray-50 dark:bg-zinc-800 border-b border-gray-100 dark:border-zinc-700">
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Batch</p>
-              <p className="text-xl font-bold text-slate-800 dark:text-slate-100">{batches.length}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Batch</p>
+              <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{batches.length}</p>
             </div>
             <div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Total Stok</p>
-              <p className="text-xl font-bold text-slate-800 dark:text-slate-100">{totalStock}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Stok</p>
+              <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{totalStock}</p>
             </div>
             <div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">Akan Kadaluarsa</p>
-              <p className={`text-xl font-bold ${expiringSoon > 0 ? 'text-amber-600' : 'text-emerald-600'}`}>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Akan Kadaluarsa</p>
+              <p className={`text-lg font-semibold ${expiringSoon > 0 ? 'text-amber-600' : 'text-emerald-600'}`}>
                 {expiringSoon}
               </p>
             </div>
@@ -144,11 +144,11 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
         <div className="flex-1 overflow-y-auto p-6">
           {/* Add Form */}
           {showAddForm ? (
-            <form onSubmit={handleAddBatch} className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 mb-6">
-              <h3 className="text-sm font-semibold text-blue-800 dark:text-blue-200 mb-4">Tambah Batch Baru</h3>
+            <form onSubmit={handleAddBatch} className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4 mb-6">
+              <h3 className="text-sm font-semibold text-indigo-800 dark:text-indigo-200 mb-4">Tambah Batch Baru</h3>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">
                     Batch Number <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -156,12 +156,12 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
                     required
                     value={form.batch_number}
                     onChange={e => setForm({ ...form, batch_number: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:text-slate-200"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:bg-zinc-800 dark:text-gray-200"
                     placeholder="LOT2024001"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">
                     Jumlah <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -170,11 +170,11 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
                     min="1"
                     value={form.quantity || ''}
                     onChange={e => setForm({ ...form, quantity: parseInt(e.target.value) || 0 })}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:text-slate-200"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:bg-zinc-800 dark:text-gray-200"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">
                     Tanggal Kadaluarsa <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -182,36 +182,36 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
                     required
                     value={form.expiry_date}
                     onChange={e => setForm({ ...form, expiry_date: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:text-slate-200"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:bg-zinc-800 dark:text-gray-200"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">Harga Beli</label>
+                  <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Harga Beli</label>
                   <input
                     type="number"
                     min="0"
                     value={form.buy_price || ''}
                     onChange={e => setForm({ ...form, buy_price: parseInt(e.target.value) || 0 })}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:text-slate-200"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:bg-zinc-800 dark:text-gray-200"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">Supplier</label>
+                  <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Supplier</label>
                   <input
                     type="text"
                     value={form.supplier}
                     onChange={e => setForm({ ...form, supplier: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:text-slate-200"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:bg-zinc-800 dark:text-gray-200"
                     placeholder="PT. Supplier"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">Catatan</label>
+                  <label className="block text-xs font-semibold text-gray-700 dark:text-gray-200 mb-1">Catatan</label>
                   <input
                     type="text"
                     value={form.notes}
                     onChange={e => setForm({ ...form, notes: e.target.value })}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:text-slate-200"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:bg-zinc-800 dark:text-gray-200"
                   />
                 </div>
               </div>
@@ -219,14 +219,14 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
                 <button
                   type="button"
                   onClick={() => setShowAddForm(false)}
-                  className="flex-1 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700"
+                  className="flex-1 py-2 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-700"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
                   disabled={saving}
-                  className="flex-1 py-2 text-sm font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="flex-1 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {saving ? <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Plus weight="bold" className="w-4 h-4" />}
                   Simpan Batch
@@ -236,7 +236,7 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
           ) : (
             <button
               onClick={() => setShowAddForm(true)}
-              className="w-full py-3 mb-6 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-2 border-dashed border-blue-200 dark:border-blue-800 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors flex items-center justify-center gap-2"
+              className="w-full py-3 mb-6 text-sm font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 border-2 border-dashed border-indigo-200 dark:border-indigo-800 rounded-xl hover:bg-indigo-100 dark:hover:bg-indigo-900/40 transition-colors flex items-center justify-center gap-2"
             >
               <Plus weight="bold" className="w-4 h-4" />
               Tambah Batch Baru
@@ -245,12 +245,12 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
 
           {/* Batch List */}
           {loading ? (
-            <div className="py-12 text-center text-slate-400 dark:text-slate-500">Memuat batch...</div>
+            <div className="py-12 text-center text-gray-400 dark:text-gray-500">Memuat batch...</div>
           ) : batches.length === 0 ? (
             <div className="py-12 text-center">
-              <Package className="w-12 h-12 text-slate-200 dark:text-slate-700 mx-auto mb-3" />
-              <p className="text-slate-400 dark:text-slate-500 text-sm">Belum ada batch.</p>
-              <p className="text-slate-400 dark:text-slate-500 text-xs">Klik tombol di atas untuk menambah batch baru.</p>
+              <Package className="w-12 h-12 text-gray-200 dark:text-gray-700 mx-auto mb-3" />
+              <p className="text-gray-400 dark:text-gray-500 text-sm">Belum ada batch.</p>
+              <p className="text-gray-400 dark:text-gray-500 text-xs">Klik tombol di atas untuk menambah batch baru.</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -265,13 +265,13 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
                     className={`border rounded-xl p-4 ${
                       isExpired ? 'bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-800' :
                       isExpiringSoon ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800' :
-                      'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700'
+                      'bg-gray-50 dark:bg-zinc-800 border-gray-200 dark:border-zinc-700'
                     }`}
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <p className="font-bold text-slate-800 dark:text-slate-100">{batch.batch_number}</p>
-                        <div className="flex items-center gap-4 mt-1 text-xs text-slate-500 dark:text-slate-400">
+                        <p className="font-bold text-gray-900 dark:text-gray-100">{batch.batch_number}</p>
+                        <div className="flex items-center gap-4 mt-1 text-xs text-gray-500 dark:text-gray-400">
                           <span className="flex items-center gap-1">
                             <Package className="w-3 h-3" />
                             {batch.quantity} unit
@@ -293,17 +293,17 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
                       </span>
                     </div>
                     <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                      <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300">
                         <Calendar className="w-3 h-3" />
                         <span>Exp: {new Date(batch.expiry_date).toLocaleDateString('id-ID')}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300">
+                      <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300">
                         <CurrencyDollarSimple className="w-3 h-3" />
                         <span>Rp {batch.buy_price.toLocaleString('id-ID')}</span>
                       </div>
                     </div>
                     {batch.notes && (
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 italic">{batch.notes}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 italic">{batch.notes}</p>
                     )}
                   </div>
                 );

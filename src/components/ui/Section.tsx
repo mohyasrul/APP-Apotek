@@ -16,10 +16,10 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       {(title || description) && (
         <div className="mb-4">
           {title && (
-            <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100">{title}</h2>
+            <h2 className="text-base font-semibold text-gray-900 dark:text-zinc-100">{title}</h2>
           )}
           {description && (
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{description}</p>
+            <p className="text-sm text-gray-500 dark:text-zinc-400 mt-0.5">{description}</p>
           )}
         </div>
       )}

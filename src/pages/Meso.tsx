@@ -57,7 +57,7 @@ const SEVERITY_LABELS: Record<string, string> = {
 };
 
 const SEVERITY_COLORS: Record<string, string> = {
-  ringan: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400',
+  ringan: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400',
   sedang: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400',
   berat: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-400',
   mengancam_jiwa: 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-400',
@@ -145,19 +145,19 @@ export default function Meso() {
     r.reaction.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const inputClass = 'w-full px-3 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500';
-  const labelClass = 'block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1';
+  const inputClass = 'w-full px-3 py-2.5 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600';
+  const labelClass = 'block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1';
 
   return (
     <div className="flex-1 p-4 lg:p-8 max-w-5xl mx-auto w-full pb-20 lg:pb-0">
       {/* Header */}
       <div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
             <FirstAidKit weight="fill" className="w-6 h-6 text-rose-500" />
             Monitoring Efek Samping Obat (MESO)
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
             Dokumentasi dan pelaporan efek samping obat sesuai PMK 73/2016 & Per-BPOM No. 24/2017
           </p>
         </div>
@@ -181,27 +181,27 @@ export default function Meso() {
 
       {/* Search */}
       <div className="relative mb-4">
-        <MagnifyingGlass weight="bold" className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+        <MagnifyingGlass weight="bold" className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
           type="search"
           placeholder="Cari pasien, obat, atau efek samping..."
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+          className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
         />
       </div>
 
       {/* Records */}
       {loading ? (
-        <div className="py-10 text-center text-slate-400 flex flex-col items-center">
+        <div className="py-10 text-center text-gray-400 flex flex-col items-center">
           <div className="w-8 h-8 border-4 border-rose-400 border-t-transparent rounded-full animate-spin mb-3" />
           Memuat data...
         </div>
       ) : filtered.length === 0 ? (
-        <div className="py-16 text-center flex flex-col items-center border border-dashed border-slate-200 dark:border-slate-700 rounded-2xl">
-          <FirstAidKit className="w-12 h-12 text-slate-300 mb-3" />
-          <p className="font-semibold text-slate-500">Belum ada laporan MESO</p>
-          <p className="text-sm text-slate-400 mb-4">Dokumen laporan efek samping obat akan ditampilkan di sini.</p>
+        <div className="py-16 text-center flex flex-col items-center border border-dashed border-gray-200 dark:border-zinc-700 rounded-xl">
+          <FirstAidKit className="w-12 h-12 text-gray-300 mb-3" />
+          <p className="font-semibold text-gray-500">Belum ada laporan MESO</p>
+          <p className="text-sm text-gray-400 mb-4">Dokumen laporan efek samping obat akan ditampilkan di sini.</p>
           <button onClick={() => { setDraft(emptyDraft()); setShowForm(true); }} className="text-rose-500 text-sm font-semibold hover:underline">
             Buat Laporan Pertama
           </button>
@@ -209,64 +209,64 @@ export default function Meso() {
       ) : (
         <div className="space-y-3">
           {filtered.map(r => (
-            <div key={r.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-4 flex flex-col gap-3">
+            <div key={r.id} className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-xl p-4 flex flex-col gap-3">
               <div className="flex items-start justify-between gap-2 flex-wrap">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${SEVERITY_COLORS[r.severity]}`}>
+                  <span className={`px-2 py-0.5 rounded text-xs font-medium ${SEVERITY_COLORS[r.severity]}`}>
                     {SEVERITY_LABELS[r.severity]}
                   </span>
                   {r.reported_to_bpom && (
-                    <span className="bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400 px-2.5 py-0.5 rounded-full text-xs font-semibold">
+                    <span className="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-400 px-2 py-0.5 rounded text-xs font-medium">
                       ✓ Dilaporkan ke BPOM
                     </span>
                   )}
                 </div>
                 {profile?.role === 'owner' && (
-                  <button onClick={() => setDeleteTarget(r)} className="text-slate-300 hover:text-rose-500 transition-colors p-1">
+                  <button onClick={() => setDeleteTarget(r)} className="text-gray-300 hover:text-rose-500 transition-colors p-1">
                     <Trash weight="bold" className="w-4 h-4" />
                   </button>
                 )}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
                 <div className="flex gap-2">
-                  <User className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                  <User className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-400 font-medium">Pasien</p>
-                    <p className="text-slate-800 dark:text-slate-100 font-semibold">{r.patient_name}</p>
-                    {r.patient_age && <p className="text-xs text-slate-500">{r.patient_age} th, {r.patient_gender}</p>}
+                    <p className="text-xs text-gray-400 font-medium">Pasien</p>
+                    <p className="text-gray-900 dark:text-gray-100 font-semibold">{r.patient_name}</p>
+                    {r.patient_age && <p className="text-xs text-gray-500">{r.patient_age} th, {r.patient_gender}</p>}
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Pill className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                  <Pill className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-400 font-medium">Obat yang Dicurigai</p>
-                    <p className="text-slate-800 dark:text-slate-100 font-semibold">{r.medicine_name}</p>
-                    {r.batch_number && <p className="text-xs text-slate-500">Batch: {r.batch_number}</p>}
+                    <p className="text-xs text-gray-400 font-medium">Obat yang Dicurigai</p>
+                    <p className="text-gray-900 dark:text-gray-100 font-semibold">{r.medicine_name}</p>
+                    {r.batch_number && <p className="text-xs text-gray-500">Batch: {r.batch_number}</p>}
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Calendar className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+                  <Calendar className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs text-slate-400 font-medium">Tanggal Lapor</p>
-                    <p className="text-slate-800 dark:text-slate-100 font-semibold">
+                    <p className="text-xs text-gray-400 font-medium">Tanggal Lapor</p>
+                    <p className="text-gray-900 dark:text-gray-100 font-semibold">
                       {new Date(r.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
                     </p>
-                    <p className="text-xs text-slate-500">Pelapor: {r.reporter_name}</p>
+                    <p className="text-xs text-gray-500">Pelapor: {r.reporter_name}</p>
                   </div>
                 </div>
               </div>
-              <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-3 text-sm">
-                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">Efek Samping yang Dilaporkan</p>
-                <p className="text-slate-700 dark:text-slate-200">{r.reaction}</p>
+              <div className="bg-gray-50 dark:bg-zinc-800 rounded-xl p-3 text-sm">
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">Efek Samping yang Dilaporkan</p>
+                <p className="text-gray-700 dark:text-gray-200">{r.reaction}</p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-400">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <div><span className="font-semibold">Indikasi:</span> {r.indication}</div>
                 <div><span className="font-semibold">Onset:</span> {r.onset}</div>
                 <div><span className="font-semibold">Tindakan:</span> {r.action_taken}</div>
                 <div><span className="font-semibold">Outcome:</span> {r.outcome}</div>
               </div>
               {r.catatan && (
-                <p className="text-xs text-slate-500 dark:text-slate-400 italic">{r.catatan}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 italic">{r.catatan}</p>
               )}
             </div>
           ))}
@@ -276,13 +276,13 @@ export default function Meso() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="meso-form-title" className="bg-white dark:bg-slate-900 w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
+          <div role="dialog" aria-modal="true" aria-labelledby="meso-form-title" className="bg-white dark:bg-zinc-900 w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-zinc-800 shrink-0">
               <div className="flex items-center gap-2">
                 <Warning weight="fill" className="w-5 h-5 text-rose-500" />
-                <h2 id="meso-form-title" className="text-base font-bold text-slate-800 dark:text-slate-100">Laporan MESO Baru</h2>
+                <h2 id="meso-form-title" className="text-sm font-semibold text-gray-900 dark:text-gray-100">Laporan MESO Baru</h2>
               </div>
-              <button onClick={() => setShowForm(false)} aria-label="Tutup form" className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800">
+              <button onClick={() => setShowForm(false)} aria-label="Tutup form" className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800">
                 <X weight="bold" className="w-4 h-4" />
               </button>
             </div>
@@ -301,8 +301,8 @@ export default function Meso() {
               </div>
 
               {/* Pasien */}
-              <fieldset className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
-                <legend className="text-xs font-bold text-slate-500 dark:text-slate-400 px-1">Data Pasien</legend>
+              <fieldset className="border border-gray-200 dark:border-zinc-700 rounded-xl p-4 space-y-3">
+                <legend className="text-xs font-bold text-gray-500 dark:text-gray-400 px-1">Data Pasien</legend>
                 <div>
                   <label className={labelClass}>Nama Pasien</label>
                   <input type="text" value={draft.patient_name} onChange={e => set('patient_name', e.target.value)} className={inputClass} placeholder="Nama pasien" required />
@@ -323,8 +323,8 @@ export default function Meso() {
               </fieldset>
 
               {/* Obat */}
-              <fieldset className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
-                <legend className="text-xs font-bold text-slate-500 dark:text-slate-400 px-1">Obat yang Dicurigai</legend>
+              <fieldset className="border border-gray-200 dark:border-zinc-700 rounded-xl p-4 space-y-3">
+                <legend className="text-xs font-bold text-gray-500 dark:text-gray-400 px-1">Obat yang Dicurigai</legend>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className={labelClass}>Nama Obat</label>
@@ -342,8 +342,8 @@ export default function Meso() {
               </fieldset>
 
               {/* Efek Samping */}
-              <fieldset className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
-                <legend className="text-xs font-bold text-slate-500 dark:text-slate-400 px-1">Efek Samping</legend>
+              <fieldset className="border border-gray-200 dark:border-zinc-700 rounded-xl p-4 space-y-3">
+                <legend className="text-xs font-bold text-gray-500 dark:text-gray-400 px-1">Efek Samping</legend>
                 <div>
                   <label className={labelClass}>Deskripsi Efek Samping <span className="text-rose-500">*</span></label>
                   <textarea value={draft.reaction} onChange={e => set('reaction', e.target.value)} className={inputClass + ' resize-none'} rows={3} placeholder="Deskripsikan efek samping yang dialami pasien..." required />
@@ -366,8 +366,8 @@ export default function Meso() {
               </fieldset>
 
               {/* Penanganan */}
-              <fieldset className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3">
-                <legend className="text-xs font-bold text-slate-500 dark:text-slate-400 px-1">Penanganan & Hasil</legend>
+              <fieldset className="border border-gray-200 dark:border-zinc-700 rounded-xl p-4 space-y-3">
+                <legend className="text-xs font-bold text-gray-500 dark:text-gray-400 px-1">Penanganan & Hasil</legend>
                 <div>
                   <label className={labelClass}>Tindakan yang Diambil</label>
                   <input type="text" value={draft.action_taken} onChange={e => set('action_taken', e.target.value)} className={inputClass} placeholder="Misal: Obat dihentikan, rujuk ke dokter" />
@@ -379,15 +379,15 @@ export default function Meso() {
               </fieldset>
 
               {/* Pelaporan BPOM */}
-              <div className="flex items-start gap-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-3">
+              <div className="flex items-start gap-3 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-3">
                 <input
                   type="checkbox"
                   id="reported_to_bpom"
                   checked={draft.reported_to_bpom}
                   onChange={e => set('reported_to_bpom', e.target.checked)}
-                  className="mt-0.5 w-4 h-4 rounded border-blue-300"
+                  className="mt-0.5 w-4 h-4 rounded border-indigo-300"
                 />
-                <label htmlFor="reported_to_bpom" className="text-sm text-blue-700 dark:text-blue-300">
+                <label htmlFor="reported_to_bpom" className="text-sm text-indigo-700 dark:text-indigo-300">
                   Sudah dilaporkan ke portal e-MESO BPOM (<a href="https://e-meso.pom.go.id" target="_blank" rel="noopener noreferrer" className="underline font-semibold">e-meso.pom.go.id</a>)
                 </label>
               </div>
@@ -399,7 +399,7 @@ export default function Meso() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={() => setShowForm(false)} className="flex-1 py-2.5 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-xl text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                <button type="button" onClick={() => setShowForm(false)} className="flex-1 py-2.5 border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-400 rounded-xl text-sm font-semibold hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                   Batal
                 </button>
                 <button type="submit" disabled={saving} className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-rose-500 hover:bg-rose-600 disabled:opacity-50 text-white rounded-xl text-sm font-semibold transition-colors">
@@ -415,18 +415,18 @@ export default function Meso() {
       {/* Delete Confirmation */}
       {deleteTarget && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="meso-delete-title" className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-2xl max-w-sm w-full border border-slate-100 dark:border-slate-800">
+          <div role="dialog" aria-modal="true" aria-labelledby="meso-delete-title" className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-2xl max-w-sm w-full border border-gray-100 dark:border-zinc-800">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-rose-100 dark:bg-rose-900/40 rounded-xl flex items-center justify-center">
                 <Trash weight="fill" className="w-5 h-5 text-rose-500" />
               </div>
-              <h3 id="meso-delete-title" className="font-bold text-slate-800 dark:text-slate-100">Hapus Laporan MESO?</h3>
+              <h3 id="meso-delete-title" className="font-bold text-gray-900 dark:text-gray-100">Hapus Laporan MESO?</h3>
             </div>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-5">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
               Laporan MESO untuk pasien <strong>{deleteTarget.patient_name}</strong> akan dihapus permanen.
             </p>
             <div className="flex gap-3">
-              <button onClick={() => setDeleteTarget(null)} className="flex-1 py-2.5 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 rounded-xl text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+              <button onClick={() => setDeleteTarget(null)} className="flex-1 py-2.5 border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-400 rounded-xl text-sm font-semibold hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                 Batal
               </button>
               <button onClick={handleDelete} disabled={deleting} className="flex-1 py-2.5 bg-rose-500 hover:bg-rose-600 disabled:opacity-50 text-white rounded-xl text-sm font-semibold transition-colors">

@@ -66,11 +66,11 @@ export function StockCardModal({ medicine, onClose }: Props) {
   const getMovementIcon = (type: string) => {
     switch (type) {
       case 'restock': return <div className="p-1.5 bg-emerald-100 text-emerald-600 rounded-lg"><ArrowDownLeft weight="bold" /></div>;
-      case 'sale': return <div className="p-1.5 bg-blue-100 text-blue-600 rounded-lg"><ArrowUpRight weight="bold" /></div>;
+      case 'sale': return <div className="p-1.5 bg-indigo-100 text-indigo-600 rounded-lg"><ArrowUpRight weight="bold" /></div>;
       case 'adjustment': return <div className="p-1.5 bg-amber-100 text-amber-600 rounded-lg"><Warning weight="bold" /></div>;
       case 'expired_removal': return <div className="p-1.5 bg-rose-100 text-rose-600 rounded-lg"><Flask weight="bold" /></div>;
       case 'void_return': return <div className="p-1.5 bg-purple-100 text-purple-600 rounded-lg"><ArrowDownLeft weight="bold" /></div>;
-      default: return <div className="p-1.5 bg-slate-100 text-slate-600 rounded-lg"><Info weight="bold" /></div>;
+      default: return <div className="p-1.5 bg-gray-100 text-gray-600 rounded-lg"><Info weight="bold" /></div>;
     }
   };
 
@@ -185,17 +185,17 @@ export function StockCardModal({ medicine, onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm shadow-2xl">
-      <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
-        <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-800">
+    <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm shadow-2xl">
+      <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+        <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-zinc-800">
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-blue-500 rounded-2xl shadow-lg shadow-blue-500/20">
+            <div className="p-3 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-500/20">
               <ClockCounterClockwise weight="fill" className="text-white w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-bold text-xl text-slate-800 dark:text-slate-100">Kartu Stok (Ledger)</h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                {medicine.name} · Stok: <span className="font-bold text-slate-700 dark:text-slate-200">{medicine.stock} {medicine.unit}</span>
+              <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100">Kartu Stok (Ledger)</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {medicine.name} · Stok: <span className="font-bold text-gray-700 dark:text-gray-200">{medicine.stock} {medicine.unit}</span>
               </p>
             </div>
           </div>
@@ -203,12 +203,12 @@ export function StockCardModal({ medicine, onClose }: Props) {
             <button
               onClick={handlePrint}
               disabled={entries.length === 0}
-              className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-full transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="p-2 text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-full transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               title="Cetak Kartu Stok"
             >
               <Printer weight="bold" className="w-5 h-5" />
             </button>
-            <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+            <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
               <X weight="bold" className="w-6 h-6" />
             </button>
           </div>
@@ -216,20 +216,20 @@ export function StockCardModal({ medicine, onClose }: Props) {
 
         <div className="flex-1 overflow-y-auto p-2 custom-scrollbar">
           {loading ? (
-            <div className="py-20 text-center text-slate-400 flex flex-col items-center">
-              <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4" />
+            <div className="py-20 text-center text-gray-400 flex flex-col items-center">
+              <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mb-4" />
               <p className="font-medium">Menyusun riwayat pergerakan stok...</p>
             </div>
           ) : entries.length === 0 ? (
-            <div className="py-20 text-center text-slate-400 flex flex-col items-center">
-              <ClockCounterClockwise className="w-16 h-16 text-slate-200 mb-4" />
-              <p className="font-bold text-slate-600 text-lg">Hening...</p>
+            <div className="py-20 text-center text-gray-400 flex flex-col items-center">
+              <ClockCounterClockwise className="w-16 h-16 text-gray-200 mb-4" />
+              <p className="font-bold text-gray-600 text-lg">Hening...</p>
               <p className="text-sm">Belum ada pergerakan stok untuk obat ini.</p>
             </div>
           ) : (
             <div className="px-4 pb-6">
               <table className="w-full text-left text-sm">
-                <thead className="sticky top-0 bg-white dark:bg-slate-900 z-10 text-slate-500 uppercase text-[10px] tracking-wider font-black py-4 border-b border-slate-100 dark:border-slate-800">
+                <thead className="sticky top-0 bg-white dark:bg-zinc-900 z-10 text-gray-500 uppercase text-[10px] tracking-wider font-black py-4 border-b border-gray-100 dark:border-zinc-800">
                   <tr>
                     <th className="py-4">Waktu & Tipe</th>
                     <th className="py-4">Batch / Keterangan</th>
@@ -237,15 +237,15 @@ export function StockCardModal({ medicine, onClose }: Props) {
                     <th className="py-4 text-center">Keluar</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50">
+                <tbody className="divide-y divide-gray-100 dark:divide-gray-800/50">
                   {entries.map((entry) => (
-                    <tr key={entry.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                    <tr key={entry.id} className="hover:bg-gray-50/50 dark:hover:bg-zinc-800/30 transition-colors">
                       <td className="py-4 pr-4">
                         <div className="flex items-center gap-3">
                           {getMovementIcon(entry.type)}
                           <div>
-                            <p className="font-bold text-slate-800 dark:text-slate-100 uppercase text-[11px] tracking-tight">{getMovementLabel(entry.type)}</p>
-                            <p className="text-[10px] text-slate-400 font-medium">
+                            <p className="font-bold text-gray-900 dark:text-gray-100 uppercase text-[11px] tracking-tight">{getMovementLabel(entry.type)}</p>
+                            <p className="text-[10px] text-gray-400 font-medium">
                               {new Date(entry.created_at).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
                             </p>
                           </div>
@@ -259,9 +259,9 @@ export function StockCardModal({ medicine, onClose }: Props) {
                               LOT: {entry.batch.batch_number}
                             </div>
                           )}
-                          <p className="text-xs text-slate-500 italic max-w-xs">{entry.notes || <span className="text-slate-300">—</span>}</p>
+                          <p className="text-xs text-gray-500 italic max-w-xs">{entry.notes || <span className="text-gray-300">—</span>}</p>
                           {entry.reference_id && (
-                            <p className="text-[9px] text-slate-400 font-mono">REF: {entry.reference_id.slice(0, 8)}...</p>
+                            <p className="text-[9px] text-gray-400 font-mono">REF: {entry.reference_id.slice(0, 8)}...</p>
                           )}
                         </div>
                       </td>
@@ -283,9 +283,9 @@ export function StockCardModal({ medicine, onClose }: Props) {
           )}
         </div>
         
-        <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-b-3xl border-t border-slate-100 dark:border-slate-800">
-           <div className="flex items-center gap-3 text-xs text-slate-500">
-             <Info weight="fill" className="w-4 h-4 text-blue-500" />
+        <div className="p-6 bg-gray-50 dark:bg-zinc-800/50 rounded-b-3xl border-t border-gray-100 dark:border-zinc-800">
+           <div className="flex items-center gap-3 text-xs text-gray-500">
+             <Info weight="fill" className="w-4 h-4 text-indigo-600" />
              <p>Data ini mencatat setiap perubahan stok manual, hasil penjualan POS, maupun pemusnahan barang kedaluwarsa.</p>
            </div>
         </div>

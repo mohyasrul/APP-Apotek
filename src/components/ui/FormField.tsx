@@ -26,7 +26,7 @@ export function FormField({
   return (
     <div className={cn('space-y-1.5', className)}>
       {label && (
-        <label htmlFor={id} className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+        <label htmlFor={id} className="block text-sm font-medium text-gray-700 dark:text-zinc-300">
           {label}
           {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
@@ -38,7 +38,7 @@ export function FormField({
         </p>
       )}
       {hint && !error && (
-        <p className="text-xs text-slate-400 dark:text-slate-500">{hint}</p>
+        <p className="text-xs text-gray-500 dark:text-zinc-500">{hint}</p>
       )}
     </div>
   );

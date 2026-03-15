@@ -326,11 +326,11 @@ export default function Racikan() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-800 dark:text-slate-100 flex items-center gap-2">
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
             <Flask weight="fill" className="w-8 h-8 text-violet-500" />
             Racikan & Compounding
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
+          <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
             Formula racikan, puyer, kapsul, dan sediaan khusus sesuai PMK 73/2016
           </p>
         </div>
@@ -345,18 +345,18 @@ export default function Racikan() {
 
       {/* Search */}
       <div className="relative mb-6">
-        <MagnifyingGlass className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+        <MagnifyingGlass className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
         <input
           type="text"
           placeholder="Cari nama racikan..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-900 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
         />
       </div>
 
       {/* Info Banner */}
-      <div className="bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800 rounded-2xl p-4 mb-6 flex gap-3">
+      <div className="bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800 rounded-xl p-4 mb-6 flex gap-3">
         <Info weight="fill" className="w-5 h-5 text-violet-500 shrink-0 mt-0.5" />
         <div className="text-sm text-violet-700 dark:text-violet-300">
           <span className="font-semibold">PMK 73/2016 Pasal 21-22:</span> Pelayanan sediaan farmasi racikan harus menggunakan
@@ -366,14 +366,14 @@ export default function Racikan() {
 
       {/* List */}
       {loading ? (
-        <div className="py-12 text-center text-slate-400">
+        <div className="py-12 text-center text-gray-400">
           <div className="w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
           Memuat formula...
         </div>
       ) : filtered.length === 0 ? (
-        <div className="py-20 text-center text-slate-400 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
-          <Flask className="w-14 h-14 text-slate-200 mx-auto mb-3" />
-          <p className="font-semibold text-slate-500 mb-1">
+        <div className="py-20 text-center text-gray-400 border border-dashed border-gray-200 dark:border-zinc-800 rounded-xl">
+          <Flask className="w-14 h-14 text-gray-200 mx-auto mb-3" />
+          <p className="font-semibold text-gray-500 mb-1">
             {search ? 'Tidak ada formula yang cocok' : 'Belum ada formula racikan'}
           </p>
           <p className="text-sm mb-4">
@@ -390,7 +390,7 @@ export default function Racikan() {
           {filtered.map(formula => (
             <div
               key={formula.id}
-              className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-5 hover:shadow-sm transition-shadow"
+              className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-xl p-5 hover:shadow-sm transition-shadow"
             >
               <div className="flex items-start justify-between gap-2 mb-3">
                 <div>
@@ -398,35 +398,35 @@ export default function Racikan() {
                     <span className="bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
                       {formula.jenis}
                     </span>
-                    <h3 className="font-bold text-slate-800 dark:text-slate-100">{formula.nama_racikan}</h3>
+                    <h3 className="font-bold text-gray-900 dark:text-gray-100">{formula.nama_racikan}</h3>
                   </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{formula.signa}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{formula.signa}</p>
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
                   <button
                     onClick={() => openEtiket(formula)}
-                    className="p-2 text-slate-400 hover:text-violet-600 hover:bg-violet-50 dark:hover:bg-violet-900/30 rounded-lg transition-colors"
+                    className="p-2 text-gray-400 hover:text-violet-600 hover:bg-violet-50 dark:hover:bg-violet-900/30 rounded-lg transition-colors"
                     title="Cetak Etiket"
                   >
                     <Tag className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handlePrintFormula(formula)}
-                    className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors"
+                    className="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors"
                     title="Cetak Formula"
                   >
                     <Printer className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => openEdit(formula)}
-                    className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+                    className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
                     title="Edit"
                   >
                     <FloppyDisk className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => handleDelete(formula)}
-                    className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-colors"
+                    className="p-2 text-gray-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-colors"
                     title="Hapus"
                   >
                     <Trash className="w-4 h-4" />
@@ -437,15 +437,15 @@ export default function Racikan() {
               {/* Ingredients */}
               <div className="space-y-1 mb-3">
                 {formula.ingredients.map(ing => (
-                  <div key={ing.medicine_id} className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 rounded-lg px-3 py-1.5">
+                  <div key={ing.medicine_id} className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-zinc-800 rounded-lg px-3 py-1.5">
                     <span className="font-medium">{ing.medicine_name}</span>
-                    <span className="text-slate-400">{ing.qty_per_bungkus} {ing.unit}/bungkus</span>
+                    <span className="text-gray-400">{ing.qty_per_bungkus} {ing.unit}/bungkus</span>
                   </div>
                 ))}
               </div>
 
               {/* Footer info */}
-              <div className="flex items-center justify-between text-xs text-slate-400 border-t border-slate-50 dark:border-slate-800 pt-3">
+              <div className="flex items-center justify-between text-xs text-gray-400 border-t border-gray-50 dark:border-zinc-800 pt-3">
                 <span>{formula.jumlah_bungkus} bungkus · {totalQty(formula).toFixed(0)} satuan total</span>
                 {formula.biaya_racik > 0 && (
                   <span className="text-violet-500 font-semibold">
@@ -461,12 +461,12 @@ export default function Racikan() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50">
-          <div className="bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[95vh] flex flex-col">
-            <div className="flex items-center justify-between p-5 border-b border-slate-100 dark:border-slate-800 shrink-0">
-              <h2 className="font-bold text-lg text-slate-800 dark:text-slate-100">
+          <div className="bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[95vh] flex flex-col">
+            <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800 shrink-0">
+              <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100">
                 {selected ? 'Edit Formula Racikan' : 'Formula Racikan Baru'}
               </h2>
-              <button onClick={() => setShowForm(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <button onClick={() => setShowForm(false)} className="p-2 rounded-xl text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">
                 <X weight="bold" className="w-5 h-5" />
               </button>
             </div>
@@ -475,21 +475,21 @@ export default function Racikan() {
               {/* Name + Jenis */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2 sm:col-span-1">
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Nama Racikan <span className="text-rose-500">*</span></label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Nama Racikan <span className="text-rose-500">*</span></label>
                   <input
                     type="text"
                     value={draft.nama_racikan}
                     onChange={e => setDraft(d => ({ ...d, nama_racikan: e.target.value }))}
                     placeholder="Mis: Puyer Batuk Anak"
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Jenis Sediaan</label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Jenis Sediaan</label>
                   <select
                     value={draft.jenis}
                     onChange={e => setDraft(d => ({ ...d, jenis: e.target.value as RacikanFormula['jenis'] }))}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   >
                     {JENIS_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                   </select>
@@ -499,50 +499,50 @@ export default function Racikan() {
               {/* Jumlah + Biaya + Signa */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Jumlah Bungkus/Kapsul</label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Jumlah Bungkus/Kapsul</label>
                   <input
                     type="number"
                     min={1}
                     value={draft.jumlah_bungkus}
                     onChange={e => setDraft(d => ({ ...d, jumlah_bungkus: parseInt(e.target.value) || 1 }))}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Biaya Racik (Rp)</label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Biaya Racik (Rp)</label>
                   <input
                     type="number"
                     min={0}
                     value={draft.biaya_racik}
                     onChange={e => setDraft(d => ({ ...d, biaya_racik: parseInt(e.target.value) || 0 }))}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1">Aturan Pakai (Signa) <span className="text-rose-500">*</span></label>
+                <label className="block text-xs font-semibold text-gray-500 mb-1">Aturan Pakai (Signa) <span className="text-rose-500">*</span></label>
                 <input
                   type="text"
                   value={draft.signa}
                   onChange={e => setDraft(d => ({ ...d, signa: e.target.value }))}
                   placeholder="Mis: 3 x sehari 1 bungkus sesudah makan"
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1">Catatan</label>
+                <label className="block text-xs font-semibold text-gray-500 mb-1">Catatan</label>
                 <textarea
                   value={draft.notes || ''}
                   onChange={e => setDraft(d => ({ ...d, notes: e.target.value }))}
                   placeholder="Catatan khusus untuk petugas atau pasien..."
                   rows={2}
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
+                  className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
                 />
               </div>
 
               {/* Bahan */}
               <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-2">
+                <label className="block text-xs font-semibold text-gray-500 mb-2">
                   Bahan-Bahan <span className="text-rose-500">*</span>
                   <span className="font-normal ml-1">({draft.ingredients.length} bahan)</span>
                 </label>
@@ -552,7 +552,7 @@ export default function Racikan() {
                   <div className="space-y-2 mb-3">
                     {draft.ingredients.map(ing => (
                       <div key={ing.medicine_id} className="flex items-center gap-3 bg-violet-50 dark:bg-violet-900/20 rounded-xl px-3 py-2">
-                        <span className="flex-1 text-sm font-medium text-slate-700 dark:text-slate-200 truncate">{ing.medicine_name}</span>
+                        <span className="flex-1 text-sm font-medium text-gray-700 dark:text-gray-200 truncate">{ing.medicine_name}</span>
                         <div className="flex items-center gap-2 shrink-0">
                           <input
                             type="number"
@@ -560,12 +560,12 @@ export default function Racikan() {
                             step={0.001}
                             value={ing.qty_per_bungkus}
                             onChange={e => updateIngredientQty(ing.medicine_id, parseFloat(e.target.value) || 0)}
-                            className="w-20 px-2 py-1 border border-violet-200 dark:border-violet-700 rounded-lg bg-white dark:bg-slate-800 text-sm text-center focus:outline-none focus:ring-1 focus:ring-violet-500"
+                            className="w-20 px-2 py-1 border border-violet-200 dark:border-violet-700 rounded-lg bg-white dark:bg-zinc-800 text-sm text-center focus:outline-none focus:ring-1 focus:ring-violet-500"
                           />
-                          <span className="text-xs text-slate-400">{ing.unit}</span>
+                          <span className="text-xs text-gray-400">{ing.unit}</span>
                           <button
                             onClick={() => removeIngredient(ing.medicine_id)}
-                            className="p-1 text-slate-400 hover:text-rose-500 transition-colors"
+                            className="p-1 text-gray-400 hover:text-rose-500 transition-colors"
                           >
                             <X weight="bold" className="w-4 h-4" />
                           </button>
@@ -577,18 +577,18 @@ export default function Racikan() {
 
                 {/* Medicine search */}
                 <div className="relative">
-                  <MagnifyingGlass className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <MagnifyingGlass className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     value={medSearch}
                     onChange={e => setMedSearch(e.target.value)}
                     placeholder="Cari dan tambah bahan obat..."
-                    className="w-full pl-9 pr-4 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full pl-9 pr-4 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                   {(medResults.length > 0 || searchingMed) && (
-                    <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg z-20 max-h-48 overflow-y-auto">
+                    <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl shadow-lg z-20 max-h-48 overflow-y-auto">
                       {searchingMed ? (
-                        <div className="p-3 text-sm text-slate-400 text-center">Mencari...</div>
+                        <div className="p-3 text-sm text-gray-400 text-center">Mencari...</div>
                       ) : (
                         medResults.map(med => (
                           <button
@@ -596,8 +596,8 @@ export default function Racikan() {
                             onClick={() => addIngredient(med)}
                             className="w-full text-left px-4 py-2.5 text-sm hover:bg-violet-50 dark:hover:bg-violet-900/20 flex items-center justify-between gap-2 transition-colors"
                           >
-                            <span className="font-medium text-slate-700 dark:text-slate-200">{med.name}</span>
-                            <span className="text-xs text-slate-400">{med.stock} {med.unit}</span>
+                            <span className="font-medium text-gray-700 dark:text-gray-200">{med.name}</span>
+                            <span className="text-xs text-gray-400">{med.stock} {med.unit}</span>
                           </button>
                         ))
                       )}
@@ -613,10 +613,10 @@ export default function Racikan() {
               </div>
             </div>
 
-            <div className="p-5 border-t border-slate-100 dark:border-slate-800 flex gap-3 shrink-0">
+            <div className="p-5 border-t border-gray-100 dark:border-zinc-800 flex gap-3 shrink-0">
               <button
                 onClick={() => setShowForm(false)}
-                className="flex-1 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-300 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors"
               >
                 Batal
               </button>
@@ -636,41 +636,41 @@ export default function Racikan() {
       {/* Etiket Modal */}
       {showEtiketModal && selectedForEtiket && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60">
-          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-md">
-            <div className="flex items-center justify-between p-5 border-b border-slate-100 dark:border-slate-800">
-              <h2 className="font-bold text-slate-800 dark:text-slate-100">Cetak Etiket Racikan</h2>
-              <button onClick={() => setShowEtiketModal(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-md">
+            <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800">
+              <h2 className="font-bold text-gray-900 dark:text-gray-100">Cetak Etiket Racikan</h2>
+              <button onClick={() => setShowEtiketModal(false)} className="p-2 rounded-xl text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">
                 <X weight="bold" className="w-5 h-5" />
               </button>
             </div>
             <div className="p-5 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1">Nama Pasien <span className="text-rose-500">*</span></label>
+                <label className="block text-xs font-semibold text-gray-500 mb-1">Nama Pasien <span className="text-rose-500">*</span></label>
                 <input
                   type="text"
                   value={etiketData.patientName}
                   onChange={e => setEtiketData(d => ({ ...d, patientName: e.target.value }))}
                   placeholder="Nama pasien"
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                  className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Jumlah</label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Jumlah</label>
                   <input
                     type="number"
                     min={1}
                     value={etiketData.jumlah}
                     onChange={e => setEtiketData(d => ({ ...d, jumlah: parseInt(e.target.value) || 1 }))}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Jenis Obat</label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Jenis Obat</label>
                   <select
                     value={etiketData.jenis}
                     onChange={e => setEtiketData(d => ({ ...d, jenis: e.target.value as EtiketItem['jenis'] }))}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
                   >
                     <option value="oral">Oral (putih)</option>
                     <option value="topikal">Topikal/Luar (biru)</option>
@@ -678,16 +678,16 @@ export default function Racikan() {
                   </select>
                 </div>
               </div>
-              <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-3 text-sm text-slate-600 dark:text-slate-300">
+              <div className="bg-gray-50 dark:bg-zinc-800 rounded-xl p-3 text-sm text-gray-600 dark:text-gray-300">
                 <span className="font-semibold">{selectedForEtiket.nama_racikan}</span>
                 <br />
-                <span className="text-xs text-slate-400">{selectedForEtiket.signa}</span>
+                <span className="text-xs text-gray-400">{selectedForEtiket.signa}</span>
               </div>
             </div>
-            <div className="p-5 border-t border-slate-100 dark:border-slate-800 flex gap-3">
+            <div className="p-5 border-t border-gray-100 dark:border-zinc-800 flex gap-3">
               <button
                 onClick={() => setShowEtiketModal(false)}
-                className="flex-1 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-300 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors"
               >
                 Batal
               </button>

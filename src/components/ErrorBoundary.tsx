@@ -29,21 +29,21 @@ export class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
-          <div className="bg-white p-8 rounded-3xl shadow-soft border border-slate-100 max-w-md w-full text-center">
-            <div className="w-16 h-16 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+          <div className="bg-white p-8 rounded-3xl shadow-soft border border-gray-100 max-w-md w-full text-center">
+            <div className="w-16 h-16 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center mx-auto mb-6">
               <Warning weight="fill" className="w-8 h-8" />
             </div>
-            <h2 className="text-xl font-bold text-slate-800 mb-2">Terjadi Kesalahan</h2>
-            <p className="text-sm text-slate-500 mb-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">Terjadi Kesalahan</h2>
+            <p className="text-sm text-gray-500 mb-6">
               Aplikasi mengalami error yang tidak terduga. Silakan coba muat ulang halaman.
             </p>
-            <p className="text-xs text-slate-400 mb-6 bg-slate-50 p-3 rounded-xl break-all font-mono">
+            <p className="text-xs text-gray-400 mb-6 bg-gray-50 p-3 rounded-xl break-all font-mono">
               {this.state.error?.message}
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)]"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)]"
             >
               Muat Ulang Halaman
             </button>

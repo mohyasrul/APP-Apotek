@@ -28,7 +28,7 @@ const FAQ_SECTIONS: FaqSection[] = [
   {
     id: 'pos',
     title: 'Kasir & POS',
-    icon: <ShoppingCart weight="fill" className="w-5 h-5 text-blue-500" />,
+    icon: <ShoppingCart weight="fill" className="w-5 h-5 text-indigo-600" />,
     faqs: [
       {
         q: 'Bagaimana cara melakukan transaksi penjualan?',
@@ -189,7 +189,7 @@ const FAQ_SECTIONS: FaqSection[] = [
   {
     id: 'settings',
     title: 'Pengaturan & Akun',
-    icon: <GearSix weight="fill" className="w-5 h-5 text-slate-500" />,
+    icon: <GearSix weight="fill" className="w-5 h-5 text-gray-500" />,
     faqs: [
       {
         q: 'Bagaimana cara mengundang kasir ke apotek saya?',
@@ -215,21 +215,21 @@ const FAQ_SECTIONS: FaqSection[] = [
 function FaqAccordion({ faq }: { faq: FaqItem }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-slate-100 dark:border-slate-800 last:border-0">
+    <div className="border-b border-gray-100 dark:border-zinc-800 last:border-0">
       <button
         onClick={() => setOpen(o => !o)}
         className="w-full text-left py-4 flex items-start justify-between gap-3 group"
       >
-        <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        <span className="text-sm font-semibold text-gray-700 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
           {faq.q}
         </span>
         {open
-          ? <CaretDown weight="bold" className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
-          : <CaretRight weight="bold" className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+          ? <CaretDown weight="bold" className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+          : <CaretRight weight="bold" className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
         }
       </button>
       {open && (
-        <div className="pb-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+        <div className="pb-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
           {faq.a}
         </div>
       )}
@@ -257,24 +257,24 @@ export default function Bantuan() {
     <div className="flex-1 p-4 lg:p-8 max-w-4xl mx-auto w-full pb-20 lg:pb-0">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-          <Question weight="fill" className="w-6 h-6 text-blue-500" />
+        <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+          <Question weight="fill" className="w-6 h-6 text-indigo-600" />
           Pusat Bantuan
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
           Panduan penggunaan MediSir untuk apotek Anda
         </p>
       </div>
 
       {/* Search */}
       <div className="relative mb-6">
-        <BookOpen weight="bold" className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+        <BookOpen weight="bold" className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
           type="search"
           placeholder="Cari pertanyaan atau kata kunci..."
           value={searchQuery}
           onChange={e => { setSearchQuery(e.target.value); setActiveSection(null); }}
-          className="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
+          className="w-full pl-10 pr-4 py-3 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-600"
         />
       </div>
 
@@ -283,10 +283,10 @@ export default function Bantuan() {
         <div className="flex gap-2 flex-wrap mb-6">
           <button
             onClick={() => setActiveSection(null)}
-            className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
               activeSection === null
-                ? 'bg-blue-500 text-white'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                ? 'bg-indigo-600 text-white'
+                : 'bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
             }`}
           >
             Semua
@@ -295,10 +295,10 @@ export default function Bantuan() {
             <button
               key={sec.id}
               onClick={() => setActiveSection(sec.id)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
                 activeSection === sec.id
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
               }`}
             >
               {sec.title}
@@ -310,18 +310,18 @@ export default function Bantuan() {
       {/* FAQ Sections */}
       <div className="space-y-4">
         {filtered.length === 0 ? (
-          <div className="py-12 text-center text-slate-400">
-            <Question className="w-10 h-10 mx-auto mb-2 text-slate-300" />
+          <div className="py-12 text-center text-gray-400">
+            <Question className="w-10 h-10 mx-auto mb-2 text-gray-300" />
             <p className="font-semibold">Pertanyaan tidak ditemukan</p>
             <p className="text-sm mt-1">Coba kata kunci lain atau hubungi support kami</p>
           </div>
         ) : (
           filtered.map(sec => (
-            <div key={sec.id} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl overflow-hidden">
-              <div className="flex items-center gap-2.5 px-5 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">
+            <div key={sec.id} className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-xl overflow-hidden">
+              <div className="flex items-center gap-2.5 px-5 py-4 border-b border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/30">
                 {sec.icon}
-                <h2 className="font-bold text-slate-700 dark:text-slate-200 text-sm">{sec.title}</h2>
-                <span className="ml-auto text-xs text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded-full">{sec.faqs.length} FAQ</span>
+                <h2 className="font-bold text-gray-700 dark:text-gray-200 text-sm">{sec.title}</h2>
+                <span className="ml-auto text-xs text-gray-400 bg-gray-100 dark:bg-zinc-700 px-2 py-0.5 rounded-full">{sec.faqs.length} FAQ</span>
               </div>
               <div className="px-5">
                 {sec.faqs.map((faq, i) => (
@@ -334,22 +334,22 @@ export default function Bantuan() {
       </div>
 
       {/* Contact Support */}
-      <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-100 dark:border-blue-800 rounded-2xl p-6">
-        <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-1">Masih butuh bantuan?</h3>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Tim kami siap membantu Anda pada jam kerja (Senin–Sabtu, 08.00–17.00 WIB).</p>
+      <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-xl p-6">
+        <h3 className="font-bold text-gray-900 dark:text-gray-100 mb-1">Masih butuh bantuan?</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Tim kami siap membantu Anda pada jam kerja (Senin–Sabtu, 08.00–17.00 WIB).</p>
         <div className="flex flex-wrap gap-3">
           <a
             href={`https://wa.me/${SUPPORT_WHATSAPP}?text=Halo%20MediSir%2C%20saya%20butuh%20bantuan`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold rounded-xl transition-colors"
+            className="flex items-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold rounded-xl transition-colors"
           >
             <WhatsappLogo weight="fill" className="w-4 h-4" />
             Chat WhatsApp Support
           </a>
           <a
             href={`mailto:${SUPPORT_EMAIL}`}
-            className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-300 text-sm font-semibold rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors"
           >
             <Phone weight="fill" className="w-4 h-4" />
             Email Support

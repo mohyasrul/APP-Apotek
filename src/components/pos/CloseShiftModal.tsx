@@ -92,19 +92,19 @@ export function CloseShiftModal({ shiftId, onClose, onClosed }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-[24px] shadow-2xl border border-slate-100 dark:border-slate-800 flex flex-col max-h-[90vh]">
-        <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-[24px] shadow-2xl border border-gray-100 dark:border-zinc-800 flex flex-col max-h-[90vh]">
+        <div className="p-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-xl flex items-center justify-center">
               <LockKey weight="fill" className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Tutup Shift Kasir</h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Rekonsiliasi pencatatan kas</p>
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">Tutup Shift Kasir</h2>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Rekonsiliasi pencatatan kas</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl text-gray-400 hover:text-gray-600 transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -113,41 +113,41 @@ export function CloseShiftModal({ shiftId, onClose, onClosed }: Props) {
           {loading ? (
             <div className="flex flex-col items-center justify-center py-10">
               <div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4" />
-              <p className="text-sm text-slate-500">Merekap transaksi shift...</p>
+              <p className="text-sm text-gray-500">Merekap transaksi shift...</p>
             </div>
           ) : (
             <>
               {/* Ringkasan Sistem */}
-              <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 border border-slate-100 dark:border-slate-800 space-y-3">
-                <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2 mb-2">
-                  <Calculator weight="fill" className="text-slate-400" /> Ringkasan Sistem
+              <div className="bg-gray-50 dark:bg-zinc-800/50 rounded-xl p-4 border border-gray-100 dark:border-zinc-800 space-y-3">
+                <h3 className="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2 mb-2">
+                  <Calculator weight="fill" className="text-gray-400" /> Ringkasan Sistem
                 </h3>
                 
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-slate-500">Modal Awal</span>
-                  <span className="font-medium text-slate-700 dark:text-slate-300">{formatRupiah(startingCash)}</span>
+                  <span className="text-gray-500">Modal Awal</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{formatRupiah(startingCash)}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-slate-500">Penjualan Tunai</span>
-                  <span className="font-medium text-slate-700 dark:text-slate-300">+{formatRupiah(cashSales)}</span>
+                  <span className="text-gray-500">Penjualan Tunai</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">+{formatRupiah(cashSales)}</span>
                 </div>
                 
-                <div className="pt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
-                  <span className="font-bold text-slate-700 dark:text-slate-200">Total Uang Fisik Seharusnya</span>
-                  <span className="font-bold text-blue-600 dark:text-blue-400 text-lg">{formatRupiah(expectedCash)}</span>
+                <div className="pt-2 border-t border-gray-200 dark:border-zinc-700 flex justify-between items-center">
+                  <span className="font-bold text-gray-700 dark:text-gray-200">Total Uang Fisik Seharusnya</span>
+                  <span className="font-bold text-indigo-600 dark:text-indigo-400 text-lg">{formatRupiah(expectedCash)}</span>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-slate-200 border-dashed dark:border-slate-700">
-                  <p className="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wide">Pendapatan Non-Tunai</p>
+                <div className="mt-4 pt-4 border-t border-gray-200 border-dashed dark:border-zinc-700">
+                  <p className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Pendapatan Non-Tunai</p>
                   <div className="flex justify-between items-center text-xs mb-1">
-                    <span className="text-slate-500">QRIS</span>
+                    <span className="text-gray-500">QRIS</span>
                     <span className="font-medium">{formatRupiah(qrisSales)}</span>
                   </div>
                   <div className="flex justify-between items-center text-xs">
-                    <span className="text-slate-500">Transfer</span>
+                    <span className="text-gray-500">Transfer</span>
                     <span className="font-medium">{formatRupiah(transferSales)}</span>
                   </div>
-                  <div className="flex justify-between items-center text-xs mt-2 font-bold text-slate-600">
+                  <div className="flex justify-between items-center text-xs mt-2 font-bold text-gray-600">
                     <span>Total Pendapatan (Semua)</span>
                     <span>{formatRupiah(cashSales + qrisSales + transferSales)}</span>
                   </div>
@@ -157,19 +157,19 @@ export function CloseShiftModal({ shiftId, onClose, onClosed }: Props) {
               {/* Form Input Kasir */}
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
                     Hitungan Uang Fisik Kasir (Rp) <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Coins weight="fill" className="text-slate-400 w-5 h-5" />
+                      <Coins weight="fill" className="text-gray-400 w-5 h-5" />
                     </div>
                     <input
                       type="number"
                       min="0"
                       value={actualCash}
                       onChange={(e) => setActualCash(e.target.value === '' ? '' : parseInt(e.target.value))}
-                      className="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 font-bold text-lg text-slate-800 dark:text-slate-100"
+                      className="w-full pl-10 pr-4 py-3 bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 font-bold text-lg text-gray-900 dark:text-gray-100"
                       placeholder="Masukkan total uang fisik di laci"
                       autoFocus
                     />
@@ -186,14 +186,14 @@ export function CloseShiftModal({ shiftId, onClose, onClosed }: Props) {
                 )}
 
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Catatan Kasir (Opsional)
                   </label>
                   <textarea
                     rows={3}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full px-3 py-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-sm placeholder-slate-400 resize-none"
+                    className="w-full px-3 py-2 bg-white dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-sm placeholder-gray-400 resize-none"
                     placeholder={difference !== 0 ? "Jelaskan alasan selisih kas..." : "Tulis catatan shift di sini..."}
                   />
                 </div>
@@ -202,10 +202,10 @@ export function CloseShiftModal({ shiftId, onClose, onClosed }: Props) {
           )}
         </div>
 
-        <div className="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-3 shrink-0">
+        <div className="p-4 bg-gray-50 dark:bg-zinc-800/50 border-t border-gray-100 dark:border-zinc-800 flex justify-end gap-3 shrink-0">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-200 rounded-full transition-colors"
+            className="px-5 py-2.5 text-sm font-semibold text-gray-600 hover:bg-zinc-200 rounded-full transition-colors"
           >
             Batal
           </button>

@@ -47,27 +47,27 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
         role="dialog"
         aria-modal="true"
         aria-labelledby="narcotic-handover-title"
-        className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-md w-full max-h-[80vh] overflow-y-auto"
+        className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl max-w-md w-full max-h-[80vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center gap-3 p-5 border-b border-slate-100 dark:border-slate-800">
+        <div className="flex items-center gap-3 p-5 border-b border-gray-100 dark:border-zinc-800">
           <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-xl">
             <Warning weight="fill" className="w-5 h-5 text-red-500" />
           </div>
           <div className="flex-1">
-            <h3 id="narcotic-handover-title" className="font-bold text-slate-800 dark:text-slate-100">Bukti Penyerahan Narkotika</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Per-BPOM No. 4/2018 — Wajib untuk setiap penyerahan narkotika</p>
+            <h3 id="narcotic-handover-title" className="font-bold text-gray-900 dark:text-gray-100">Bukti Penyerahan Narkotika</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Per-BPOM No. 4/2018 — Wajib untuk setiap penyerahan narkotika</p>
           </div>
-          <button onClick={onClose} className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
-            <X weight="bold" className="w-4 h-4 text-slate-400" />
+          <button onClick={onClose} className="p-1 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg">
+            <X weight="bold" className="w-4 h-4 text-gray-400" />
           </button>
         </div>
 
         <div className="p-5 space-y-4">
           {/* Narcotic items being dispensed */}
           <div>
-            <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wider">
+            <label className="block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">
               Obat Narkotika yang Diserahkan
             </label>
             <div className="space-y-1.5">
@@ -82,22 +82,22 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
 
           {/* Recipient info */}
           <div>
-            <label className="block text-xs text-slate-400 dark:text-slate-500 mb-1">Nama Penerima *</label>
+            <label className="block text-xs text-gray-400 dark:text-gray-500 mb-1">Nama Penerima *</label>
             <input
               type="text"
               value={form.penerima_nama}
               onChange={e => setForm({ ...form, penerima_nama: e.target.value })}
               placeholder="Nama lengkap penerima obat"
               aria-invalid={!!errors.penerima_nama}
-              className={`w-full border ${errors.penerima_nama ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20`}
+              className={`w-full border ${errors.penerima_nama ? 'border-red-400' : 'border-gray-200 dark:border-zinc-700'} bg-white dark:bg-zinc-800 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20`}
             />
             {errors.penerima_nama && <p className="text-xs text-red-500 mt-1">{errors.penerima_nama}</p>}
           </div>
 
           <div>
-            <label className="block text-xs text-slate-400 dark:text-slate-500 mb-1">NIK (No. KTP) *</label>
+            <label className="block text-xs text-gray-400 dark:text-gray-500 mb-1">NIK (No. KTP) *</label>
             <div className="relative">
-              <IdentificationCard weight="bold" className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <IdentificationCard weight="bold" className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type="text"
                 value={form.penerima_nik}
@@ -108,18 +108,18 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
                 placeholder="16 digit NIK"
                 maxLength={16}
                 aria-invalid={!!errors.penerima_nik}
-                className={`w-full border ${errors.penerima_nik ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-mono tracking-wider`}
+                className={`w-full border ${errors.penerima_nik ? 'border-red-400' : 'border-gray-200 dark:border-zinc-700'} bg-white dark:bg-zinc-800 dark:text-gray-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 font-mono tracking-wider`}
               />
             </div>
             {errors.penerima_nik && <p className="text-xs text-red-500 mt-1">{errors.penerima_nik}</p>}
           </div>
 
           <div>
-            <label className="block text-xs text-slate-400 dark:text-slate-500 mb-1">Hubungan dengan Pasien</label>
+            <label className="block text-xs text-gray-400 dark:text-gray-500 mb-1">Hubungan dengan Pasien</label>
             <select
               value={form.hubungan_pasien}
               onChange={e => setForm({ ...form, hubungan_pasien: e.target.value })}
-              className="w-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="w-full border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 dark:text-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             >
               <option value="sendiri">Pasien Sendiri</option>
               <option value="keluarga">Keluarga</option>
@@ -137,10 +137,10 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2 p-5 border-t border-slate-100 dark:border-slate-800">
+        <div className="flex gap-2 p-5 border-t border-gray-100 dark:border-zinc-800">
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-sm font-semibold"
+            className="flex-1 py-2.5 bg-gray-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-gray-700 dark:text-gray-200 rounded-xl text-sm font-semibold"
           >
             Batal
           </button>

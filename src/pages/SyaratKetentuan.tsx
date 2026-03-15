@@ -5,23 +5,23 @@ export default function SyaratKetentuan() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-3xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 mb-6 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Kembali
         </button>
 
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">Syarat dan Ketentuan</h1>
-          <p className="text-sm text-slate-400 mb-6">Terakhir diperbarui: Maret 2026</p>
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 sm:p-8">
+          <h1 className="text-xl font-semibold text-gray-900 mb-2">Syarat dan Ketentuan</h1>
+          <p className="text-sm text-gray-400 mb-6">Terakhir diperbarui: Maret 2026</p>
 
-          <div className="prose prose-slate prose-sm max-w-none space-y-6 text-sm text-slate-600 leading-relaxed">
+          <div className="prose prose-gray prose-sm max-w-none space-y-6 text-sm text-gray-600 leading-relaxed">
             <section>
-              <h2 className="text-lg font-bold text-slate-800 mt-0">1. Ketentuan Umum</h2>
+              <h2 className="text-base font-semibold text-gray-900 mt-0">1. Ketentuan Umum</h2>
               <p>
                 Dengan mengakses dan menggunakan layanan MediSir, Anda menyetujui untuk terikat oleh Syarat dan
                 Ketentuan ini. Jika Anda tidak menyetujui ketentuan ini, Anda tidak diperkenankan menggunakan
@@ -30,7 +30,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">2. Definisi</h2>
+              <h2 className="text-base font-semibold text-gray-900">2. Definisi</h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li><strong>&quot;Layanan&quot;</strong> berarti aplikasi web MediSir beserta seluruh fitur dan fungsinya.</li>
                 <li><strong>&quot;Pengguna&quot;</strong> berarti setiap orang atau entitas yang mendaftar dan menggunakan Layanan.</li>
@@ -40,7 +40,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">3. Pendaftaran dan Akun</h2>
+              <h2 className="text-base font-semibold text-gray-900">3. Pendaftaran dan Akun</h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Anda wajib memberikan informasi yang akurat dan lengkap saat mendaftar.</li>
                 <li>Anda bertanggung jawab atas keamanan akun dan kata sandi Anda.</li>
@@ -50,7 +50,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">4. Penggunaan Layanan</h2>
+              <h2 className="text-base font-semibold text-gray-900">4. Penggunaan Layanan</h2>
               <p>Anda setuju untuk:</p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Menggunakan Layanan sesuai dengan peraturan perundang-undangan yang berlaku di Indonesia.</li>
@@ -62,7 +62,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">5. Langganan dan Pembayaran</h2>
+              <h2 className="text-base font-semibold text-gray-900">5. Langganan dan Pembayaran</h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Layanan tersedia dalam beberapa paket langganan dengan fitur dan batasan yang berbeda.</li>
                 <li>Pembayaran dilakukan sesuai siklus billing yang dipilih (bulanan/tahunan).</li>
@@ -73,7 +73,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">6. Data dan Kepemilikan</h2>
+              <h2 className="text-base font-semibold text-gray-900">6. Data dan Kepemilikan</h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Data yang Anda masukkan ke dalam Layanan tetap menjadi milik Anda.</li>
                 <li>Kami berhak menggunakan data agregat dan anonim untuk peningkatan layanan.</li>
@@ -83,7 +83,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">7. Ketersediaan Layanan</h2>
+              <h2 className="text-base font-semibold text-gray-900">7. Ketersediaan Layanan</h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Kami berusaha menyediakan Layanan 24/7, namun tidak menjamin ketersediaan tanpa gangguan.</li>
                 <li>Pemeliharaan terjadwal akan diinformasikan sebelumnya.</li>
@@ -92,7 +92,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">8. Batasan Tanggung Jawab</h2>
+              <h2 className="text-base font-semibold text-gray-900">8. Batasan Tanggung Jawab</h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Layanan disediakan &quot;sebagaimana adanya&quot; (as is).</li>
                 <li>MediSir adalah alat bantu manajemen dan tidak menggantikan tanggung jawab profesional apoteker.</li>
@@ -103,7 +103,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">9. Penghentian</h2>
+              <h2 className="text-base font-semibold text-gray-900">9. Penghentian</h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Anda dapat menghentikan akun Anda kapan saja.</li>
                 <li>Kami berhak menangguhkan atau menghentikan akun yang melanggar ketentuan ini.</li>
@@ -112,7 +112,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">10. Penyelesaian Sengketa</h2>
+              <h2 className="text-base font-semibold text-gray-900">10. Penyelesaian Sengketa</h2>
               <p>
                 Sengketa yang timbul dari penggunaan Layanan akan diselesaikan secara musyawarah.
                 Apabila musyawarah tidak berhasil, sengketa akan diselesaikan melalui Badan Arbitrase
@@ -121,7 +121,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">11. Perubahan Syarat dan Ketentuan</h2>
+              <h2 className="text-base font-semibold text-gray-900">11. Perubahan Syarat dan Ketentuan</h2>
               <p>
                 Kami berhak mengubah Syarat dan Ketentuan ini kapan saja. Perubahan material akan
                 diberitahukan melalui email atau notifikasi dalam aplikasi minimal 14 hari sebelum berlaku.
@@ -130,7 +130,7 @@ export default function SyaratKetentuan() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">12. Hubungi Kami</h2>
+              <h2 className="text-base font-semibold text-gray-900">12. Hubungi Kami</h2>
               <p>
                 Untuk pertanyaan mengenai Syarat dan Ketentuan ini, silakan hubungi kami melalui
                 email di halaman kontak atau melalui fitur bantuan dalam aplikasi.

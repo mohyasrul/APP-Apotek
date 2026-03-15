@@ -19,7 +19,7 @@ type DateFilter = 'week' | 'month' | 'all';
 const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ value: number; name: string }> }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-slate-800 text-white p-3 rounded-lg text-sm font-bold shadow-lg border border-slate-700">
+      <div className="bg-gray-900 text-white p-2.5 rounded-md text-sm font-medium shadow-md border border-zinc-700">
         <p>{formatRupiah(payload[0].value)}</p>
       </div>
     );
@@ -263,7 +263,7 @@ export default function Dashboard() {
       alkes: "bg-cyan-50 text-cyan-600",
       vitamin: "bg-amber-50 text-amber-600",
     };
-    return map[cat] || "bg-slate-100 text-slate-600";
+    return map[cat] || "bg-gray-100 text-gray-600";
   };
 
   const periodTotalSales = chartData.reduce((s, d) => s + d.sales, 0);
@@ -277,35 +277,35 @@ export default function Dashboard() {
       <OnboardingWizard onComplete={handleOnboardingComplete} />
     )}
     {!showOnboarding && (
-    <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 pb-20 lg:pb-0">
+    <div className="font-sans text-gray-900 dark:text-gray-100 antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-zinc-950 pb-20 lg:pb-0">
       <main className="flex-1 p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-0.5">{getGreeting()}, <span className="font-semibold text-slate-700 dark:text-slate-200">{profile?.full_name || 'User'}</span></p>
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Dashboard {profile?.pharmacy_name ? `— ${profile.pharmacy_name}` : ''}</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{getGreeting()}, <span className="font-semibold text-gray-700 dark:text-gray-200">{profile?.full_name || 'User'}</span></p>
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Dashboard {profile?.pharmacy_name ? `— ${profile.pharmacy_name}` : ''}</h1>
           </div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Statistik</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Statistik</span>
               <button onClick={() => setShowStats(!showStats)}
                 aria-label="Toggle statistik"
-                className={`relative w-10 h-6 rounded-full transition-colors ${showStats ? 'bg-blue-500' : 'bg-slate-300 dark:bg-slate-600'}`}>
+                className={`relative w-10 h-6 rounded-full transition-colors ${showStats ? 'bg-indigo-600' : 'bg-zinc-300 dark:bg-zinc-600'}`}>
                 <span className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${showStats ? 'left-[18px]' : 'left-0.5'}`} />
               </button>
             </div>
-            <div className="h-6 w-[1px] bg-slate-200 dark:bg-slate-700" />
+            <div className="h-6 w-[1px] bg-zinc-200 dark:bg-zinc-700" />
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Periode</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Periode</span>
               <select value={dateFilter} onChange={(e) => setDateFilter(e.target.value as DateFilter)}
-                className="border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-900 text-sm text-slate-600 dark:text-slate-300 cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                className="border border-gray-200 dark:border-zinc-700 rounded-lg px-3 py-2 bg-white dark:bg-zinc-900 text-sm text-gray-600 dark:text-gray-300 cursor-pointer hover:border-gray-300 dark:hover:border-zinc-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
                 <option value="week">7 Hari Terakhir</option>
                 <option value="month">30 Hari Terakhir</option>
                 <option value="all">Semua Waktu</option>
               </select>
             </div>
             <button onClick={() => navigate('/pos')}
-              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
               <Plus weight="bold" className="w-4 h-4" /> Buka Kasir
             </button>
           </div>
@@ -357,49 +357,49 @@ export default function Dashboard() {
         {showStats && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
             {/* KPI 1: Total Sales */}
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-e1 border border-slate-100 dark:border-slate-800 relative group cursor-pointer hover:border-blue-200 dark:hover:border-blue-800 transition-colors">
-              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 dark:group-hover:bg-blue-950 group-hover:text-blue-500 transition-colors" aria-label="Detail penjualan">
+            <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl border border-gray-200 dark:border-zinc-800 relative group cursor-pointer hover:border-indigo-200 dark:hover:border-blue-800 transition-colors">
+              <button className="absolute top-5 right-5 w-7 h-7 rounded-lg bg-gray-50 dark:bg-zinc-800 flex items-center justify-center text-gray-400 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-950 group-hover:text-indigo-600 transition-colors" aria-label="Detail penjualan">
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-500 flex items-center justify-center"><Coins weight="fill" className="w-4 h-4" /></div>
-                <span className="font-medium text-slate-600 dark:text-slate-400">Total Penjualan</span>
+                <div className="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-950 text-indigo-600 flex items-center justify-center"><Coins weight="fill" className="w-4 h-4" /></div>
+                <span className="font-medium text-gray-600 dark:text-gray-400">Total Penjualan</span>
               </div>
-              {loading ? <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse w-2/3 mb-4" /> : (
-                <h3 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4 tracking-tight">{formatRupiah(metrics.totalSales)}</h3>
+              {loading ? <div className="h-8 bg-gray-100 dark:bg-zinc-800 rounded-lg animate-pulse w-2/3 mb-4" /> : (
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 tracking-tight">{formatRupiah(metrics.totalSales)}</h3>
               )}
-              <div className="text-sm"><span className="text-slate-400 dark:text-slate-500 font-medium text-xs">{metrics.totalTransactions} transaksi</span></div>
+              <div className="text-sm"><span className="text-gray-400 dark:text-gray-500 font-medium text-xs">{metrics.totalTransactions} transaksi</span></div>
             </div>
 
             {/* KPI 2: Items Sold */}
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-e1 border border-slate-100 dark:border-slate-800 relative group cursor-pointer hover:border-emerald-200 dark:hover:border-emerald-800 transition-colors">
-              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-950 group-hover:text-emerald-500 transition-colors" aria-label="Detail obat terjual">
+            <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl border border-gray-200 dark:border-zinc-800 relative group cursor-pointer hover:border-emerald-200 dark:hover:border-emerald-800 transition-colors">
+              <button className="absolute top-5 right-5 w-7 h-7 rounded-lg bg-gray-50 dark:bg-zinc-800 flex items-center justify-center text-gray-400 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-950 group-hover:text-emerald-500 transition-colors" aria-label="Detail obat terjual">
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-500 flex items-center justify-center"><Package weight="fill" className="w-4 h-4" /></div>
-                <span className="font-medium text-slate-600 dark:text-slate-400">Obat Terjual</span>
+                <div className="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-500 flex items-center justify-center"><Package weight="fill" className="w-4 h-4" /></div>
+                <span className="font-medium text-gray-600 dark:text-gray-400">Obat Terjual</span>
               </div>
-              {loading ? <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse w-1/2 mb-4" /> : (
-                <h3 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4 tracking-tight flex items-baseline gap-2">
-                  {metrics.itemsSold} <span className="text-base font-medium text-slate-400 dark:text-slate-500">Pcs</span>
+              {loading ? <div className="h-8 bg-gray-100 dark:bg-zinc-800 rounded-lg animate-pulse w-1/2 mb-4" /> : (
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 tracking-tight flex items-baseline gap-2">
+                  {metrics.itemsSold} <span className="text-base font-medium text-gray-400 dark:text-gray-500">Pcs</span>
                 </h3>
               )}
               <div className="text-sm"><span className="text-emerald-500 font-medium bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-md text-xs">Realtime</span></div>
             </div>
 
             {/* KPI 3: Critical Stock */}
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-e1 border border-slate-100 dark:border-slate-800 relative group cursor-pointer hover:border-rose-200 dark:hover:border-rose-800 transition-colors" onClick={() => navigate('/medicines')}>
-              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-rose-50 dark:group-hover:bg-rose-950 group-hover:text-rose-500 transition-colors" aria-label="Detail stok kritis">
+            <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl border border-gray-200 dark:border-zinc-800 relative group cursor-pointer hover:border-rose-200 dark:hover:border-rose-800 transition-colors" onClick={() => navigate('/medicines')}>
+              <button className="absolute top-5 right-5 w-7 h-7 rounded-lg bg-gray-50 dark:bg-zinc-800 flex items-center justify-center text-gray-400 group-hover:bg-rose-50 dark:group-hover:bg-rose-950 group-hover:text-rose-500 transition-colors" aria-label="Detail stok kritis">
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-500 flex items-center justify-center"><Warning weight="fill" className="w-4 h-4" /></div>
-                <span className="font-medium text-slate-600 dark:text-slate-400">Stok Kritis</span>
+                <div className="w-7 h-7 rounded-lg bg-rose-50 dark:bg-rose-950 text-rose-500 flex items-center justify-center"><Warning weight="fill" className="w-4 h-4" /></div>
+                <span className="font-medium text-gray-600 dark:text-gray-400">Stok Kritis</span>
               </div>
-              {loading ? <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse w-1/3 mb-4" /> : (
-                <h3 className={`text-3xl font-bold mb-4 tracking-tight flex items-baseline gap-2 ${metrics.criticalStockCount > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-slate-800 dark:text-slate-100'}`}>
-                  {metrics.criticalStockCount} <span className="text-base font-medium text-slate-400 dark:text-slate-500">Item</span>
+              {loading ? <div className="h-8 bg-gray-100 dark:bg-zinc-800 rounded-lg animate-pulse w-1/3 mb-4" /> : (
+                <h3 className={`text-2xl font-semibold mb-3 tracking-tight flex items-baseline gap-2 ${metrics.criticalStockCount > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-gray-900 dark:text-gray-100'}`}>
+                  {metrics.criticalStockCount} <span className="text-base font-medium text-gray-400 dark:text-gray-500">Item</span>
                 </h3>
               )}
               <div className="text-sm">
@@ -410,17 +410,17 @@ export default function Dashboard() {
             </div>
 
             {/* KPI 4: Expiry Warning */}
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-e1 border border-slate-100 dark:border-slate-800 relative group cursor-pointer hover:border-amber-200 dark:hover:border-amber-800 transition-colors" onClick={() => navigate('/medicines')}>
-              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-amber-50 dark:group-hover:bg-amber-950 group-hover:text-amber-500 transition-colors" aria-label="Detail kedaluwarsa">
+            <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl border border-gray-200 dark:border-zinc-800 relative group cursor-pointer hover:border-amber-200 dark:hover:border-amber-800 transition-colors" onClick={() => navigate('/medicines')}>
+              <button className="absolute top-5 right-5 w-7 h-7 rounded-lg bg-gray-50 dark:bg-zinc-800 flex items-center justify-center text-gray-400 group-hover:bg-amber-50 dark:group-hover:bg-amber-950 group-hover:text-amber-500 transition-colors" aria-label="Detail kedaluwarsa">
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-500 flex items-center justify-center"><Calendar weight="fill" className="w-4 h-4" /></div>
-                <span className="font-medium text-slate-600 dark:text-slate-400">Akan Kedaluwarsa</span>
+                <div className="w-7 h-7 rounded-lg bg-amber-50 dark:bg-amber-950 text-amber-500 flex items-center justify-center"><Calendar weight="fill" className="w-4 h-4" /></div>
+                <span className="font-medium text-gray-600 dark:text-gray-400">Akan Kedaluwarsa</span>
               </div>
-              {loading ? <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse w-1/3 mb-4" /> : (
-                <h3 className={`text-3xl font-bold mb-4 tracking-tight flex items-baseline gap-2 ${metrics.expiryCount > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-800 dark:text-slate-100'}`}>
-                  {metrics.expiryCount} <span className="text-base font-medium text-slate-400 dark:text-slate-500">Item</span>
+              {loading ? <div className="h-8 bg-gray-100 dark:bg-zinc-800 rounded-lg animate-pulse w-1/3 mb-4" /> : (
+                <h3 className={`text-2xl font-semibold mb-3 tracking-tight flex items-baseline gap-2 ${metrics.expiryCount > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-gray-900 dark:text-gray-100'}`}>
+                  {metrics.expiryCount} <span className="text-base font-medium text-gray-400 dark:text-gray-500">Item</span>
                 </h3>
               )}
               <div className="text-sm">
@@ -435,20 +435,20 @@ export default function Dashboard() {
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Chart */}
-          <div className="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800">
+          <div className="lg:col-span-8 bg-white dark:bg-zinc-900 rounded-xl p-6 border border-gray-200 dark:border-zinc-800">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm"><ChartLineUp weight="fill" className="w-4 h-4" /></div>
-                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">{getChartTitle()}</h2>
+                <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center"><ChartLineUp weight="fill" className="w-4 h-4" /></div>
+                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">{getChartTitle()}</h2>
               </div>
             </div>
 
             <div className="h-72 w-full relative mb-6">
               {loading ? (
-                <div className="w-full h-full flex items-center justify-center text-slate-400"><div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" /></div>
+                <div className="w-full h-full flex items-center justify-center text-gray-400"><div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" /></div>
               ) : chartData.every(d => d.sales === 0) ? (
-                <div className="w-full h-full flex flex-col items-center justify-center text-slate-400">
-                  <ShoppingCart className="w-12 h-12 text-slate-200 mb-3" />
+                <div className="w-full h-full flex flex-col items-center justify-center text-gray-400">
+                  <ShoppingCart className="w-12 h-12 text-gray-200 mb-3" />
                   <p className="text-sm font-medium">Belum ada data penjualan</p>
                   <p className="text-xs">Mulai transaksi untuk melihat grafik</p>
                 </div>
@@ -472,59 +472,59 @@ export default function Dashboard() {
               )}
             </div>
 
-            <div className="grid grid-cols-3 gap-4 border-t border-slate-100 dark:border-slate-800 pt-6">
+            <div className="grid grid-cols-3 gap-4 border-t border-gray-100 dark:border-zinc-800 pt-6">
               <div>
-                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Total {periodLabel}</p>
-                <h4 className="text-xl font-bold text-slate-800 dark:text-slate-100">{formatRupiah(periodTotalSales)}</h4>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total {periodLabel}</p>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(periodTotalSales)}</h4>
               </div>
               <div>
-                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Rata-rata Harian</p>
-                <h4 className="text-xl font-bold text-slate-800 dark:text-slate-100">{formatRupiah(Math.round(avgDailySales))}</h4>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Rata-rata Harian</p>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(Math.round(avgDailySales))}</h4>
               </div>
               <div>
-                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Hari Ini</p>
-                <h4 className="text-xl font-bold text-blue-600 dark:text-blue-400">{formatRupiah(chartData.length > 0 ? chartData[chartData.length - 1].sales : 0)}</h4>
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Hari Ini</p>
+                <h4 className="text-lg font-semibold text-indigo-600 dark:text-indigo-400">{formatRupiah(chartData.length > 0 ? chartData[chartData.length - 1].sales : 0)}</h4>
               </div>
             </div>
           </div>
 
           {/* Top Selling */}
-          <div className="lg:col-span-4 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800 flex flex-col">
+          <div className="lg:col-span-4 bg-white dark:bg-zinc-900 rounded-xl p-6 border border-gray-200 dark:border-zinc-800 flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm"><Star weight="fill" className="w-4 h-4" /></div>
-                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Obat Terlaris</h2>
+                <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center"><Star weight="fill" className="w-4 h-4" /></div>
+                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">Obat Terlaris</h2>
               </div>
             </div>
 
-            <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-4 py-2.5 rounded-lg mb-2">
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Nama Produk</span>
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Terjual</span>
+            <div className="flex items-center justify-between bg-gray-50 dark:bg-zinc-800/50 px-4 py-2.5 rounded-lg mb-2">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Nama Produk</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Terjual</span>
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-1">
               {loading ? (
                 Array.from({ length: 5 }).map((_, i) => (
                   <div key={i} className="flex items-center justify-between p-3 animate-pulse">
-                    <div className="flex items-center gap-3"><div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800" /><div><div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-24 mb-2" /><div className="h-3 bg-slate-100 dark:bg-slate-800 rounded w-16" /></div></div>
-                    <div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-12" />
+                    <div className="flex items-center gap-3"><div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-zinc-800" /><div><div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded w-24 mb-2" /><div className="h-3 bg-gray-100 dark:bg-zinc-800 rounded w-16" /></div></div>
+                    <div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded w-12" />
                   </div>
                 ))
               ) : topSelling.length === 0 ? (
-                <div className="flex-1 flex items-center justify-center text-slate-400 dark:text-slate-500 py-8">
-                  <div className="text-center"><Star className="w-10 h-10 text-slate-200 dark:text-slate-700 mx-auto mb-2" /><p className="text-sm">Belum ada data penjualan</p></div>
+                <div className="flex-1 flex items-center justify-center text-gray-400 dark:text-gray-500 py-8">
+                  <div className="text-center"><Star className="w-10 h-10 text-gray-200 dark:text-gray-700 mx-auto mb-2" /><p className="text-sm">Belum ada data penjualan</p></div>
                 </div>
               ) : (
                 topSelling.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-800/30 rounded-xl transition-colors cursor-pointer">
+                  <div key={index} className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-zinc-800/30 rounded-xl transition-colors cursor-pointer">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden border border-slate-200/60 dark:border-slate-700 p-1 flex items-center justify-center">{getCategoryIcon(item.category)}</div>
+                      <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-zinc-800 overflow-hidden border border-gray-200/60 dark:border-zinc-700 p-1 flex items-center justify-center">{getCategoryIcon(item.category)}</div>
                       <div>
-                        <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm">{item.name}</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm">{item.name}</h4>
                         <span className={`inline-block mt-0.5 px-2 py-0.5 text-[10px] font-semibold rounded-md ${getCategoryBadge(item.category)}`}>{item.category || 'Umum'}</span>
                       </div>
                     </div>
-                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{item.totalQty} {item.unit}</span>
+                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{item.totalQty} {item.unit}</span>
                   </div>
                 ))
               )}
@@ -532,33 +532,33 @@ export default function Dashboard() {
           </div>
 
           {/* Critical Stock Alerts */}
-          <div className="lg:col-span-6 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800 flex flex-col mt-6 lg:mt-0 xl:col-span-6">
+          <div className="lg:col-span-6 bg-white dark:bg-zinc-900 rounded-xl p-6 border border-gray-200 dark:border-zinc-800 flex flex-col mt-6 lg:mt-0 xl:col-span-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-500 flex items-center justify-center shadow-sm"><Warning weight="fill" className="w-4 h-4" /></div>
-                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Peringatan Stok Limit</h2>
+                <div className="w-7 h-7 rounded-lg bg-rose-50 dark:bg-rose-950 text-rose-500 flex items-center justify-center shadow-sm"><Warning weight="fill" className="w-4 h-4" /></div>
+                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">Peringatan Stok Limit</h2>
               </div>
-              <button onClick={() => navigate('/medicines')} className="text-sm text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 font-semibold">Lihat Semua</button>
+              <button onClick={() => navigate('/medicines')} className="text-sm text-indigo-600 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold">Lihat Semua</button>
             </div>
             
             <div className="flex-1 overflow-y-auto pr-1">
               {loading ? (
-                 <div className="p-4 text-center text-slate-400 dark:text-slate-500 text-sm animate-pulse">Memuat data...</div>
+                 <div className="p-4 text-center text-gray-400 dark:text-gray-500 text-sm animate-pulse">Memuat data...</div>
               ) : criticalItems.length === 0 ? (
-                 <div className="p-8 text-center bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-700">
-                    <Package className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
-                    <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Stok obat aman</p>
+                 <div className="p-8 text-center bg-gray-50 dark:bg-zinc-800/50 rounded-xl border border-dashed border-gray-200 dark:border-zinc-700">
+                    <Package className="w-8 h-8 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+                    <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Stok obat aman</p>
                  </div>
               ) : (
                  <div className="space-y-2">
                    {criticalItems.map((med, idx) => (
                      <div key={idx} className="flex items-center justify-between p-3 bg-rose-50/50 dark:bg-rose-950/30 hover:bg-rose-50 dark:hover:bg-rose-950/50 border border-rose-100 dark:border-rose-900 rounded-xl transition-colors">
                        <div>
-                         <p className="font-bold text-slate-800 dark:text-slate-100 text-sm">{med.name}</p>
-                         <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Minimal Stok: {med.min_stock} {med.unit}</p>
+                         <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{med.name}</p>
+                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Minimal Stok: {med.min_stock} {med.unit}</p>
                        </div>
                        <div className="text-right">
-                         <span className="font-bold text-rose-600 dark:text-rose-400 px-2.5 py-1 bg-white dark:bg-slate-900 rounded-lg border border-rose-100 dark:border-rose-800 shadow-sm">{med.stock} {med.unit}</span>
+                         <span className="font-bold text-rose-600 dark:text-rose-400 px-2.5 py-1 bg-white dark:bg-zinc-900 rounded-lg border border-rose-100 dark:border-rose-800 shadow-sm">{med.stock} {med.unit}</span>
                        </div>
                      </div>
                    ))}
@@ -568,22 +568,22 @@ export default function Dashboard() {
           </div>
 
           {/* Near Expiry Alerts */}
-          <div className="lg:col-span-6 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800 flex flex-col mt-6 lg:mt-0 xl:col-span-6">
+          <div className="lg:col-span-6 bg-white dark:bg-zinc-900 rounded-xl p-6 border border-gray-200 dark:border-zinc-800 flex flex-col mt-6 lg:mt-0 xl:col-span-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-500 flex items-center justify-center shadow-sm"><Calendar weight="fill" className="w-4 h-4" /></div>
-                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Segera Kedaluwarsa (FEFO)</h2>
+                <div className="w-7 h-7 rounded-lg bg-amber-50 dark:bg-amber-950 text-amber-500 flex items-center justify-center shadow-sm"><Calendar weight="fill" className="w-4 h-4" /></div>
+                <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">Segera Kedaluwarsa (FEFO)</h2>
               </div>
-              <button onClick={() => navigate('/medicines')} className="text-sm text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 font-semibold">Lihat Semua</button>
+              <button onClick={() => navigate('/medicines')} className="text-sm text-indigo-600 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold">Lihat Semua</button>
             </div>
             
             <div className="flex-1 overflow-y-auto pr-1">
               {loading ? (
-                 <div className="p-4 text-center text-slate-400 dark:text-slate-500 text-sm animate-pulse">Memuat data...</div>
+                 <div className="p-4 text-center text-gray-400 dark:text-gray-500 text-sm animate-pulse">Memuat data...</div>
               ) : expiryItems.length === 0 ? (
-                 <div className="p-8 text-center bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-700">
-                    <Pill className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
-                    <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Batas kedaluwarsa aman</p>
+                 <div className="p-8 text-center bg-gray-50 dark:bg-zinc-800/50 rounded-xl border border-dashed border-gray-200 dark:border-zinc-700">
+                    <Pill className="w-8 h-8 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+                    <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">Batas kedaluwarsa aman</p>
                  </div>
               ) : (
                  <div className="space-y-2">
@@ -593,8 +593,8 @@ export default function Dashboard() {
                      return (
                        <div key={idx} className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${isExpired ? 'bg-rose-50/50 dark:bg-rose-950/30 hover:bg-rose-50 dark:hover:bg-rose-950/50 border-rose-100 dark:border-rose-900' : 'bg-amber-50/50 dark:bg-amber-950/30 hover:bg-amber-50 dark:hover:bg-amber-950/50 border-amber-100 dark:border-amber-900'}`}>
                          <div>
-                           <p className="font-bold text-slate-800 dark:text-slate-100 text-sm">{med.name}</p>
-                           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Sisa Stok: {med.stock} {med.unit}</p>
+                           <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{med.name}</p>
+                           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Sisa Stok: {med.stock} {med.unit}</p>
                          </div>
                          <div className="text-right">
                            <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border shadow-sm ${isExpired ? 'bg-rose-100 dark:bg-rose-900 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800' : 'bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800'}`}>

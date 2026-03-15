@@ -10,7 +10,7 @@ const DataTable = forwardRef<HTMLDivElement, DataTableProps>(
     <div
       ref={ref}
       className={cn(
-        'rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-e1',
+        'rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden',
         className
       )}
       {...props}
@@ -28,7 +28,7 @@ const DataTableHeader = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLT
     <thead
       ref={ref}
       className={cn(
-        'bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800',
+        'bg-gray-50/80 dark:bg-zinc-800/50 border-b border-gray-200 dark:border-zinc-800',
         className
       )}
       {...props}
@@ -42,7 +42,7 @@ const DataTableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTableRow
     <tr
       ref={ref}
       className={cn(
-        'border-b border-slate-100 dark:border-slate-800 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors',
+        'border-b border-gray-100 dark:border-zinc-800 last:border-0 hover:bg-gray-50/50 dark:hover:bg-zinc-800/30 transition-colors',
         className
       )}
       {...props}
@@ -56,7 +56,7 @@ const DataTableHead = forwardRef<HTMLTableCellElement, HTMLAttributes<HTMLTableC
     <th
       ref={ref}
       className={cn(
-        'px-4 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap',
+        'px-4 py-2.5 text-left text-xs font-medium text-gray-500 dark:text-zinc-400 uppercase tracking-wider whitespace-nowrap',
         className
       )}
       {...props}
@@ -70,7 +70,7 @@ const DataTableCell = forwardRef<HTMLTableCellElement, HTMLAttributes<HTMLTableC
     <td
       ref={ref}
       className={cn(
-        'px-4 py-3 text-slate-700 dark:text-slate-300 whitespace-nowrap',
+        'px-4 py-2.5 text-gray-700 dark:text-zinc-300 whitespace-nowrap',
         className
       )}
       {...props}

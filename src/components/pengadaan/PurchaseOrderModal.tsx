@@ -171,18 +171,18 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-2xl shadow-xl flex flex-col h-[95vh] sm:h-[90vh]">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4 bg-zinc-900/50 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-white dark:bg-zinc-900 w-full max-w-4xl rounded-xl shadow-xl flex flex-col h-[95vh] sm:h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 shrink-0">
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-gray-100 dark:border-zinc-800 shrink-0">
           <div>
-            <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-              <FileText className="w-6 h-6 text-blue-500" />
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+              <FileText className="w-6 h-6 text-indigo-600" />
               Buat Surat Pesanan (SP)
             </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Buat draft pesanan baru ke PBF</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Buat draft pesanan baru ke PBF</p>
           </div>
-          <button onClick={onClose} className="p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors">
+          <button onClick={onClose} className="p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -193,28 +193,28 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
             {/* SP Details Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Pilih Suplier (PBF) *</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Pilih Suplier (PBF) *</label>
                 <div className="relative">
                   <select 
                     value={selectedSupplier}
                     onChange={(e) => setSelectedSupplier(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-800 dark:text-slate-100 text-sm appearance-none"
+                    className="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-gray-900 dark:text-gray-100 text-sm appearance-none"
                     required
                   >
                     <option value="" disabled>-- Pilih PBF --</option>
                     {suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
                   </select>
-                  <Buildings className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <Buildings className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Jenis SP *</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Jenis SP *</label>
                 <div className="relative">
                   <select 
                     value={orderType}
                     onChange={(e) => setOrderType(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-800 dark:text-slate-100 text-sm appearance-none"
+                    className="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-gray-900 dark:text-gray-100 text-sm appearance-none"
                     required
                   >
                     <option value="reguler">Reguler</option>
@@ -223,7 +223,7 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
                     <option value="prekursor">Prekursor</option>
                     <option value="oot">OOT (Obat Obat Tertentu)</option>
                   </select>
-                  <FileText className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <FileText className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
               </div>
             </div>
@@ -235,13 +235,13 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
               </div>
             )}
 
-            <hr className="border-slate-100 dark:border-slate-800" />
+            <hr className="border-gray-100 dark:border-zinc-800" />
 
             {/* Medicine Search */}
             <div className="relative" ref={searchRef}>
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Tambah Obat ke Pesanan</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Tambah Obat ke Pesanan</label>
               <div className="relative">
-                <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
                   value={searchQuery}
@@ -250,28 +250,28 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
                     setShowDropdown(true);
                   }}
                   onFocus={() => setShowDropdown(true)}
-                  className="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm shadow-sm"
+                  className="w-full pl-10 pr-4 py-3 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm shadow-sm"
                   placeholder="Ketik nama obat untuk mencari..."
                 />
               </div>
 
               {/* Search Results Dropdown */}
               {showDropdown && searchQuery && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl shadow-xl z-50 overflow-hidden max-h-60">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 rounded-xl shadow-xl z-50 overflow-hidden max-h-60">
                   {filteredMedicines.length === 0 ? (
-                    <div className="p-4 text-center text-sm text-slate-500">Tidak ada obat ditemukan</div>
+                    <div className="p-4 text-center text-sm text-gray-500">Tidak ada obat ditemukan</div>
                   ) : (
                     filteredMedicines.map(med => (
                       <button
                         key={med.id}
                         type="button"
                         onClick={() => addItem(med)}
-                        className="w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex align-center justify-between border-b border-slate-50 dark:border-slate-700/50 last:border-0"
+                        className="w-full text-left px-4 py-3 hover:bg-gray-50 dark:hover:bg-zinc-700/50 flex align-center justify-between border-b border-gray-50 dark:border-zinc-700/50 last:border-0"
                       >
-                        <span className="font-semibold text-slate-800 dark:text-slate-200">{med.name}</span>
+                        <span className="font-semibold text-gray-900 dark:text-gray-200">{med.name}</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-slate-500">{med.unit}</span>
-                          <Plus className="w-4 h-4 text-blue-500" />
+                          <span className="text-xs text-gray-500">{med.unit}</span>
+                          <Plus className="w-4 h-4 text-indigo-600" />
                         </div>
                       </button>
                     ))
@@ -282,49 +282,49 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
 
             {/* Items List */}
             <div>
-              <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3 flex items-center justify-between">
+              <h3 className="text-sm font-bold text-gray-900 dark:text-gray-200 mb-3 flex items-center justify-between">
                 <span>Daftar Item ({items.length})</span>
-                <span className="text-blue-600 dark:text-blue-400">Total: {formatRupiah(totalAmount)}</span>
+                <span className="text-indigo-600 dark:text-indigo-400">Total: {formatRupiah(totalAmount)}</span>
               </h3>
               
               {items.length === 0 ? (
-                <div className="bg-slate-50 dark:bg-slate-800/50 border border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-8 text-center text-slate-400 text-sm">
+                <div className="bg-gray-50 dark:bg-zinc-800/50 border border-dashed border-gray-200 dark:border-zinc-700 rounded-xl p-8 text-center text-gray-400 text-sm">
                   Belum ada obat yang ditambahkan
                 </div>
               ) : (
                 <div className="space-y-3">
                   {items.map((item, idx) => (
-                    <div key={item.medicine_id} className="flex flex-col sm:flex-row gap-3 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 p-3 rounded-xl items-start sm:items-center">
+                    <div key={item.medicine_id} className="flex flex-col sm:flex-row gap-3 bg-white dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 p-3 rounded-xl items-start sm:items-center">
                       <div className="flex-1 min-w-0">
-                        <span className="text-xs font-bold text-slate-400 mb-1 block">#{idx + 1}</span>
-                        <h4 className="font-semibold text-slate-800 dark:text-slate-200 truncate">{item.name}</h4>
+                        <span className="text-xs font-bold text-gray-400 mb-1 block">#{idx + 1}</span>
+                        <h4 className="font-semibold text-gray-900 dark:text-gray-200 truncate">{item.name}</h4>
                       </div>
                       
                       <div className="flex w-full sm:w-auto items-center gap-3">
                         <div className="flex-1 sm:w-28 flex flex-col">
-                          <label className="text-[10px] uppercase font-bold text-slate-500 mb-1">Qty</label>
+                          <label className="text-[10px] uppercase font-bold text-gray-500 mb-1">Qty</label>
                           <div className="relative">
                             <input
                               type="number"
                               min="1"
                               value={item.quantity || ''}
                               onChange={(e) => updateQuantity(item.medicine_id, parseInt(e.target.value) || 0)}
-                              className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold"
+                              className="w-full px-3 py-1.5 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm font-semibold"
                             />
-                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 pointer-events-none">{item.unit}</span>
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 pointer-events-none">{item.unit}</span>
                           </div>
                         </div>
 
                         <div className="flex-1 sm:w-36 flex flex-col">
-                          <label className="text-[10px] uppercase font-bold text-slate-500 mb-1">Estimasi Harga Beli</label>
+                          <label className="text-[10px] uppercase font-bold text-gray-500 mb-1">Estimasi Harga Beli</label>
                           <div className="relative">
-                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 pointer-events-none">Rp</span>
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-gray-400 pointer-events-none">Rp</span>
                             <input
                               type="number"
                               min="0"
                               value={item.estimated_price || ''}
                               onChange={(e) => updatePrice(item.medicine_id, parseInt(e.target.value) || 0)}
-                              className="w-full pl-8 pr-3 py-1.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold"
+                              className="w-full pl-8 pr-3 py-1.5 bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm font-semibold"
                             />
                           </div>
                         </div>
@@ -333,7 +333,7 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
                           <button
                             type="button"
                             onClick={() => removeItem(item.medicine_id)}
-                            className="p-2 text-slate-400 hover:text-rose-500 bg-slate-50 hover:bg-rose-50 dark:bg-slate-900 dark:hover:bg-slate-800 rounded-lg shrink-0 transition-colors"
+                            className="p-2 text-gray-400 hover:text-rose-500 bg-gray-50 hover:bg-rose-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 rounded-lg shrink-0 transition-colors"
                           >
                             <Trash className="w-5 h-5" />
                           </button>
@@ -348,18 +348,18 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
           </div>
 
           {/* Footer */}
-          <div className="p-4 sm:p-5 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex justify-end gap-3 shrink-0">
+          <div className="p-4 sm:p-5 border-t border-gray-100 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800/50 flex justify-end gap-3 shrink-0">
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors"
+              className="px-5 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-full transition-colors"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={isSubmitting || items.length === 0 || !selectedSupplier}
-              className="px-8 py-2.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-500/30 transition-all active:scale-95 disabled:opacity-50"
+              className="px-8 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-full shadow-lg shadow-indigo-500/30 transition-all active:scale-95 disabled:opacity-50"
             >
               {isSubmitting ? 'Menyimpan...' : 'Buat SP Draft'}
             </button>

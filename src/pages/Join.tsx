@@ -177,28 +177,28 @@ export default function Join() {
   const renderHeader = (preview?: InvitePreview) => (
     <div className="text-center mb-8">
       {preview?.logo_url ? (
-        <img src={preview.logo_url} alt="Logo Apotek" className="w-16 h-16 rounded-2xl object-cover mx-auto mb-4 shadow-md" />
+        <img src={preview.logo_url} alt="Logo Apotek" className="w-16 h-16 rounded-xl object-cover mx-auto mb-4 shadow-md" />
       ) : (
-        <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white transform rotate-45 mx-auto mb-4 shadow-lg shadow-blue-500/30">
-          <Cross weight="bold" className="w-8 h-8 -rotate-45" />
+        <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4">
+          <Cross weight="bold" className="w-6 h-6" />
         </div>
       )}
       {preview ? (
         <>
-          <h1 className="text-xl font-bold text-slate-800 mb-1">Undangan Bergabung</h1>
-          <div className="flex items-center justify-center gap-1.5 text-slate-600">
-            <Buildings weight="fill" className="w-4 h-4 text-blue-500 flex-shrink-0" />
+          <h1 className="text-lg font-semibold text-gray-900 mb-1">Undangan Bergabung</h1>
+          <div className="flex items-center justify-center gap-1.5 text-gray-600">
+            <Buildings weight="fill" className="w-4 h-4 text-indigo-600 flex-shrink-0" />
             <span className="font-semibold">{preview.pharmacy_name}</span>
           </div>
-          <p className="text-sm text-slate-500 mt-1">oleh {preview.owner_name}</p>
+          <p className="text-sm text-gray-500 mt-1">oleh {preview.owner_name}</p>
           {preview.email && (
-            <p className="text-xs text-slate-400 mt-2 bg-slate-50 rounded-lg px-3 py-1.5 inline-block">
-              Untuk: <span className="font-mono font-semibold text-slate-600">{preview.email}</span>
+            <p className="text-xs text-gray-400 mt-2 bg-gray-50 rounded-lg px-3 py-1.5 inline-block">
+              Untuk: <span className="font-mono font-semibold text-gray-600">{preview.email}</span>
             </p>
           )}
         </>
       ) : (
-        <h1 className="text-2xl font-bold text-slate-800">Bergabung ke Tim Apotek</h1>
+        <h1 className="text-xl font-semibold text-gray-900">Bergabung ke Tim Apotek</h1>
       )}
     </div>
   );
@@ -206,14 +206,14 @@ export default function Join() {
   const renderAuthForm = () => (
     <div className="w-full">
       {/* Mode toggle */}
-      <div className="flex bg-slate-100 rounded-xl p-1 mb-6">
+      <div className="flex bg-gray-100 rounded-xl p-1 mb-6">
         {(['register', 'login'] as const).map(mode => (
           <button
             key={mode}
             type="button"
             onClick={() => { setAuthMode(mode); setAuthError(''); }}
             className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-all ${
-              authMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+              authMode === mode ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
             }`}
           >
             {mode === 'register' ? 'Daftar Akun Baru' : 'Sudah Punya Akun'}
@@ -224,39 +224,39 @@ export default function Join() {
       <form onSubmit={handleAuth} className="space-y-3">
         {authMode === 'register' && (
           <div className="relative">
-            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
               required
               type="text"
               placeholder="Nama Lengkap"
               value={authName}
               onChange={e => setAuthName(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+              className="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
             />
           </div>
         )}
 
         <div className="relative">
-          <EnvelopeSimple className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+          <EnvelopeSimple className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
             required
             type="email"
             placeholder="Email"
             value={authEmail}
             onChange={e => setAuthEmail(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            className="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
           />
         </div>
 
         <div className="relative">
-          <LockKey className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+          <LockKey className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
             required
             type="password"
             placeholder="Password (min. 6 karakter)"
             value={authPassword}
             onChange={e => setAuthPassword(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+            className="w-full pl-11 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
           />
         </div>
 
@@ -271,15 +271,15 @@ export default function Join() {
               id="agree-terms-join"
               checked={agreedToTerms}
               onChange={(e) => setAgreedToTerms(e.target.checked)}
-              className="mt-0.5 w-4 h-4 rounded border-slate-300 text-blue-500 focus:ring-blue-500/20"
+              className="mt-0.5 w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500/20"
             />
-            <label htmlFor="agree-terms-join" className="text-xs text-slate-500 leading-relaxed">
+            <label htmlFor="agree-terms-join" className="text-xs text-gray-500 leading-relaxed">
               Saya menyetujui{' '}
-              <Link to="/syarat-ketentuan" className="text-blue-500 hover:underline font-semibold" target="_blank">
+              <Link to="/syarat-ketentuan" className="text-indigo-600 hover:underline font-semibold" target="_blank">
                 Syarat dan Ketentuan
               </Link>{' '}
               dan{' '}
-              <Link to="/kebijakan-privasi" className="text-blue-500 hover:underline font-semibold" target="_blank">
+              <Link to="/kebijakan-privasi" className="text-indigo-600 hover:underline font-semibold" target="_blank">
                 Kebijakan Privasi
               </Link>{' '}
               MediSir.
@@ -290,7 +290,7 @@ export default function Join() {
         <button
           type="submit"
           disabled={authLoading || (authMode === 'register' && !agreedToTerms)}
-          className="w-full py-2.5 bg-blue-500 text-white rounded-xl font-semibold text-sm hover:bg-blue-600 disabled:opacity-60 flex items-center justify-center gap-2 transition-all"
+          className="w-full py-2.5 bg-indigo-600 text-white rounded-xl font-semibold text-sm hover:bg-indigo-700 disabled:opacity-60 flex items-center justify-center gap-2 transition-all"
         >
           {authLoading
             ? <><Spinner className="w-4 h-4 animate-spin" /> Memproses...</>
@@ -309,10 +309,10 @@ export default function Join() {
 
   if (pageState.status === 'loading') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm text-slate-500">Memuat undangan...</span>
+          <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+          <span className="text-sm text-gray-500">Memuat undangan...</span>
         </div>
       </div>
     );
@@ -320,14 +320,14 @@ export default function Join() {
 
   if (pageState.status === 'error') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 font-sans p-4">
-        <div className="bg-white max-w-sm w-full p-8 rounded-[24px] shadow-soft border border-slate-100 text-center">
-          <div className="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 font-sans p-4">
+        <div className="bg-white max-w-sm w-full p-8 rounded-[24px] shadow-soft border border-gray-100 text-center">
+          <div className="w-16 h-16 bg-rose-50 rounded-xl flex items-center justify-center mx-auto mb-6">
             <Warning weight="fill" className="w-8 h-8 text-rose-500" />
           </div>
-          <h1 className="text-xl font-bold text-slate-800 mb-2">Undangan Tidak Valid</h1>
-          <p className="text-sm text-slate-500 mb-6">{ERROR_MESSAGES[pageState.reason]}</p>
-          <a href="/login" className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition-colors">
+          <h1 className="text-lg font-semibold text-gray-900 mb-2">Undangan Tidak Valid</h1>
+          <p className="text-sm text-gray-500 mb-6">{ERROR_MESSAGES[pageState.reason]}</p>
+          <a href="/login" className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-100 hover:bg-zinc-200 text-gray-700 font-semibold rounded-xl text-sm transition-colors">
             Kembali ke Login
           </a>
         </div>
@@ -337,16 +337,16 @@ export default function Join() {
 
   if (pageState.status === 'success') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 font-sans p-4">
-        <div className="bg-white max-w-sm w-full p-8 rounded-[24px] shadow-soft border border-slate-100 text-center">
-          <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 font-sans p-4">
+        <div className="bg-white max-w-sm w-full p-8 rounded-[24px] shadow-soft border border-gray-100 text-center">
+          <div className="w-16 h-16 bg-emerald-50 rounded-xl flex items-center justify-center mx-auto mb-6">
             <CheckCircle weight="fill" className="w-8 h-8 text-emerald-500" />
           </div>
-          <h1 className="text-xl font-bold text-slate-800 mb-2">Selamat Bergabung!</h1>
-          <p className="text-sm text-slate-500 mb-1">Anda berhasil bergabung ke tim</p>
-          <p className="font-bold text-blue-600 text-lg mb-6">{pageState.pharmacyName}</p>
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
-            <div className="w-4 h-4 border-2 border-slate-300 border-t-slate-500 rounded-full animate-spin" />
+          <h1 className="text-lg font-semibold text-gray-900 mb-2">Selamat Bergabung!</h1>
+          <p className="text-sm text-gray-500 mb-1">Anda berhasil bergabung ke tim</p>
+          <p className="font-bold text-indigo-600 text-lg mb-6">{pageState.pharmacyName}</p>
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
+            <div className="w-4 h-4 border-2 border-gray-300 border-t-slate-500 rounded-full animate-spin" />
             Mengalihkan ke dashboard...
           </div>
         </div>
@@ -356,15 +356,15 @@ export default function Join() {
 
   if (pageState.status === 'already_member') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 font-sans p-4">
-        <div className="bg-white max-w-sm w-full p-8 rounded-[24px] shadow-soft border border-slate-100 text-center">
-          <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <CheckCircle weight="fill" className="w-8 h-8 text-blue-500" />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 font-sans p-4">
+        <div className="bg-white max-w-sm w-full p-8 rounded-[24px] shadow-soft border border-gray-100 text-center">
+          <div className="w-16 h-16 bg-indigo-50 rounded-xl flex items-center justify-center mx-auto mb-6">
+            <CheckCircle weight="fill" className="w-8 h-8 text-indigo-600" />
           </div>
-          <h1 className="text-xl font-bold text-slate-800 mb-2">Sudah Bergabung</h1>
-          <p className="text-sm text-slate-500 mb-6">Anda sudah menjadi anggota tim apotek ini.</p>
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
-            <div className="w-4 h-4 border-2 border-slate-300 border-t-slate-500 rounded-full animate-spin" />
+          <h1 className="text-lg font-semibold text-gray-900 mb-2">Sudah Bergabung</h1>
+          <p className="text-sm text-gray-500 mb-6">Anda sudah menjadi anggota tim apotek ini.</p>
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
+            <div className="w-4 h-4 border-2 border-gray-300 border-t-slate-500 rounded-full animate-spin" />
             Mengalihkan...
           </div>
         </div>
@@ -377,22 +377,22 @@ export default function Join() {
   const isAccepting = pageState.status === 'accepting';
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 font-sans p-4">
-      <div className="bg-white max-w-md w-full p-8 rounded-[24px] shadow-soft border border-slate-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 font-sans p-4">
+      <div className="bg-white max-w-md w-full p-8 rounded-[24px] shadow-soft border border-gray-100">
 
         {renderHeader(preview)}
 
         {/* Email confirmation sent state */}
         {confirmEmail ? (
           <div className="text-center">
-            <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 mb-4">
+            <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-5 mb-4">
               <EnvelopeSimple weight="fill" className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
               <p className="text-sm font-semibold text-emerald-800 mb-1">Cek Email Anda!</p>
               <p className="text-xs text-emerald-600">Kami mengirimkan link konfirmasi ke <strong>{authEmail}</strong>. Klik link tersebut untuk melanjutkan.</p>
             </div>
             <button
               onClick={() => setConfirmEmail(false)}
-              className="text-sm text-blue-500 hover:underline"
+              className="text-sm text-indigo-600 hover:underline"
             >
               Masukkan email lain
             </button>
@@ -400,15 +400,15 @@ export default function Join() {
         ) : user ? (
           /* User is already authenticated — show accept button */
           <div className="space-y-4">
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
-              <p className="text-sm text-blue-700">
+            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 text-center">
+              <p className="text-sm text-indigo-700">
                 Masuk sebagai <span className="font-semibold">{user.email}</span>
               </p>
             </div>
             <button
               onClick={handleAccept}
               disabled={isAccepting}
-              className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-60"
+              className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-60"
             >
               {isAccepting
                 ? <><Spinner className="w-4 h-4 animate-spin" /> Bergabung...</>
@@ -423,10 +423,10 @@ export default function Join() {
 
         {/* Escape hatch */}
         {!confirmEmail && (
-          <div className="mt-6 pt-5 border-t border-slate-100 flex justify-center">
+          <div className="mt-6 pt-5 border-t border-gray-100 flex justify-center">
             <button
               onClick={() => navigate('/login')}
-              className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-600 transition-colors"
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-600 transition-colors"
             >
               <Storefront weight="fill" className="w-4 h-4" />
               Saya pemilik apotek

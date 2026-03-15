@@ -117,26 +117,26 @@ export function OnboardingWizard({ onComplete }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-xl border border-slate-200 w-full max-w-2xl overflow-hidden">
+      <div className="bg-white rounded-3xl shadow-xl border border-gray-200 w-full max-w-2xl overflow-hidden">
         {/* Progress Header */}
-        <div className="bg-slate-50 border-b border-slate-200 px-8 py-6">
-          <h1 className="text-xl font-bold text-slate-800 mb-1">Selamat Datang di MediSir! 🎉</h1>
-          <p className="text-sm text-slate-500">Mari siapkan apotek Anda dalam beberapa langkah</p>
+        <div className="bg-gray-50 border-b border-gray-200 px-8 py-6">
+          <h1 className="text-lg font-semibold text-gray-900 mb-1">Selamat Datang di MediSir! 🎉</h1>
+          <p className="text-sm text-gray-500">Mari siapkan apotek Anda dalam beberapa langkah</p>
 
           {/* Step Indicators */}
           <div className="flex items-center gap-2 mt-6">
             {steps.map((s, idx) => (
               <div key={s.num} className="flex items-center flex-1">
                 <div className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
-                  step === s.num ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/20' :
+                  step === s.num ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' :
                   step > s.num ? 'bg-emerald-100 text-emerald-700' :
-                  'bg-slate-100 text-slate-400'
+                  'bg-gray-100 text-gray-400'
                 }`}>
                   {step > s.num ? <Check weight="bold" className="w-3.5 h-3.5" /> : <s.icon weight="fill" className="w-3.5 h-3.5" />}
                   <span className="hidden sm:inline">{s.label}</span>
                 </div>
                 {idx < steps.length - 1 && (
-                  <div className={`flex-1 h-0.5 mx-1 rounded ${step > s.num ? 'bg-emerald-300' : 'bg-slate-200'}`} />
+                  <div className={`flex-1 h-0.5 mx-1 rounded ${step > s.num ? 'bg-emerald-300' : 'bg-zinc-200'}`} />
                 )}
               </div>
             ))}
@@ -149,48 +149,48 @@ export function OnboardingWizard({ onComplete }: Props) {
           {step === 1 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-lg font-bold text-slate-800 mb-1">Profil Apotek Anda</h2>
-                <p className="text-sm text-slate-500">Informasi ini akan tampil di struk dan dokumen resmi.</p>
+                <h2 className="text-base font-semibold text-gray-900 mb-1">Profil Apotek Anda</h2>
+                <p className="text-sm text-gray-500">Informasi ini akan tampil di struk dan dokumen resmi.</p>
               </div>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Nama Apotek *</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Nama Apotek *</label>
                   <input
                     type="text"
                     value={pharmacyForm.pharmacy_name}
                     onChange={(e) => setPharmacyForm({ ...pharmacyForm, pharmacy_name: e.target.value })}
                     placeholder="contoh: Apotek Sehat Makmur"
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Nama Pemilik / Apoteker *</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Nama Pemilik / Apoteker *</label>
                   <input
                     type="text"
                     value={pharmacyForm.full_name}
                     onChange={(e) => setPharmacyForm({ ...pharmacyForm, full_name: e.target.value })}
                     placeholder="Nama lengkap"
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Alamat</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Alamat</label>
                   <input
                     type="text"
                     value={pharmacyForm.pharmacy_address}
                     onChange={(e) => setPharmacyForm({ ...pharmacyForm, pharmacy_address: e.target.value })}
                     placeholder="Jl. Contoh No. 1, Kota"
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Telepon / WhatsApp</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Telepon / WhatsApp</label>
                   <input
                     type="tel"
                     value={pharmacyForm.phone}
                     onChange={(e) => setPharmacyForm({ ...pharmacyForm, phone: e.target.value })}
                     placeholder="08123456789"
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                   />
                 </div>
               </div>
@@ -201,38 +201,38 @@ export function OnboardingWizard({ onComplete }: Props) {
           {step === 2 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-lg font-bold text-slate-800 mb-1">Informasi Resmi</h2>
-                <p className="text-sm text-slate-500">Nomor izin resmi apotek Anda (opsional, bisa diisi nanti di Pengaturan).</p>
+                <h2 className="text-base font-semibold text-gray-900 mb-1">Informasi Resmi</h2>
+                <p className="text-sm text-gray-500">Nomor izin resmi apotek Anda (opsional, bisa diisi nanti di Pengaturan).</p>
               </div>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Nomor SIA</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Nomor SIA</label>
                   <input
                     type="text"
                     value={officialForm.sia_number}
                     onChange={(e) => setOfficialForm({ ...officialForm, sia_number: e.target.value })}
                     placeholder="SIA-XX-XXXX-XXXX"
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Nama Apoteker Penanggung Jawab</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Nama Apoteker Penanggung Jawab</label>
                   <input
                     type="text"
                     value={officialForm.apoteker_name}
                     onChange={(e) => setOfficialForm({ ...officialForm, apoteker_name: e.target.value })}
                     placeholder="Apt. Nama Lengkap, S.Farm"
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-1">Nomor SIPA</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Nomor SIPA</label>
                   <input
                     type="text"
                     value={officialForm.sipa_number}
                     onChange={(e) => setOfficialForm({ ...officialForm, sipa_number: e.target.value })}
                     placeholder="SIPA-XXXX"
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                   />
                 </div>
               </div>
@@ -246,8 +246,8 @@ export function OnboardingWizard({ onComplete }: Props) {
           {step === 3 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-lg font-bold text-slate-800 mb-1">Tambah Obat Pertama</h2>
-                <p className="text-sm text-slate-500">Coba tambahkan satu obat sebagai latihan. Anda juga bisa mengimpor dari CSV nanti.</p>
+                <h2 className="text-base font-semibold text-gray-900 mb-1">Tambah Obat Pertama</h2>
+                <p className="text-sm text-gray-500">Coba tambahkan satu obat sebagai latihan. Anda juga bisa mengimpor dari CSV nanti.</p>
               </div>
               {medicineAdded ? (
                 <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 text-center">
@@ -258,22 +258,22 @@ export function OnboardingWizard({ onComplete }: Props) {
               ) : (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Nama Obat *</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">Nama Obat *</label>
                     <input
                       type="text"
                       value={sampleMedicine.name}
                       onChange={(e) => setSampleMedicine({ ...sampleMedicine, name: e.target.value })}
                       placeholder="contoh: Paracetamol 500mg"
-                      className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                      className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Kategori</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
                       <select
                         value={sampleMedicine.category}
                         onChange={(e) => setSampleMedicine({ ...sampleMedicine, category: e.target.value })}
-                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                       >
                         <option value="bebas">Obat Bebas</option>
                         <option value="bebas_terbatas">Bebas Terbatas</option>
@@ -287,11 +287,11 @@ export function OnboardingWizard({ onComplete }: Props) {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Satuan</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Satuan</label>
                       <select
                         value={sampleMedicine.unit}
                         onChange={(e) => setSampleMedicine({ ...sampleMedicine, unit: e.target.value })}
-                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                       >
                         <option value="tablet">Tablet</option>
                         <option value="strip">Strip</option>
@@ -304,23 +304,23 @@ export function OnboardingWizard({ onComplete }: Props) {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Harga Jual (Rp)</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Harga Jual (Rp)</label>
                       <input
                         type="number"
                         value={sampleMedicine.sell_price}
                         onChange={(e) => setSampleMedicine({ ...sampleMedicine, sell_price: e.target.value })}
                         placeholder="5000"
-                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Stok Awal</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Stok Awal</label>
                       <input
                         type="number"
                         value={sampleMedicine.stock}
                         onChange={(e) => setSampleMedicine({ ...sampleMedicine, stock: e.target.value })}
                         placeholder="100"
-                        className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 outline-none"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 focus:border-blue-400 outline-none"
                       />
                     </div>
                   </div>
@@ -339,7 +339,7 @@ export function OnboardingWizard({ onComplete }: Props) {
                   </button>
                 </div>
               )}
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 text-sm text-blue-700">
+              <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3 text-sm text-indigo-700">
                 💡 Anda juga bisa mengimpor daftar obat dari file <strong>CSV</strong> di menu Inventaris nanti.
               </div>
             </div>
@@ -352,11 +352,11 @@ export function OnboardingWizard({ onComplete }: Props) {
                 <Rocket weight="fill" className="w-10 h-10 text-emerald-500" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-slate-800 mb-2">Apotek Anda Siap! 🎉</h2>
-                <p className="text-slate-500">Semua pengaturan dasar sudah selesai. Anda bisa mulai menggunakan MediSir.</p>
+                <h2 className="text-xl font-semibold text-gray-900 mb-2">Apotek Anda Siap! 🎉</h2>
+                <p className="text-gray-500">Semua pengaturan dasar sudah selesai. Anda bisa mulai menggunakan MediSir.</p>
               </div>
-              <div className="bg-slate-50 rounded-2xl p-6 text-left space-y-3">
-                <h3 className="font-bold text-slate-700 text-sm">Langkah selanjutnya:</h3>
+              <div className="bg-gray-50 rounded-xl p-6 text-left space-y-3">
+                <h3 className="font-bold text-gray-700 text-sm">Langkah selanjutnya:</h3>
                 <div className="space-y-2">
                   {[
                     { text: 'Buka Kasir untuk transaksi pertama', path: '/pos' },
@@ -364,8 +364,8 @@ export function OnboardingWizard({ onComplete }: Props) {
                     { text: 'Undang kasir di Pengaturan → Tim', path: '/settings' },
                     { text: 'Lihat laporan penjualan di Laporan', path: '/laporan' },
                   ].map((item) => (
-                    <div key={item.path} className="flex items-center gap-3 text-sm text-slate-600">
-                      <CheckCircle weight="fill" className="w-4 h-4 text-blue-500 flex-shrink-0" />
+                    <div key={item.path} className="flex items-center gap-3 text-sm text-gray-600">
+                      <CheckCircle weight="fill" className="w-4 h-4 text-indigo-600 flex-shrink-0" />
                       <span>{item.text}</span>
                     </div>
                   ))}
@@ -376,12 +376,12 @@ export function OnboardingWizard({ onComplete }: Props) {
         </div>
 
         {/* Footer Navigation */}
-        <div className="border-t border-slate-200 bg-slate-50 px-8 py-5 flex items-center justify-between">
+        <div className="border-t border-gray-200 bg-gray-50 px-8 py-5 flex items-center justify-between">
           <div>
             {step > 1 && step < 4 && (
               <button
                 onClick={handleBack}
-                className="flex items-center gap-2 text-slate-500 hover:text-slate-700 text-sm font-medium transition-colors"
+                className="flex items-center gap-2 text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors"
               >
                 <ArrowLeft weight="bold" className="w-4 h-4" /> Kembali
               </button>
@@ -392,7 +392,7 @@ export function OnboardingWizard({ onComplete }: Props) {
             {step === 3 && (
               <button
                 onClick={() => setStep(4)}
-                className="text-sm text-slate-400 hover:text-slate-600 font-medium"
+                className="text-sm text-gray-400 hover:text-gray-600 font-medium"
               >
                 Lewati
               </button>
@@ -401,7 +401,7 @@ export function OnboardingWizard({ onComplete }: Props) {
               <button
                 onClick={handleNext}
                 disabled={saving || (step === 1 && !pharmacyForm.pharmacy_name)}
-                className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)] disabled:opacity-50"
+                className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)] disabled:opacity-50"
               >
                 {saving ? (
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

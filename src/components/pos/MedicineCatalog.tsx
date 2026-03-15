@@ -22,23 +22,23 @@ export function MedicineCatalog({
   );
 
   return (
-    <div className="w-full lg:w-2/3 p-4 flex flex-col h-full bg-slate-50">
+    <div className="w-full lg:w-2/3 p-4 flex flex-col h-full bg-gray-50">
       {/* Search bar */}
-      <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 mb-4 flex-shrink-0">
+      <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-4 flex-shrink-0">
         <div className="flex items-center gap-4">
           <div className="relative flex-1">
-            <MagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <MagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               ref={searchInputRef as React.RefObject<HTMLInputElement>}
               type="text"
               placeholder="Cari obat atau scan barcode... (F2)"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-medium"
+              className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-medium"
               autoFocus
             />
           </div>
-          <button onClick={onStartScanner} className="p-3 bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-600 rounded-xl transition-colors border border-slate-200" title="Scan Barcode">
+          <button onClick={onStartScanner} className="p-3 bg-gray-100 hover:bg-indigo-50 hover:text-indigo-600 text-gray-600 rounded-xl transition-colors border border-gray-200" title="Scan Barcode">
             <Barcode className="w-5 h-5" />
           </button>
         </div>
@@ -49,11 +49,11 @@ export function MedicineCatalog({
         {loading ? (
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-20">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="bg-white p-4 rounded-2xl border border-slate-100 animate-pulse">
-                <div className="flex justify-between mb-3"><div className="h-4 w-12 bg-slate-100 rounded" /><div className="h-4 w-10 bg-slate-100 rounded" /></div>
-                <div className="h-5 bg-slate-100 rounded w-3/4 mb-2" />
-                <div className="h-6 bg-slate-100 rounded w-1/2 mb-3" />
-                <div className="pt-3 border-t border-slate-100/80 flex justify-between"><div className="h-3 w-14 bg-slate-100 rounded" /><div className="h-3 w-14 bg-slate-100 rounded" /></div>
+              <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 animate-pulse">
+                <div className="flex justify-between mb-3"><div className="h-4 w-12 bg-gray-100 rounded" /><div className="h-4 w-10 bg-gray-100 rounded" /></div>
+                <div className="h-5 bg-gray-100 rounded w-3/4 mb-2" />
+                <div className="h-6 bg-gray-100 rounded w-1/2 mb-3" />
+                <div className="pt-3 border-t border-gray-100/80 flex justify-between"><div className="h-3 w-14 bg-gray-100 rounded" /><div className="h-3 w-14 bg-gray-100 rounded" /></div>
               </div>
             ))}
           </div>
@@ -83,13 +83,13 @@ function MedicineCard({ med, onAdd }: { med: Medicine; onAdd: (m: Medicine) => v
         }
         onAdd(med);
       }}
-      className={`bg-white p-4 rounded-2xl border transition-all cursor-pointer relative overflow-hidden
-        ${disabled ? 'opacity-50 grayscale border-slate-100 cursor-not-allowed' : 'border-slate-100 hover:border-blue-300 shadow-sm hover:shadow-md'}
+      className={`bg-white p-4 rounded-xl border transition-all cursor-pointer relative overflow-hidden
+        ${disabled ? 'opacity-50 grayscale border-gray-100 cursor-not-allowed' : 'border-gray-100 hover:border-indigo-300 shadow-sm hover:shadow-md'}
         ${expiryStatus === 'expired' && !outOfStock ? 'border-rose-300 bg-rose-50/30' : ''}
         ${expiryStatus === 'near-expiry' && !outOfStock ? 'border-amber-200 bg-amber-50/20' : ''}`}
     >
       <div className="flex justify-between items-start mb-3">
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 uppercase">{med.category || 'Umum'}</span>
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-gray-100 text-gray-600 uppercase">{med.category || 'Umum'}</span>
         {expiryStatus === 'expired' && !outOfStock && (
           <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-100 text-rose-600 flex items-center gap-1"><Warning weight="fill" /> EXPIRED</span>
         )}
@@ -97,10 +97,10 @@ function MedicineCard({ med, onAdd }: { med: Medicine; onAdd: (m: Medicine) => v
           <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-600 flex items-center gap-1"><Warning weight="fill" /> FEFO</span>
         )}
       </div>
-      <h3 className="font-bold text-slate-800 text-sm line-clamp-2 mb-1 min-h-[40px] leading-tight">{med.name}</h3>
-      <p className="font-bold text-blue-600 text-base mb-1">{formatRupiah(med.sell_price)}</p>
-      <p className="text-[10px] text-slate-400 mb-3">/ {med.unit || 'pcs'}</p>
-      <div className="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100/80">
+      <h3 className="font-bold text-gray-900 text-sm line-clamp-2 mb-1 min-h-[40px] leading-tight">{med.name}</h3>
+      <p className="font-bold text-indigo-600 text-base mb-1">{formatRupiah(med.sell_price)}</p>
+      <p className="text-[10px] text-gray-400 mb-3">/ {med.unit || 'pcs'}</p>
+      <div className="flex items-center justify-between text-xs text-gray-500 pt-3 border-t border-gray-100/80">
         <span className={outOfStock ? 'text-rose-500 font-bold' : med.stock < (med.min_stock || 5) ? 'text-amber-500 font-semibold' : ''}>
           Stok: {med.stock}
         </span>

@@ -4,96 +4,99 @@
 
 @layer base {
   :root {
-    /* Canvas / Background */
-    --color-canvas: #f8fafc;       /* slate-50 */
-    --color-surface: #ffffff;      /* white */
+    /* Canvas / Background — warm neutral undertone for enterprise feel */
+    --color-canvas: #f7f8fa;
+    --color-surface: #ffffff;
     --color-elevated: #ffffff;
-    --color-muted: #f1f5f9;        /* slate-100 */
+    --color-muted: #f1f3f5;
 
-    /* Text */
-    --color-text-primary: #1e293b;   /* slate-800 */
-    --color-text-secondary: #64748b; /* slate-500 */
-    --color-text-muted: #94a3b8;     /* slate-400 */
+    /* Text — deep, high-contrast */
+    --color-text-primary: #111827;
+    --color-text-secondary: #4b5563;
+    --color-text-muted: #9ca3af;
     --color-text-inverse: #ffffff;
 
-    /* Border */
-    --color-border-subtle: #f1f5f9;  /* slate-100 */
-    --color-border-default: #e2e8f0; /* slate-200 */
-    --color-border-strong: #cbd5e1;  /* slate-300 */
+    /* Border — subtle and refined */
+    --color-border-subtle: #f3f4f6;
+    --color-border-default: #e5e7eb;
+    --color-border-strong: #d1d5db;
 
-    /* Brand */
-    --color-brand-primary: #3b82f6;  /* blue-500 */
-    --color-brand-hover: #2563eb;    /* blue-600 */
-    --color-brand-active: #1d4ed8;   /* blue-700 */
+    /* Brand — refined indigo for professional identity */
+    --color-brand-primary: #4f46e5;
+    --color-brand-hover: #4338ca;
+    --color-brand-active: #3730a3;
 
     /* Status – Success */
-    --color-success-bg: #f0fdf4;     /* green-50 */
-    --color-success-text: #16a34a;   /* green-600 */
-    --color-success-border: #bbf7d0; /* green-200 */
+    --color-success-bg: #f0fdf4;
+    --color-success-text: #15803d;
+    --color-success-border: #bbf7d0;
 
     /* Status – Warning */
-    --color-warning-bg: #fffbeb;     /* amber-50 */
-    --color-warning-text: #d97706;   /* amber-600 */
-    --color-warning-border: #fde68a; /* amber-200 */
+    --color-warning-bg: #fffbeb;
+    --color-warning-text: #b45309;
+    --color-warning-border: #fde68a;
 
     /* Status – Error */
-    --color-error-bg: #fef2f2;       /* rose-50 */
-    --color-error-text: #dc2626;     /* red-600 */
-    --color-error-border: #fecaca;   /* red-200 */
+    --color-error-bg: #fef2f2;
+    --color-error-text: #dc2626;
+    --color-error-border: #fecaca;
 
     /* Status – Info */
-    --color-info-bg: #eff6ff;        /* blue-50 */
-    --color-info-text: #2563eb;      /* blue-600 */
-    --color-info-border: #bfdbfe;    /* blue-200 */
+    --color-info-bg: #eef2ff;
+    --color-info-text: #4338ca;
+    --color-info-border: #c7d2fe;
   }
 
   .dark {
-    --color-canvas: #020617;         /* slate-950 */
-    --color-surface: #0f172a;        /* slate-900 */
-    --color-elevated: #1e293b;       /* slate-800 */
-    --color-muted: #1e293b;          /* slate-800 */
+    --color-canvas: #09090b;
+    --color-surface: #18181b;
+    --color-elevated: #27272a;
+    --color-muted: #27272a;
 
-    --color-text-primary: #f1f5f9;   /* slate-100 */
-    --color-text-secondary: #94a3b8; /* slate-400 */
-    --color-text-muted: #64748b;     /* slate-500 */
-    --color-text-inverse: #0f172a;   /* slate-900 */
+    --color-text-primary: #fafafa;
+    --color-text-secondary: #a1a1aa;
+    --color-text-muted: #71717a;
+    --color-text-inverse: #09090b;
 
-    --color-border-subtle: #1e293b;  /* slate-800 */
-    --color-border-default: #334155; /* slate-700 */
-    --color-border-strong: #475569;  /* slate-600 */
+    --color-border-subtle: #27272a;
+    --color-border-default: #3f3f46;
+    --color-border-strong: #52525b;
 
-    --color-brand-primary: #3b82f6;
-    --color-brand-hover: #60a5fa;    /* blue-400 */
-    --color-brand-active: #93c5fd;   /* blue-300 */
+    --color-brand-primary: #6366f1;
+    --color-brand-hover: #818cf8;
+    --color-brand-active: #a5b4fc;
 
-    --color-success-bg: #052e16;     /* green-950 */
-    --color-success-text: #4ade80;   /* green-400 */
-    --color-success-border: #166534; /* green-800 */
+    --color-success-bg: #052e16;
+    --color-success-text: #4ade80;
+    --color-success-border: #166534;
 
-    --color-warning-bg: #451a03;     /* amber-950 */
-    --color-warning-text: #fbbf24;   /* amber-400 */
-    --color-warning-border: #92400e; /* amber-800 */
+    --color-warning-bg: #451a03;
+    --color-warning-text: #fbbf24;
+    --color-warning-border: #92400e;
 
-    --color-error-bg: #450a0a;       /* red-950 */
-    --color-error-text: #f87171;     /* red-400 */
-    --color-error-border: #991b1b;   /* red-800 */
+    --color-error-bg: #450a0a;
+    --color-error-text: #f87171;
+    --color-error-border: #991b1b;
 
-    --color-info-bg: #172554;        /* blue-950 */
-    --color-info-text: #60a5fa;      /* blue-400 */
-    --color-info-border: #1e40af;    /* blue-800 */
+    --color-info-bg: #1e1b4b;
+    --color-info-text: #818cf8;
+    --color-info-border: #3730a3;
   }
 
   body {
-    @apply antialiased min-h-screen font-sans;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    @apply antialiased min-h-screen;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     background-color: var(--color-canvas);
     color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 }
 
 @layer utilities {
   .shadow-soft {
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
   }
 
   .hide-scrollbar::-webkit-scrollbar {
@@ -104,29 +107,35 @@
     scrollbar-width: none;
   }
 
-  /* Global scrollbar */
+  /* Global scrollbar — thin and unobtrusive */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #e2e8f0;
+    background: #d1d5db;
     border-radius: 10px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #cbd5e1;
+    background: #9ca3af;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #52525b;
   }
 
   /* Toggle Switch */
   .toggle-checkbox:checked {
     right: 0;
-    border-color: theme('colors.blue.500');
+    border-color: var(--color-brand-primary);
   }
   .toggle-checkbox:checked+.toggle-label {
-    background-color: theme('colors.blue.500');
+    background-color: var(--color-brand-primary);
   }
 
   /* Narrow scrollbar variant */
@@ -137,14 +146,14 @@
     background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #e2e8f0;
+    background: #d1d5db;
     border-radius: 10px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #cbd5e1;
+    background: #9ca3af;
   }
 
-  /* animate-in / animate-out utility classes (replaces tailwindcss-animate plugin dependency) */
+  /* animate-in / animate-out utility classes */
   .animate-in {
     animation-fill-mode: both;
   }

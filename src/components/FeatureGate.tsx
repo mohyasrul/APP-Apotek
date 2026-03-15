@@ -44,12 +44,12 @@ export function FeatureGate({ feature, children, fallback, silent = false }: Fea
   const planName = subscription?.plan?.name || 'Gratis';
 
   return (
-    <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-6 text-center">
+    <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6 text-center">
       <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mx-auto mb-4">
         <Warning weight="fill" className="w-6 h-6 text-amber-600" />
       </div>
-      <h3 className="text-lg font-bold text-slate-800 mb-2">Fitur Premium</h3>
-      <p className="text-sm text-slate-600 mb-4">
+      <h3 className="text-base font-semibold text-gray-900 mb-2">Fitur Premium</h3>
+      <p className="text-sm text-gray-600 mb-4">
         Fitur ini tidak tersedia di paket <span className="font-semibold">{planName}</span>.
         <br />
         Upgrade ke paket yang lebih tinggi untuk mengakses fitur ini.
