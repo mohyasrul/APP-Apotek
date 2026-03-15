@@ -256,7 +256,7 @@ export default function BukuHarianNarkotika() {
             <Book weight="duotone" className="w-6 h-6 text-amber-600 dark:text-amber-400" />
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Buku Harian Narkotika/Psikotropika</h1>
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Buku Harian Narkotika/Psikotropika</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">Per-BPOM No. 4/2018 & PMK 3/2015</p>
           </div>
         </div>

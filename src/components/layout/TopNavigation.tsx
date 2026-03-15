@@ -1,4 +1,4 @@
-import { Cross, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, Clipboard, CreditCard, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar, Sun, Moon, Timer, Question, List } from "@phosphor-icons/react";
+import { Cross, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, Sun, Moon, Timer, List } from "@phosphor-icons/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../lib/AuthContext";
 import { supabase } from "../../lib/supabase";
@@ -286,85 +286,7 @@ export function TopNavigation() {
                 <GearSix weight="bold" className="w-4 h-4" />
                 Pengaturan
               </button>
-              {profile?.role === 'owner' && (
-                <>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/stock-opname'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <Clipboard weight="bold" className="w-4 h-4" />
-                    Stock Opname
-                  </button>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/billing'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <CreditCard weight="bold" className="w-4 h-4" />
-                    Langganan
-                  </button>
-                  <div className="border-t border-gray-100 dark:border-zinc-800 my-1" />
-                  <p className="px-4 py-1 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Kepatuhan</p>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/sipnap'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <FileText weight="bold" className="w-4 h-4" />
-                    Laporan SIPNAP
-                  </button>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/buku-harian-narkotika'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <Book weight="bold" className="w-4 h-4" />
-                    Buku Harian Narkotika
-                  </button>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/pemusnahan-obat'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <Trash weight="bold" className="w-4 h-4" />
-                    Pemusnahan Obat
-                  </button>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/laporan-keuangan'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <CurrencyCircleDollar weight="bold" className="w-4 h-4" />
-                    Laporan Keuangan
-                  </button>
-                  <div className="border-t border-gray-100 dark:border-zinc-800 my-1" />
-                  <p className="px-4 py-1 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Farmasi Klinis</p>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/konseling'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <ChatCircleText weight="bold" className="w-4 h-4" />
-                    Konseling & PIO
-                  </button>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/racikan'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <Flask weight="bold" className="w-4 h-4" />
-                    Racikan & Compounding
-                  </button>
-                  <button
-                    onClick={() => { setShowDropdown(false); navigate('/meso'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-                  >
-                    <Warning weight="bold" className="w-4 h-4" />
-                    MESO (Efek Samping Obat)
-                  </button>
-                </>
-              )}
               <div className="border-t border-gray-100 dark:border-zinc-800 my-1" />
-              <button
-                onClick={() => { setShowDropdown(false); navigate('/bantuan'); }}
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
-              >
-                <Question weight="bold" className="w-4 h-4" />
-                Pusat Bantuan
-              </button>
               <button
                 onClick={handleLogout}
                 className="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950 transition-colors text-left"

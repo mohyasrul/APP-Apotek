@@ -249,11 +249,11 @@ export default function Settings() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-zinc-950 pb-20 lg:pb-0">
-      <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex-1 pb-20 lg:pb-0">
+      <div className="flex flex-col lg:flex-row min-h-full">
 
         {/* ── Settings Sidebar (desktop) ── */}
-        <aside className="hidden lg:flex flex-col w-56 xl:w-64 flex-shrink-0 bg-white dark:bg-zinc-900 border-r border-gray-100 dark:border-zinc-800 p-4 min-h-full">
+        <aside className="hidden lg:flex flex-col w-56 xl:w-64 flex-shrink-0 bg-white dark:bg-zinc-900 border-r border-gray-100 dark:border-zinc-800 p-4">
           <div className="mb-6">
             <h1 className="text-base font-semibold text-gray-900 dark:text-gray-100">Pengaturan</h1>
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Apotek &amp; Akun</p>
@@ -277,7 +277,7 @@ export default function Settings() {
         </aside>
 
         {/* ── Main Content ── */}
-        <main className="flex-1 p-5 lg:p-8 max-w-full lg:max-w-4xl">
+        <main className="flex-1 p-5 lg:p-8 max-w-3xl">
           <div className="mb-5 lg:hidden">
             <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">Pengaturan Apotek</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">Kelola profil apotek, tim kasir, dan informasi resmi.</p>

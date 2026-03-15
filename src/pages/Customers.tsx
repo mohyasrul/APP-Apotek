@@ -176,17 +176,16 @@ export default function Customers() {
 
 
   return (
-    <div className="font-sans text-gray-900 dark:text-gray-100 antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-zinc-950 pb-20 lg:pb-0">
+    <div className="flex-1 pb-20 lg:pb-0">
 
-      <main className="flex-1 p-4 lg:p-8 max-w-5xl mx-auto w-full">
+      <main className="p-6 lg:p-8 max-w-[1400px] mx-auto w-full">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
+        <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-              <UsersFour weight="fill" className="w-6 h-6 text-indigo-600" />
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
               Pelanggan
             </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
               Kelola data pelanggan dan lihat riwayat transaksi mereka.
             </p>
           </div>

@@ -4,6 +4,32 @@ import { useAuth } from '../lib/AuthContext';
 import { toast } from 'sonner';
 import type { Medicine } from '../lib/types';
 
+const CACHE_KEY = 'pos_catalog_cache';
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+function getCachedCatalog(userId: string): Medicine[] | null {
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const { uid, ts, data } = JSON.parse(raw);
+    if (uid !== userId || Date.now() - ts > CACHE_TTL) {
+      sessionStorage.removeItem(CACHE_KEY);
+      return null;
+    }
+    return data as Medicine[];
+  } catch {
+    return null;
+  }
+}
+
+function setCachedCatalog(userId: string, data: Medicine[]) {
+  try {
+    sessionStorage.setItem(CACHE_KEY, JSON.stringify({ uid: userId, ts: Date.now(), data }));
+  } catch {
+    // storage full — ignore
+  }
+}
+
 /**
  * Custom hook for POS inventory management.
  * Handles: initial fetch, server-side search, realtime sync, catalog reset.
@@ -19,6 +45,15 @@ export function usePOSInventory() {
 
   const fetchInventory = useCallback(async () => {
     if (!effectiveUserId) return;
+
+    // Try cache first for instant render
+    const cached = getCachedCatalog(effectiveUserId);
+    if (cached && cached.length > 0) {
+      catalogRef.current = cached;
+      setMedicines(cached);
+      setLoading(false);
+    }
+
     try {
       const { data, error } = await supabase
         .from('medicines')
@@ -31,8 +66,11 @@ export function usePOSInventory() {
       const result = data || [];
       catalogRef.current = result;
       setMedicines(result);
+      setCachedCatalog(effectiveUserId, result);
     } catch (error: unknown) {
-      toast.error('Gagal memuat katalog obat: ' + (error instanceof Error ? error.message : 'Terjadi kesalahan'));
+      if (!cached || cached.length === 0) {
+        toast.error('Gagal memuat katalog obat: ' + (error instanceof Error ? error.message : 'Terjadi kesalahan'), { id: 'pos-catalog-error' });
+      }
     } finally {
       setLoading(false);
     }

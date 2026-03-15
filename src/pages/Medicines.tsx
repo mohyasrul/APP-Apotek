@@ -530,14 +530,14 @@ export default function Medicines() {
   };
 
   return (
-    <div className="font-sans text-gray-900 dark:text-gray-100 antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-zinc-950 pb-20 lg:pb-0">
+    <div className="flex-1 pb-20 lg:pb-0">
 
-      <main className="flex-1 p-6 lg:p-8 max-w-[1400px] mx-auto w-full">
+      <main className="p-6 lg:p-8 max-w-[1400px] mx-auto w-full">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">Manajemen Stok Obat</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{totalCount} obat terdaftar</p>
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">Manajemen Stok Obat</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{totalCount} obat terdaftar</p>
           </div>
           <div className="flex items-center gap-3">
             {profile?.role === 'owner' && (

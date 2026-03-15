@@ -238,7 +238,7 @@ export default function Sipnap() {
             <FileText weight="duotone" className="w-6 h-6 text-red-600 dark:text-red-400" />
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Laporan SIPNAP</h1>
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Laporan SIPNAP</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">Pelaporan Narkotika & Psikotropika ke BPOM</p>
           </div>
         </div>
