@@ -3,9 +3,91 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Canvas / Background */
+    --color-canvas: #f8fafc;       /* slate-50 */
+    --color-surface: #ffffff;      /* white */
+    --color-elevated: #ffffff;
+    --color-muted: #f1f5f9;        /* slate-100 */
+
+    /* Text */
+    --color-text-primary: #1e293b;   /* slate-800 */
+    --color-text-secondary: #64748b; /* slate-500 */
+    --color-text-muted: #94a3b8;     /* slate-400 */
+    --color-text-inverse: #ffffff;
+
+    /* Border */
+    --color-border-subtle: #f1f5f9;  /* slate-100 */
+    --color-border-default: #e2e8f0; /* slate-200 */
+    --color-border-strong: #cbd5e1;  /* slate-300 */
+
+    /* Brand */
+    --color-brand-primary: #3b82f6;  /* blue-500 */
+    --color-brand-hover: #2563eb;    /* blue-600 */
+    --color-brand-active: #1d4ed8;   /* blue-700 */
+
+    /* Status – Success */
+    --color-success-bg: #f0fdf4;     /* green-50 */
+    --color-success-text: #16a34a;   /* green-600 */
+    --color-success-border: #bbf7d0; /* green-200 */
+
+    /* Status – Warning */
+    --color-warning-bg: #fffbeb;     /* amber-50 */
+    --color-warning-text: #d97706;   /* amber-600 */
+    --color-warning-border: #fde68a; /* amber-200 */
+
+    /* Status – Error */
+    --color-error-bg: #fef2f2;       /* rose-50 */
+    --color-error-text: #dc2626;     /* red-600 */
+    --color-error-border: #fecaca;   /* red-200 */
+
+    /* Status – Info */
+    --color-info-bg: #eff6ff;        /* blue-50 */
+    --color-info-text: #2563eb;      /* blue-600 */
+    --color-info-border: #bfdbfe;    /* blue-200 */
+  }
+
+  .dark {
+    --color-canvas: #020617;         /* slate-950 */
+    --color-surface: #0f172a;        /* slate-900 */
+    --color-elevated: #1e293b;       /* slate-800 */
+    --color-muted: #1e293b;          /* slate-800 */
+
+    --color-text-primary: #f1f5f9;   /* slate-100 */
+    --color-text-secondary: #94a3b8; /* slate-400 */
+    --color-text-muted: #64748b;     /* slate-500 */
+    --color-text-inverse: #0f172a;   /* slate-900 */
+
+    --color-border-subtle: #1e293b;  /* slate-800 */
+    --color-border-default: #334155; /* slate-700 */
+    --color-border-strong: #475569;  /* slate-600 */
+
+    --color-brand-primary: #3b82f6;
+    --color-brand-hover: #60a5fa;    /* blue-400 */
+    --color-brand-active: #93c5fd;   /* blue-300 */
+
+    --color-success-bg: #052e16;     /* green-950 */
+    --color-success-text: #4ade80;   /* green-400 */
+    --color-success-border: #166534; /* green-800 */
+
+    --color-warning-bg: #451a03;     /* amber-950 */
+    --color-warning-text: #fbbf24;   /* amber-400 */
+    --color-warning-border: #92400e; /* amber-800 */
+
+    --color-error-bg: #450a0a;       /* red-950 */
+    --color-error-text: #f87171;     /* red-400 */
+    --color-error-border: #991b1b;   /* red-800 */
+
+    --color-info-bg: #172554;        /* blue-950 */
+    --color-info-text: #60a5fa;      /* blue-400 */
+    --color-info-border: #1e40af;    /* blue-800 */
+  }
+
   body {
-    @apply bg-slate-50 text-slate-800 antialiased min-h-screen font-sans;
+    @apply antialiased min-h-screen font-sans;
     font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--color-canvas);
+    color: var(--color-text-primary);
   }
 }
 
