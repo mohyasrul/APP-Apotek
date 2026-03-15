@@ -25,4 +25,5 @@ dist-ssr
 
 # Ignore SQL files from being pushed
 *.sql
+!supabase/*.sql
 
