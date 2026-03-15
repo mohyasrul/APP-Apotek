@@ -30,6 +30,9 @@ const SyaratKetentuan  = lazy(() => import('./pages/SyaratKetentuan'));
 const Sipnap           = lazy(() => import('./pages/Sipnap'));
 const BukuHarianNarkotika = lazy(() => import('./pages/BukuHarianNarkotika'));
 const PemusnahanObat   = lazy(() => import('./pages/PemusnahanObat'));
+const Konseling        = lazy(() => import('./pages/Konseling'));
+const LaporanKeuangan  = lazy(() => import('./pages/LaporanKeuangan'));
+const Racikan          = lazy(() => import('./pages/Racikan'));
 
 // Fallback loading UI untuk route publik (Login, ResetPassword)
 function PageLoader() {
@@ -162,6 +165,9 @@ function App() {
                 <Route path="/sipnap"         element={<ProtectedRoute allowedRoles={['owner']}><Sipnap /></ProtectedRoute>} />
                 <Route path="/buku-harian-narkotika" element={<ProtectedRoute allowedRoles={['owner']}><BukuHarianNarkotika /></ProtectedRoute>} />
                 <Route path="/pemusnahan-obat" element={<ProtectedRoute allowedRoles={['owner']}><PemusnahanObat /></ProtectedRoute>} />
+                <Route path="/konseling"      element={<ProtectedRoute><Konseling /></ProtectedRoute>} />
+                <Route path="/laporan-keuangan" element={<ProtectedRoute allowedRoles={['owner']}><LaporanKeuangan /></ProtectedRoute>} />
+                <Route path="/racikan"        element={<ProtectedRoute><Racikan /></ProtectedRoute>} />
                 <Route path="*"               element={<NotFound />} />
               </Routes>
             </Suspense>

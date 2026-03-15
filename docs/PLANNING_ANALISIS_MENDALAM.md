@@ -45,10 +45,11 @@ Terdapat **34 celah signifikan** yang terbagi dalam 7 kategori utama yang harus 
 |-------|--------|------------|
 | POS / Kasir | ✅ Lengkap | Dengan shift, FEFO allocation, barcode scanner, offline queue |
 | Manajemen Obat | ✅ Lengkap | CRUD, filter kategori, import CSV, batch management |
-| Resep (Resep) | ✅ Ada | Lifecycle pending→dispensed→cancelled, cetak apograph |
+| Resep (Resep) | ✅ Ada | Lifecycle pending→dispensed→cancelled, cetak apograph, etiket obat |
 | Pengadaan | ✅ Ada | Surat Pesanan, Faktur PBF (A/P), Defecta, Supplier |
 | Stock Opname | ✅ Ada | Draft→in_progress→completed→approved workflow |
 | Laporan | ✅ Ada | Omset, laba kotor, grafik harian, filter waktu |
+| Laporan Keuangan | ✅ Ada | P&L per bulan, HPP, margin, hutang dagang PBF, export Excel |
 | Pelanggan (CRM dasar) | ✅ Ada | Nama, telepon, riwayat transaksi |
 | Pengaturan Apotek | ✅ Ada | Profil, SIA, SIPA, apoteker, logo |
 | Multi-Role | ✅ Ada | Owner & Kasir dengan RLS Supabase |
@@ -63,6 +64,14 @@ Terdapat **34 celah signifikan** yang terbagi dalam 7 kategori utama yang harus 
 | FEFO Allocation | ✅ Ada | First Expiry First Out untuk batch |
 | Apoteker Approval | ✅ Ada | Untuk obat keras/narkotika/psikotropika |
 | Receipt PMK-compliant | ✅ Ada | Nama, SIA, SIPA, apoteker di struk |
+| SIPNAP | ✅ Ada | Form pelaporan narkotika bulanan |
+| Buku Harian Narkotika | ✅ Ada | Catatan harian pemasukan/pengeluaran |
+| Pemusnahan Obat | ✅ Ada | BAP pemusnahan sesuai PMK |
+| Skrining Resep | ✅ Ada | Checklist 18 item administrasi/farmasetik/klinis |
+| Bukti Penyerahan Narkotika | ✅ Ada | Modal dengan NIK |
+| Etiket Obat | ✅ Ada | Cetak etiket per item resep (oral/topikal/injeksi) |
+| Konseling & PIO | ✅ Ada | Dokumentasi konseling pasien, cetak, riwayat |
+| Racikan/Compounding | ✅ Ada | Formula racikan, cetak formula, etiket racikan |
 
 ### ⚠️ Fitur Ada Tapi Belum Selesai
 
@@ -946,20 +955,21 @@ IMPACT TINGGI, EFFORT RENDAH (Quick Wins - Lakukan Segera):
 
 IMPACT TINGGI, EFFORT SEDANG (Core Features - Sprint 1-3):
 🔧 Payment gateway (Midtrans)
-🔧 Modul SIPNAP (laporan narkotika/psikotropika)
+✅ Modul SIPNAP (laporan narkotika/psikotropika)
 🔧 SP Narkotika/Psikotropika khusus
 🔧 Notifikasi WhatsApp (stok kritis, kadaluarsa, reminder SIPNAP)
 🔧 PWA dengan service worker
-🔧 Racikan/compounding sederhana
+✅ Racikan/compounding sederhana
 ✅ Printer termal support (58mm/80mm/A4 configurable)
 
 IMPACT TINGGI, EFFORT TINGGI (Strategic - Sprint 4-8):
 ⬜ Integrasi database BPOM
 ⬜ Modul BPJS/klaim
-⬜ Pemusnahan obat (BAP)
-⬜ Buku harian narkotika/psikotropika
-⬜ Skrining resep formal
-⬜ Laporan keuangan lengkap
+✅ Pemusnahan obat (BAP)
+✅ Buku harian narkotika/psikotropika
+✅ Skrining resep formal
+✅ Laporan keuangan (P&L, hutang dagang)
+✅ Konseling & PIO documentation
 
 IMPACT SEDANG, EFFORT RENDAH (Nice to Have - Backlog):
 ✅ Keyboard shortcuts POS (F2/F4/F8/Ctrl+Enter/Esc/? help overlay)
@@ -985,8 +995,8 @@ BULAN 1-2: Foundation (Pre-Launch Blockers)
 BULAN 3-4: Compliance & Core UX
 ─────────────────────────────────────────
 □ Pemusnahan obat + BAP
-□ Buku harian narkotika/psikotropika (cetak resmi)
-□ Bukti penyerahan narkotika ke pasien
+✅ Buku harian narkotika/psikotropika (cetak resmi)
+✅ Bukti penyerahan narkotika ke pasien
 ✅ Kartu stok sesuai PMK 73/2016 (verifikasi + cetak)
 ✅ Etiket obat & racikan
 □ Notifikasi WhatsApp (stok kritis, reminder)
@@ -996,10 +1006,10 @@ BULAN 3-4: Compliance & Core UX
 BULAN 5-6: SaaS Maturity
 ─────────────────────────────────────────
 □ PWA penuh dengan service worker
-□ Skrining resep formal (checklist)
-□ PIO/Konseling documentation
+✅ Skrining resep formal (checklist)
+✅ PIO/Konseling documentation
 □ Status page & SLA resmi
-□ Laporan keuangan sederhana (P&L, cash flow)
+✅ Laporan keuangan sederhana (P&L, hutang dagang)
 □ In-app help center (Bahasa Indonesia)
 □ Trial optimization (data demo, email drip)
 
@@ -1089,12 +1099,12 @@ BULAN 10-12: Scale
 | Dimensi | Skor | Keterangan |
 |---------|------|------------|
 | Fungsionalitas POS Inti | 8/10 | Kuat, FEFO, offline, shift |
-| Kepatuhan Regulasi | 4/10 | SIPNAP & narkotika rules belum ada |
-| UX untuk Apotek Kecil | 5/10 | Onboarding, printer termal, racikan belum |
-| Kematangan SaaS | 5/10 | Payment gateway belum, onboarding belum |
+| Kepatuhan Regulasi | 7/10 | SIPNAP, Buku Harian, Skrining, PIO, Etiket, Racikan ✅ |
+| UX untuk Apotek Kecil | 7/10 | Onboarding, printer termal, racikan, konseling ✅ |
+| Kematangan SaaS | 5/10 | Payment gateway belum, help center belum |
 | Keamanan & Privasi | 6/10 | Tidak ada 2FA, tidak ada UU PDP compliance |
 | Integrasi Ekosistem | 3/10 | Sangat terbatas |
-| **Overall** | **5.2/10** | Butuh 2-3 bulan lagi untuk go-live yang aman |
+| **Overall** | **6.0/10** | Siap go-live terbatas; payment gateway & 2FA masih diperlukan |
 
 ### Rekomendasi Urutan Tindakan
 

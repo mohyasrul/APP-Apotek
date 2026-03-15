@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ClipboardText, Plus, MagnifyingGlass, Storefront,
-  Trash, X, FloppyDisk, ShoppingCart, Prohibit, Printer
+  Trash, X, FloppyDisk, ShoppingCart, Prohibit, Printer, Tag
 } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../lib/AuthContext';
 import type { Prescription, PrescriptionItem, PrescriptionScreening } from '../lib/types';
-import { printApograph, type ApographData } from '../lib/receipt';
+import { printApograph, printEtiketObat, type ApographData, type EtiketItem } from '../lib/receipt';
 import { PrescriptionScreeningModal } from '../components/PrescriptionScreeningModal';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
@@ -263,6 +263,30 @@ export default function Resep() {
     printApograph(data);
   };
 
+  const handlePrintEtiket = (resep: Prescription) => {
+    if (!profile) return;
+    const items: EtiketItem[] = (resep.prescription_items || []).map(item => ({
+      medicineName: item.medicine_name,
+      signa: item.signa || 'Sesuai petunjuk dokter',
+      quantity: item.dispensed_quantity || item.quantity,
+      unit: item.medicines?.unit || 'tablet',
+      patientName: resep.patient_name,
+      patientAge: resep.patient_age,
+      prescriptionDate: resep.prescription_date,
+      prescriptionNumber: resep.prescription_number,
+      jenis: 'oral' as const,
+      pharmacyName: profile.pharmacy_name || 'APOTEK MEDISIR',
+      pharmacyAddress: profile.pharmacy_address || undefined,
+      pharmacyPhone: profile.phone || undefined,
+      apotekerName: profile.apoteker_name || undefined,
+    }));
+    if (items.length === 0) {
+      toast.error('Tidak ada obat dalam resep untuk dicetak etiket');
+      return;
+    }
+    printEtiketObat(items);
+  };
+
   // ─────────────────────────────────────────────────────────────────────────
   return (
     <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950">
@@ -453,6 +477,12 @@ export default function Resep() {
                   className="flex-1 flex items-center justify-center gap-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 py-2.5 rounded-xl text-sm font-semibold border border-emerald-100 dark:border-emerald-800"
                 >
                   <Printer weight="bold" className="w-4 h-4" /> Cetak Salinan (Apograph)
+                </button>
+                <button
+                  onClick={() => handlePrintEtiket(selected)}
+                  className="flex-1 flex items-center justify-center gap-2 bg-violet-50 text-violet-600 hover:bg-violet-100 dark:bg-violet-900/30 dark:text-violet-400 py-2.5 rounded-xl text-sm font-semibold border border-violet-100 dark:border-violet-800"
+                >
+                  <Tag weight="bold" className="w-4 h-4" /> Cetak Etiket
                 </button>
                 <button
                   onClick={() => { setScreeningTarget(selected); setShowScreening(true); }}

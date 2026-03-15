@@ -1,4 +1,4 @@
-import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck, FileText, Book, Trash } from "@phosphor-icons/react";
+import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar } from "@phosphor-icons/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../lib/AuthContext";
 import { supabase } from "../../lib/supabase";
@@ -325,6 +325,29 @@ export function TopNavigation() {
                   >
                     <Trash weight="bold" className="w-4 h-4" />
                     Pemusnahan Obat
+                  </button>
+                  <button
+                    onClick={() => { setShowDropdown(false); navigate('/laporan-keuangan'); }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                  >
+                    <CurrencyCircleDollar weight="bold" className="w-4 h-4" />
+                    Laporan Keuangan
+                  </button>
+                  <div className="border-t border-slate-100 my-1" />
+                  <p className="px-4 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Farmasi Klinis</p>
+                  <button
+                    onClick={() => { setShowDropdown(false); navigate('/konseling'); }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                  >
+                    <ChatCircleText weight="bold" className="w-4 h-4" />
+                    Konseling & PIO
+                  </button>
+                  <button
+                    onClick={() => { setShowDropdown(false); navigate('/racikan'); }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                  >
+                    <Flask weight="bold" className="w-4 h-4" />
+                    Racikan & Compounding
                   </button>
                 </>
               )}
