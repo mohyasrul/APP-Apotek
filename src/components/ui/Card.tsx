@@ -6,7 +6,7 @@ const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       className={cn(
-        'rounded-2xl border border-slate-200 bg-white shadow-e1 dark:border-slate-800 dark:bg-slate-900',
+        'rounded-xl border border-gray-200 bg-white dark:border-zinc-800 dark:bg-zinc-900',
         className
       )}
       {...props}
@@ -19,7 +19,7 @@ const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('px-5 py-4 border-b border-slate-100 dark:border-slate-800', className)}
+      className={cn('px-5 py-4 border-b border-gray-100 dark:border-zinc-800', className)}
       {...props}
     />
   )
@@ -37,7 +37,7 @@ const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('px-5 py-3 border-t border-slate-100 dark:border-slate-800', className)}
+      className={cn('px-5 py-3 border-t border-gray-100 dark:border-zinc-800', className)}
       {...props}
     />
   )

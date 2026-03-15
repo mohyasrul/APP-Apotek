@@ -125,25 +125,25 @@ export function TopNavigation() {
 
 
   return (
-    <nav className="bg-white dark:bg-slate-900 px-6 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between sticky top-0 z-50">
+    <nav className="bg-white dark:bg-zinc-900 px-6 py-3 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between sticky top-0 z-50">
       {/* Left: Logo & Menus */}
       <div className="flex items-center gap-10">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white transform rotate-45">
-            <Cross weight="bold" className="w-5 h-5 -rotate-45" />
+          <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+            <Cross weight="bold" className="w-4 h-4" />
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-800 dark:text-slate-100">MediSir</span>
+          <span className="font-semibold text-xl tracking-tight text-gray-900 dark:text-zinc-100">MediSir</span>
         </Link>
       </div>
 
       {/* Right: Actions & Profile */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         {/* Trial Counter */}
         {isTrialing && profile?.role === 'owner' && (
           <button
             onClick={() => navigate('/billing')}
             aria-label={`${daysRemaining} hari trial tersisa`}
-            className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${
+            className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${
               daysRemaining <= 3
                 ? 'bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-800 hover:bg-rose-100'
                 : 'bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900/50'
@@ -157,7 +157,7 @@ export function TopNavigation() {
         <button
           onClick={toggleTheme}
           aria-label={theme === 'dark' ? 'Aktifkan mode terang' : 'Aktifkan mode gelap'}
-          className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+          className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-200 dark:border-zinc-700 text-gray-500 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors"
         >
           {theme === 'dark'
             ? <Sun weight="bold" className="w-4 h-4 text-amber-400" />
@@ -170,11 +170,11 @@ export function TopNavigation() {
           <button
             onClick={handleBellClick}
             aria-label="Notifikasi"
-            className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors relative"
+            className="w-9 h-9 flex items-center justify-center rounded-lg border border-gray-200 dark:border-zinc-700 text-gray-500 dark:text-zinc-400 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors relative"
           >
             <Bell weight="bold" className="w-4 h-4" />
             {notifications.length > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-rose-500 text-white text-[9px] font-bold rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center translate-x-1/4 -translate-y-1/4">
+              <span className="absolute top-0 right-0 w-4 h-4 bg-rose-500 text-white text-[9px] font-bold rounded-full border-2 border-white dark:border-zinc-900 flex items-center justify-center translate-x-1/4 -translate-y-1/4">
                 {notifications.length > 9 ? '9+' : notifications.length}
               </span>
             )}
@@ -182,31 +182,31 @@ export function TopNavigation() {
 
           {/* Notification Panel */}
           {showNotifPanel && (
-            <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 z-50 animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden">
-              <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">Notifikasi</p>
-                <button onClick={() => setShowNotifPanel(false)} className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
-                  <X className="w-4 h-4 text-slate-400" />
+            <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-zinc-900 rounded-xl shadow-xl border border-gray-200 dark:border-zinc-700 z-50 animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden">
+              <div className="px-4 py-3 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
+                <p className="text-sm font-semibold text-gray-900 dark:text-zinc-100">Notifikasi</p>
+                <button onClick={() => setShowNotifPanel(false)} className="p-1 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-md">
+                  <X className="w-4 h-4 text-gray-400" />
                 </button>
               </div>
               <div className="max-h-80 overflow-y-auto">
                 {loadingNotif ? (
-                  <div className="py-6 text-center text-xs text-slate-400">Memuat...</div>
+                  <div className="py-6 text-center text-xs text-gray-400">Memuat...</div>
                 ) : notifications.length === 0 ? (
-                  <div className="py-6 text-center text-xs text-slate-400">
+                  <div className="py-6 text-center text-xs text-gray-400">
                     Tidak ada notifikasi saat ini
                   </div>
                 ) : (
                   <>
                     {notifications.filter(n => n.type === 'stock').length > 0 && (
                       <div className="px-4 pt-3 pb-1">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                        <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-1">
                           <Warning className="w-3 h-3 text-amber-500" />
                           Stok Kritis ({notifications.filter(n => n.type === 'stock').length})
                         </p>
                         {notifications.filter(n => n.type === 'stock').map((n, i) => (
-                          <div key={i} className="py-2 border-b border-slate-50 dark:border-slate-800 last:border-0">
-                            <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">{n.name}</p>
+                          <div key={i} className="py-2 border-b border-gray-50 dark:border-zinc-800 last:border-0">
+                            <p className="text-sm font-medium text-gray-900 dark:text-zinc-100">{n.name}</p>
                             <p className="text-xs text-amber-600 dark:text-amber-400">{n.detail}</p>
                           </div>
                         ))}
@@ -214,13 +214,13 @@ export function TopNavigation() {
                     )}
                     {notifications.filter(n => n.type === 'expiry').length > 0 && (
                       <div className="px-4 pt-3 pb-2">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                        <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-1">
                           <CalendarX className="w-3 h-3 text-rose-500" />
                           Mendekati Kadaluarsa ({notifications.filter(n => n.type === 'expiry').length})
                         </p>
                         {notifications.filter(n => n.type === 'expiry').map((n, i) => (
-                          <div key={i} className="py-2 border-b border-slate-50 dark:border-slate-800 last:border-0">
-                            <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">{n.name}</p>
+                          <div key={i} className="py-2 border-b border-gray-50 dark:border-zinc-800 last:border-0">
+                            <p className="text-sm font-medium text-gray-900 dark:text-zinc-100">{n.name}</p>
                             <p className="text-xs text-rose-600 dark:text-rose-400">{n.detail}</p>
                           </div>
                         ))}
@@ -230,10 +230,10 @@ export function TopNavigation() {
                 )}
               </div>
               {notifications.length > 0 && (
-                <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800">
+                <div className="px-4 py-3 border-t border-gray-100 dark:border-zinc-800">
                   <button
                     onClick={() => { setShowNotifPanel(false); navigate('/medicines'); }}
-                    className="w-full text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline text-center"
+                    className="w-full text-xs text-indigo-600 dark:text-indigo-400 font-medium hover:underline text-center"
                   >
                     Kelola Stok Obat →
                   </button>
@@ -242,36 +242,36 @@ export function TopNavigation() {
             </div>
           )}
         </div>
-        <div className="h-8 w-[1px] bg-slate-200 dark:bg-slate-700 mx-1"></div>
+        <div className="h-8 w-[1px] bg-gray-200 dark:bg-zinc-700 mx-1"></div>
 
         <div className="relative" ref={dropdownRef}>
           <div
             onClick={() => setShowDropdown(!showDropdown)}
-            className="flex items-center gap-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 p-1.5 pr-3 rounded-full border border-slate-100 dark:border-slate-700 transition-colors"
+            className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800 p-1.5 pr-3 rounded-lg border border-gray-200 dark:border-zinc-700 transition-colors"
           >
-            <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm uppercase">
+            <div className="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-semibold text-sm uppercase">
               {displayName.charAt(0)}
             </div>
             <div className="flex-col hidden sm:flex">
-              <span className="text-sm font-semibold leading-tight text-slate-800 dark:text-slate-100 max-w-[120px] truncate">
+              <span className="text-sm font-medium leading-tight text-gray-900 dark:text-zinc-100 max-w-[120px] truncate">
                 {displayName}
               </span>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400 max-w-[120px] truncate">{pharmacyName}</span>
+              <span className="text-[11px] text-gray-500 dark:text-zinc-400 max-w-[120px] truncate">{pharmacyName}</span>
             </div>
-            <CaretDown weight="bold" className={`w-4 h-4 text-slate-400 ml-1 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
+            <CaretDown weight="bold" className={`w-3.5 h-3.5 text-gray-400 ml-1 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
           </div>
 
           {/* User Dropdown */}
           {showDropdown && (
-            <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-100 dark:border-slate-800 py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800 mb-1">
-                <p className="text-xs text-slate-500 dark:text-slate-400">Masuk sebagai</p>
-                <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">{user?.email}</p>
-                <p className="text-xs text-slate-400 dark:text-slate-500 truncate">{pharmacyName}</p>
+            <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-zinc-900 rounded-xl shadow-lg border border-gray-200 dark:border-zinc-700 py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="px-4 py-2 border-b border-gray-100 dark:border-zinc-800 mb-1">
+                <p className="text-xs text-gray-500 dark:text-zinc-400">Masuk sebagai</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-zinc-100 truncate">{user?.email}</p>
+                <p className="text-xs text-gray-400 dark:text-zinc-500 truncate">{pharmacyName}</p>
               </div>
               <button
                 onClick={() => { setShowDropdown(false); navigate('/settings'); }}
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
               >
                 <GearSix weight="bold" className="w-4 h-4" />
                 Pengaturan
@@ -280,77 +280,77 @@ export function TopNavigation() {
                 <>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/stock-opname'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <Clipboard weight="bold" className="w-4 h-4" />
                     Stock Opname
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/billing'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <CreditCard weight="bold" className="w-4 h-4" />
                     Langganan
                   </button>
-                  <div className="border-t border-slate-100 dark:border-slate-800 my-1" />
-                  <p className="px-4 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kepatuhan</p>
+                  <div className="border-t border-gray-100 dark:border-zinc-800 my-1" />
+                  <p className="px-4 py-1 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Kepatuhan</p>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/sipnap'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <FileText weight="bold" className="w-4 h-4" />
                     Laporan SIPNAP
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/buku-harian-narkotika'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <Book weight="bold" className="w-4 h-4" />
                     Buku Harian Narkotika
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/pemusnahan-obat'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <Trash weight="bold" className="w-4 h-4" />
                     Pemusnahan Obat
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/laporan-keuangan'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <CurrencyCircleDollar weight="bold" className="w-4 h-4" />
                     Laporan Keuangan
                   </button>
-                  <div className="border-t border-slate-100 dark:border-slate-800 my-1" />
-                  <p className="px-4 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Farmasi Klinis</p>
+                  <div className="border-t border-gray-100 dark:border-zinc-800 my-1" />
+                  <p className="px-4 py-1 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Farmasi Klinis</p>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/konseling'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <ChatCircleText weight="bold" className="w-4 h-4" />
                     Konseling & PIO
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/racikan'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <Flask weight="bold" className="w-4 h-4" />
                     Racikan & Compounding
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/meso'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
                   >
                     <Warning weight="bold" className="w-4 h-4" />
                     MESO (Efek Samping Obat)
                   </button>
                 </>
               )}
-              <div className="border-t border-slate-100 dark:border-slate-800 my-1" />
+              <div className="border-t border-gray-100 dark:border-zinc-800 my-1" />
               <button
                 onClick={() => { setShowDropdown(false); navigate('/bantuan'); }}
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-zinc-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors text-left"
               >
                 <Question weight="bold" className="w-4 h-4" />
                 Pusat Bantuan

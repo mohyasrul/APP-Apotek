@@ -93,10 +93,10 @@ function NavLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
     <Link
       to={item.to}
       className={cn(
-        'flex items-center gap-3 px-3 py-2 mx-2 rounded-xl text-sm transition-colors duration-200',
+        'flex items-center gap-3 px-3 py-2 mx-2 rounded-lg text-[13px] transition-colors duration-150',
         isActive
-          ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-semibold'
-          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200'
+          ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 font-medium'
+          : 'text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-800 hover:text-gray-900 dark:hover:text-zinc-200'
       )}
     >
       <Icon
@@ -119,14 +119,14 @@ export function SidebarNav() {
   return (
     <div className="hidden lg:block">
       {/* pt-[57px] matches the TopNavigation height (h-[57px]) to avoid overlapping */}
-      <div className="fixed top-0 left-0 h-full w-60 z-40 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col pt-[57px]">
+      <div className="fixed top-0 left-0 h-full w-60 z-40 bg-white dark:bg-zinc-900 border-r border-gray-200 dark:border-zinc-800 flex flex-col pt-[57px]">
         {/* Logo */}
-        <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800">
+        <div className="px-4 py-3 border-b border-gray-100 dark:border-zinc-800">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white transform rotate-45 shrink-0">
-              <Cross weight="bold" className="w-5 h-5 -rotate-45" />
+            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white shrink-0">
+              <Cross weight="bold" className="w-4 h-4" />
             </div>
-            <span className="font-bold text-lg tracking-tight text-slate-800 dark:text-slate-100">
+            <span className="font-semibold text-lg tracking-tight text-gray-900 dark:text-zinc-100">
               MediSir
             </span>
           </Link>
@@ -139,7 +139,7 @@ export function SidebarNav() {
             return (
               <div key={si} className={si > 0 ? 'mt-1' : ''}>
                 {section.sectionLabel && (
-                  <p className="px-4 pt-3 pb-1 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest select-none">
+                  <p className="px-4 pt-3 pb-1 text-[10px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest select-none">
                     {section.sectionLabel}
                   </p>
                 )}
@@ -158,7 +158,7 @@ export function SidebarNav() {
         </nav>
 
         {/* Bottom items */}
-        <div className="pb-4 border-t border-slate-100 dark:border-slate-800 pt-2 space-y-0.5">
+        <div className="pb-4 border-t border-gray-100 dark:border-zinc-800 pt-2 space-y-0.5">
           {bottomItems.map((item) => (
             <NavLink
               key={item.to}

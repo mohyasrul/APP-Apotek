@@ -19,7 +19,7 @@ export function Tabs({ items, value, onChange, className }: TabsProps) {
     <div
       role="tablist"
       className={cn(
-        'flex items-center gap-1 border-b border-slate-200 dark:border-slate-800 pb-px overflow-x-auto custom-scrollbar',
+        'flex items-center gap-1 border-b border-gray-200 dark:border-zinc-800 pb-px overflow-x-auto custom-scrollbar',
         className
       )}
     >
@@ -48,10 +48,10 @@ function TabButton({ active, className, children, ...props }: TabButtonProps) {
   return (
     <button
       className={cn(
-        'flex items-center gap-2 px-4 py-2.5 text-sm font-semibold whitespace-nowrap border-b-2 transition-colors',
+        'flex items-center gap-2 px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors',
         active
-          ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-          : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300',
+          ? 'border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400'
+          : 'border-transparent text-gray-500 hover:text-gray-700 dark:text-zinc-400 dark:hover:text-zinc-300',
         className
       )}
       {...props}
