@@ -1,10 +1,11 @@
-import { Cross, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, Clipboard, CreditCard, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar, Sun, Moon, Timer, Question } from "@phosphor-icons/react";
+import { Cross, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, Clipboard, CreditCard, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar, Sun, Moon, Timer, Question, List } from "@phosphor-icons/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../lib/AuthContext";
 import { supabase } from "../../lib/supabase";
 import { usePOSStore } from "../../lib/store";
 import { useTheme } from "../../lib/ThemeContext";
 import { useSubscription } from "../../lib/SubscriptionContext";
+import { useSidebar } from "../../lib/SidebarContext";
 import { useState, useRef, useEffect, useCallback } from "react";
 
 interface NotificationItem {
@@ -18,6 +19,7 @@ export function TopNavigation() {
   const { user, profile, effectiveUserId } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const { isTrialing, daysRemaining } = useSubscription();
+  const { collapsed, toggle: toggleSidebar } = useSidebar();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNotifPanel, setShowNotifPanel] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
@@ -125,10 +127,18 @@ export function TopNavigation() {
 
 
   return (
-    <nav className="bg-white dark:bg-zinc-900 px-6 py-3 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between sticky top-0 z-50">
-      {/* Left: Logo & Menus */}
-      <div className="flex items-center gap-10">
-        <Link to="/" className="flex items-center gap-2">
+    <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-zinc-900 px-4 border-b border-gray-200 dark:border-zinc-800 flex items-center justify-between z-50 h-[57px]">
+      {/* Left: Sidebar toggle + Logo */}
+      <div className="flex items-center gap-1">
+        {/* Sidebar collapse toggle — desktop only */}
+        <button
+          onClick={toggleSidebar}
+          aria-label={collapsed ? 'Perluas sidebar' : 'Kecilkan sidebar'}
+          className="hidden lg:flex w-8 h-8 items-center justify-center rounded-lg text-gray-500 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+        >
+          <List weight="bold" className="w-4 h-4" />
+        </button>
+        <Link to="/" className="flex items-center gap-2 px-2">
           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
             <Cross weight="bold" className="w-4 h-4" />
           </div>

@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { SubscriptionProvider } from './lib/SubscriptionContext';
 import { ThemeProvider } from './lib/ThemeContext';
+import { SidebarProvider, useSidebar } from './lib/SidebarContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { TopNavigation } from './components/layout/TopNavigation';
 import { MobileBottomNav } from './components/layout/MobileBottomNav';
@@ -12,6 +13,7 @@ import { PageTransition } from './components/layout/PageTransition';
 import { SessionTimeout } from './components/SessionTimeout';
 import { Toaster } from 'sonner';
 import { initOfflineQueue } from './lib/offlineQueue';
+import { cn } from './lib/cn';
 import Dashboard from './pages/Dashboard'; // eager — halaman utama, tidak perlu lazy
 
 // Lazy-loaded routes — halaman sekunder jadi chunk terpisah.
@@ -69,10 +71,16 @@ function ContentLoader() {
 
 function AppLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
+  const { collapsed } = useSidebar();
   return (
     <div className="flex min-h-screen pt-[57px]">
       <SidebarNav />
-      <main className="flex-1 min-w-0 lg:ml-60 overflow-auto bg-slate-50 dark:bg-slate-950">
+      <main
+        className={cn(
+          'flex-1 min-w-0 overflow-auto bg-canvas dark:bg-zinc-950 transition-[margin] duration-200',
+          collapsed ? 'lg:ml-16' : 'lg:ml-60'
+        )}
+      >
         <AnimatePresence mode="wait" initial={false}>
           <PageTransition key={location.pathname}>
             {children}
@@ -115,7 +123,7 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
   }
 
   return (
-    <>
+    <SidebarProvider>
       <TopNavigation />
       <AppLayout>
         <Suspense fallback={<ContentLoader />}>
@@ -123,7 +131,7 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
         </Suspense>
       </AppLayout>
       <MobileBottomNav />
-    </>
+    </SidebarProvider>
   );
 }
 

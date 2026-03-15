@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
-  Cross,
   SquaresFour,
   Receipt,
   ClipboardText,
@@ -19,8 +18,11 @@ import {
   CreditCard,
   GearSix,
   Question,
+  ArrowLineLeft,
+  ArrowLineRight,
 } from '@phosphor-icons/react';
 import { useAuth } from '../../lib/AuthContext';
+import { useSidebar } from '../../lib/SidebarContext';
 import { cn } from '../../lib/cn';
 
 interface NavItem {
@@ -87,13 +89,23 @@ const bottomItems: NavItem[] = [
   { label: 'Bantuan',    to: '/bantuan',  icon: Question },
 ];
 
-function NavLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
+function NavLink({
+  item,
+  isActive,
+  collapsed,
+}: {
+  item: NavItem;
+  isActive: boolean;
+  collapsed: boolean;
+}) {
   const Icon = item.icon;
   return (
     <Link
       to={item.to}
+      title={collapsed ? item.label : undefined}
       className={cn(
-        'flex items-center gap-3 px-3 py-2 mx-2 rounded-lg text-[13px] transition-colors duration-150',
+        'flex items-center gap-3 py-2 mx-2 rounded-lg text-[13px] transition-colors duration-150',
+        collapsed ? 'justify-center px-2.5' : 'px-3',
         isActive
           ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 font-medium'
           : 'text-gray-600 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-800 hover:text-gray-900 dark:hover:text-zinc-200'
@@ -103,7 +115,7 @@ function NavLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
         weight={isActive ? 'fill' : 'regular'}
         className="w-[18px] h-[18px] shrink-0"
       />
-      <span className="truncate">{item.label}</span>
+      {!collapsed && <span className="truncate">{item.label}</span>}
     </Link>
   );
 }
@@ -111,6 +123,7 @@ function NavLink({ item, isActive }: { item: NavItem; isActive: boolean }) {
 export function SidebarNav() {
   const location = useLocation();
   const { profile } = useAuth();
+  const { collapsed, toggle } = useSidebar();
   const isOwner = profile?.role === 'owner';
 
   const checkActive = (to: string) =>
@@ -118,30 +131,28 @@ export function SidebarNav() {
 
   return (
     <div className="hidden lg:block">
-      {/* pt-[57px] matches the TopNavigation height (h-[57px]) to avoid overlapping */}
-      <div className="fixed top-0 left-0 h-full w-60 z-40 bg-white dark:bg-zinc-900 border-r border-gray-200 dark:border-zinc-800 flex flex-col pt-[57px]">
-        {/* Logo */}
-        <div className="px-4 py-3 border-b border-gray-100 dark:border-zinc-800">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white shrink-0">
-              <Cross weight="bold" className="w-4 h-4" />
-            </div>
-            <span className="font-semibold text-lg tracking-tight text-gray-900 dark:text-zinc-100">
-              MediSir
-            </span>
-          </Link>
-        </div>
-
+      {/* Sidebar starts below TopNavigation — no z-index collision */}
+      <div
+        className={cn(
+          'fixed top-[57px] left-0 h-[calc(100vh-57px)] z-40',
+          'bg-white dark:bg-zinc-900 border-r border-gray-200 dark:border-zinc-800 flex flex-col',
+          'transition-[width] duration-200 overflow-hidden',
+          collapsed ? 'w-16' : 'w-60'
+        )}
+      >
         {/* Scrollable nav */}
         <nav className="flex-1 overflow-y-auto py-2 custom-scrollbar" aria-label="Menu utama">
           {navSections.map((section, si) => {
             if (section.ownerOnly && !isOwner) return null;
             return (
               <div key={si} className={si > 0 ? 'mt-1' : ''}>
-                {section.sectionLabel && (
+                {!collapsed && section.sectionLabel && (
                   <p className="px-4 pt-3 pb-1 text-[10px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest select-none">
                     {section.sectionLabel}
                   </p>
+                )}
+                {collapsed && si > 0 && (
+                  <div className="mx-3 my-2 h-px bg-gray-100 dark:bg-zinc-800" />
                 )}
                 <div className="space-y-0.5">
                   {section.items.map((item) => (
@@ -149,6 +160,7 @@ export function SidebarNav() {
                       key={item.to}
                       item={item}
                       isActive={checkActive(item.to)}
+                      collapsed={collapsed}
                     />
                   ))}
                 </div>
@@ -157,15 +169,37 @@ export function SidebarNav() {
           })}
         </nav>
 
-        {/* Bottom items */}
-        <div className="pb-4 border-t border-gray-100 dark:border-zinc-800 pt-2 space-y-0.5">
+        {/* Bottom items + collapse toggle */}
+        <div className="pb-3 border-t border-gray-100 dark:border-zinc-800 pt-2 space-y-0.5">
           {bottomItems.map((item) => (
             <NavLink
               key={item.to}
               item={item}
               isActive={checkActive(item.to)}
+              collapsed={collapsed}
             />
           ))}
+
+          <button
+            onClick={toggle}
+            aria-label={collapsed ? 'Perluas sidebar' : 'Kecilkan sidebar'}
+            title={collapsed ? 'Perluas sidebar' : 'Kecilkan sidebar'}
+            className={cn(
+              'flex items-center gap-3 py-2 mx-2 rounded-lg text-[13px]',
+              'text-gray-400 dark:text-zinc-500 hover:bg-gray-100 dark:hover:bg-zinc-800 hover:text-gray-600 dark:hover:text-zinc-300',
+              'transition-colors duration-150 w-[calc(100%-16px)]',
+              collapsed ? 'justify-center px-2.5' : 'px-3'
+            )}
+          >
+            {collapsed ? (
+              <ArrowLineRight weight="bold" className="w-[18px] h-[18px] shrink-0" />
+            ) : (
+              <>
+                <ArrowLineLeft weight="bold" className="w-[18px] h-[18px] shrink-0" />
+                <span className="truncate">Kecilkan</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>
