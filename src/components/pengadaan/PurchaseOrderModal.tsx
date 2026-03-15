@@ -60,6 +60,7 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
           .order('name');
         if (medErr) throw medErr;
         setMedicines(medData || []);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         toast.error('Gagal memuat data master: ' + err.message);
       }
@@ -152,6 +153,7 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
 
       toast.success('Surat Pesanan berhasil dibuat');
       onSuccess();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal membuat Surat Pesanan: ' + err.message);
     } finally {

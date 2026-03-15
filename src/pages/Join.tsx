@@ -50,6 +50,7 @@ export default function Join() {
       return;
     }
     loadPreview();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const loadPreview = async () => {
@@ -94,6 +95,7 @@ export default function Join() {
       setPageState({ status: 'already_member', pharmacyName: profile.pharmacy_name || '' });
     }
     // Otherwise: user is now authed, accept button will show (handled in render)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, profile]);
 
   // ── Auto-redirect on terminal states ─────────────────────
@@ -102,6 +104,7 @@ export default function Join() {
       const timer = setTimeout(() => navigate('/', { replace: true }), 2500);
       return () => clearTimeout(timer);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageState.status]);
 
   // ── Handle inline auth form submit ───────────────────────

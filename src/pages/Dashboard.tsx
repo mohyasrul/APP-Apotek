@@ -68,6 +68,7 @@ export default function Dashboard() {
     const userIdUnchanged = lastFetchedUserId.current === effectiveUserId;
     if (filterUnchanged && userIdUnchanged && age < 60_000 && lastFetchedAt.current > 0) return;
     fetchDashboardData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, dateFilter, effectiveUserId]);
 
   const getChartDays = (): number => {

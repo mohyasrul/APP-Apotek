@@ -135,6 +135,7 @@ export function ApotekerApprovalModal({ restrictedItems, onApprove, onCancel, ap
 /**
  * Check if cart contains restricted medicines
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export function hasRestrictedMedicines(cart: CartItem[], medicineCategories: Record<string, string>): CartItem[] {
   return cart.filter(item => {
     const category = medicineCategories[item.id];

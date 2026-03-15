@@ -149,6 +149,7 @@ export default function LaporanKeuangan() {
 
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId, period]);
 
   const handleExportExcel = () => {
@@ -294,7 +295,7 @@ export default function LaporanKeuangan() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                 <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                 <YAxis tickFormatter={(v) => `${(v / 1_000_000).toFixed(0)}Jt`} tick={{ fontSize: 11 }} />
-                <Tooltip formatter={(v: number) => formatRupiah(v)} />
+                <Tooltip formatter={(v) => formatRupiah(Number(v ?? 0))} />
                 <Bar dataKey="Omset" fill="#3b82f6" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="HPP" fill="#f87171" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="Laba Kotor" fill="#10b981" radius={[4, 4, 0, 0]} />

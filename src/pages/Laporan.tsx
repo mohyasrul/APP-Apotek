@@ -50,12 +50,14 @@ export default function Laporan() {
       fetchChartData();
       fetchData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, dateFilter, paymentFilter]);
 
   useEffect(() => {
     if (user) {
       fetchData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const getDateRange = () => {

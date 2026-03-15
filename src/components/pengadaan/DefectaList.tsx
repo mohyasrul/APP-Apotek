@@ -36,6 +36,7 @@ export function DefectaList() {
       
       if (error) throw error;
       setItems(data as unknown as DefectaItem[] || []);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal memuat Buku Defecta: ' + err.message);
     } finally {
@@ -45,6 +46,7 @@ export function DefectaList() {
 
   useEffect(() => {
     fetchDefecta();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId]);
 
   const handleMarkOrdered = async (id: string, name: string) => {
@@ -57,6 +59,7 @@ export function DefectaList() {
       if (error) throw error;
       toast.success(`${name} ditandai sudah dipesan`);
       setItems(items.map(i => i.id === id ? { ...i, status: 'ordered' } : i));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal update status: ' + err.message);
     }

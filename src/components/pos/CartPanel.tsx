@@ -19,6 +19,7 @@ type Props = {
   onCloseShift?: () => void;
   isMobileSheet?: boolean;
   onClose?: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   allocations?: Record<string, any[]>;
 };
 

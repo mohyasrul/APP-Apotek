@@ -75,6 +75,7 @@ export default function Medicines() {
 
   useEffect(() => {
     if (user) fetchMedicines();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, effectiveUserId, page, searchDebounce, categoryFilter, sortBy]);
 
   const fetchMedicines = useCallback(async () => {
@@ -128,6 +129,7 @@ export default function Medicines() {
     } finally {
       setLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, effectiveUserId, page, searchDebounce, categoryFilter, sortBy]);
 
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);

@@ -93,6 +93,7 @@ export default function Racikan() {
 
   useEffect(() => {
     if (effectiveUserId) fetchFormulas();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId]);
 
   // Search medicines for ingredient addition

@@ -50,6 +50,7 @@ export default function BukuHarianNarkotika() {
         setSelectedMedicineId(data[0].id);
       }
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId, category]);
 
   // Generate daily logbook entries

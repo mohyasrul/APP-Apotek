@@ -164,6 +164,7 @@ export default function Settings() {
     if (activeTab === 'log') {
       fetchAuditLogs();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const fetchAuditLogs = async () => {

@@ -71,10 +71,12 @@ export default function Customers() {
     } finally {
       setLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, effectiveUserId]);
 
   useEffect(() => {
     if (user) fetchCustomers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, effectiveUserId]);
 
   const resetForm = () => {

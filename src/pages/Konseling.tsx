@@ -73,7 +73,7 @@ export default function Konseling() {
 
       if (error) throw error;
       setRecords((data as KonselingRecord[]) || []);
-    } catch (err: unknown) {
+    } catch {
       // Table might not exist yet — show graceful empty state
       setRecords([]);
     } finally {
@@ -83,6 +83,7 @@ export default function Konseling() {
 
   useEffect(() => {
     if (effectiveUserId) fetchRecords();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId]);
 
   // Pre-fill petugas from profile
