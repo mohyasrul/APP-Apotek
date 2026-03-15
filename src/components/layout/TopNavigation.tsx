@@ -1,5 +1,5 @@
-import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar, Sun, Moon, Timer, Question } from "@phosphor-icons/react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Cross, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, Clipboard, CreditCard, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar, Sun, Moon, Timer, Question } from "@phosphor-icons/react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../lib/AuthContext";
 import { supabase } from "../../lib/supabase";
 import { usePOSStore } from "../../lib/store";
@@ -14,7 +14,6 @@ interface NotificationItem {
 }
 
 export function TopNavigation() {
-  const location = useLocation();
   const navigate = useNavigate();
   const { user, profile, effectiveUserId } = useAuth();
   const { theme, toggleTheme } = useTheme();
@@ -124,14 +123,6 @@ export function TopNavigation() {
     ? `Kasir — ${ownerPharmacyName ?? profile?.pharmacy_name ?? 'Apotek'}`
     : profile?.pharmacy_name || 'Apotek';
 
-  const getLinkClass = (path: string) => {
-    const isActive = location.pathname === path;
-    return `flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-colors ${
-      isActive
-        ? "bg-blue-500 text-white shadow-[0_4px_12px_rgba(59,130,246,0.3)]"
-        : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
-    }`;
-  };
 
   return (
     <nav className="bg-white dark:bg-slate-900 px-6 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between sticky top-0 z-50">
@@ -143,40 +134,6 @@ export function TopNavigation() {
           </div>
           <span className="font-bold text-xl tracking-tight text-slate-800 dark:text-slate-100">MediSir</span>
         </Link>
-
-      {/* Desktop Menus */}
-        <div className="hidden md:flex items-center gap-2">
-          <Link to="/" className={getLinkClass("/")}>
-            <SquaresFour weight={location.pathname === "/" ? "fill" : "bold"} className="w-4 h-4" />
-            Dashboard
-          </Link>
-          <Link to="/resep" className={getLinkClass("/resep")}>
-            <ClipboardText weight={location.pathname === "/resep" ? "fill" : "bold"} className="w-4 h-4" />
-            Resep
-          </Link>
-          <Link to="/pengadaan" className={getLinkClass("/pengadaan")}>
-            <Truck weight={location.pathname === "/pengadaan" ? "fill" : "bold"} className="w-4 h-4" />
-            Pengadaan
-          </Link>
-          <Link to="/pos" className={getLinkClass("/pos")}>
-            <Receipt weight={location.pathname === "/pos" ? "fill" : "bold"} className="w-4 h-4" />
-            Kasir / POS
-          </Link>
-          {profile?.role === 'owner' && (
-            <Link to="/laporan" className={getLinkClass("/laporan")}>
-              <ChartPieSlice weight={location.pathname === "/laporan" ? "fill" : "bold"} className="w-4 h-4" />
-              Laporan
-            </Link>
-          )}
-          <Link to="/medicines" className={getLinkClass("/medicines")}>
-            <Package weight={location.pathname === "/medicines" ? "fill" : "bold"} className="w-4 h-4" />
-            Stok Obat
-          </Link>
-          <Link to="/customers" className={getLinkClass("/customers")}>
-            <UsersFour weight={location.pathname === "/customers" ? "fill" : "bold"} className="w-4 h-4" />
-            Pelanggan
-          </Link>
-        </div>
       </div>
 
       {/* Right: Actions & Profile */}

@@ -1,11 +1,14 @@
 import { lazy, Suspense, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { SubscriptionProvider } from './lib/SubscriptionContext';
 import { ThemeProvider } from './lib/ThemeContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { TopNavigation } from './components/layout/TopNavigation';
 import { MobileBottomNav } from './components/layout/MobileBottomNav';
+import { SidebarNav } from './components/layout/SidebarNav';
+import { PageTransition } from './components/layout/PageTransition';
 import { SessionTimeout } from './components/SessionTimeout';
 import { Toaster } from 'sonner';
 import { initOfflineQueue } from './lib/offlineQueue';
@@ -64,6 +67,22 @@ function ContentLoader() {
   );
 }
 
+function AppLayout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  return (
+    <div className="flex min-h-screen pt-[57px]">
+      <SidebarNav />
+      <main className="flex-1 min-w-0 lg:ml-60 overflow-auto bg-slate-50 dark:bg-slate-950">
+        <AnimatePresence mode="wait" initial={false}>
+          <PageTransition key={location.pathname}>
+            {children}
+          </PageTransition>
+        </AnimatePresence>
+      </main>
+    </div>
+  );
+}
+
 function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode; allowedRoles?: string[] }) {
   const { user, profile, loading, profileError } = useAuth();
 
@@ -98,9 +117,11 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
   return (
     <>
       <TopNavigation />
-      <Suspense fallback={<ContentLoader />}>
-        {children}
-      </Suspense>
+      <AppLayout>
+        <Suspense fallback={<ContentLoader />}>
+          {children}
+        </Suspense>
+      </AppLayout>
       <MobileBottomNav />
     </>
   );
