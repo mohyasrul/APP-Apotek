@@ -27,7 +27,7 @@ type Props = {
 };
 
 export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
-  const { effectiveUserId } = useAuth();
+  const { effectiveUserId, profile } = useAuth();
   
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [selectedSupplier, setSelectedSupplier] = useState('');
@@ -113,6 +113,13 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
     e.preventDefault();
     if (!selectedSupplier) return toast.error('Pilih PBF terlebih dahulu');
     if (items.length === 0) return toast.error('Pilih minimal 1 obat untuk dipesan');
+
+    // Regulasi: SP Narkotika/Psikotropika/Prekursor/OOT hanya boleh dibuat oleh Apoteker (owner)
+    const restrictedTypes = ['narkotika', 'psikotropika', 'prekursor', 'oot'];
+    if (restrictedTypes.includes(orderType) && profile?.role !== 'owner') {
+      toast.error('SP ' + orderType.toUpperCase() + ' hanya dapat dibuat oleh Apoteker (Pemilik). Hubungi APJ Anda.');
+      return;
+    }
 
     setIsSubmitting(true);
     try {

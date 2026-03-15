@@ -1,9 +1,10 @@
-import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar, Sun, Moon } from "@phosphor-icons/react";
+import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar, Sun, Moon, Timer, Question } from "@phosphor-icons/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../lib/AuthContext";
 import { supabase } from "../../lib/supabase";
 import { usePOSStore } from "../../lib/store";
 import { useTheme } from "../../lib/ThemeContext";
+import { useSubscription } from "../../lib/SubscriptionContext";
 import { useState, useRef, useEffect, useCallback } from "react";
 
 interface NotificationItem {
@@ -17,6 +18,7 @@ export function TopNavigation() {
   const navigate = useNavigate();
   const { user, profile, effectiveUserId } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { isTrialing, daysRemaining } = useSubscription();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNotifPanel, setShowNotifPanel] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
@@ -179,6 +181,21 @@ export function TopNavigation() {
 
       {/* Right: Actions & Profile */}
       <div className="flex items-center gap-4">
+        {/* Trial Counter */}
+        {isTrialing && profile?.role === 'owner' && (
+          <button
+            onClick={() => navigate('/billing')}
+            aria-label={`${daysRemaining} hari trial tersisa`}
+            className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${
+              daysRemaining <= 3
+                ? 'bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 border-rose-200 dark:border-rose-800 hover:bg-rose-100'
+                : 'bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900/50'
+            }`}
+          >
+            <Timer weight="fill" className="w-3.5 h-3.5" />
+            {daysRemaining} hari trial
+          </button>
+        )}
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
@@ -364,8 +381,23 @@ export function TopNavigation() {
                     <Flask weight="bold" className="w-4 h-4" />
                     Racikan & Compounding
                   </button>
+                  <button
+                    onClick={() => { setShowDropdown(false); navigate('/meso'); }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+                  >
+                    <Warning weight="bold" className="w-4 h-4" />
+                    MESO (Efek Samping Obat)
+                  </button>
                 </>
               )}
+              <div className="border-t border-slate-100 dark:border-slate-800 my-1" />
+              <button
+                onClick={() => { setShowDropdown(false); navigate('/bantuan'); }}
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
+              >
+                <Question weight="bold" className="w-4 h-4" />
+                Pusat Bantuan
+              </button>
               <button
                 onClick={handleLogout}
                 className="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950 transition-colors text-left"

@@ -6,7 +6,7 @@ import { formatRupiah, isValidPhone } from "../lib/types";
 import type { Customer } from "../lib/types";
 import {
   Plus, MagnifyingGlass, PencilSimple, TrashSimple, X,
-  User, Phone, Receipt, Warning, UsersFour, WhatsappLogo
+  User, Phone, Receipt, Warning, UsersFour, WhatsappLogo, DownloadSimple
 } from "@phosphor-icons/react";
 
 type CustomerWithStats = Customer & {
@@ -149,6 +149,32 @@ export default function Customers() {
     (c.phone && c.phone.includes(searchQuery))
   );
 
+  const exportCSV = () => {
+    if (customers.length === 0) {
+      toast.warning('Belum ada data pelanggan untuk diekspor');
+      return;
+    }
+    const header = ['Nama', 'No. HP', 'Catatan', 'Jumlah Transaksi', 'Total Belanja (Rp)', 'Tanggal Daftar'];
+    const rows = customers.map(c => [
+      `"${c.name.replace(/"/g, '""')}"`,
+      c.phone || '',
+      `"${(c.notes || '').replace(/"/g, '""')}"`,
+      c.transaction_count ?? 0,
+      c.total_spend ?? 0,
+      c.created_at ? new Date(c.created_at).toLocaleDateString('id-ID') : '',
+    ]);
+    const csv = [header.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `pelanggan-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success(`${customers.length} pelanggan diekspor ke CSV`);
+  };
+
+
   return (
     <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 pb-20 md:pb-0">
 
@@ -165,13 +191,22 @@ export default function Customers() {
             </p>
           </div>
           {profile?.role === 'owner' && (
-            <button
-              onClick={() => { resetForm(); setShowForm(true); }}
-              className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-xl shadow-[0_4px_12px_rgba(59,130,246,0.3)] transition-all"
-            >
-              <Plus weight="bold" className="w-4 h-4" />
-              Tambah Pelanggan
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={exportCSV}
+                className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all"
+              >
+                <DownloadSimple weight="bold" className="w-4 h-4" />
+                Export CSV
+              </button>
+              <button
+                onClick={() => { resetForm(); setShowForm(true); }}
+                className="flex items-center gap-2 px-4 py-2.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-xl shadow-[0_4px_12px_rgba(59,130,246,0.3)] transition-all"
+              >
+                <Plus weight="bold" className="w-4 h-4" />
+                Tambah Pelanggan
+              </button>
+            </div>
           )}
         </div>
 
