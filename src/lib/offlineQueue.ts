@@ -76,7 +76,6 @@ export async function queueTransaction(transaction: Omit<QueuedTransaction, 'id'
     const request = store.add(queuedTx);
 
     request.onsuccess = () => {
-      console.log('✓ Transaction queued offline:', queuedTx.id);
       resolve(queuedTx.id);
     };
     request.onerror = () => reject(request.error);
@@ -173,7 +172,7 @@ async function syncTransaction(transaction: QueuedTransaction): Promise<{ succes
     await updateTransaction(transaction.id, { status: 'syncing' });
 
     // Call process_checkout RPC
-    const { data, error } = await supabase.rpc('process_checkout', {
+    const { error } = await supabase.rpc('process_checkout', {
       p_total_amount: transaction.totalAmount,
       p_discount_total: transaction.discountTotal,
       p_payment_method: transaction.paymentMethod,
@@ -210,7 +209,6 @@ async function syncTransaction(transaction: QueuedTransaction): Promise<{ succes
 
     // Success - remove from queue
     await removeTransaction(transaction.id);
-    console.log('✓ Transaction synced successfully:', transaction.id, data);
     return { success: true };
 
   } catch (err) {
@@ -235,11 +233,8 @@ export async function syncAllPendingTransactions(): Promise<{ synced: number; fa
   const pending = await getPendingTransactions();
 
   if (pending.length === 0) {
-    console.log('✓ No pending transactions to sync');
     return { synced: 0, failed: 0 };
   }
-
-  console.log(`⏳ Syncing ${pending.length} pending transaction(s)...`);
 
   let synced = 0;
   let failed = 0;
@@ -253,8 +248,6 @@ export async function syncAllPendingTransactions(): Promise<{ synced: number; fa
     }
   }
 
-  console.log(`✓ Sync complete: ${synced} succeeded, ${failed} failed`);
-
   return { synced, failed };
 }
 
@@ -265,7 +258,6 @@ export async function syncAllPendingTransactions(): Promise<{ synced: number; fa
 export function initOfflineQueue() {
   // Sync when coming back online
   window.addEventListener('online', async () => {
-    console.log('🌐 Network status: ONLINE');
     toast.info('Koneksi kembali! Menyinkronkan transaksi...');
 
     try {
@@ -285,7 +277,6 @@ export function initOfflineQueue() {
   });
 
   window.addEventListener('offline', () => {
-    console.log('🔴 Network status: OFFLINE');
     toast.warning('Anda sedang offline. Transaksi akan disimpan dan disinkronkan nanti.');
   });
 
@@ -294,7 +285,6 @@ export function initOfflineQueue() {
     setTimeout(async () => {
       const pending = await getPendingTransactions();
       if (pending.length > 0) {
-        console.log(`📋 Found ${pending.length} pending transaction(s) on startup`);
         toast.info(`${pending.length} transaksi offline menunggu sinkronisasi...`, {
           action: {
             label: 'Sync Sekarang',
@@ -368,10 +358,8 @@ export async function cleanupOldTransactions(): Promise<number> {
         }
         cursor.continue();
       } else {
-        console.log(`🗑️ Cleaned up ${deletedCount} old transactions`);
         resolve(deletedCount);
-      }
-    };
+      }    };
 
     request.onerror = () => reject(request.error);
   });

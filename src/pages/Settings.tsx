@@ -602,7 +602,7 @@ export default function Settings() {
                         <button
                           onClick={() => {
                             const link = `${window.location.origin}/join?token=${inv.token}`;
-                            navigator.clipboard.writeText(link).then(() => toast.success('Link disalin'));
+                            navigator.clipboard.writeText(link).then(() => toast.success('Link disalin')).catch(() => toast.error('Gagal menyalin link'));
                           }}
                           className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 text-slate-600 text-xs font-semibold rounded-lg hover:bg-slate-50 transition-colors"
                         >
@@ -728,7 +728,7 @@ export default function Settings() {
                   </span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText(`${window.location.origin}/join?token=${inviteResult.token}`).then(() => toast.success('Link disalin'));
+                      navigator.clipboard.writeText(`${window.location.origin}/join?token=${inviteResult.token}`).then(() => toast.success('Link disalin')).catch(() => toast.error('Gagal menyalin link'));
                     }}
                     className="p-1.5 hover:bg-slate-200 rounded-lg transition-colors flex-shrink-0"
                     title="Salin link"
@@ -749,7 +749,7 @@ export default function Settings() {
                   <summary className="cursor-pointer hover:text-slate-600 transition-colors">Kode manual (fallback)</summary>
                   <div className="mt-2 flex items-center gap-2 bg-slate-100 rounded-lg p-2">
                     <span className="flex-1 font-mono font-bold text-slate-700 text-base tracking-widest text-center">{inviteResult.code}</span>
-                    <button onClick={() => navigator.clipboard.writeText(inviteResult.code).then(() => toast.success('Kode disalin'))} className="p-1 hover:bg-slate-200 rounded">
+                    <button onClick={() => navigator.clipboard.writeText(inviteResult.code).then(() => toast.success('Kode disalin')).catch(() => toast.error('Gagal menyalin kode'))} className="p-1 hover:bg-slate-200 rounded">
                       <Copy className="w-3.5 h-3.5 text-slate-500" />
                     </button>
                   </div>

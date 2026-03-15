@@ -96,6 +96,7 @@ export default function POS() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         console.error("Error checking shift:", err);
+        toast.error('Gagal memeriksa shift: ' + (err?.message ?? 'Terjadi kesalahan'));
       } finally {
         setCheckingShift(false);
       }

@@ -166,6 +166,15 @@ export default function Medicines() {
     const buyPrice = parseInt(form.buy_price);
     const sellPrice = parseInt(form.sell_price);
 
+    if (isNaN(buyPrice) || buyPrice < 0) {
+      toast.warning("Harga beli harus berupa angka yang valid!");
+      return;
+    }
+    if (isNaN(sellPrice) || sellPrice < 0) {
+      toast.warning("Harga jual harus berupa angka yang valid!");
+      return;
+    }
+
     if (sellPrice <= buyPrice) {
       toast.warning("Harga jual harus lebih besar dari harga beli!");
       return;

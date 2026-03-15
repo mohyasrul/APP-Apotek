@@ -1,8 +1,9 @@
-import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar } from "@phosphor-icons/react";
+import { Cross, SquaresFour, ClipboardText, Receipt, ChartPieSlice, Package, Bell, CaretDown, SignOut, GearSix, X, Warning, CalendarX, UsersFour, Clipboard, CreditCard, Truck, FileText, Book, Trash, ChatCircleText, Flask, CurrencyCircleDollar, Sun, Moon } from "@phosphor-icons/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../lib/AuthContext";
 import { supabase } from "../../lib/supabase";
 import { usePOSStore } from "../../lib/store";
+import { useTheme } from "../../lib/ThemeContext";
 import { useState, useRef, useEffect, useCallback } from "react";
 
 interface NotificationItem {
@@ -15,6 +16,7 @@ export function TopNavigation() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, profile, effectiveUserId } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNotifPanel, setShowNotifPanel] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
@@ -125,19 +127,19 @@ export function TopNavigation() {
     return `flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-colors ${
       isActive
         ? "bg-blue-500 text-white shadow-[0_4px_12px_rgba(59,130,246,0.3)]"
-        : "text-slate-500 hover:text-slate-900"
+        : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
     }`;
   };
 
   return (
-    <nav className="bg-white px-6 py-3 border-b border-slate-100 flex items-center justify-between sticky top-0 z-50">
+    <nav className="bg-white dark:bg-slate-900 px-6 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between sticky top-0 z-50">
       {/* Left: Logo & Menus */}
       <div className="flex items-center gap-10">
         <Link to="/" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white transform rotate-45">
             <Cross weight="bold" className="w-5 h-5 -rotate-45" />
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-800">MediSir</span>
+          <span className="font-bold text-xl tracking-tight text-slate-800 dark:text-slate-100">MediSir</span>
         </Link>
 
       {/* Desktop Menus */}
@@ -177,11 +179,24 @@ export function TopNavigation() {
 
       {/* Right: Actions & Profile */}
       <div className="flex items-center gap-4">
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Aktifkan mode terang' : 'Aktifkan mode gelap'}
+          className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+        >
+          {theme === 'dark'
+            ? <Sun weight="bold" className="w-4 h-4 text-amber-400" />
+            : <Moon weight="bold" className="w-4 h-4" />
+          }
+        </button>
+
         {/* Notification Bell */}
         <div className="relative" ref={notifRef}>
           <button
             onClick={handleBellClick}
-            className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors relative"
+            aria-label="Notifikasi"
+            className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors relative"
           >
             <Bell weight="bold" className="w-4 h-4" />
             {notifications.length > 0 && (
@@ -193,10 +208,10 @@ export function TopNavigation() {
 
           {/* Notification Panel */}
           {showNotifPanel && (
-            <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 z-50 animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden">
-              <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
-                <p className="text-sm font-bold text-slate-800">Notifikasi</p>
-                <button onClick={() => setShowNotifPanel(false)} className="p-1 hover:bg-slate-100 rounded-lg">
+            <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 z-50 animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden">
+              <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">Notifikasi</p>
+                <button onClick={() => setShowNotifPanel(false)} className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
                   <X className="w-4 h-4 text-slate-400" />
                 </button>
               </div>
@@ -253,36 +268,36 @@ export function TopNavigation() {
             </div>
           )}
         </div>
-        <div className="h-8 w-[1px] bg-slate-200 mx-1"></div>
+        <div className="h-8 w-[1px] bg-slate-200 dark:bg-slate-700 mx-1"></div>
 
         <div className="relative" ref={dropdownRef}>
           <div
             onClick={() => setShowDropdown(!showDropdown)}
-            className="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-1.5 pr-3 rounded-full border border-slate-100 transition-colors"
+            className="flex items-center gap-3 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 p-1.5 pr-3 rounded-full border border-slate-100 dark:border-slate-700 transition-colors"
           >
             <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm uppercase">
               {displayName.charAt(0)}
             </div>
             <div className="flex-col hidden sm:flex">
-              <span className="text-sm font-semibold leading-tight text-slate-800 max-w-[120px] truncate">
+              <span className="text-sm font-semibold leading-tight text-slate-800 dark:text-slate-100 max-w-[120px] truncate">
                 {displayName}
               </span>
-              <span className="text-[11px] text-slate-500 max-w-[120px] truncate">{pharmacyName}</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 max-w-[120px] truncate">{pharmacyName}</span>
             </div>
             <CaretDown weight="bold" className={`w-4 h-4 text-slate-400 ml-1 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
           </div>
 
           {/* User Dropdown */}
           {showDropdown && (
-            <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-              <div className="px-4 py-2 border-b border-slate-100 mb-1">
-                <p className="text-xs text-slate-500">Masuk sebagai</p>
-                <p className="text-sm font-semibold text-slate-800 truncate">{user?.email}</p>
-                <p className="text-xs text-slate-400 truncate">{pharmacyName}</p>
+            <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-100 dark:border-slate-800 py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800 mb-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400">Masuk sebagai</p>
+                <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 truncate">{user?.email}</p>
+                <p className="text-xs text-slate-400 dark:text-slate-500 truncate">{pharmacyName}</p>
               </div>
               <button
                 onClick={() => { setShowDropdown(false); navigate('/settings'); }}
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
               >
                 <GearSix weight="bold" className="w-4 h-4" />
                 Pengaturan
@@ -291,60 +306,60 @@ export function TopNavigation() {
                 <>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/stock-opname'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
                   >
                     <Clipboard weight="bold" className="w-4 h-4" />
                     Stock Opname
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/billing'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
                   >
                     <CreditCard weight="bold" className="w-4 h-4" />
                     Langganan
                   </button>
-                  <div className="border-t border-slate-100 my-1" />
+                  <div className="border-t border-slate-100 dark:border-slate-800 my-1" />
                   <p className="px-4 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kepatuhan</p>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/sipnap'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
                   >
                     <FileText weight="bold" className="w-4 h-4" />
                     Laporan SIPNAP
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/buku-harian-narkotika'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
                   >
                     <Book weight="bold" className="w-4 h-4" />
                     Buku Harian Narkotika
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/pemusnahan-obat'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
                   >
                     <Trash weight="bold" className="w-4 h-4" />
                     Pemusnahan Obat
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/laporan-keuangan'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
                   >
                     <CurrencyCircleDollar weight="bold" className="w-4 h-4" />
                     Laporan Keuangan
                   </button>
-                  <div className="border-t border-slate-100 my-1" />
+                  <div className="border-t border-slate-100 dark:border-slate-800 my-1" />
                   <p className="px-4 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Farmasi Klinis</p>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/konseling'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
                   >
                     <ChatCircleText weight="bold" className="w-4 h-4" />
                     Konseling & PIO
                   </button>
                   <button
                     onClick={() => { setShowDropdown(false); navigate('/racikan'); }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left"
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-left"
                   >
                     <Flask weight="bold" className="w-4 h-4" />
                     Racikan & Compounding
@@ -353,7 +368,7 @@ export function TopNavigation() {
               )}
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 transition-colors text-left"
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950 transition-colors text-left"
               >
                 <SignOut weight="bold" className="w-4 h-4" />
                 Keluar
