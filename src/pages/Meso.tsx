@@ -276,13 +276,13 @@ export default function Meso() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-          <div className="bg-white dark:bg-slate-900 w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
+          <div role="dialog" aria-modal="true" aria-labelledby="meso-form-title" className="bg-white dark:bg-slate-900 w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
               <div className="flex items-center gap-2">
                 <Warning weight="fill" className="w-5 h-5 text-rose-500" />
-                <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">Laporan MESO Baru</h2>
+                <h2 id="meso-form-title" className="text-base font-bold text-slate-800 dark:text-slate-100">Laporan MESO Baru</h2>
               </div>
-              <button onClick={() => setShowForm(false)} className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800">
+              <button onClick={() => setShowForm(false)} aria-label="Tutup form" className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800">
                 <X weight="bold" className="w-4 h-4" />
               </button>
             </div>
@@ -415,12 +415,12 @@ export default function Meso() {
       {/* Delete Confirmation */}
       {deleteTarget && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-2xl max-w-sm w-full">
+          <div role="dialog" aria-modal="true" aria-labelledby="meso-delete-title" className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-2xl max-w-sm w-full border border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-rose-100 dark:bg-rose-900/40 rounded-xl flex items-center justify-center">
                 <Trash weight="fill" className="w-5 h-5 text-rose-500" />
               </div>
-              <h3 className="font-bold text-slate-800 dark:text-slate-100">Hapus Laporan MESO?</h3>
+              <h3 id="meso-delete-title" className="font-bold text-slate-800 dark:text-slate-100">Hapus Laporan MESO?</h3>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 mb-5">
               Laporan MESO untuk pasien <strong>{deleteTarget.patient_name}</strong> akan dihapus permanen.

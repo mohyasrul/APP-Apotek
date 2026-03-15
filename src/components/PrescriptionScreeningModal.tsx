@@ -128,6 +128,9 @@ export function PrescriptionScreeningModal({
   return (
     <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={onClose}>
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="prescription-screening-title"
         className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col"
         onClick={e => e.stopPropagation()}
       >
@@ -138,7 +141,7 @@ export function PrescriptionScreeningModal({
               <ClipboardText weight="duotone" className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-800 dark:text-slate-100">Skrining Resep</h3>
+              <h3 id="prescription-screening-title" className="font-bold text-slate-800 dark:text-slate-100">Skrining Resep</h3>
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 Pasien: <b>{patientName}</b> — PMK 73/2016
               </p>
