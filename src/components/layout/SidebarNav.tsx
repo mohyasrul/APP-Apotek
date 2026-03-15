@@ -139,9 +139,12 @@ export function SidebarNav() {
   // Collapsible section state — auto-expand section if it contains the active route
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(() => {
     const initial: Record<string, boolean> = {};
+    const pathname = location.pathname;
     navSections.forEach(section => {
       if (section.sectionLabel && section.collapsible) {
-        const hasActiveChild = section.items.some(item => checkActive(item.to));
+        const hasActiveChild = section.items.some(item =>
+          item.to === '/' ? pathname === '/' : pathname.startsWith(item.to)
+        );
         initial[section.sectionLabel] = hasActiveChild;
       }
     });
@@ -151,6 +154,21 @@ export function SidebarNav() {
   const toggleSection = useCallback((label: string) => {
     setExpandedSections(prev => ({ ...prev, [label]: !prev[label] }));
   }, []);
+
+  // Auto-expand section when navigating to one of its child routes
+  useEffect(() => {
+    navSections.forEach(section => {
+      if (section.sectionLabel && section.collapsible) {
+        const hasActiveChild = section.items.some(item => checkActive(item.to));
+        if (hasActiveChild) {
+          setExpandedSections(prev => {
+            if (prev[section.sectionLabel!]) return prev;
+            return { ...prev, [section.sectionLabel!]: true };
+          });
+        }
+      }
+    });
+  }, [location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="hidden lg:block">

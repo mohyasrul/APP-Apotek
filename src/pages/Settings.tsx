@@ -277,7 +277,7 @@ export default function Settings() {
         </aside>
 
         {/* ── Main Content ── */}
-        <main className="flex-1 p-5 lg:p-8 max-w-3xl">
+        <main className="flex-1 p-5 lg:p-8 lg:max-w-3xl">
           <div className="mb-5 lg:hidden">
             <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">Pengaturan Apotek</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">Kelola profil apotek, tim kasir, dan informasi resmi.</p>
