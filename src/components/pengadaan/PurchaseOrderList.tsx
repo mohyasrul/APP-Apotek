@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../lib/AuthContext';
 import { Plus, Eye, Printer, Truck, FileText, CheckCircle, XCircle, X } from '@phosphor-icons/react';
@@ -37,6 +37,20 @@ export function PurchaseOrderList() {
   const [selected, setSelected] = useState<PurchaseOrder | null>(null);
   const [selectedItems, setSelectedItems] = useState<POItem[]>([]);
   const [loadingItems, setLoadingItems] = useState(false);
+
+  // Close detail modal on Escape
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') setSelected(null);
+  }, []);
+
+  useEffect(() => {
+    if (selected) {
+      document.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.removeEventListener('keydown', handleKeyDown);
+    }
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [selected, handleKeyDown]);
 
   const fetchOrders = async () => {
     if (!effectiveUserId) return;

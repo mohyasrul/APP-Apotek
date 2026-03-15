@@ -161,18 +161,26 @@ export default function PemusnahanObat() {
     if (error) { toast.error('Gagal memperbarui status'); return; }
 
     // Decrement stock for each item with a valid medicine_id
+    const stockErrors: string[] = [];
     for (const item of record.items) {
       if (item.medicine_id && item.quantity > 0) {
-        await supabase.rpc('decrement_stock', {
+        const { error: rpcErr } = await supabase.rpc('decrement_stock', {
           p_medicine_id: item.medicine_id,
           p_qty: item.quantity,
         });
+        if (rpcErr) {
+          stockErrors.push(`${item.medicine_name}: ${rpcErr.message}`);
+        }
       }
     }
 
     setRecords(records.map(r => r.id === id ? { ...r, status: 'completed' as const } : r));
     setSelected(null);
-    toast.success('Pemusnahan ditandai selesai & stok dikurangi');
+    if (stockErrors.length > 0) {
+      toast.warning(`Pemusnahan selesai, namun pengurangan stok gagal untuk: ${stockErrors.join('; ')}`);
+    } else {
+      toast.success('Pemusnahan ditandai selesai & stok dikurangi');
+    }
   };
 
   const markScheduled = async (id: string) => {
