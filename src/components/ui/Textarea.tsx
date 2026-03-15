@@ -28,7 +28,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           aria-describedby={errorId}
           className={cn(
             'block w-full rounded-lg border bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 transition-colors duration-150 min-h-[80px]',
-            'focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500',
+            'focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600',
             'dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500',
             error
               ? 'border-red-300 dark:border-red-700'
