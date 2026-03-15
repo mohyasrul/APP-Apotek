@@ -78,8 +78,8 @@ export function Modal({
         )}
         {...props}
       >
-        {/* Header */}
-        {(title || true) && (
+        {/* Header - always rendered for close button */}
+        {(title || description) && (
           <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
             <div>
               {title && (

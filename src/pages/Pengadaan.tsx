@@ -8,10 +8,10 @@ import { PageHeader, Tabs } from '../components/ui';
 import type { TabItem } from '../components/ui';
 
 const tabItems: TabItem[] = [
-  { value: 'surat-pesanan', label: 'Surat Pesanan', icon: <Truck className="w-4 h-4" /> },
-  { value: 'faktur', label: 'Faktur PBF (A/P)', icon: <Receipt className="w-4 h-4" /> },
-  { value: 'defecta', label: 'Buku Defecta', icon: <BookBookmark className="w-4 h-4" /> },
-  { value: 'supplier', label: 'Suplier (PBF)', icon: <Storefront className="w-4 h-4" /> },
+  { value: 'surat-pesanan', label: 'Surat Pesanan', icon: <Truck aria-hidden="true" className="w-4 h-4" /> },
+  { value: 'faktur', label: 'Faktur PBF (A/P)', icon: <Receipt aria-hidden="true" className="w-4 h-4" /> },
+  { value: 'defecta', label: 'Buku Defecta', icon: <BookBookmark aria-hidden="true" className="w-4 h-4" /> },
+  { value: 'supplier', label: 'Suplier (PBF)', icon: <Storefront aria-hidden="true" className="w-4 h-4" /> },
 ];
 
 export default function Pengadaan() {

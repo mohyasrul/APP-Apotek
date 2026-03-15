@@ -118,6 +118,7 @@ export function SidebarNav() {
 
   return (
     <div className="hidden lg:block">
+      {/* pt-[57px] matches the TopNavigation height (h-[57px]) to avoid overlapping */}
       <div className="fixed top-0 left-0 h-full w-60 z-40 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col pt-[57px]">
         {/* Logo */}
         <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800">
