@@ -67,35 +67,35 @@ export function DefectaList() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700">
+      <div className="flex justify-between items-center bg-white dark:bg-zinc-800 p-4 rounded-xl border border-gray-100 dark:border-zinc-700">
         <div>
-          <h2 className="font-bold text-slate-800 dark:text-slate-100">Buku Defecta</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">Catatan stok obat yang perlu dipesan kembali</p>
+          <h2 className="font-bold text-gray-900 dark:text-gray-100">Buku Defecta</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Catatan stok obat yang perlu dipesan kembali</p>
         </div>
         <button
           onClick={() => toast.info('Fitur auto-generate Defecta segera hadir')}
-          className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
+          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
         >
           <Plus weight="bold" /> Generate dari Stok Minimum
         </button>
       </div>
 
       {loading ? (
-        <div className="py-10 text-center text-slate-400 flex flex-col items-center">
-          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4" />
+        <div className="py-10 text-center text-gray-400 flex flex-col items-center">
+          <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mb-4" />
           Memuat data...
         </div>
       ) : items.length === 0 ? (
-        <div className="py-16 text-center text-slate-400 flex flex-col items-center border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
-          <BookBookmark className="w-12 h-12 text-slate-200 mb-3" />
-          <p className="font-semibold text-slate-500">Buku Defecta Kosong</p>
+        <div className="py-16 text-center text-gray-400 flex flex-col items-center border border-dashed border-gray-200 dark:border-zinc-800 rounded-xl">
+          <BookBookmark className="w-12 h-12 text-gray-200 mb-3" />
+          <p className="font-semibold text-gray-500">Buku Defecta Kosong</p>
           <p className="text-sm mb-4">Semua stok obat masih dalam batas aman.</p>
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl overflow-hidden">
+        <div className="bg-white dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 rounded-xl overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
-              <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase text-xs font-semibold">
+            <table className="w-full text-left text-sm text-gray-600 dark:text-gray-400">
+              <thead className="bg-gray-50 dark:bg-zinc-800/50 text-gray-500 dark:text-gray-400 uppercase text-xs font-semibold">
                 <tr>
                   <th className="px-5 py-4">Tanggal Dicatat</th>
                   <th className="px-5 py-4">Nama Obat</th>
@@ -105,28 +105,28 @@ export function DefectaList() {
                   <th className="px-5 py-4 text-center">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-700/50">
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-700/50">
                 {items.map((item) => (
-                  <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                  <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors">
                     <td className="px-5 py-4">
                       {new Date(item.recorded_date).toLocaleDateString('id-ID')}
                     </td>
-                    <td className="px-5 py-4 font-semibold text-slate-800 dark:text-slate-200">
+                    <td className="px-5 py-4 font-semibold text-gray-900 dark:text-gray-200">
                       {item.medicines?.name || 'Obat Dihapus'}
                     </td>
                     <td className="px-5 py-4 text-center text-rose-500 font-bold">
                       {item.current_stock}
                     </td>
-                    <td className="px-5 py-4 text-center font-bold text-blue-600 dark:text-blue-400">
-                      {item.required_stock} <span className="text-xs text-slate-500 font-normal">{item.medicines?.unit}</span>
+                    <td className="px-5 py-4 text-center font-bold text-indigo-600 dark:text-indigo-400">
+                      {item.required_stock} <span className="text-xs text-gray-500 font-normal">{item.medicines?.unit}</span>
                     </td>
                     <td className="px-5 py-4">
                       {item.status === 'pending' ? (
-                        <span className="bg-amber-100 text-amber-700 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 w-fit">
+                        <span className="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-md text-xs font-medium flex items-center gap-1 w-fit">
                           <Clock weight="fill" /> Pending
                         </span>
                       ) : (
-                        <span className="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 w-fit">
+                        <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-md text-xs font-medium flex items-center gap-1 w-fit">
                           <CheckCircle weight="fill" /> Selesai Dipesan
                         </span>
                       )}
@@ -135,7 +135,7 @@ export function DefectaList() {
                       {item.status === 'pending' && (
                         <button 
                           onClick={() => handleMarkOrdered(item.id, item.medicines?.name || 'Obat')}
-                          className="bg-blue-50 text-blue-600 hover:bg-blue-100 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
+                          className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
                         >
                           Tandai Dipesan
                         </button>

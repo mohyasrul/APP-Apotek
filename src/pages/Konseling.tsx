@@ -243,17 +243,17 @@ export default function Konseling() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-800 dark:text-slate-100 flex items-center gap-2">
-            <ChatCircleText weight="fill" className="w-8 h-8 text-blue-500" />
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <ChatCircleText weight="fill" className="w-8 h-8 text-indigo-600" />
             Konseling & PIO
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
+          <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
             Catatan Pelayanan Informasi Obat dan konseling pasien sesuai PMK 73/2016
           </p>
         </div>
         <button
           onClick={openNew}
-          className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors shadow-sm"
+          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors shadow-sm"
         >
           <Plus weight="bold" className="w-4 h-4" />
           Tambah Catatan
@@ -262,20 +262,20 @@ export default function Konseling() {
 
       {/* Search */}
       <div className="relative mb-6">
-        <MagnifyingGlass className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+        <MagnifyingGlass className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
         <input
           type="text"
           placeholder="Cari nama pasien, obat, atau petugas..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-900 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
       </div>
 
       {/* Info Banner */}
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-2xl p-4 mb-6 flex gap-3">
-        <Info weight="fill" className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-        <div className="text-sm text-blue-700 dark:text-blue-300">
+      <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-100 dark:border-indigo-800 rounded-xl p-4 mb-6 flex gap-3">
+        <Info weight="fill" className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
+        <div className="text-sm text-indigo-700 dark:text-indigo-300">
           <span className="font-semibold">PMK 73/2016 Pasal 6-8:</span> Apotek wajib menyediakan Pelayanan Informasi Obat (PIO) dan
           konseling. Konseling wajib didokumentasikan untuk narkotika, psikotropika, dan obat risiko tinggi.
         </div>
@@ -283,21 +283,21 @@ export default function Konseling() {
 
       {/* List */}
       {loading ? (
-        <div className="py-12 text-center text-slate-400">
-          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <div className="py-12 text-center text-gray-400">
+          <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
           Memuat data...
         </div>
       ) : filtered.length === 0 ? (
-        <div className="py-20 text-center text-slate-400 border border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
-          <ChatCircleText className="w-14 h-14 text-slate-200 mx-auto mb-3" />
-          <p className="font-semibold text-slate-500 mb-1">
+        <div className="py-20 text-center text-gray-400 border border-dashed border-gray-200 dark:border-zinc-800 rounded-xl">
+          <ChatCircleText className="w-14 h-14 text-gray-200 mx-auto mb-3" />
+          <p className="font-semibold text-gray-500 mb-1">
             {search ? 'Tidak ada catatan yang cocok' : 'Belum ada catatan konseling'}
           </p>
           <p className="text-sm mb-4">
             {search ? 'Coba kata kunci berbeda' : 'Mulai dokumentasikan konseling pasien Anda'}
           </p>
           {!search && (
-            <button onClick={openNew} className="text-blue-500 text-sm font-semibold hover:underline">
+            <button onClick={openNew} className="text-indigo-600 text-sm font-semibold hover:underline">
               Tambah Catatan Pertama
             </button>
           )}
@@ -307,20 +307,20 @@ export default function Konseling() {
           {filtered.map(rec => (
             <div
               key={rec.id}
-              className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-5 flex gap-4 hover:shadow-sm transition-shadow"
+              className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 rounded-xl p-5 flex gap-4 hover:shadow-sm transition-shadow"
             >
-              <div className="w-10 h-10 rounded-full bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center shrink-0 mt-0.5">
-                <User weight="fill" className="w-5 h-5 text-blue-500" />
+              <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center shrink-0 mt-0.5">
+                <User weight="fill" className="w-5 h-5 text-indigo-600" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2 flex-wrap">
                   <div>
-                    <h3 className="font-semibold text-slate-800 dark:text-slate-100">{rec.patient_name}</h3>
-                    <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">{rec.patient_name}</h3>
+                    <p className="text-xs text-gray-400 flex items-center gap-1 mt-0.5">
                       <Calendar className="w-3 h-3" />
                       {formatDate(rec.tanggal)}
                       {rec.prescription_number && (
-                        <span className="ml-2 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-[10px]">
+                        <span className="ml-2 bg-gray-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-[10px]">
                           Resep: {rec.prescription_number}
                         </span>
                       )}
@@ -329,14 +329,14 @@ export default function Konseling() {
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={() => handlePrint(rec)}
-                      className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors"
+                      className="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 rounded-lg transition-colors"
                       title="Cetak catatan konseling"
                     >
                       <Printer className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => openEdit(rec)}
-                      className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+                      className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
                       title="Edit"
                     >
                       <FloppyDisk className="w-4 h-4" />
@@ -344,7 +344,7 @@ export default function Konseling() {
                     <button
                       onClick={() => handleDelete(rec)}
                       disabled={deleting}
-                      className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-colors"
+                      className="p-2 text-gray-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-colors"
                       title="Hapus"
                     >
                       <Trash className="w-4 h-4" />
@@ -353,10 +353,10 @@ export default function Konseling() {
                 </div>
                 <div className="flex items-center gap-1 mt-2">
                   <Pill weight="fill" className="w-3.5 h-3.5 text-violet-400 shrink-0" />
-                  <p className="text-sm text-slate-600 dark:text-slate-300 font-medium truncate">{rec.medicines}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 font-medium truncate">{rec.medicines}</p>
                 </div>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{rec.informasi}</p>
-                <p className="text-xs text-slate-400 mt-1">Petugas: {rec.petugas}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">{rec.informasi}</p>
+                <p className="text-xs text-gray-400 mt-1">Petugas: {rec.petugas}</p>
               </div>
             </div>
           ))}
@@ -366,15 +366,15 @@ export default function Konseling() {
       {/* Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50">
-          <div className="bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[95vh] flex flex-col">
+          <div className="bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[95vh] flex flex-col">
             {/* Header */}
-            <div className="flex items-center justify-between p-5 border-b border-slate-100 dark:border-slate-800 shrink-0">
-              <h2 className="font-bold text-lg text-slate-800 dark:text-slate-100">
+            <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800 shrink-0">
+              <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100">
                 {selected ? 'Edit Catatan Konseling' : 'Catatan Konseling Baru'}
               </h2>
               <button
                 onClick={() => setShowForm(false)}
-                className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-xl text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
               >
                 <X weight="bold" className="w-5 h-5" />
               </button>
@@ -384,22 +384,22 @@ export default function Konseling() {
               {/* Tanggal + Petugas */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Tanggal <span className="text-rose-500">*</span></label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Tanggal <span className="text-rose-500">*</span></label>
                   <input
                     type="date"
                     value={draft.tanggal}
                     onChange={e => setDraft(d => ({ ...d, tanggal: e.target.value }))}
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Petugas Konseling <span className="text-rose-500">*</span></label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Petugas Konseling <span className="text-rose-500">*</span></label>
                   <input
                     type="text"
                     value={draft.petugas}
                     onChange={e => setDraft(d => ({ ...d, petugas: e.target.value }))}
                     placeholder="Nama apoteker"
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
               </div>
@@ -407,52 +407,52 @@ export default function Konseling() {
               {/* Pasien */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">Nama Pasien <span className="text-rose-500">*</span></label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Nama Pasien <span className="text-rose-500">*</span></label>
                   <input
                     type="text"
                     value={draft.patient_name}
                     onChange={e => setDraft(d => ({ ...d, patient_name: e.target.value }))}
                     placeholder="Nama lengkap pasien"
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1">No. Telepon</label>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">No. Telepon</label>
                   <input
                     type="tel"
                     value={draft.patient_phone || ''}
                     onChange={e => setDraft(d => ({ ...d, patient_phone: e.target.value }))}
                     placeholder="08xx-xxxx-xxxx"
-                    className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   />
                 </div>
               </div>
 
               {/* No Resep + Obat */}
               <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1">No. Resep (opsional)</label>
+                <label className="block text-xs font-semibold text-gray-500 mb-1">No. Resep (opsional)</label>
                 <input
                   type="text"
                   value={draft.prescription_number || ''}
                   onChange={e => setDraft(d => ({ ...d, prescription_number: e.target.value }))}
                   placeholder="Mis: RX/2026/03/0001"
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1">Obat yang Dikonseling <span className="text-rose-500">*</span></label>
+                <label className="block text-xs font-semibold text-gray-500 mb-1">Obat yang Dikonseling <span className="text-rose-500">*</span></label>
                 <input
                   type="text"
                   value={draft.medicines}
                   onChange={e => setDraft(d => ({ ...d, medicines: e.target.value }))}
                   placeholder="Mis: Amoxicillin 500mg, Paracetamol 500mg"
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
 
               {/* Informasi */}
               <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1">
+                <label className="block text-xs font-semibold text-gray-500 mb-1">
                   Informasi yang Disampaikan <span className="text-rose-500">*</span>
                 </label>
                 <div className="flex flex-wrap gap-1.5 mb-2">
@@ -464,7 +464,7 @@ export default function Konseling() {
                         ...d,
                         informasi: d.informasi ? d.informasi + '\n' + tmpl : tmpl
                       }))}
-                      className="text-[11px] bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-lg hover:bg-blue-100 transition-colors"
+                      className="text-[11px] bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-2 py-1 rounded-lg hover:bg-indigo-100 transition-colors"
                     >
                       + {tmpl}
                     </button>
@@ -475,35 +475,35 @@ export default function Konseling() {
                   onChange={e => setDraft(d => ({ ...d, informasi: e.target.value }))}
                   placeholder="Informasi yang disampaikan kepada pasien..."
                   rows={4}
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
                 />
               </div>
 
               {/* Catatan */}
               <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1">Catatan Tambahan</label>
+                <label className="block text-xs font-semibold text-gray-500 mb-1">Catatan Tambahan</label>
                 <textarea
                   value={draft.catatan || ''}
                   onChange={e => setDraft(d => ({ ...d, catatan: e.target.value }))}
                   placeholder="Catatan lain yang relevan (opsional)..."
                   rows={2}
-                  className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
                 />
               </div>
             </div>
 
             {/* Footer */}
-            <div className="p-5 border-t border-slate-100 dark:border-slate-800 flex gap-3 shrink-0">
+            <div className="p-5 border-t border-gray-100 dark:border-zinc-800 flex gap-3 shrink-0">
               <button
                 onClick={() => setShowForm(false)}
-                className="flex-1 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                className="flex-1 py-2.5 rounded-xl border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-300 text-sm font-semibold hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors"
               >
                 Batal
               </button>
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold transition-colors disabled:opacity-60"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors disabled:opacity-60"
               >
                 <FloppyDisk weight="bold" className="w-4 h-4" />
                 {saving ? 'Menyimpan...' : 'Simpan Catatan'}

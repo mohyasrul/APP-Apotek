@@ -67,36 +67,36 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm shadow-2xl">
-      <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-        <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-800">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm shadow-2xl">
+      <div className="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+        <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-zinc-800">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-emerald-500 rounded-2xl shadow-lg shadow-emerald-500/20">
+            <div className="p-2.5 bg-emerald-500 rounded-xl shadow-lg shadow-emerald-500/20">
               <HandCoins weight="fill" className="text-white w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-lg text-slate-800 dark:text-slate-100">Catat Pembayaran</h3>
-              <p className="text-xs text-slate-500">Bayar hutang faktur ke suplier</p>
+              <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100">Catat Pembayaran</h3>
+              <p className="text-xs text-gray-500">Bayar hutang faktur ke suplier</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+          <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
             <X weight="bold" className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Invoice Info */}
-          <div className="bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 space-y-2">
+          <div className="bg-gray-50 dark:bg-zinc-800 p-4 rounded-xl border border-gray-100 dark:border-zinc-700 space-y-2">
             <div className="flex justify-between items-center text-xs">
-              <span className="text-slate-400 uppercase font-bold tracking-wider">Nomor Faktur</span>
-              <span className="font-mono font-bold text-slate-700 dark:text-slate-200">{invoice.invoice_number}</span>
+              <span className="text-gray-400 uppercase font-bold tracking-wider">Nomor Faktur</span>
+              <span className="font-mono font-bold text-gray-700 dark:text-gray-200">{invoice.invoice_number}</span>
             </div>
             <div className="flex justify-between items-center text-xs">
-              <span className="text-slate-400 uppercase font-bold tracking-wider">Suplier</span>
-              <span className="font-bold text-slate-700 dark:text-slate-200">{invoice.suppliers?.name}</span>
+              <span className="text-gray-400 uppercase font-bold tracking-wider">Suplier</span>
+              <span className="font-bold text-gray-700 dark:text-gray-200">{invoice.suppliers?.name}</span>
             </div>
-            <div className="pt-2 mt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between items-center">
-              <span className="text-sm font-bold text-slate-600 dark:text-slate-300">Sisa Hutang:</span>
+            <div className="pt-2 mt-2 border-t border-gray-200 dark:border-zinc-700 flex justify-between items-center">
+              <span className="text-sm font-bold text-gray-600 dark:text-gray-300">Sisa Hutang:</span>
               <span className="text-lg font-black text-rose-500">{formatRupiah(remaining)}</span>
             </div>
           </div>
@@ -104,18 +104,18 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
           <div className="space-y-4">
             {/* Amount */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-2">
+              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">
                 Jumlah Bayar (Rp) *
               </label>
               <div className="relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 font-black text-slate-300">Rp</div>
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 font-black text-gray-300">Rp</div>
                 <input
                   required
                   type="number"
                   placeholder="0"
                   value={form.amount}
                   onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                  className="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 focus:border-emerald-500 rounded-2xl text-lg font-black outline-none transition-all dark:text-slate-100"
+                  className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-zinc-800 border-2 border-gray-200 dark:border-zinc-700 focus:border-emerald-500 rounded-xl text-lg font-black outline-none transition-all dark:text-gray-100"
                 />
               </div>
             </div>
@@ -123,27 +123,27 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
             {/* Date & Method */}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-2">Tgl Bayar *</label>
+                <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">Tgl Bayar *</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                   <input
                     required
                     type="date"
                     value={form.payment_date}
                     onChange={(e) => setForm({ ...form, payment_date: e.target.value })}
-                    className="w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20"
+                    className="w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-2">Metode *</label>
+                <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">Metode *</label>
                 <div className="relative">
-                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                   <select
                     required
                     value={form.payment_method}
                     onChange={(e) => setForm({ ...form, payment_method: e.target.value })}
-                    className="w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20"
+                    className="w-full pl-9 pr-3 py-2.5 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20"
                   >
                     <option value="transfer">Transfer</option>
                     <option value="cash">Tunai</option>
@@ -155,17 +155,17 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
 
             {/* Notes */}
             <div>
-              <label className="block text-sm font-bold text-slate-700 dark:text-slate-200 mb-2">Catatan</label>
+              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-2">Catatan</label>
               <textarea
                 rows={2}
                 value={form.notes}
                 onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"
+                className="w-full px-4 py-3 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"
                 placeholder="Misal: Bukti transfer terlampir..."
               />
             </div>
 
-            <div className="flex items-center gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-blue-600 dark:text-blue-400 text-xs leading-relaxed">
+            <div className="flex items-center gap-2 p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl text-indigo-600 dark:text-indigo-400 text-xs leading-relaxed">
               <Info weight="fill" className="shrink-0 w-4 h-4" />
               <p>Pembayaran akan otomatis mengurangi sisa hutang pada faktur ini dan memperbarui statusnya.</p>
             </div>
@@ -175,14 +175,14 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-6 py-3 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-2xl text-sm font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+              className="flex-1 px-6 py-3 border border-gray-200 dark:border-zinc-700 text-gray-600 dark:text-gray-300 rounded-xl text-sm font-bold hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl text-sm font-bold shadow-lg shadow-emerald-500/30 disabled:opacity-50 transition-all active:scale-95 flex items-center justify-center gap-2"
+              className="flex-1 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-emerald-500/30 disabled:opacity-50 transition-all active:scale-95 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

@@ -50,26 +50,26 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 font-sans p-4">
-      <div className="bg-white max-w-md w-full p-8 rounded-[24px] shadow-soft border border-slate-100 flex flex-col items-center">
-        <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white transform rotate-45 mb-8 shadow-lg shadow-blue-500/30">
-          <Cross weight="bold" className="w-8 h-8 -rotate-45" />
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 font-sans p-4">
+      <div className="bg-white max-w-md w-full p-8 rounded-[24px] shadow-soft border border-gray-100 flex flex-col items-center">
+        <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white mb-6">
+          <Cross weight="bold" className="w-6 h-6" />
         </div>
 
-        <h1 className="text-2xl font-bold text-slate-800 mb-2">Reset Password</h1>
-        <p className="text-slate-500 text-center mb-6 text-sm">
+        <h1 className="text-xl font-semibold text-gray-900 mb-2">Reset Password</h1>
+        <p className="text-gray-500 text-center mb-6 text-sm">
           Masukkan password baru Anda di bawah.
         </p>
 
         {done ? (
           <div className="text-center">
-            <CheckCircle weight="fill" className="w-12 h-12 text-green-500 mx-auto mb-3" />
-            <p className="font-semibold text-slate-800 mb-1">Password berhasil direset!</p>
-            <p className="text-sm text-slate-500">Anda akan diarahkan ke dashboard dalam beberapa detik...</p>
+            <CheckCircle weight="fill" className="w-12 h-12 text-emerald-600 mx-auto mb-3" />
+            <p className="font-semibold text-gray-900 mb-1">Password berhasil direset!</p>
+            <p className="text-sm text-gray-500">Anda akan diarahkan ke dashboard dalam beberapa detik...</p>
           </div>
         ) : !sessionReady ? (
-          <div className="text-center text-slate-500 text-sm">
-            <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <div className="text-center text-gray-500 text-sm">
+            <div className="w-8 h-8 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
             Memverifikasi link reset...
           </div>
         ) : (
@@ -81,33 +81,33 @@ export default function ResetPassword() {
             )}
 
             <div className="relative">
-              <LockKey className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+              <LockKey className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 required
                 type="password"
                 placeholder="Password Baru (Min. 6 Karakter)"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
               />
             </div>
 
             <div className="relative">
-              <LockKey className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+              <LockKey className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 required
                 type="password"
                 placeholder="Konfirmasi Password Baru"
                 value={confirm}
                 onChange={e => setConfirm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)] disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-xl transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)] disabled:opacity-50"
             >
               {loading ? 'Menyimpan...' : 'Simpan Password Baru'}
             </button>

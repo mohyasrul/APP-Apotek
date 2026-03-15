@@ -48,11 +48,11 @@ export function CustomerAutocomplete({ effectiveUserId, customerName, customerPh
 
   return (
     <div className="space-y-3">
-      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-        Data Pelanggan <span className="text-slate-400 normal-case font-normal">(opsional)</span>
+      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+        Data Pelanggan <span className="text-gray-400 normal-case font-normal">(opsional)</span>
       </p>
       <div className="relative">
-        <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+        <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
         <input
           type="text"
           value={query}
@@ -63,15 +63,15 @@ export function CustomerAutocomplete({ effectiveUserId, customerName, customerPh
           onFocus={() => { if (results.length > 0) setShowDropdown(true); }}
           onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
           placeholder="Cari atau ketik nama pelanggan..."
-          className="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+          className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
         />
         {showDropdown && results.length > 0 && (
-          <div className="absolute z-50 top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden">
+          <div className="absolute z-50 top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
             {results.map(c => (
               <button
                 key={c.id}
                 type="button"
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-blue-50 transition-colors text-sm"
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-indigo-50 transition-colors text-sm"
                 onMouseDown={(e) => {
                   e.preventDefault();
                   setQuery(c.name);
@@ -79,12 +79,12 @@ export function CustomerAutocomplete({ effectiveUserId, customerName, customerPh
                   setShowDropdown(false);
                 }}
               >
-                <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                  <User weight="bold" className="w-3.5 h-3.5 text-blue-600" />
+                <div className="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
+                  <User weight="bold" className="w-3.5 h-3.5 text-indigo-600" />
                 </div>
                 <div>
-                  <div className="font-semibold text-slate-800">{c.name}</div>
-                  {c.phone && <div className="text-xs text-slate-400">{c.phone}</div>}
+                  <div className="font-semibold text-gray-900">{c.name}</div>
+                  {c.phone && <div className="text-xs text-gray-400">{c.phone}</div>}
                 </div>
               </button>
             ))}
@@ -96,7 +96,7 @@ export function CustomerAutocomplete({ effectiveUserId, customerName, customerPh
         value={customerPhone}
         onChange={e => onSelectCustomer(query, e.target.value)}
         placeholder="No. HP pelanggan (untuk kirim WA)"
-        className="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+        className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
       />
     </div>
   );

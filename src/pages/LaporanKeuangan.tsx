@@ -182,12 +182,12 @@ export default function LaporanKeuangan() {
       <div className="flex-1 p-6 lg:p-8 max-w-[1600px] mx-auto w-full flex items-center justify-center">
         <div className="text-center max-w-sm">
           <CurrencyCircleDollar weight="fill" className="w-16 h-16 text-blue-200 mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Laporan Keuangan</h2>
-          <p className="text-slate-500 dark:text-slate-400 mb-4 text-sm">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Laporan Keuangan</h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-4 text-sm">
             Fitur laporan keuangan lengkap dengan grafik P&L dan analisis hutang dagang
             tersedia di plan <b>Starter</b> ke atas.
           </p>
-          <Link to="/billing" className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors">
+          <Link to="/billing" className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors">
             Upgrade Sekarang
           </Link>
         </div>
@@ -208,25 +208,25 @@ export default function LaporanKeuangan() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-800 dark:text-slate-100 flex items-center gap-2">
-            <CurrencyCircleDollar weight="fill" className="w-8 h-8 text-blue-500" />
+          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <CurrencyCircleDollar weight="fill" className="w-8 h-8 text-indigo-600" />
             Laporan Keuangan
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1 text-sm">
+          <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
             Laba rugi, hutang dagang, dan rekap pembelian per bulan
           </p>
         </div>
         <div className="flex items-center gap-3">
           {/* Period Filter */}
-          <div className="flex bg-slate-100 dark:bg-slate-800 rounded-xl p-1 gap-1">
+          <div className="flex bg-gray-100 dark:bg-zinc-800 rounded-xl p-1 gap-1">
             {(['1m', '3m', '6m', '12m'] as PeriodFilter[]).map(p => (
               <button
                 key={p}
                 onClick={() => setPeriod(p)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
                   period === p
-                    ? 'bg-white dark:bg-slate-700 text-blue-600 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-700 dark:text-slate-400'
+                    ? 'bg-white dark:bg-zinc-700 text-indigo-600 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400'
                 }`}
               >
                 {p === '1m' ? '1 Bln' : p === '3m' ? '3 Bln' : p === '6m' ? '6 Bln' : '12 Bln'}
@@ -243,41 +243,41 @@ export default function LaporanKeuangan() {
       </div>
 
       {loading ? (
-        <div className="py-12 text-center text-slate-400">
-          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <div className="py-12 text-center text-gray-400">
+          <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
           Memuat laporan keuangan...
         </div>
       ) : (
         <>
           {/* KPI Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-800">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Total Omset</p>
-              <p className="text-xl font-bold text-slate-800 dark:text-slate-100">{formatRupiah(totalOmset)}</p>
-              <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
+            <div className="bg-white dark:bg-zinc-900 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-zinc-800">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Total Omset</p>
+              <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(totalOmset)}</p>
+              <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
                 <TrendUp className="w-3.5 h-3.5 text-emerald-500" />
                 {monthlyData.length} bulan
               </p>
             </div>
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-800">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Total HPP</p>
-              <p className="text-xl font-bold text-slate-800 dark:text-slate-100">{formatRupiah(totalHPP)}</p>
-              <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
+            <div className="bg-white dark:bg-zinc-900 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-zinc-800">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Total HPP</p>
+              <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(totalHPP)}</p>
+              <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
                 <TrendDown className="w-3.5 h-3.5 text-rose-500" />
                 Harga Pokok Penjualan
               </p>
             </div>
-            <div className={`rounded-2xl p-5 shadow-sm border ${totalLabaKotor >= 0 ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-100 dark:border-emerald-800' : 'bg-rose-50 dark:bg-rose-900/20 border-rose-100 dark:border-rose-800'}`}>
+            <div className={`rounded-xl p-5 shadow-sm border ${totalLabaKotor >= 0 ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-100 dark:border-emerald-800' : 'bg-rose-50 dark:bg-rose-900/20 border-rose-100 dark:border-rose-800'}`}>
               <p className={`text-xs font-semibold uppercase tracking-wide mb-1 ${totalLabaKotor >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600'}`}>Laba Kotor</p>
-              <p className={`text-xl font-bold ${totalLabaKotor >= 0 ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700'}`}>{formatRupiah(totalLabaKotor)}</p>
+              <p className={`text-lg font-semibold ${totalLabaKotor >= 0 ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700'}`}>{formatRupiah(totalLabaKotor)}</p>
               <p className={`text-xs mt-1 font-semibold ${totalLabaKotor >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                 Margin {marginPct.toFixed(1)}%
               </p>
             </div>
-            <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-800">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Pembelian PBF</p>
-              <p className="text-xl font-bold text-slate-800 dark:text-slate-100">{formatRupiah(totalPembelian)}</p>
-              <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
+            <div className="bg-white dark:bg-zinc-900 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-zinc-800">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Pembelian PBF</p>
+              <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(totalPembelian)}</p>
+              <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
                 <Receipt className="w-3.5 h-3.5" />
                 SP diterima
               </p>
@@ -285,9 +285,9 @@ export default function LaporanKeuangan() {
           </div>
 
           {/* Chart */}
-          <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 mb-8">
-            <h2 className="font-bold text-slate-700 dark:text-slate-200 mb-4 flex items-center gap-2">
-              <ChartLine weight="fill" className="w-5 h-5 text-blue-500" />
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800 mb-8">
+            <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center gap-2">
+              <ChartLine weight="fill" className="w-5 h-5 text-indigo-600" />
               Grafik Laba Rugi per Bulan
             </h2>
             <ResponsiveContainer width="100%" height={280}>
@@ -304,14 +304,14 @@ export default function LaporanKeuangan() {
           </div>
 
           {/* Monthly Table */}
-          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 mb-8 overflow-hidden">
-            <div className="p-5 border-b border-slate-100 dark:border-slate-800">
-              <h2 className="font-bold text-slate-700 dark:text-slate-200">Rincian per Bulan</h2>
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-sm border border-gray-100 dark:border-zinc-800 mb-8 overflow-hidden">
+            <div className="p-5 border-b border-gray-100 dark:border-zinc-800">
+              <h2 className="font-bold text-gray-700 dark:text-gray-200">Rincian per Bulan</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                  <tr className="bg-gray-50 dark:bg-zinc-800 text-xs font-semibold text-gray-500 uppercase tracking-wide">
                     <th className="px-5 py-3 text-left">Bulan</th>
                     <th className="px-5 py-3 text-right">Omset</th>
                     <th className="px-5 py-3 text-right">HPP</th>
@@ -320,16 +320,16 @@ export default function LaporanKeuangan() {
                     <th className="px-5 py-3 text-right">Pembelian PBF</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
+                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
                   {monthlyData.map((m) => {
                     const margin = m.omset > 0 ? (m.labaKotor / m.omset) * 100 : 0;
                     return (
-                      <tr key={m.month} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                        <td className="px-5 py-3 font-medium text-slate-700 dark:text-slate-200 flex items-center gap-2">
-                          <CalendarBlank className="w-4 h-4 text-slate-400" />
+                      <tr key={m.month} className="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors">
+                        <td className="px-5 py-3 font-medium text-gray-700 dark:text-gray-200 flex items-center gap-2">
+                          <CalendarBlank className="w-4 h-4 text-gray-400" />
                           {m.month}
                         </td>
-                        <td className="px-5 py-3 text-right font-medium text-slate-700 dark:text-slate-200">{formatRupiah(m.omset)}</td>
+                        <td className="px-5 py-3 text-right font-medium text-gray-700 dark:text-gray-200">{formatRupiah(m.omset)}</td>
                         <td className="px-5 py-3 text-right text-rose-600 dark:text-rose-400">{formatRupiah(m.hpp)}</td>
                         <td className={`px-5 py-3 text-right font-semibold ${m.labaKotor >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                           {formatRupiah(m.labaKotor)}
@@ -337,19 +337,19 @@ export default function LaporanKeuangan() {
                         <td className={`px-5 py-3 text-right text-sm font-semibold ${margin >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                           {margin.toFixed(1)}%
                         </td>
-                        <td className="px-5 py-3 text-right text-slate-500 dark:text-slate-400">{formatRupiah(m.pembelian)}</td>
+                        <td className="px-5 py-3 text-right text-gray-500 dark:text-gray-400">{formatRupiah(m.pembelian)}</td>
                       </tr>
                     );
                   })}
                 </tbody>
                 <tfoot>
-                  <tr className="bg-slate-50 dark:bg-slate-800 font-bold">
-                    <td className="px-5 py-3 text-slate-700 dark:text-slate-200">TOTAL</td>
-                    <td className="px-5 py-3 text-right text-blue-600">{formatRupiah(totalOmset)}</td>
+                  <tr className="bg-gray-50 dark:bg-zinc-800 font-bold">
+                    <td className="px-5 py-3 text-gray-700 dark:text-gray-200">TOTAL</td>
+                    <td className="px-5 py-3 text-right text-indigo-600">{formatRupiah(totalOmset)}</td>
                     <td className="px-5 py-3 text-right text-rose-600">{formatRupiah(totalHPP)}</td>
                     <td className={`px-5 py-3 text-right ${totalLabaKotor >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>{formatRupiah(totalLabaKotor)}</td>
                     <td className={`px-5 py-3 text-right ${marginPct >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>{marginPct.toFixed(1)}%</td>
-                    <td className="px-5 py-3 text-right text-slate-600 dark:text-slate-300">{formatRupiah(totalPembelian)}</td>
+                    <td className="px-5 py-3 text-right text-gray-600 dark:text-gray-300">{formatRupiah(totalPembelian)}</td>
                   </tr>
                 </tfoot>
               </table>
@@ -358,27 +358,27 @@ export default function LaporanKeuangan() {
 
           {/* AP Summary */}
           {apSummary && (
-            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 mb-8">
-              <h2 className="font-bold text-slate-700 dark:text-slate-200 mb-4 flex items-center gap-2">
+            <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800 mb-8">
+              <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center gap-2">
                 <Receipt weight="fill" className="w-5 h-5 text-amber-500" />
                 Hutang Dagang (Account Payable / PBF)
               </h2>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="text-center bg-slate-50 dark:bg-slate-800 rounded-2xl p-4">
-                  <p className="text-xs text-slate-500 mb-1">Total Hutang</p>
-                  <p className="text-lg font-bold text-slate-800 dark:text-slate-100">{formatRupiah(apSummary.total_hutang)}</p>
+                <div className="text-center bg-gray-50 dark:bg-zinc-800 rounded-xl p-4">
+                  <p className="text-xs text-gray-500 mb-1">Total Hutang</p>
+                  <p className="text-base font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(apSummary.total_hutang)}</p>
                 </div>
-                <div className="text-center bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl p-4">
+                <div className="text-center bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-4">
                   <p className="text-xs text-emerald-600 mb-1">Sudah Lunas</p>
-                  <p className="text-lg font-bold text-emerald-700 dark:text-emerald-300">{formatRupiah(apSummary.total_lunas)}</p>
+                  <p className="text-base font-semibold text-emerald-700 dark:text-emerald-300">{formatRupiah(apSummary.total_lunas)}</p>
                 </div>
-                <div className={`text-center rounded-2xl p-4 ${apSummary.outstanding > 0 ? 'bg-rose-50 dark:bg-rose-900/20' : 'bg-emerald-50 dark:bg-emerald-900/20'}`}>
+                <div className={`text-center rounded-xl p-4 ${apSummary.outstanding > 0 ? 'bg-rose-50 dark:bg-rose-900/20' : 'bg-emerald-50 dark:bg-emerald-900/20'}`}>
                   <p className={`text-xs mb-1 ${apSummary.outstanding > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>Belum Lunas</p>
-                  <p className={`text-lg font-bold ${apSummary.outstanding > 0 ? 'text-rose-700 dark:text-rose-300' : 'text-emerald-700 dark:text-emerald-300'}`}>{formatRupiah(apSummary.outstanding)}</p>
+                  <p className={`text-base font-semibold ${apSummary.outstanding > 0 ? 'text-rose-700 dark:text-rose-300' : 'text-emerald-700 dark:text-emerald-300'}`}>{formatRupiah(apSummary.outstanding)}</p>
                 </div>
-                <div className={`text-center rounded-2xl p-4 ${apSummary.overdue_count > 0 ? 'bg-amber-50 dark:bg-amber-900/20' : 'bg-slate-50 dark:bg-slate-800'}`}>
-                  <p className={`text-xs mb-1 ${apSummary.overdue_count > 0 ? 'text-amber-600' : 'text-slate-500'}`}>Jatuh Tempo Lewat</p>
-                  <p className={`text-lg font-bold ${apSummary.overdue_count > 0 ? 'text-amber-700 dark:text-amber-300' : 'text-slate-700 dark:text-slate-200'}`}>{apSummary.overdue_count} Faktur</p>
+                <div className={`text-center rounded-xl p-4 ${apSummary.overdue_count > 0 ? 'bg-amber-50 dark:bg-amber-900/20' : 'bg-gray-50 dark:bg-zinc-800'}`}>
+                  <p className={`text-xs mb-1 ${apSummary.overdue_count > 0 ? 'text-amber-600' : 'text-gray-500'}`}>Jatuh Tempo Lewat</p>
+                  <p className={`text-base font-semibold ${apSummary.overdue_count > 0 ? 'text-amber-700 dark:text-amber-300' : 'text-gray-700 dark:text-gray-200'}`}>{apSummary.overdue_count} Faktur</p>
                 </div>
               </div>
               {apSummary.overdue_count > 0 && (
@@ -391,7 +391,7 @@ export default function LaporanKeuangan() {
           )}
 
           {/* Disclaimer */}
-          <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 text-xs text-slate-500 dark:text-slate-400">
+          <div className="bg-gray-50 dark:bg-zinc-800/50 border border-gray-200 dark:border-zinc-700 rounded-xl p-4 text-xs text-gray-500 dark:text-gray-400">
             <span className="font-semibold">Catatan:</span> Laporan ini merupakan <b>laporan internal</b> berdasarkan data transaksi di MediSir.
             Untuk laporan pajak resmi, silakan konsultasikan dengan akuntan atau konsultan pajak Anda.
             HPP dihitung berdasarkan harga beli saat pembelian dicatat.

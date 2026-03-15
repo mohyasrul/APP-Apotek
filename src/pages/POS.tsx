@@ -550,11 +550,11 @@ export default function POS() {
   }, [medicines, handleAddToCart, setSearchQuery]);
 
   return (
-    <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 overflow-hidden">
+    <div className="font-sans text-gray-900 dark:text-gray-100 antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-zinc-950 overflow-hidden">
       <main className="flex-1 flex flex-col lg:flex-row h-[calc(100vh-80px)] overflow-hidden">
         {checkingShift ? (
-          <div className="w-full h-full flex items-center justify-center flex-col gap-4 text-slate-400">
-             <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-full h-full flex items-center justify-center flex-col gap-4 text-gray-400">
+             <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
              <p className="text-sm">Memeriksa status shift...</p>
           </div>
         ) : !activeShiftId ? (
@@ -618,7 +618,7 @@ export default function POS() {
       {cart.length > 0 && (
         <button
           onClick={() => setShowMobileCart(true)}
-          className="lg:hidden fixed bottom-20 right-4 z-50 bg-blue-500 text-white p-4 rounded-2xl shadow-lg shadow-blue-500/30 flex items-center gap-2"
+          className="lg:hidden fixed bottom-20 right-4 z-50 bg-indigo-600 text-white p-4 rounded-xl shadow-lg shadow-indigo-500/30 flex items-center gap-2"
         >
           <ShoppingCart weight="fill" className="w-6 h-6" />
           <span className="font-bold text-lg">{cart.length}</span>
@@ -689,9 +689,9 @@ export default function POS() {
 
       {/* Keyboard Shortcut Help Overlay */}
       {showShortcutHelp && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm" onClick={() => setShowShortcutHelp(false)}>
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
-            <h3 className="font-bold text-lg text-slate-800 dark:text-slate-100 mb-4">⌨️ Keyboard Shortcuts</h3>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-zinc-900/60 backdrop-blur-sm" onClick={() => setShowShortcutHelp(false)}>
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl p-6 w-full max-w-sm" onClick={e => e.stopPropagation()}>
+            <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-4">⌨️ Keyboard Shortcuts</h3>
             <div className="space-y-2 text-sm">
               {[
                 { key: 'F2', desc: 'Cari obat / fokus pencarian' },
@@ -701,15 +701,15 @@ export default function POS() {
                 { key: 'Esc', desc: 'Tutup modal / batal' },
                 { key: '?', desc: 'Tampilkan bantuan ini' },
               ].map(s => (
-                <div key={s.key} className="flex items-center justify-between py-1.5 border-b border-slate-100 dark:border-slate-800 last:border-0">
-                  <span className="text-slate-600 dark:text-slate-300">{s.desc}</span>
-                  <kbd className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-2 py-0.5 rounded text-xs font-mono font-bold">{s.key}</kbd>
+                <div key={s.key} className="flex items-center justify-between py-1.5 border-b border-gray-100 dark:border-zinc-800 last:border-0">
+                  <span className="text-gray-600 dark:text-gray-300">{s.desc}</span>
+                  <kbd className="bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-200 px-2 py-0.5 rounded text-xs font-mono font-bold">{s.key}</kbd>
                 </div>
               ))}
             </div>
             <button
               onClick={() => setShowShortcutHelp(false)}
-              className="mt-4 w-full bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 py-2 rounded-xl text-sm font-medium transition-colors"
+              className="mt-4 w-full bg-gray-100 hover:bg-zinc-200 text-gray-700 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-gray-200 py-2 rounded-xl text-sm font-medium transition-colors"
             >
               Tutup
             </button>

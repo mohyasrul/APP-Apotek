@@ -108,16 +108,16 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 font-sans p-4">
-      <div className="bg-white dark:bg-slate-900 max-w-md w-full p-8 rounded-2xl shadow-e2 border border-slate-100 dark:border-slate-800 flex flex-col items-center">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950 font-sans p-4">
+      <div className="bg-white dark:bg-zinc-900 max-w-md w-full p-8 rounded-xl shadow-e2 border border-gray-100 dark:border-zinc-800 flex flex-col items-center">
         {/* Logo */}
-        <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white transform rotate-45 mb-8 shadow-lg shadow-blue-500/30">
-          <Cross weight="bold" className="w-8 h-8 -rotate-45" />
+        <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center text-white mb-6">
+          <Cross weight="bold" className="w-6 h-6" />
         </div>
         
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">Selamat Datang di MediSir</h1>
-        <p className="text-slate-500 dark:text-slate-400 text-center mb-6 text-sm">
-          Aplikasi kasir dan manajemen stok apotek yang simpel dan mudah digunakan.
+        <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">Selamat Datang di MediSir</h1>
+        <p className="text-gray-500 dark:text-gray-400 text-center mb-6 text-sm">
+          Sistem manajemen apotek terintegrasi
         </p>
 
         {errorMsg && (
@@ -135,7 +135,7 @@ export default function Login() {
         <form onSubmit={handleAuth} className="w-full">
           <div className="mb-4 relative">
             <label htmlFor="login-email" className="sr-only">Email</label>
-            <EnvelopeSimple className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+            <EnvelopeSimple className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input 
               id="login-email"
               required
@@ -143,13 +143,13 @@ export default function Login() {
               placeholder="Email" 
               value={email}
               onChange={e => setEmail(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 transition-all"
+              className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 focus-visible:ring-2 focus-visible:ring-indigo-500 transition-all"
             />
           </div>
           
           <div className="mb-6 relative">
             <label htmlFor="login-password" className="sr-only">Password</label>
-            <LockKey className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
+            <LockKey className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input 
               id="login-password"
               required
@@ -157,7 +157,7 @@ export default function Login() {
               placeholder="Password (Min. 6 Karakter)" 
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-blue-500 transition-all"
+              className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 focus-visible:ring-2 focus-visible:ring-indigo-500 transition-all"
             />
           </div>
 
@@ -166,7 +166,7 @@ export default function Login() {
               <button
                 type="button"
                 onClick={() => { setShowForgotModal(true); setForgotEmail(email); setForgotSent(false); }}
-                className="text-xs text-blue-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded"
+                className="text-xs text-indigo-600 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded"
               >
                 Lupa Password?
               </button>
@@ -180,15 +180,15 @@ export default function Login() {
                 id="agree-terms"
                 checked={agreedToTerms}
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded border-slate-300 dark:border-slate-600 text-blue-500 focus:ring-blue-500/20"
+                className="mt-0.5 w-4 h-4 rounded border-gray-300 dark:border-zinc-600 text-indigo-600 focus:ring-indigo-500/20"
               />
-              <label htmlFor="agree-terms" className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              <label htmlFor="agree-terms" className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                 Saya menyetujui{' '}
-                <Link to="/syarat-ketentuan" className="text-blue-500 hover:underline font-semibold" target="_blank">
+                <Link to="/syarat-ketentuan" className="text-indigo-600 hover:underline font-semibold" target="_blank">
                   Syarat dan Ketentuan
                 </Link>{' '}
                 dan{' '}
-                <Link to="/kebijakan-privasi" className="text-blue-500 hover:underline font-semibold" target="_blank">
+                <Link to="/kebijakan-privasi" className="text-indigo-600 hover:underline font-semibold" target="_blank">
                   Kebijakan Privasi
                 </Link>{' '}
                 MediSir, termasuk pemrosesan data pribadi sesuai UU PDP.
@@ -199,12 +199,12 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading || (isSignUp && !agreedToTerms)}
-            className="w-full py-3 bg-blue-500 text-white rounded-xl font-semibold text-sm hover:bg-blue-600 active:bg-blue-700 transition-all disabled:opacity-60 mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+            className="w-full py-2.5 bg-indigo-600 text-white rounded-lg font-medium text-sm hover:bg-indigo-700 active:bg-indigo-800 transition-all disabled:opacity-40 mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 shadow-sm"
           >
             {loading ? 'Memproses...' : isSignUp ? 'Daftar' : 'Masuk'}
           </button>
 
-          <p className="text-center text-sm text-slate-600 dark:text-slate-400">
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400">
           {isSignUp ? "Sudah punya akun? " : "Belum punya akun? "}
           <button 
             type="button"
@@ -213,7 +213,7 @@ export default function Login() {
               setErrorMsg('');
               setSuccessMsg('');
             }}
-            className="text-blue-500 font-semibold hover:underline"
+            className="text-indigo-600 font-semibold hover:underline"
           >
             {isSignUp ? "Masuk di sini" : "Daftar di sini"}
           </button>
@@ -221,16 +221,16 @@ export default function Login() {
         </form>
 
         {isSignUp && (
-          <p className="mt-3 text-xs text-slate-400 dark:text-slate-500 text-center">
-            Akun baru otomatis menjadi <span className="font-semibold text-slate-500 dark:text-slate-400">Owner</span>.
-            Jika Anda kasir, gunakan <span className="font-semibold text-slate-500 dark:text-slate-400">link undangan</span> dari pemilik apotek.
+          <p className="mt-3 text-xs text-gray-400 dark:text-gray-500 text-center">
+            Akun baru otomatis menjadi <span className="font-semibold text-gray-500 dark:text-gray-400">Owner</span>.
+            Jika Anda kasir, gunakan <span className="font-semibold text-gray-500 dark:text-gray-400">link undangan</span> dari pemilik apotek.
           </p>
         )}
 
-        <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-center gap-3 text-xs text-slate-400 dark:text-slate-500">
-          <Link to="/kebijakan-privasi" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Kebijakan Privasi</Link>
+        <div className="mt-6 pt-4 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-center gap-3 text-xs text-gray-400 dark:text-gray-500">
+          <Link to="/kebijakan-privasi" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Kebijakan Privasi</Link>
           <span>·</span>
-          <Link to="/syarat-ketentuan" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Syarat & Ketentuan</Link>
+          <Link to="/syarat-ketentuan" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors">Syarat & Ketentuan</Link>
         </div>
 
       </div>
@@ -238,36 +238,36 @@ export default function Login() {
     {/* Forgot Password Modal */}
     {showForgotModal && (
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-        <div role="dialog" aria-modal="true" aria-labelledby="forgot-pw-title" className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-sm p-6 border border-slate-100 dark:border-slate-800">
+        <div role="dialog" aria-modal="true" aria-labelledby="forgot-pw-title" className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-sm p-6 border border-gray-100 dark:border-zinc-800">
           <div className="flex items-center justify-between mb-4">
-            <h2 id="forgot-pw-title" className="text-lg font-bold text-slate-800 dark:text-slate-100">Reset Password</h2>
-            <button onClick={() => setShowForgotModal(false)} className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" aria-label="Tutup modal">
-              <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
+            <h2 id="forgot-pw-title" className="text-base font-semibold text-gray-900 dark:text-gray-100">Reset Password</h2>
+            <button onClick={() => setShowForgotModal(false)} className="p-1.5 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg" aria-label="Tutup modal">
+              <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
             </button>
           </div>
 
           {forgotSent ? (
             <div className="text-center py-4">
-              <div className="w-12 h-12 bg-green-100 dark:bg-green-950 rounded-full flex items-center justify-center mx-auto mb-3">
-                <EnvelopeSimple weight="fill" className="w-6 h-6 text-green-600 dark:text-green-400" />
+              <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-950 rounded-full flex items-center justify-center mx-auto mb-3">
+                <EnvelopeSimple weight="fill" className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
               </div>
-              <p className="font-semibold text-slate-800 dark:text-slate-100 mb-1">Email Terkirim!</p>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
+              <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1">Email Terkirim!</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                 Cek inbox <strong>{forgotEmail}</strong> untuk link reset password.
               </p>
               <button
                 onClick={() => setShowForgotModal(false)}
-                className="px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-xl hover:bg-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-xl hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
               >
                 Tutup
               </button>
             </div>
           ) : (
             <form onSubmit={handleForgotPassword} className="space-y-4">
-              <p className="text-sm text-slate-500 dark:text-slate-400">Masukkan email Anda. Kami akan mengirimkan link untuk reset password.</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Masukkan email Anda. Kami akan mengirimkan link untuk reset password.</p>
               <div className="relative">
                 <label htmlFor="forgot-email" className="sr-only">Email</label>
-                <EnvelopeSimple className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+                <EnvelopeSimple className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   id="forgot-email"
                   type="email"
@@ -276,13 +276,13 @@ export default function Login() {
                   value={forgotEmail}
                   onChange={e => setForgotEmail(e.target.value)}
                   placeholder="email@domain.com"
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                  className="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
                 />
               </div>
               <button
                 type="submit"
                 disabled={forgotLoading}
-                className="w-full py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl text-sm transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-sm transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
               >
                 {forgotLoading ? 'Mengirim...' : 'Kirim Link Reset'}
               </button>

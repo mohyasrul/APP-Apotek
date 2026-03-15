@@ -5,23 +5,23 @@ export default function KebijakanPrivasi() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-3xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 mb-6 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Kembali
         </button>
 
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">Kebijakan Privasi</h1>
-          <p className="text-sm text-slate-400 mb-6">Terakhir diperbarui: Maret 2026</p>
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 sm:p-8">
+          <h1 className="text-xl font-semibold text-gray-900 mb-2">Kebijakan Privasi</h1>
+          <p className="text-sm text-gray-400 mb-6">Terakhir diperbarui: Maret 2026</p>
 
-          <div className="prose prose-slate prose-sm max-w-none space-y-6 text-sm text-slate-600 leading-relaxed">
+          <div className="prose prose-gray prose-sm max-w-none space-y-6 text-sm text-gray-600 leading-relaxed">
             <section>
-              <h2 className="text-lg font-bold text-slate-800 mt-0">1. Pendahuluan</h2>
+              <h2 className="text-base font-semibold text-gray-900 mt-0">1. Pendahuluan</h2>
               <p>
                 MediSir (&quot;kami&quot;, &quot;milik kami&quot;) berkomitmen untuk melindungi privasi dan data pribadi Anda
                 sesuai dengan Undang-Undang Nomor 27 Tahun 2022 tentang Perlindungan Data Pribadi (UU PDP) Republik Indonesia.
@@ -31,7 +31,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">2. Data yang Kami Kumpulkan</h2>
+              <h2 className="text-base font-semibold text-gray-900">2. Data yang Kami Kumpulkan</h2>
               <p>Kami mengumpulkan jenis data berikut:</p>
               <ul className="list-disc pl-5 space-y-1">
                 <li><strong>Data Identitas:</strong> Nama lengkap, alamat email, nomor telepon.</li>
@@ -44,7 +44,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">3. Tujuan Penggunaan Data</h2>
+              <h2 className="text-base font-semibold text-gray-900">3. Tujuan Penggunaan Data</h2>
               <p>Data Anda digunakan untuk:</p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Menyediakan dan mengelola layanan manajemen apotek.</li>
@@ -57,7 +57,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">4. Dasar Hukum Pemrosesan Data</h2>
+              <h2 className="text-base font-semibold text-gray-900">4. Dasar Hukum Pemrosesan Data</h2>
               <p>
                 Kami memproses data pribadi Anda berdasarkan persetujuan yang Anda berikan saat mendaftar dan menggunakan
                 layanan kami, serta untuk pemenuhan kontrak layanan, sesuai dengan Pasal 20 UU PDP.
@@ -65,7 +65,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">5. Penyimpanan dan Keamanan Data</h2>
+              <h2 className="text-base font-semibold text-gray-900">5. Penyimpanan dan Keamanan Data</h2>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Data disimpan di server yang terenkripsi dan dilindungi dengan standar keamanan industri.</li>
                 <li>Akses ke data dibatasi hanya untuk personel yang berwenang.</li>
@@ -75,7 +75,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">6. Hak Anda Sebagai Subjek Data</h2>
+              <h2 className="text-base font-semibold text-gray-900">6. Hak Anda Sebagai Subjek Data</h2>
               <p>Sesuai UU PDP, Anda memiliki hak untuk:</p>
               <ul className="list-disc pl-5 space-y-1">
                 <li><strong>Hak Akses:</strong> Meminta salinan data pribadi Anda yang kami simpan.</li>
@@ -91,7 +91,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">7. Berbagi Data dengan Pihak Ketiga</h2>
+              <h2 className="text-base font-semibold text-gray-900">7. Berbagi Data dengan Pihak Ketiga</h2>
               <p>
                 Kami tidak menjual data pribadi Anda. Data hanya dibagikan kepada pihak ketiga dalam kondisi berikut:
               </p>
@@ -103,7 +103,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">8. Cookie dan Teknologi Pelacakan</h2>
+              <h2 className="text-base font-semibold text-gray-900">8. Cookie dan Teknologi Pelacakan</h2>
               <p>
                 Kami menggunakan cookie dan teknologi serupa untuk menjaga sesi login, preferensi pengguna,
                 dan meningkatkan pengalaman penggunaan. Anda dapat mengatur preferensi cookie melalui pengaturan browser Anda.
@@ -111,7 +111,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">9. Notifikasi Pelanggaran Data</h2>
+              <h2 className="text-base font-semibold text-gray-900">9. Notifikasi Pelanggaran Data</h2>
               <p>
                 Sesuai UU PDP, apabila terjadi pelanggaran data yang mempengaruhi data pribadi Anda, kami akan
                 memberitahukan kepada Anda dan otoritas terkait dalam waktu paling lambat 3 x 24 jam sejak
@@ -120,7 +120,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">10. Perubahan Kebijakan Privasi</h2>
+              <h2 className="text-base font-semibold text-gray-900">10. Perubahan Kebijakan Privasi</h2>
               <p>
                 Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Perubahan material akan
                 diberitahukan melalui email atau notifikasi dalam aplikasi. Penggunaan layanan setelah perubahan
@@ -129,7 +129,7 @@ export default function KebijakanPrivasi() {
             </section>
 
             <section>
-              <h2 className="text-lg font-bold text-slate-800">11. Hubungi Kami</h2>
+              <h2 className="text-base font-semibold text-gray-900">11. Hubungi Kami</h2>
               <p>
                 Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini atau ingin menggunakan hak-hak Anda
                 terkait data pribadi, silakan hubungi kami melalui email di halaman kontak atau melalui fitur

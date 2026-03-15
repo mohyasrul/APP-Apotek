@@ -526,33 +526,33 @@ export default function Medicines() {
       alkes: "bg-cyan-50 text-cyan-700",
       vitamin: "bg-amber-50 text-amber-700",
     };
-    return map[cat] || "bg-slate-100 text-slate-600";
+    return map[cat] || "bg-gray-100 text-gray-600";
   };
 
   return (
-    <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 pb-20 lg:pb-0">
+    <div className="font-sans text-gray-900 dark:text-gray-100 antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-zinc-950 pb-20 lg:pb-0">
 
       <main className="flex-1 p-6 lg:p-8 max-w-[1400px] mx-auto w-full">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1">Manajemen Stok Obat</h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">{totalCount} obat terdaftar</p>
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">Manajemen Stok Obat</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{totalCount} obat terdaftar</p>
           </div>
           <div className="flex items-center gap-3">
             {profile?.role === 'owner' && (
-              <label className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer shadow-sm">
+              <label className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 cursor-pointer shadow-sm">
                 <UploadSimple weight="bold" className="w-4 h-4" /> Import CSV
                 <input type="file" accept=".csv" className="hidden" onChange={handleCSVFile} />
               </label>
             )}
             <button onClick={handleExportCSV}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm">
+              className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 shadow-sm">
               <DownloadSimple weight="bold" className="w-4 h-4" /> Export CSV
             </button>
             {profile?.role === 'owner' && (
               <button onClick={openAddForm}
-                className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-[0_4px_12px_rgba(59,130,246,0.3)]">
+                className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-[0_4px_12px_rgba(59,130,246,0.3)]">
                 <Plus weight="bold" className="w-4 h-4" /> Tambah Obat
               </button>
             )}
@@ -562,19 +562,19 @@ export default function Medicines() {
         {/* Search + Filter */}
         <div className="flex flex-wrap gap-3 mb-6 items-center">
           <div className="relative flex-1 min-w-[200px] max-w-md">
-            <MagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 dark:text-slate-500" />
+            <MagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
             <input
               type="text"
               placeholder="Cari nama obat atau barcode..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 shadow-sm"
+              className="w-full pl-12 pr-4 py-3 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 shadow-sm"
             />
           </div>
           <select
             value={categoryFilter}
             onChange={e => { setCategoryFilter(e.target.value); setPage(0); }}
-            className="px-3 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 shadow-sm text-slate-700"
+            className="px-3 py-3 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 shadow-sm text-gray-700"
           >
             <option value="all">Semua Kategori</option>
             <option value="bebas">Bebas</option>
@@ -586,7 +586,7 @@ export default function Medicines() {
           <select
             value={sortBy}
             onChange={e => { setSortBy(e.target.value as typeof sortBy); setPage(0); }}
-            className="px-3 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 shadow-sm text-slate-700"
+            className="px-3 py-3 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 shadow-sm text-gray-700"
           >
             <option value="name_asc">Nama A-Z</option>
             <option value="stock_asc">Stok Terendah</option>
@@ -595,11 +595,11 @@ export default function Medicines() {
         </div>
 
         {/* Table */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs border-b border-slate-100 dark:border-slate-700 uppercase">
+                <tr className="bg-gray-50 dark:bg-zinc-800 text-gray-500 dark:text-gray-400 text-xs border-b border-gray-100 dark:border-zinc-700 uppercase">
                   <th className="px-5 py-3.5 font-semibold">Nama Obat</th>
                   <th className="px-5 py-3.5 font-semibold">Kategori</th>
                   <th className="px-5 py-3.5 font-semibold">Satuan</th>
@@ -614,15 +614,15 @@ export default function Medicines() {
               <tbody className="text-sm">
                 {loading ? (
                   Array.from({ length: 5 }).map((_, i) => (
-                    <tr key={i} className="border-b border-slate-50 dark:border-slate-800">
+                    <tr key={i} className="border-b border-gray-50 dark:border-zinc-800">
                       {Array.from({ length: 8 }).map((_, j) => (
-                        <td key={j} className="px-5 py-4"><div className="h-4 bg-slate-100 dark:bg-slate-800 rounded animate-pulse" style={{ width: j % 3 === 0 ? '70%' : j % 3 === 1 ? '50%' : '40%' }} /></td>
+                        <td key={j} className="px-5 py-4"><div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded animate-pulse" style={{ width: j % 3 === 0 ? '70%' : j % 3 === 1 ? '50%' : '40%' }} /></td>
                       ))}
                     </tr>
                   ))
                 ) : medicines.length === 0 ? (
-                  <tr><td colSpan={8} className="px-5 py-8 text-center text-slate-500 dark:text-slate-400">
-                    <Package className="w-10 h-10 text-slate-200 dark:text-slate-700 mx-auto mb-2" />
+                  <tr><td colSpan={8} className="px-5 py-8 text-center text-gray-500 dark:text-gray-400">
+                    <Package className="w-10 h-10 text-gray-200 dark:text-gray-700 mx-auto mb-2" />
                     <p>Belum ada data obat.</p>
                   </td></tr>
                 ) : (
@@ -630,35 +630,35 @@ export default function Medicines() {
                     const expiryStatus = getExpiryStatus(med.expiry_date);
                     const isCriticalStock = med.stock < (med.min_stock || 5);
                     return (
-                      <tr key={med.id} className="border-b border-slate-50 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800 transition-colors">
+                      <tr key={med.id} className="border-b border-gray-50 dark:border-zinc-800 hover:bg-gray-50/50 dark:hover:bg-zinc-800 transition-colors">
                         <td className="px-5 py-4">
                           <div>
-                            <span className="font-semibold text-slate-800 dark:text-slate-100">{med.name}</span>
-                            {med.barcode && <p className="text-[11px] text-slate-400 dark:text-slate-500 font-mono">{med.barcode}</p>}
-                            {med.batch_number && <p className="text-[11px] text-slate-400 dark:text-slate-500">Batch: {med.batch_number}</p>}
+                            <span className="font-semibold text-gray-900 dark:text-gray-100">{med.name}</span>
+                            {med.barcode && <p className="text-[11px] text-gray-400 dark:text-gray-500 font-mono">{med.barcode}</p>}
+                            {med.batch_number && <p className="text-[11px] text-gray-400 dark:text-gray-500">Batch: {med.batch_number}</p>}
                           </div>
                         </td>
                         <td className="px-5 py-4">
                           <span className={`inline-flex px-2 py-0.5 text-[10px] font-semibold rounded-md uppercase ${getCategoryBadge(med.category)}`}>{med.category || 'Umum'}</span>
                         </td>
-                        <td className="px-5 py-4 text-slate-600 dark:text-slate-300 capitalize">{med.unit || 'tablet'}</td>
-                        <td className="px-5 py-4 text-slate-500 dark:text-slate-400 text-xs">{med.supplier || <span className="text-slate-300 dark:text-slate-600">—</span>}</td>
-                        <td className="px-5 py-4 text-slate-600 dark:text-slate-300">{formatRupiah(med.buy_price)}</td>
-                        <td className="px-5 py-4 font-semibold text-slate-800 dark:text-slate-100">{formatRupiah(med.sell_price)}</td>
+                        <td className="px-5 py-4 text-gray-600 dark:text-gray-300 capitalize">{med.unit || 'tablet'}</td>
+                        <td className="px-5 py-4 text-gray-500 dark:text-gray-400 text-xs">{med.supplier || <span className="text-gray-300 dark:text-gray-600">—</span>}</td>
+                        <td className="px-5 py-4 text-gray-600 dark:text-gray-300">{formatRupiah(med.buy_price)}</td>
+                        <td className="px-5 py-4 font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(med.sell_price)}</td>
                         <td className="px-5 py-4">
-                          <span className={`font-semibold ${isCriticalStock ? 'text-rose-600' : 'text-slate-800'}`}>
+                          <span className={`font-semibold ${isCriticalStock ? 'text-rose-600' : 'text-gray-900'}`}>
                             {med.stock}
                           </span>
                           {isCriticalStock && <Warning weight="fill" className="inline w-3.5 h-3.5 text-rose-500 ml-1" />}
                           {med.min_stock != null && (
-                            <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">min: {med.min_stock}</p>
+                            <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5">min: {med.min_stock}</p>
                           )}
                         </td>
                         <td className="px-5 py-4">
                           <span className={`text-xs font-semibold px-2 py-0.5 rounded-md ${
                             expiryStatus === 'expired' ? 'bg-rose-50 text-rose-600' :
                             expiryStatus === 'near-expiry' ? 'bg-amber-50 text-amber-600' :
-                            'text-slate-600'
+                            'text-gray-600'
                           }`}>
                             {new Date(med.expiry_date).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })}
                             {expiryStatus === 'expired' && ' (EXPIRED)'}
@@ -667,29 +667,29 @@ export default function Medicines() {
                         <td className="px-5 py-4 text-right">
                           <div className="flex items-center justify-end gap-1">
                             <button onClick={() => setRestockTarget(med)} title="Restock"
-                              className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
+                              className="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
                               <ArrowsClockwise weight="bold" className="w-4 h-4" />
                             </button>
                             <button onClick={() => openStockCard(med)} title="Riwayat Stok"
-                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                              className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
                               <ClockCounterClockwise weight="bold" className="w-4 h-4" />
                             </button>
                             {profile?.role === 'owner' && (
                               <>
                                 <button onClick={() => setBatchTarget(med)} title="Kelola Batch/Lot"
-                                  className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                                  className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
                                   <Archive weight="bold" className="w-4 h-4" />
                                 </button>
                                 <button onClick={() => openAlternatives(med)} title="Obat Alternatif"
-                                  className="p-2 text-slate-400 hover:text-violet-600 hover:bg-violet-50 rounded-lg transition-colors">
+                                  className="p-2 text-gray-400 hover:text-violet-600 hover:bg-violet-50 rounded-lg transition-colors">
                                   <ArrowsLeftRight weight="bold" className="w-4 h-4" />
                                 </button>
                                 <button onClick={() => openEditForm(med)} title="Edit"
-                                  className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                                  className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
                                   <PencilSimple weight="bold" className="w-4 h-4" />
                                 </button>
                                 <button onClick={() => setDeleteTarget(med)} title="Hapus"
-                                  className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
+                                  className="p-2 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
                                   <TrashSimple weight="bold" className="w-4 h-4" />
                                 </button>
                               </>
@@ -706,13 +706,13 @@ export default function Medicines() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-between px-5 py-4 border-t border-slate-100 dark:border-slate-800">
-              <span className="text-sm text-slate-500 dark:text-slate-400">Halaman {page + 1} dari {totalPages} ({totalCount} obat)</span>
+            <div className="flex items-center justify-between px-5 py-4 border-t border-gray-100 dark:border-zinc-800">
+              <span className="text-sm text-gray-500 dark:text-gray-400">Halaman {page + 1} dari {totalPages} ({totalCount} obat)</span>
               <div className="flex items-center gap-2">
                 <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
-                  className="p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed"><CaretLeft weight="bold" className="w-4 h-4 text-slate-600 dark:text-slate-300" /></button>
+                  className="p-2 rounded-lg border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 disabled:opacity-40 disabled:cursor-not-allowed"><CaretLeft weight="bold" className="w-4 h-4 text-gray-600 dark:text-gray-300" /></button>
                 <button onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1}
-                  className="p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed"><CaretRight weight="bold" className="w-4 h-4 text-slate-600 dark:text-slate-300" /></button>
+                  className="p-2 rounded-lg border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 disabled:opacity-40 disabled:cursor-not-allowed"><CaretRight weight="bold" className="w-4 h-4 text-gray-600 dark:text-gray-300" /></button>
               </div>
             </div>
           )}
@@ -721,24 +721,24 @@ export default function Medicines() {
 
       {/* ADD/EDIT FORM MODAL */}
       {showForm && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm" onClick={() => setShowForm(false)}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm" onClick={() => setShowForm(false)}
           role="dialog" aria-modal="true" aria-label={editingId ? 'Edit Obat' : 'Tambah Obat'}>
-          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between flex-shrink-0">
-              <h3 className="font-bold text-lg text-slate-800 dark:text-slate-100">{editingId ? 'Edit Obat' : 'Tambah Obat Baru'}</h3>
-              <button onClick={() => setShowForm(false)} className="p-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"><X weight="bold" className="w-5 h-5" /></button>
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+            <div className="px-6 py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between flex-shrink-0">
+              <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100">{editingId ? 'Edit Obat' : 'Tambah Obat Baru'}</h3>
+              <button onClick={() => setShowForm(false)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full"><X weight="bold" className="w-5 h-5" /></button>
             </div>
             <form onSubmit={handleSave} className="p-6 space-y-4 overflow-y-auto custom-scrollbar">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Nama Obat *</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Nama Obat *</label>
                 <input required type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" />
+                  className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Kategori</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Kategori</label>
                   <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
                     <option value="bebas">Bebas</option>
                     <option value="keras">Keras</option>
                     <option value="resep">Resep</option>
@@ -747,63 +747,63 @@ export default function Medicines() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Satuan</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Satuan</label>
                   <select value={form.unit} onChange={(e) => setForm({ ...form, unit: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
                     {UNIT_OPTIONS.map(u => <option key={u.value} value={u.value}>{u.label}</option>)}
                   </select>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Barcode</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Barcode</label>
                   <input type="text" value={form.barcode} onChange={(e) => setForm({ ...form, barcode: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20" placeholder="Opsional" />
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20" placeholder="Opsional" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">No. Batch</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">No. Batch</label>
                   <input type="text" value={form.batch_number} onChange={(e) => setForm({ ...form, batch_number: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20" placeholder="Opsional" />
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20" placeholder="Opsional" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Harga Beli (Rp) *</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Harga Beli (Rp) *</label>
                   <input required type="number" min="1" value={form.buy_price} onChange={(e) => setForm({ ...form, buy_price: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Harga Jual (Rp) *</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Harga Jual (Rp) *</label>
                   <input required type="number" min="1" value={form.sell_price} onChange={(e) => setForm({ ...form, sell_price: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20" />
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Stok *</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Stok *</label>
                   <input required type="number" min="0" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Min Stok</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Min Stok</label>
                   <input type="number" min="0" value={form.min_stock} onChange={(e) => setForm({ ...form, min_stock: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Kadaluwarsa *</label>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Kadaluwarsa *</label>
                   <input required type="date" value={form.expiry_date} onChange={(e) => setForm({ ...form, expiry_date: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+                    className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Supplier</label>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Supplier</label>
                 <input type="text" value={form.supplier} onChange={(e) => setForm({ ...form, supplier: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20" placeholder="Opsional" />
+                  className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20" placeholder="Opsional" />
               </div>
               <div className="flex items-center gap-3 pt-2">
-                <button type="button" onClick={() => setShowForm(false)} className="flex-1 px-4 py-3 text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700">Batal</button>
+                <button type="button" onClick={() => setShowForm(false)} className="flex-1 px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-700">Batal</button>
                 <button type="submit" disabled={saving}
-                  className="flex-1 px-4 py-3 text-sm font-semibold text-white bg-blue-500 rounded-xl hover:bg-blue-600 shadow-sm disabled:opacity-50">
+                  className="flex-1 px-4 py-3 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 shadow-sm disabled:opacity-50">
                   {saving ? 'Menyimpan...' : editingId ? 'Simpan Perubahan' : 'Tambah Obat'}
                 </button>
               </div>
@@ -814,18 +814,18 @@ export default function Medicines() {
 
       {/* DELETE CONFIRMATION MODAL */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm"
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm"
           role="dialog" aria-modal="true" aria-label="Konfirmasi Hapus Obat">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-sm p-6 animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-sm p-6 animate-in fade-in zoom-in-95 duration-200">
             <div className="text-center mb-6">
-              <div className="w-14 h-14 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mx-auto mb-4"><TrashSimple weight="fill" className="w-7 h-7" /></div>
-              <h3 className="font-bold text-lg text-slate-800 dark:text-slate-100 mb-1">Hapus Obat?</h3>
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                <span className="font-semibold text-slate-700 dark:text-slate-200">{deleteTarget.name}</span> akan dihapus permanen dan tidak bisa dikembalikan.
+              <div className="w-14 h-14 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center mx-auto mb-4"><TrashSimple weight="fill" className="w-7 h-7" /></div>
+              <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-1">Hapus Obat?</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                <span className="font-semibold text-gray-700 dark:text-gray-200">{deleteTarget.name}</span> akan dihapus permanen dan tidak bisa dikembalikan.
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <button onClick={() => setDeleteTarget(null)} className="flex-1 px-4 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700">Batal</button>
+              <button onClick={() => setDeleteTarget(null)} className="flex-1 px-4 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-700">Batal</button>
               <button onClick={handleDelete} disabled={deleting}
                 className="flex-1 px-4 py-2.5 text-sm font-semibold text-white bg-rose-500 rounded-xl hover:bg-rose-600 disabled:opacity-50">
                 {deleting ? 'Menghapus...' : 'Hapus Permanen'}
@@ -837,27 +837,27 @@ export default function Medicines() {
 
       {/* RESTOCK MODAL */}
       {restockTarget && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm" onClick={() => setRestockTarget(null)}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm" onClick={() => setRestockTarget(null)}
           role="dialog" aria-modal="true" aria-label="Restock Obat">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-sm p-6 animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
-            <h3 className="font-bold text-lg text-slate-800 dark:text-slate-100 mb-1 flex items-center gap-2">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-sm p-6 animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+            <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-1 flex items-center gap-2">
               <ArrowsClockwise weight="fill" className="w-5 h-5 text-emerald-500" /> Restock
             </h3>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
-              <span className="font-semibold text-slate-700 dark:text-slate-200">{restockTarget.name}</span> — Stok saat ini: <span className="font-bold">{restockTarget.stock} {restockTarget.unit || 'pcs'}</span>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+              <span className="font-semibold text-gray-700 dark:text-gray-200">{restockTarget.name}</span> — Stok saat ini: <span className="font-bold">{restockTarget.stock} {restockTarget.unit || 'pcs'}</span>
             </p>
             <div className="mb-4">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Jumlah Tambah ({restockTarget.unit || 'pcs'})</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Jumlah Tambah ({restockTarget.unit || 'pcs'})</label>
               <input type="number" min="1" value={restockQty} onChange={(e) => setRestockQty(e.target.value)} autoFocus
-                className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500" placeholder="0" />
+                className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500" placeholder="0" />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Catatan (opsional)</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">Catatan (opsional)</label>
               <input type="text" value={restockNotes} onChange={(e) => setRestockNotes(e.target.value)}
-                className="w-full px-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20" placeholder="Contoh: dari PBF Kimia Farma" />
+                className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20" placeholder="Contoh: dari PBF Kimia Farma" />
             </div>
             <div className="flex items-center gap-3">
-              <button onClick={() => setRestockTarget(null)} className="flex-1 px-4 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700">Batal</button>
+              <button onClick={() => setRestockTarget(null)} className="flex-1 px-4 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-700">Batal</button>
               <button onClick={handleRestock} disabled={restocking || !restockQty}
                 className="flex-1 px-4 py-2.5 text-sm font-semibold text-white bg-emerald-500 rounded-xl hover:bg-emerald-600 disabled:opacity-50">
                 {restocking ? 'Memproses...' : 'Tambah Stok'}
@@ -877,43 +877,43 @@ export default function Medicines() {
 
       {/* MEDICINE ALTERNATIVES MODAL */}
       {altTarget && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm"
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm"
           role="dialog" aria-modal="true" aria-labelledby="alt-modal-title"
           onClick={() => setAltTarget(null)}>
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-lg max-h-[82vh] flex flex-col animate-in fade-in zoom-in-95 duration-200"
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-lg max-h-[82vh] flex flex-col animate-in fade-in zoom-in-95 duration-200"
             onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-zinc-800">
               <div>
-                <h3 id="alt-modal-title" className="font-bold text-lg text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                <h3 id="alt-modal-title" className="font-bold text-lg text-gray-900 dark:text-gray-100 flex items-center gap-2">
                   <ArrowsLeftRight weight="fill" className="w-5 h-5 text-violet-500" />
                   Obat Alternatif
                 </h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">untuk: <span className="font-semibold text-slate-700 dark:text-slate-200">{altTarget.name}</span></p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">untuk: <span className="font-semibold text-gray-700 dark:text-gray-200">{altTarget.name}</span></p>
               </div>
-              <button onClick={() => setAltTarget(null)} className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
-                <X className="w-5 h-5 text-slate-400 dark:text-slate-500" />
+              <button onClick={() => setAltTarget(null)} className="p-1.5 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg">
+                <X className="w-5 h-5 text-gray-400 dark:text-gray-500" />
               </button>
             </div>
 
             <div className="overflow-y-auto flex-1 p-5 space-y-4">
               {/* Current alternatives list */}
               {loadingAlts ? (
-                <p className="text-center text-sm text-slate-400 dark:text-slate-500 py-6">Memuat...</p>
+                <p className="text-center text-sm text-gray-400 dark:text-gray-500 py-6">Memuat...</p>
               ) : altList.length === 0 ? (
-                <p className="text-center text-sm text-slate-400 dark:text-slate-500 py-4">Belum ada obat alternatif terdaftar</p>
+                <p className="text-center text-sm text-gray-400 dark:text-gray-500 py-4">Belum ada obat alternatif terdaftar</p>
               ) : (
                 <div className="space-y-2">
                   {altList.map(({ rowId, medicine: alt }) => (
-                    <div key={rowId} className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                    <div key={rowId} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-zinc-800 rounded-xl">
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm text-slate-800 dark:text-slate-100 truncate">{alt.name}</p>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                        <p className="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">{alt.name}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
                           {formatRupiah(alt.sell_price)} · Stok: <span className={alt.stock <= (alt.min_stock || 5) ? 'text-rose-600 font-semibold' : ''}>{alt.stock} {alt.unit}</span>
                         </p>
                       </div>
                       <button
                         onClick={() => handleRemoveAlt(alt.id)}
-                        className="p-1.5 text-slate-300 dark:text-slate-600 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-colors"
+                        className="p-1.5 text-gray-300 dark:text-gray-600 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-colors"
                         title="Hapus alternatif"
                       >
                         <X className="w-4 h-4" />
@@ -926,29 +926,29 @@ export default function Medicines() {
               {/* Add alternative (owner only) */}
               {profile?.role === 'owner' && (
                 <div>
-                  <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Tambah Alternatif</p>
+                  <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Tambah Alternatif</p>
                   <div className="relative">
-                    <MagnifyingGlass weight="bold" className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500" />
+                    <MagnifyingGlass weight="bold" className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
                     <input
                       type="text"
                       value={altSearch}
                       onChange={e => setAltSearch(e.target.value)}
                       placeholder="Cari nama obat..."
-                      className="w-full pl-10 pr-4 py-2.5 border border-slate-200 dark:border-slate-700 rounded-xl text-sm dark:bg-slate-800 dark:text-slate-200 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500"
+                      className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm dark:bg-zinc-800 dark:text-gray-200 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500"
                     />
                   </div>
                   {altSearchResults.length > 0 && (
-                    <div className="mt-2 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                    <div className="mt-2 border border-gray-200 dark:border-zinc-700 rounded-xl overflow-hidden">
                       {altSearchResults.map(med => (
                         <button
                           key={med.id}
                           onClick={() => handleAddAlt(med)}
                           disabled={addingAlt}
-                          className="w-full flex items-center justify-between gap-3 px-4 py-2.5 text-left hover:bg-violet-50 dark:hover:bg-violet-900/20 border-b border-slate-50 dark:border-slate-800 last:border-0 transition-colors disabled:opacity-50"
+                          className="w-full flex items-center justify-between gap-3 px-4 py-2.5 text-left hover:bg-violet-50 dark:hover:bg-violet-900/20 border-b border-gray-50 dark:border-zinc-800 last:border-0 transition-colors disabled:opacity-50"
                         >
                           <div>
-                            <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">{med.name}</p>
-                            <p className="text-xs text-slate-500 dark:text-slate-400">{formatRupiah(med.sell_price)} · Stok: {med.stock} {med.unit}</p>
+                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{med.name}</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">{formatRupiah(med.sell_price)} · Stok: {med.stock} {med.unit}</p>
                           </div>
                           <Plus weight="bold" className="w-4 h-4 text-violet-500 shrink-0" />
                         </button>
@@ -956,14 +956,14 @@ export default function Medicines() {
                     </div>
                   )}
                   {altSearch && altSearchResults.length === 0 && !loadingAlts && (
-                    <p className="text-xs text-slate-400 dark:text-slate-500 mt-2 text-center">Tidak ada obat ditemukan</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-2 text-center">Tidak ada obat ditemukan</p>
                   )}
                 </div>
               )}
             </div>
 
-            <div className="px-6 py-3 border-t border-slate-100 dark:border-slate-800 text-center">
-              <p className="text-xs text-slate-400 dark:text-slate-500">{altList.length} obat alternatif terdaftar · Hubungan bersifat dua arah</p>
+            <div className="px-6 py-3 border-t border-gray-100 dark:border-zinc-800 text-center">
+              <p className="text-xs text-gray-400 dark:text-gray-500">{altList.length} obat alternatif terdaftar · Hubungan bersifat dua arah</p>
             </div>
           </div>
         </div>

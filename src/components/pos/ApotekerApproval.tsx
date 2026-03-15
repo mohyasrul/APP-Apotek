@@ -24,12 +24,12 @@ export function ApotekerApprovalModal({ restrictedItems, onApprove, onCancel, ap
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="approval-title"
     >
-      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-md overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-rose-500 to-rose-600 px-6 py-4 text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -50,7 +50,7 @@ export function ApotekerApprovalModal({ restrictedItems, onApprove, onCancel, ap
         </div>
 
         {/* Content */}
-        <div className="p-6 dark:bg-slate-900">
+        <div className="p-6 dark:bg-zinc-900">
           {/* Warning */}
           <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6">
             <div className="flex items-start gap-3">
@@ -67,18 +67,18 @@ export function ApotekerApprovalModal({ restrictedItems, onApprove, onCancel, ap
 
           {/* List of restricted items */}
           <div className="mb-6">
-            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
               Obat yang memerlukan persetujuan:
             </p>
-            <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-3 space-y-2">
+            <div className="bg-gray-50 dark:bg-zinc-800 rounded-xl p-3 space-y-2">
               {restrictedItems.map(item => (
                 <div key={item.id} className="flex items-center gap-3 text-sm">
                   <div className="w-8 h-8 bg-rose-100 dark:bg-rose-900/30 rounded-lg flex items-center justify-center">
                     <Pill weight="fill" className="w-4 h-4 text-rose-500" />
                   </div>
                   <div className="flex-1">
-                    <p className="font-medium text-slate-800 dark:text-slate-100">{item.name}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Qty: {item.quantity} {item.unit}</p>
+                    <p className="font-medium text-gray-900 dark:text-gray-100">{item.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Qty: {item.quantity} {item.unit}</p>
                   </div>
                 </div>
               ))}
@@ -88,10 +88,10 @@ export function ApotekerApprovalModal({ restrictedItems, onApprove, onCancel, ap
           {/* Apoteker info */}
           {apotekerName && (
             <div className="mb-6">
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
                 Apoteker Penanggung Jawab:
               </p>
-              <p className="text-sm font-medium text-slate-800 dark:text-slate-100">{apotekerName}</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{apotekerName}</p>
             </div>
           )}
 
@@ -101,9 +101,9 @@ export function ApotekerApprovalModal({ restrictedItems, onApprove, onCancel, ap
               type="checkbox"
               checked={confirmed}
               onChange={e => setConfirmed(e.target.checked)}
-              className="w-5 h-5 rounded border-slate-300 dark:border-slate-600 text-rose-500 focus:ring-rose-500 mt-0.5 dark:bg-slate-800"
+              className="w-5 h-5 rounded border-gray-300 dark:border-zinc-600 text-rose-500 focus:ring-rose-500 mt-0.5 dark:bg-zinc-800"
             />
-            <span className="text-sm text-slate-700 dark:text-slate-300">
+            <span className="text-sm text-gray-700 dark:text-gray-300">
               Saya <span className="font-semibold">{apotekerName || 'Apoteker'}</span> menyetujui dispensing
               obat-obatan di atas sesuai dengan resep dokter yang telah divalidasi.
             </span>
@@ -111,10 +111,10 @@ export function ApotekerApprovalModal({ restrictedItems, onApprove, onCancel, ap
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700 flex gap-3">
+        <div className="px-6 py-4 bg-gray-50 dark:bg-zinc-800 border-t border-gray-100 dark:border-zinc-700 flex gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            className="flex-1 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors"
           >
             Batal
           </button>

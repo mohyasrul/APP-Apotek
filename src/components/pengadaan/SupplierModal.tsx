@@ -54,30 +54,30 @@ export function SupplierModal({ supplier, onClose, onSuccess }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800">
-        <div className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
-          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-            <Buildings className="w-5 h-5 text-blue-500" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-xl shadow-xl border border-gray-100 dark:border-zinc-800">
+        <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-zinc-800">
+          <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <Buildings className="w-5 h-5 text-indigo-600" />
             {supplier ? 'Edit PBF' : 'Tambah PBF Baru'}
           </h2>
-          <button onClick={onClose} className="p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+          <button onClick={onClose} className="p-2 text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-4 space-y-4">
           <div>
-            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Nama PBF *</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Nama PBF *</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Buildings className="text-slate-400 w-5 h-5" />
+                <Buildings className="text-gray-400 w-5 h-5" />
               </div>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-800 dark:text-slate-100 text-sm"
+                className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-gray-900 dark:text-gray-100 text-sm"
                 placeholder="PT Pedagang Besar Farmasi"
                 required
                 autoFocus
@@ -86,32 +86,32 @@ export function SupplierModal({ supplier, onClose, onSuccess }: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">No. Telepon / WA</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">No. Telepon / WA</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Phone className="text-slate-400 w-5 h-5" />
+                <Phone className="text-gray-400 w-5 h-5" />
               </div>
               <input
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-800 dark:text-slate-100 text-sm"
+                className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-gray-900 dark:text-gray-100 text-sm"
                 placeholder="0812xxxxxx"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Alamat Lengkap</label>
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Alamat Lengkap</label>
             <div className="relative">
               <div className="absolute top-3 left-0 pl-3 pointer-events-none">
-                <MapPin className="text-slate-400 w-5 h-5" />
+                <MapPin className="text-gray-400 w-5 h-5" />
               </div>
               <textarea
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 rows={3}
-                className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-800 dark:text-slate-100 text-sm resize-none"
+                className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-zinc-950 border border-gray-200 dark:border-zinc-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 text-gray-900 dark:text-gray-100 text-sm resize-none"
                 placeholder="Jl. Raya Farma No. 123..."
               />
             </div>
@@ -121,14 +121,14 @@ export function SupplierModal({ supplier, onClose, onSuccess }: Props) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors"
+              className="px-4 py-2 text-sm font-semibold text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl transition-colors"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95 disabled:opacity-50"
+              className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all active:scale-95 disabled:opacity-50"
             >
               {isSubmitting ? 'Menyimpan...' : 'Simpan PBF'}
             </button>

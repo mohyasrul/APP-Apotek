@@ -26,7 +26,7 @@ export default function Pengadaan() {
 
       <Tabs items={tabItems} value={activeTab} onChange={setActiveTab} className="mb-6" />
 
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800 min-h-[400px]">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 border border-gray-200 dark:border-zinc-800 min-h-[400px]">
         {activeTab === 'surat-pesanan' && <PurchaseOrderList />}
         {activeTab === 'faktur' && <InvoiceList />}
         {activeTab === 'defecta' && <DefectaList />}
