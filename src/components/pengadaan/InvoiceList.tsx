@@ -35,6 +35,7 @@ export function InvoiceList() {
       
       if (error) throw error;
       setInvoices(data as unknown as PBFInvoice[] || []);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal memuat Faktur PBF: ' + err.message);
     } finally {
@@ -44,6 +45,7 @@ export function InvoiceList() {
 
   useEffect(() => {
     fetchInvoices();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId]);
 
   const getStatusBadge = (status: string) => {

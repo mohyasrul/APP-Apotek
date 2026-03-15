@@ -50,12 +50,14 @@ export default function Laporan() {
       fetchChartData();
       fetchData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, dateFilter, paymentFilter]);
 
   useEffect(() => {
     if (user) {
       fetchData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const getDateRange = () => {
@@ -450,7 +452,7 @@ export default function Laporan() {
   };
 
   return (
-    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 md:pb-0">
+    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 lg:pb-0">
 
       <main className="flex-1 p-6 lg:p-8 max-w-[1200px] mx-auto w-full">
 

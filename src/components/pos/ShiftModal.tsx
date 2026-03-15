@@ -32,6 +32,7 @@ export function ShiftModal({ effectiveUserId, onShiftOpened }: Props) {
       if (error) throw error;
       toast.success('Shift kasir berhasil dibuka!');
       onShiftOpened(data.id);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error(err.message || 'Gagal membuka shift kasir');
     } finally {

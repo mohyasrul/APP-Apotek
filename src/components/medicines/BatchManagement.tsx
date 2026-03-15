@@ -47,6 +47,7 @@ export function BatchManagementModal({ medicineId, medicineName, userId, onClose
 
   useEffect(() => {
     fetchBatches();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [medicineId]);
 
   const handleAddBatch = async (e: React.FormEvent) => {

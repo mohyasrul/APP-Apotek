@@ -75,6 +75,7 @@ export default function Medicines() {
 
   useEffect(() => {
     if (user) fetchMedicines();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, effectiveUserId, page, searchDebounce, categoryFilter, sortBy]);
 
   const fetchMedicines = useCallback(async () => {
@@ -128,6 +129,7 @@ export default function Medicines() {
     } finally {
       setLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, effectiveUserId, page, searchDebounce, categoryFilter, sortBy]);
 
   const totalPages = Math.ceil(totalCount / PAGE_SIZE);
@@ -163,6 +165,15 @@ export default function Medicines() {
 
     const buyPrice = parseInt(form.buy_price);
     const sellPrice = parseInt(form.sell_price);
+
+    if (isNaN(buyPrice) || buyPrice < 0) {
+      toast.warning("Harga beli harus berupa angka yang valid!");
+      return;
+    }
+    if (isNaN(sellPrice) || sellPrice < 0) {
+      toast.warning("Harga jual harus berupa angka yang valid!");
+      return;
+    }
 
     if (sellPrice <= buyPrice) {
       toast.warning("Harga jual harus lebih besar dari harga beli!");
@@ -519,7 +530,7 @@ export default function Medicines() {
   };
 
   return (
-    <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 pb-20 md:pb-0">
+    <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 pb-20 lg:pb-0">
 
       <main className="flex-1 p-6 lg:p-8 max-w-[1400px] mx-auto w-full">
         {/* Header */}

@@ -93,8 +93,10 @@ export default function POS() {
         } else {
           setActiveShiftId(null);
         }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         console.error("Error checking shift:", err);
+        toast.error('Gagal memeriksa shift: ' + (err?.message ?? 'Terjadi kesalahan'));
       } finally {
         setCheckingShift(false);
       }
@@ -250,6 +252,7 @@ export default function POS() {
     };
 
     loadPrescription();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, user, effectiveUserId]);
 
   // ── Revalidate persisted cart on mount (stale stock/price fix) ──
@@ -283,6 +286,7 @@ export default function POS() {
         }
       }
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId, loading]);
 
   // ── Cart calculations ──

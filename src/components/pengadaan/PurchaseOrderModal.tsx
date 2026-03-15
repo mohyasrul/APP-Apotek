@@ -6,6 +6,9 @@ import { toast } from 'sonner';
 import { formatRupiah } from '../../lib/types';
 import type { Supplier } from './SupplierList';
 
+// SP types that require an Apoteker (owner) per Permenkes 3/2015
+const RESTRICTED_SP_TYPES = ['narkotika', 'psikotropika', 'prekursor', 'oot'] as const;
+
 type MedicineOption = {
   id: string;
   name: string;
@@ -27,7 +30,7 @@ type Props = {
 };
 
 export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
-  const { effectiveUserId } = useAuth();
+  const { effectiveUserId, profile } = useAuth();
   
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [selectedSupplier, setSelectedSupplier] = useState('');
@@ -60,6 +63,7 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
           .order('name');
         if (medErr) throw medErr;
         setMedicines(medData || []);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         toast.error('Gagal memuat data master: ' + err.message);
       }
@@ -113,6 +117,12 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
     if (!selectedSupplier) return toast.error('Pilih PBF terlebih dahulu');
     if (items.length === 0) return toast.error('Pilih minimal 1 obat untuk dipesan');
 
+    // Regulasi: SP Narkotika/Psikotropika/Prekursor/OOT hanya boleh dibuat oleh Apoteker (owner)
+    if ((RESTRICTED_SP_TYPES as readonly string[]).includes(orderType) && profile?.role !== 'owner') {
+      toast.error('SP ' + orderType.toUpperCase() + ' hanya dapat dibuat oleh Apoteker (Pemilik). Hubungi APJ Anda.');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       // 1. Generate Order Number
@@ -152,6 +162,7 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
 
       toast.success('Surat Pesanan berhasil dibuat');
       onSuccess();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal membuat Surat Pesanan: ' + err.message);
     } finally {

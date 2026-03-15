@@ -164,6 +164,7 @@ export default function Settings() {
     if (activeTab === 'log') {
       fetchAuditLogs();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const fetchAuditLogs = async () => {
@@ -239,45 +240,79 @@ export default function Settings() {
     }
   };
 
+  const settingsTabs = [
+    { id: 'profil' as const, label: 'Profil Apotek', icon: Storefront },
+    ...(profile?.role !== 'cashier' ? [
+      { id: 'tim' as const, label: 'Tim Kasir', icon: Users },
+      { id: 'log' as const, label: 'Log Aktivitas', icon: ClockCounterClockwise },
+    ] : []),
+  ];
+
   return (
-    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 md:pb-0">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-20 lg:pb-0">
+      <div className="flex flex-col lg:flex-row min-h-screen">
 
-      <main className="flex-1 p-6 lg:p-8 max-w-[800px] mx-auto w-full">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-slate-800 mb-1">Pengaturan Apotek</h1>
-          <p className="text-sm text-slate-500">Kelola profil apotek, tim kasir, dan informasi resmi.</p>
-        </div>
+        {/* ── Settings Sidebar (desktop) ── */}
+        <aside className="hidden lg:flex flex-col w-56 xl:w-64 flex-shrink-0 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 p-4 min-h-full">
+          <div className="mb-6">
+            <h1 className="text-lg font-bold text-slate-800 dark:text-slate-100">Pengaturan</h1>
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Apotek &amp; Akun</p>
+          </div>
+          <nav className="space-y-1">
+            {settingsTabs.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left ${
+                  activeTab === tab.id
+                    ? 'bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 font-semibold border-l-2 border-blue-500'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100'
+                }`}
+              >
+                <tab.icon weight={activeTab === tab.id ? 'fill' : 'bold'} className="w-4 h-4 flex-shrink-0" />
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+        </aside>
 
-        {/* Tabs */}
-        <div className="flex gap-1 bg-slate-100 p-1 rounded-xl mb-6 w-fit">
-          <button
-            onClick={() => setActiveTab('profil')}
-            className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all ${activeTab === 'profil' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
-          >
-            Profil Apotek
-          </button>
-          <button
-            onClick={() => setActiveTab('tim')}
-            className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${activeTab === 'tim' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'} ${profile?.role === 'cashier' ? 'hidden' : ''}`}
-          >
-            <Users className="w-4 h-4" />
-            Tim Kasir
-          </button>
-          <button
-            onClick={() => setActiveTab('log')}
-            className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${activeTab === 'log' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'} ${profile?.role === 'cashier' ? 'hidden' : ''}`}
-          >
-            <ClockCounterClockwise className="w-4 h-4" />
-            Log Aktivitas
-          </button>
-        </div>
+        {/* ── Main Content ── */}
+        <main className="flex-1 p-5 lg:p-8 max-w-full lg:max-w-4xl">
+          <div className="mb-5 lg:hidden">
+            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1">Pengaturan Apotek</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400">Kelola profil apotek, tim kasir, dan informasi resmi.</p>
+          </div>
+          <div className="hidden lg:block mb-7">
+            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
+              {settingsTabs.find(t => t.id === activeTab)?.label}
+            </h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+              {activeTab === 'profil' && 'Kelola informasi apotek, lisensi, dan preferensi tampilan.'}
+              {activeTab === 'tim' && 'Undang kasir, kelola anggota tim, dan atur izin akses.'}
+              {activeTab === 'log' && 'Pantau semua aktivitas perubahan data di apotek Anda.'}
+            </p>
+          </div>
+
+          {/* Mobile tab pills */}
+          <div className="flex gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl mb-6 w-fit lg:hidden">
+            {settingsTabs.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg transition-all ${activeTab === tab.id ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'}`}
+              >
+                <tab.icon weight={activeTab === tab.id ? 'fill' : 'bold'} className="w-4 h-4" />
+                {tab.label}
+              </button>
+            ))}
+          </div>
 
         {/* ── TAB: Profil Apotek ── */}
         {activeTab === 'profil' && (
           <form onSubmit={handleSave} className="space-y-6">
           {/* Logo Section */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
               <ImageIcon weight="fill" className="w-5 h-5 text-blue-500" />
               Logo Apotek
             </h2>
@@ -311,8 +346,8 @@ export default function Settings() {
           </div>
 
           {/* Profile Info */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
               <User weight="fill" className="w-5 h-5 text-blue-500" />
               Informasi Profil
             </h2>
@@ -370,8 +405,8 @@ export default function Settings() {
           </div>
 
           {/* Informasi Resmi Apotek */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-1 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1 flex items-center gap-2">
               <IdentificationCard weight="fill" className="w-5 h-5 text-blue-500" />
               Informasi Resmi Apotek
             </h2>
@@ -411,8 +446,8 @@ export default function Settings() {
           </div>
 
           {/* Masa Berlaku Izin */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-1 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-1 flex items-center gap-2">
               <CalendarBlank weight="fill" className="w-5 h-5 text-blue-500" />
               Masa Berlaku Izin
             </h2>
@@ -452,8 +487,8 @@ export default function Settings() {
           </div>
 
           {/* Receipt Settings */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
               <Storefront weight="fill" className="w-5 h-5 text-blue-500" />
               Pengaturan Struk
             </h2>
@@ -475,8 +510,8 @@ export default function Settings() {
           </div>
 
           {/* Receipt Preview */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-            <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
               <Storefront weight="fill" className="w-5 h-5 text-blue-500" />
               Preview Header Struk
             </h2>
@@ -535,9 +570,9 @@ export default function Settings() {
             </div>
 
             {/* Active team members */}
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
                   <Users weight="fill" className="w-5 h-5 text-blue-500" />
                   Kasir Aktif
                 </h2>
@@ -584,7 +619,7 @@ export default function Settings() {
 
             {/* Pending invitations */}
             {invitations.length > 0 && (
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
                 <h2 className="text-base font-bold text-slate-800 mb-4">Undangan Tertunda</h2>
                 <div className="space-y-3">
                   {invitations.map((inv) => (
@@ -601,7 +636,7 @@ export default function Settings() {
                         <button
                           onClick={() => {
                             const link = `${window.location.origin}/join?token=${inv.token}`;
-                            navigator.clipboard.writeText(link).then(() => toast.success('Link disalin'));
+                            navigator.clipboard.writeText(link).then(() => toast.success('Link disalin')).catch(() => toast.error('Gagal menyalin link'));
                           }}
                           className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 text-slate-600 text-xs font-semibold rounded-lg hover:bg-slate-50 transition-colors"
                         >
@@ -653,7 +688,7 @@ export default function Settings() {
               </button>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
               {loadingLogs ? (
                 <div className="py-12 text-center text-slate-400 text-sm">Memuat log aktivitas...</div>
               ) : auditLogs.length === 0 ? (
@@ -701,6 +736,7 @@ export default function Settings() {
           </div>
         )}
       </main>
+      </div>{/* end flex row */}
 
       {/* ── Modal: Undang Kasir ── */}
       {showInviteModal && (
@@ -727,7 +763,7 @@ export default function Settings() {
                   </span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText(`${window.location.origin}/join?token=${inviteResult.token}`).then(() => toast.success('Link disalin'));
+                      navigator.clipboard.writeText(`${window.location.origin}/join?token=${inviteResult.token}`).then(() => toast.success('Link disalin')).catch(() => toast.error('Gagal menyalin link'));
                     }}
                     className="p-1.5 hover:bg-slate-200 rounded-lg transition-colors flex-shrink-0"
                     title="Salin link"
@@ -748,7 +784,7 @@ export default function Settings() {
                   <summary className="cursor-pointer hover:text-slate-600 transition-colors">Kode manual (fallback)</summary>
                   <div className="mt-2 flex items-center gap-2 bg-slate-100 rounded-lg p-2">
                     <span className="flex-1 font-mono font-bold text-slate-700 text-base tracking-widest text-center">{inviteResult.code}</span>
-                    <button onClick={() => navigator.clipboard.writeText(inviteResult.code).then(() => toast.success('Kode disalin'))} className="p-1 hover:bg-slate-200 rounded">
+                    <button onClick={() => navigator.clipboard.writeText(inviteResult.code).then(() => toast.success('Kode disalin')).catch(() => toast.error('Gagal menyalin kode'))} className="p-1 hover:bg-slate-200 rounded">
                       <Copy className="w-3.5 h-3.5 text-slate-500" />
                     </button>
                   </div>

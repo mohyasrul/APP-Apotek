@@ -1,11 +1,14 @@
 import { lazy, Suspense, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { AuthProvider, useAuth } from './lib/AuthContext';
 import { SubscriptionProvider } from './lib/SubscriptionContext';
 import { ThemeProvider } from './lib/ThemeContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { TopNavigation } from './components/layout/TopNavigation';
 import { MobileBottomNav } from './components/layout/MobileBottomNav';
+import { SidebarNav } from './components/layout/SidebarNav';
+import { PageTransition } from './components/layout/PageTransition';
 import { SessionTimeout } from './components/SessionTimeout';
 import { Toaster } from 'sonner';
 import { initOfflineQueue } from './lib/offlineQueue';
@@ -30,6 +33,11 @@ const SyaratKetentuan  = lazy(() => import('./pages/SyaratKetentuan'));
 const Sipnap           = lazy(() => import('./pages/Sipnap'));
 const BukuHarianNarkotika = lazy(() => import('./pages/BukuHarianNarkotika'));
 const PemusnahanObat   = lazy(() => import('./pages/PemusnahanObat'));
+const Konseling        = lazy(() => import('./pages/Konseling'));
+const LaporanKeuangan  = lazy(() => import('./pages/LaporanKeuangan'));
+const Racikan          = lazy(() => import('./pages/Racikan'));
+const Meso             = lazy(() => import('./pages/Meso'));
+const Bantuan          = lazy(() => import('./pages/Bantuan'));
 
 // Fallback loading UI untuk route publik (Login, ResetPassword)
 function PageLoader() {
@@ -55,6 +63,22 @@ function ContentLoader() {
         </div>
         <div className="h-64 bg-slate-200 rounded-xl mt-4" />
       </div>
+    </div>
+  );
+}
+
+function AppLayout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  return (
+    <div className="flex min-h-screen pt-[57px]">
+      <SidebarNav />
+      <main className="flex-1 min-w-0 lg:ml-60 overflow-auto bg-slate-50 dark:bg-slate-950">
+        <AnimatePresence mode="wait" initial={false}>
+          <PageTransition key={location.pathname}>
+            {children}
+          </PageTransition>
+        </AnimatePresence>
+      </main>
     </div>
   );
 }
@@ -93,9 +117,11 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
   return (
     <>
       <TopNavigation />
-      <Suspense fallback={<ContentLoader />}>
-        {children}
-      </Suspense>
+      <AppLayout>
+        <Suspense fallback={<ContentLoader />}>
+          {children}
+        </Suspense>
+      </AppLayout>
       <MobileBottomNav />
     </>
   );
@@ -162,6 +188,11 @@ function App() {
                 <Route path="/sipnap"         element={<ProtectedRoute allowedRoles={['owner']}><Sipnap /></ProtectedRoute>} />
                 <Route path="/buku-harian-narkotika" element={<ProtectedRoute allowedRoles={['owner']}><BukuHarianNarkotika /></ProtectedRoute>} />
                 <Route path="/pemusnahan-obat" element={<ProtectedRoute allowedRoles={['owner']}><PemusnahanObat /></ProtectedRoute>} />
+                <Route path="/konseling"      element={<ProtectedRoute><Konseling /></ProtectedRoute>} />
+                <Route path="/laporan-keuangan" element={<ProtectedRoute allowedRoles={['owner']}><LaporanKeuangan /></ProtectedRoute>} />
+                <Route path="/racikan"        element={<ProtectedRoute><Racikan /></ProtectedRoute>} />
+                <Route path="/meso"           element={<ProtectedRoute><Meso /></ProtectedRoute>} />
+                <Route path="/bantuan"        element={<ProtectedRoute><Bantuan /></ProtectedRoute>} />
                 <Route path="*"               element={<NotFound />} />
               </Routes>
             </Suspense>

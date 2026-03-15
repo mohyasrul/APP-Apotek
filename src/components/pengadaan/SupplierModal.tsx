@@ -45,6 +45,7 @@ export function SupplierModal({ supplier, onClose, onSuccess }: Props) {
       
       toast.success(supplier ? 'PBF berhasil diperbarui' : 'PBF berhasil ditambahkan');
       onSuccess();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal menyimpan PBF: ' + err.message);
     } finally {

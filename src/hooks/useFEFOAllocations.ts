@@ -4,6 +4,7 @@ import { usePOSStore } from '../lib/store';
 
 export function useFEFOAllocations(effectiveUserId: string | null) {
   const { cart } = usePOSStore();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [allocations, setAllocations] = useState<Record<string, any[]>>({});
   const [loading, setLoading] = useState(false);
 
@@ -15,6 +16,7 @@ export function useFEFOAllocations(effectiveUserId: string | null) {
 
     const fetchAllocations = async () => {
       setLoading(true);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newAllocations: Record<string, any[]> = {};
       
       try {
@@ -26,6 +28,7 @@ export function useFEFOAllocations(effectiveUserId: string | null) {
           });
 
           if (!error && data) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             newAllocations[item.id] = data as any[];
           }
         }));

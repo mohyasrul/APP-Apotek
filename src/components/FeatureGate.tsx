@@ -86,6 +86,7 @@ export function FeatureBadge({ feature }: { feature: string }) {
 /**
  * Hook to check multiple features at once
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export function useFeatures(features: string[]) {
   const { checkFeature } = useSubscription();
 

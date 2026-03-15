@@ -105,7 +105,7 @@ export default function Billing() {
   ];
 
   return (
-    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 md:pb-0">
+    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 lg:pb-0">
       <main className="flex-1 p-6 lg:p-8 max-w-[1200px] mx-auto w-full">
         {/* Header */}
         <div className="mb-8">

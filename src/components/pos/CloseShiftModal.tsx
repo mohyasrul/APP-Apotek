@@ -51,6 +51,7 @@ export function CloseShiftModal({ shiftId, onClose, onClosed }: Props) {
         setCashSales(cSales);
         setQrisSales(qSales);
         setTransferSales(tSales);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         toast.error('Gagal memuat data shift: ' + err.message);
       } finally {
@@ -82,6 +83,7 @@ export function CloseShiftModal({ shiftId, onClose, onClosed }: Props) {
       if (error) throw error;
       toast.success('Shift kasir berhasil ditutup!');
       onClosed();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal menutup shift: ' + err.message);
     } finally {

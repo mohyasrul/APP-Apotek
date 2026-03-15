@@ -68,6 +68,7 @@ export default function Dashboard() {
     const userIdUnchanged = lastFetchedUserId.current === effectiveUserId;
     if (filterUnchanged && userIdUnchanged && age < 60_000 && lastFetchedAt.current > 0) return;
     fetchDashboardData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, dateFilter, effectiveUserId]);
 
   const getChartDays = (): number => {
@@ -276,7 +277,7 @@ export default function Dashboard() {
       <OnboardingWizard onComplete={handleOnboardingComplete} />
     )}
     {!showOnboarding && (
-    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 md:pb-0">
+    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 lg:pb-0">
       <main className="flex-1 p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">

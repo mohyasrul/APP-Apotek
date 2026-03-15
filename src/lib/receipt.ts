@@ -455,3 +455,151 @@ export function printApograph(data: ApographData): void {
   iframe.contentWindow?.print();
   setTimeout(removeIframe, 60_000);
 }
+
+// ============================================================
+// Etiket Obat (Medicine Label) - multi-label sesuai PMK 73/2016
+// PMK 73/2016: setiap obat yang diserahkan wajib diberi etiket
+// Berbeda dari printEtiket (POS struk), ini mendukung beberapa
+// label sekaligus dengan data pasien dan jenis obat yang lengkap
+// ============================================================
+
+export type EtiketItem = {
+  medicineName: string;
+  signa: string;           // Aturan pakai, mis: "3 x sehari 1 tablet sesudah makan"
+  quantity: number;
+  unit: string;
+  patientName: string;
+  patientAge?: number | null;
+  prescriptionDate: string;
+  prescriptionNumber?: string;
+  /** 'oral' (putih) | 'topikal' (biru) | 'injeksi' (kuning) */
+  jenis: 'oral' | 'topikal' | 'injeksi';
+  notes?: string;          // Catatan tambahan, mis: "Kocok dulu sebelum digunakan"
+  pharmacyName: string;
+  pharmacyAddress?: string;
+  pharmacyPhone?: string;
+  apotekerName?: string;
+};
+
+function generateEtiketObatHTML(items: EtiketItem[]): string {
+  const colorMap: Record<string, { bg: string; border: string; label: string }> = {
+    oral:     { bg: '#fff',    border: '#334155', label: 'OBAT DALAM' },
+    topikal:  { bg: '#eff6ff', border: '#1d4ed8', label: 'OBAT LUAR' },
+    injeksi:  { bg: '#fefce8', border: '#ca8a04', label: 'INJEKSI' },
+  };
+
+  const labelsHTML = items.map((item) => {
+    const safe = (s?: string | null) => escapeHtml(s || '');
+    const colors = colorMap[item.jenis] || colorMap['oral'];
+    const tanggal = item.prescriptionDate
+      ? new Date(item.prescriptionDate).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+      : '-';
+
+    return `
+    <div class="label" style="background:${colors.bg}; border-color:${colors.border};">
+      <div class="label-header" style="border-bottom-color:${colors.border};">
+        <div class="pharmacy-name">${safe(item.pharmacyName)}</div>
+        ${item.pharmacyAddress ? `<div class="pharmacy-sub">${safe(item.pharmacyAddress)}</div>` : ''}
+        ${item.pharmacyPhone ? `<div class="pharmacy-sub">Telp: ${safe(item.pharmacyPhone)}</div>` : ''}
+      </div>
+      <div class="label-body">
+        <div class="jenis-badge" style="color:${colors.border};">${colors.label}</div>
+        <div class="medicine-name">${safe(item.medicineName)}</div>
+        <div class="qty">Jumlah: <b>${item.quantity} ${safe(item.unit)}</b></div>
+        <div class="signa">${safe(item.signa)}</div>
+        ${item.notes ? `<div class="notes">${safe(item.notes)}</div>` : ''}
+      </div>
+      <div class="label-footer">
+        <div class="patient">
+          <span class="label-key">Pasien:</span>
+          <b>${safe(item.patientName)}</b>${item.patientAge ? ` (${item.patientAge} th)` : ''}
+        </div>
+        <div class="meta">
+          <span>${tanggal}</span>
+          ${item.prescriptionNumber ? `<span class="rx-no">No: ${safe(item.prescriptionNumber)}</span>` : ''}
+        </div>
+        ${item.apotekerName ? `<div class="apoteker">Apt: ${safe(item.apotekerName)}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<html>
+<head>
+<meta charset="UTF-8"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    padding: 16px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(72mm, 1fr));
+    gap: 8px;
+    max-width: 210mm;
+    margin: 0 auto;
+  }
+  .label {
+    border: 2px solid #334155;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 11px;
+    min-width: 72mm;
+    break-inside: avoid;
+  }
+  .label-header {
+    border-bottom: 1px solid #334155;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+  }
+  .pharmacy-name { font-weight: bold; font-size: 12px; }
+  .pharmacy-sub { font-size: 9px; color: #475569; }
+  .label-body { padding: 4px 0; border-bottom: 1px dashed #94a3b8; margin-bottom: 4px; }
+  .jenis-badge { font-size: 9px; font-weight: bold; text-transform: uppercase; margin-bottom: 3px; }
+  .medicine-name { font-weight: bold; font-size: 13px; margin-bottom: 3px; }
+  .qty { font-size: 10px; color: #475569; margin-bottom: 2px; }
+  .signa { font-size: 11px; font-weight: bold; color: #0f172a; padding: 3px 0; }
+  .notes { font-size: 9px; color: #6b7280; font-style: italic; padding-top: 2px; }
+  .label-footer { font-size: 9px; color: #475569; }
+  .patient { margin-bottom: 2px; }
+  .label-key { color: #64748b; }
+  .meta { display: flex; justify-content: space-between; align-items: center; }
+  .rx-no { color: #6b7280; }
+  .apoteker { color: #6b7280; margin-top: 2px; }
+  @media print {
+    body { background: white; padding: 8px; }
+    .grid { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+  <div class="grid">
+    ${labelsHTML}
+  </div>
+</body>
+</html>`;
+}
+
+/** Cetak Etiket Obat lengkap (multi-label) untuk resep dan racikan */
+export function printEtiketObat(items: EtiketItem[]): void {
+  if (items.length === 0) return;
+  const html = generateEtiketObatHTML(items);
+  const iframe = document.createElement('iframe');
+  iframe.style.position = 'absolute';
+  iframe.style.top = '-9999px';
+  document.body.appendChild(iframe);
+  iframe.contentDocument?.write(html);
+  iframe.contentDocument?.close();
+  iframe.contentWindow?.focus();
+
+  const removeIframe = () => {
+    if (document.body.contains(iframe)) document.body.removeChild(iframe);
+  };
+
+  if (iframe.contentWindow) {
+    iframe.contentWindow.onafterprint = removeIframe;
+  }
+  iframe.contentWindow?.print();
+  setTimeout(removeIframe, 60_000);
+}

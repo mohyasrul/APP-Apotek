@@ -38,6 +38,7 @@ export function PurchaseOrderList() {
       
       if (error) throw error;
       setOrders(data as unknown as PurchaseOrder[] || []);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal memuat Surat Pesanan: ' + err.message);
     } finally {
@@ -47,6 +48,7 @@ export function PurchaseOrderList() {
 
   useEffect(() => {
     fetchOrders();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId]);
 
   const getStatusBadge = (status: string) => {

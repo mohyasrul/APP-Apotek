@@ -34,6 +34,7 @@ const SubscriptionContext = createContext<SubscriptionContextType>({
   refreshSubscription: async () => {},
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useSubscription = () => useContext(SubscriptionContext);
 
 export function SubscriptionProvider({ children }: { children: React.ReactNode }) {

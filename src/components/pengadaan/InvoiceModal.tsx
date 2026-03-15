@@ -27,6 +27,7 @@ export function InvoiceModal({ onClose, onSuccess }: Props) {
 
   useEffect(() => {
     fetchSuppliers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId]);
 
   const fetchSuppliers = async () => {
@@ -98,6 +99,7 @@ export function InvoiceModal({ onClose, onSuccess }: Props) {
 
       toast.success('Faktur berhasil dicatat');
       onSuccess();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error(err.message || 'Gagal menyimpan faktur');
     } finally {

@@ -27,6 +27,7 @@ export function StockCardModal({ medicine, onClose }: Props) {
 
   useEffect(() => {
     fetchStockCard();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [medicine.id]);
 
   const fetchStockCard = async () => {

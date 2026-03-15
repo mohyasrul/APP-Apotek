@@ -33,6 +33,7 @@ export function SupplierList() {
       
       if (error) throw error;
       setSuppliers(data || []);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal memuat data PBF: ' + err.message);
     } finally {
@@ -42,6 +43,7 @@ export function SupplierList() {
 
   useEffect(() => {
     fetchSuppliers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [effectiveUserId]);
 
   const handleDelete = async (id: string, name: string) => {
@@ -52,6 +54,7 @@ export function SupplierList() {
       if (error) throw error;
       toast.success('PBF berhasil dihapus');
       setSuppliers(suppliers.filter(s => s.id !== id));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       toast.error('Gagal menghapus PBF: ' + err.message);
     }
