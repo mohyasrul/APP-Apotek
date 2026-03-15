@@ -277,13 +277,13 @@ export default function Dashboard() {
       <OnboardingWizard onComplete={handleOnboardingComplete} />
     )}
     {!showOnboarding && (
-    <div className="font-sans text-gray-900 dark:text-gray-100 antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-zinc-950 pb-20 lg:pb-0">
-      <main className="flex-1 p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
+    <div className="flex-1 pb-20 lg:pb-0">
+      <main className="p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-0.5">{getGreeting()}, <span className="font-semibold text-gray-700 dark:text-gray-200">{profile?.full_name || 'User'}</span></p>
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Dashboard {profile?.pharmacy_name ? `— ${profile.pharmacy_name}` : ''}</h1>
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">Dashboard {profile?.pharmacy_name ? `— ${profile.pharmacy_name}` : ''}</h1>
           </div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">

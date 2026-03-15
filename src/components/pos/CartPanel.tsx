@@ -34,20 +34,20 @@ export function CartPanel({
   const panelContent = (
     <>
       {/* Header */}
-      <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-white flex-shrink-0">
+      <div className="p-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between bg-white dark:bg-zinc-900 flex-shrink-0">
         <div className="flex items-center gap-2">
-          <ShoppingCart className="w-5 h-5 text-indigo-600" />
-          <h2 className="font-bold text-gray-900">Keranjang</h2>
-          <span className="bg-indigo-100 text-indigo-600 text-xs font-bold px-2 py-0.5 rounded-full">{cart.length}</span>
+          <ShoppingCart className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+          <h2 className="font-bold text-gray-900 dark:text-zinc-100">Keranjang</h2>
+          <span className="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 text-xs font-bold px-2 py-0.5 rounded-full">{cart.length}</span>
         </div>
         <div className="flex items-center gap-2">
           {onCloseShift && (
-            <button onClick={onCloseShift} className="text-xs font-semibold text-amber-600 hover:text-amber-700 px-2 py-1 flex items-center gap-1 rounded-md hover:bg-amber-50 transition-colors">
+            <button onClick={onCloseShift} className="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 px-2 py-1 flex items-center gap-1 rounded-md hover:bg-amber-50 dark:hover:bg-amber-900/30 transition-colors">
               <LockKey weight="fill" /> Tutup Shift
             </button>
           )}
           {cart.length > 0 && (
-            <button onClick={onClearCart} className="text-xs font-semibold text-rose-500 hover:text-rose-600 px-2 py-1 rounded-md hover:bg-rose-50 transition-colors">Kosongkan</button>
+            <button onClick={onClearCart} className="text-xs font-semibold text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 px-2 py-1 rounded-md hover:bg-rose-50 dark:hover:bg-rose-900/30 transition-colors">Kosongkan</button>
           )}
         </div>
       </div>
@@ -55,8 +55,8 @@ export function CartPanel({
       {/* Cart items */}
       <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
         {cart.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-3">
-            <ShoppingCart className="w-12 h-12 text-gray-200 mb-2" />
+          <div className="h-full flex flex-col items-center justify-center text-gray-400 dark:text-zinc-500 space-y-3">
+            <ShoppingCart className="w-12 h-12 text-gray-200 dark:text-zinc-700 mb-2" />
             <p className="text-sm font-medium">Keranjang masih kosong</p>
             <p className="text-xs text-center max-w-[200px]">Cari obat atau scan barcode untuk menambahkan.</p>
           </div>
@@ -66,13 +66,13 @@ export function CartPanel({
               const expiryStatus = getExpiryStatus(item.expiry_date);
               const isFEFO = expiryStatus === 'near-expiry' || expiryStatus === 'expired';
               return (
-                <div key={item.id} className={`p-3 rounded-xl border ${isFEFO ? 'border-rose-200 bg-rose-50/20' : 'border-gray-100 bg-gray-50/50'} flex flex-col gap-2`}>
+                <div key={item.id} className={`p-3 rounded-xl border ${isFEFO ? 'border-rose-200 dark:border-rose-800 bg-rose-50/20 dark:bg-rose-900/10' : 'border-gray-100 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-800/50'} flex flex-col gap-2`}>
                   <div className="flex justify-between items-start">
                     <div className="pr-3">
-                      <h4 className="font-semibold text-gray-900 text-sm leading-tight mb-1">{item.name}</h4>
-                      <p className="text-indigo-600 font-bold text-sm">{formatRupiah(item.price)} <span className="text-gray-400 font-normal text-xs">/ {item.unit}</span></p>
+                      <h4 className="font-semibold text-gray-900 dark:text-zinc-100 text-sm leading-tight mb-1">{item.name}</h4>
+                      <p className="text-indigo-600 dark:text-indigo-400 font-bold text-sm">{formatRupiah(item.price)} <span className="text-gray-400 dark:text-zinc-500 font-normal text-xs">/ {item.unit}</span></p>
                     </div>
-                    <button onClick={() => onRemove(item)} className="text-gray-400 hover:text-rose-500 transition-colors p-1"><Trash className="w-4 h-4" /></button>
+                    <button onClick={() => onRemove(item)} className="text-gray-400 dark:text-zinc-500 hover:text-rose-500 dark:hover:text-rose-400 transition-colors p-1"><Trash className="w-4 h-4" /></button>
                   </div>
                   
                   <div className="flex items-center justify-between mt-1">
@@ -81,10 +81,10 @@ export function CartPanel({
                         <Warning weight="fill" /> {expiryStatus === 'expired' ? 'EXPIRED!' : 'PRIORITASKAN!'}
                       </div>
                     ) : <div />}
-                    <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-lg p-1">
-                      <button onClick={() => onUpdateQuantity(item.id, item.quantity - 1)} className="w-6 h-6 flex items-center justify-center text-gray-500 hover:bg-gray-100 rounded-md"><Minus className="w-3 h-3" /></button>
-                      <span className="text-sm font-semibold w-6 text-center">{item.quantity}</span>
-                      <button onClick={() => onUpdateQuantity(item.id, item.quantity + 1)} className="w-6 h-6 flex items-center justify-center text-gray-500 hover:bg-gray-100 rounded-md"><Plus className="w-3 h-3" /></button>
+                    <div className="flex items-center gap-3 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-lg p-1">
+                      <button onClick={() => onUpdateQuantity(item.id, item.quantity - 1)} className="w-6 h-6 flex items-center justify-center text-gray-500 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-md"><Minus className="w-3 h-3" /></button>
+                      <span className="text-sm font-semibold w-6 text-center text-gray-900 dark:text-zinc-100">{item.quantity}</span>
+                      <button onClick={() => onUpdateQuantity(item.id, item.quantity + 1)} className="w-6 h-6 flex items-center justify-center text-gray-500 dark:text-zinc-400 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-md"><Plus className="w-3 h-3" /></button>
                     </div>
                   </div>
 
@@ -108,14 +108,14 @@ export function CartPanel({
 
                   {/* Per-item discount input */}
                   <div className="flex items-center gap-2 mt-1">
-                    <Tag weight="bold" className="w-3 h-3 text-gray-400 shrink-0" />
+                    <Tag weight="bold" className="w-3 h-3 text-gray-400 dark:text-zinc-500 shrink-0" />
                     <input
                       type="number"
                       min="0"
                       max={item.price * item.quantity}
                       value={item.discount || ''}
                       onChange={(e) => onUpdateItemDiscount(item.id, parseInt(e.target.value) || 0)}
-                      className="w-24 px-2 py-1 bg-white border border-gray-200 rounded-md text-xs text-right focus:outline-none focus:ring-1 focus:ring-indigo-500/20 font-medium shrink-0"
+                      className="w-24 px-2 py-1 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-md text-xs text-right focus:outline-none focus:ring-1 focus:ring-indigo-500/20 font-medium shrink-0 text-gray-900 dark:text-zinc-100"
                       placeholder="Diskon (Rp)"
                     />
                     {item.discount > 0 && (
@@ -129,7 +129,7 @@ export function CartPanel({
                       type="text"
                       value={item.signa || ''}
                       onChange={(e) => onUpdateItemSigna(item.id, e.target.value)}
-                      className="flex-1 px-2 py-1 bg-white border border-gray-200 rounded-md text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500/20"
+                      className="flex-1 px-2 py-1 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-md text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500/20 text-gray-900 dark:text-zinc-100"
                       placeholder="Aturan Pakai (opsional)"
                     />
                   </div>
@@ -138,8 +138,8 @@ export function CartPanel({
             })}
 
             {/* Global Discount */}
-            <div className="p-3 rounded-xl border border-indigo-100 bg-indigo-50/30">
-              <label className="flex items-center gap-1.5 text-xs font-semibold text-indigo-600 mb-2">
+            <div className="p-3 rounded-xl border border-indigo-100 dark:border-indigo-900/40 bg-indigo-50/30 dark:bg-indigo-950/20">
+              <label className="flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 mb-2">
                 <Percent weight="bold" className="w-3 h-3" /> Diskon Total (Rp)
               </label>
               <input
@@ -147,7 +147,7 @@ export function CartPanel({
                 min="0"
                 value={globalDiscount || ''}
                 onChange={(e) => onSetGlobalDiscount(parseInt(e.target.value) || 0)}
-                className="w-full px-3 py-2 bg-white border border-indigo-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-right font-semibold"
+                className="w-full px-3 py-2 bg-white dark:bg-zinc-800 border border-indigo-200 dark:border-indigo-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-right font-semibold text-gray-900 dark:text-zinc-100"
                 placeholder="0"
               />
             </div>
@@ -156,11 +156,11 @@ export function CartPanel({
       </div>
 
       {/* Checkout Footer */}
-      <div className="p-4 bg-white border-t border-gray-100 flex-shrink-0 shadow-[0_-4px_24px_rgba(0,0,0,0.02)]">
+      <div className="p-4 bg-white dark:bg-zinc-900 border-t border-gray-100 dark:border-zinc-800 flex-shrink-0 shadow-[0_-4px_24px_rgba(0,0,0,0.02)]">
         {(globalDiscount > 0 || itemDiscountTotal > 0) && (
           <div className="flex items-center justify-between mb-2 text-sm">
-            <span className="text-gray-400">Subtotal</span>
-            <span className="text-gray-500">{formatRupiah(subtotal + itemDiscountTotal)}</span>
+            <span className="text-gray-400 dark:text-zinc-500">Subtotal</span>
+            <span className="text-gray-500 dark:text-zinc-400">{formatRupiah(subtotal + itemDiscountTotal)}</span>
           </div>
         )}
         {itemDiscountTotal > 0 && (
@@ -176,8 +176,8 @@ export function CartPanel({
           </div>
         )}
         <div className="flex items-center justify-between mb-4">
-          <span className="text-gray-500 font-medium">Total</span>
-          <span className="text-xl font-semibold text-gray-900">{formatRupiah(totalAmount)}</span>
+          <span className="text-gray-500 dark:text-zinc-400 font-medium">Total</span>
+          <span className="text-xl font-semibold text-gray-900 dark:text-zinc-100">{formatRupiah(totalAmount)}</span>
         </div>
         <button
           onClick={onCheckout}
@@ -197,7 +197,7 @@ export function CartPanel({
     return (
       <div className="fixed inset-0 z-[90] bg-zinc-900/50 backdrop-blur-sm lg:hidden" onClick={onClose}>
         <div
-          className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl max-h-[85vh] flex flex-col animate-slide-up"
+          className="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 rounded-t-3xl max-h-[85vh] flex flex-col animate-slide-up"
           onClick={e => e.stopPropagation()}
         >
           {/* Drag handle */}
@@ -211,7 +211,7 @@ export function CartPanel({
   }
 
   return (
-    <div className="w-full border-l border-gray-200 bg-white flex flex-col h-full shadow-[-4px_0_24px_rgba(0,0,0,0.02)] z-10">
+    <div className="w-full border-l border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col h-full shadow-[-4px_0_24px_rgba(0,0,0,0.02)] z-10">
       {panelContent}
     </div>
   );

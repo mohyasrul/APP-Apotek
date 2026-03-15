@@ -307,7 +307,7 @@ export default function StockOpname() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900 mb-1">Stock Opname</h1>
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">Stock Opname</h1>
             <p className="text-sm text-gray-500">Hitung fisik stok untuk memastikan akurasi inventaris.</p>
           </div>
           <button

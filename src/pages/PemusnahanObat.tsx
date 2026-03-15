@@ -269,7 +269,7 @@ export default function PemusnahanObat() {
             <Trash weight="duotone" className="w-6 h-6 text-rose-600 dark:text-rose-400" />
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Pemusnahan Obat</h1>
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Pemusnahan Obat</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">Berita Acara Pemusnahan (BAP) — PMK 73/2016 & PMK 3/2015</p>
           </div>
         </div>

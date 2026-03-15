@@ -1,3 +1,4 @@
+import { useState, useCallback, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   SquaresFour,
@@ -20,6 +21,7 @@ import {
   Question,
   ArrowLineLeft,
   ArrowLineRight,
+  CaretDown,
 } from '@phosphor-icons/react';
 import { useAuth } from '../../lib/AuthContext';
 import { useSidebar } from '../../lib/SidebarContext';
@@ -34,6 +36,7 @@ interface NavItem {
 interface NavSection {
   sectionLabel?: string;
   ownerOnly?: boolean;
+  collapsible?: boolean;
   items: NavItem[];
 }
 
@@ -51,6 +54,7 @@ const navSections: NavSection[] = [
   {
     sectionLabel: 'LAPORAN',
     ownerOnly: true,
+    collapsible: true,
     items: [
       { label: 'Laporan',   to: '/laporan',          icon: ChartPieSlice },
       { label: 'Keuangan',  to: '/laporan-keuangan', icon: CurrencyCircleDollar },
@@ -59,6 +63,7 @@ const navSections: NavSection[] = [
   {
     sectionLabel: 'FARMASI KLINIS',
     ownerOnly: true,
+    collapsible: true,
     items: [
       { label: 'Konseling & PIO', to: '/konseling', icon: ChatCircleText },
       { label: 'Racikan',         to: '/racikan',    icon: Flask },
@@ -68,6 +73,7 @@ const navSections: NavSection[] = [
   {
     sectionLabel: 'KEPATUHAN',
     ownerOnly: true,
+    collapsible: true,
     items: [
       { label: 'SIPNAP',          to: '/sipnap',                   icon: FileText },
       { label: 'Buku Harian',     to: '/buku-harian-narkotika',    icon: Book },
@@ -77,6 +83,7 @@ const navSections: NavSection[] = [
   {
     sectionLabel: 'MANAJEMEN',
     ownerOnly: true,
+    collapsible: true,
     items: [
       { label: 'Stock Opname', to: '/stock-opname', icon: Clipboard },
       { label: 'Langganan',    to: '/billing',       icon: CreditCard },
@@ -129,6 +136,40 @@ export function SidebarNav() {
   const checkActive = (to: string) =>
     to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
 
+  // Collapsible section state — auto-expand section if it contains the active route
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(() => {
+    const initial: Record<string, boolean> = {};
+    const pathname = location.pathname;
+    navSections.forEach(section => {
+      if (section.sectionLabel && section.collapsible) {
+        const hasActiveChild = section.items.some(item =>
+          item.to === '/' ? pathname === '/' : pathname.startsWith(item.to)
+        );
+        initial[section.sectionLabel] = hasActiveChild;
+      }
+    });
+    return initial;
+  });
+
+  const toggleSection = useCallback((label: string) => {
+    setExpandedSections(prev => ({ ...prev, [label]: !prev[label] }));
+  }, []);
+
+  // Auto-expand section when navigating to one of its child routes
+  useEffect(() => {
+    navSections.forEach(section => {
+      if (section.sectionLabel && section.collapsible) {
+        const hasActiveChild = section.items.some(item => checkActive(item.to));
+        if (hasActiveChild) {
+          setExpandedSections(prev => {
+            if (prev[section.sectionLabel!]) return prev;
+            return { ...prev, [section.sectionLabel!]: true };
+          });
+        }
+      }
+    });
+  }, [location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <div className="hidden lg:block">
       {/* Sidebar starts below TopNavigation — no z-index collision */}
@@ -144,17 +185,53 @@ export function SidebarNav() {
         <nav className="flex-1 overflow-y-auto py-2 custom-scrollbar" aria-label="Menu utama">
           {navSections.map((section, si) => {
             if (section.ownerOnly && !isOwner) return null;
+
+            const isCollapsible = section.collapsible && section.sectionLabel && !collapsed;
+            const isExpanded = section.sectionLabel ? expandedSections[section.sectionLabel] ?? false : true;
+            const hasActiveChild = section.items.some(item => checkActive(item.to));
+
             return (
               <div key={si} className={si > 0 ? 'mt-1' : ''}>
                 {!collapsed && section.sectionLabel && (
-                  <p className="px-4 pt-3 pb-1 text-[10px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest select-none">
-                    {section.sectionLabel}
-                  </p>
+                  isCollapsible ? (
+                    <button
+                      onClick={() => toggleSection(section.sectionLabel!)}
+                      className={cn(
+                        'w-full flex items-center justify-between px-4 pt-3 pb-1 select-none group',
+                        'hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors rounded-md mx-0'
+                      )}
+                    >
+                      <span className={cn(
+                        'text-[10px] font-semibold uppercase tracking-widest',
+                        hasActiveChild
+                          ? 'text-indigo-500 dark:text-indigo-400'
+                          : 'text-gray-400 dark:text-zinc-500'
+                      )}>
+                        {section.sectionLabel}
+                      </span>
+                      <CaretDown
+                        weight="bold"
+                        className={cn(
+                          'w-3 h-3 text-gray-400 dark:text-zinc-500 transition-transform duration-200',
+                          isExpanded ? '' : '-rotate-90'
+                        )}
+                      />
+                    </button>
+                  ) : (
+                    <p className="px-4 pt-3 pb-1 text-[10px] font-semibold text-gray-400 dark:text-zinc-500 uppercase tracking-widest select-none">
+                      {section.sectionLabel}
+                    </p>
+                  )
                 )}
                 {collapsed && si > 0 && (
                   <div className="mx-3 my-2 h-px bg-gray-100 dark:bg-zinc-800" />
                 )}
-                <div className="space-y-0.5">
+                <div
+                  className={cn(
+                    'space-y-0.5 overflow-hidden transition-all duration-200',
+                    isCollapsible && !isExpanded ? 'max-h-0 opacity-0' : 'max-h-[500px] opacity-100'
+                  )}
+                >
                   {section.items.map((item) => (
                     <NavLink
                       key={item.to}

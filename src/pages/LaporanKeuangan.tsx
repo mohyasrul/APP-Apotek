@@ -208,8 +208,8 @@ export default function LaporanKeuangan() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
-            <CurrencyCircleDollar weight="fill" className="w-8 h-8 text-indigo-600" />
+          <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+            <CurrencyCircleDollar weight="fill" className="w-6 h-6 text-indigo-600" />
             Laporan Keuangan
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">

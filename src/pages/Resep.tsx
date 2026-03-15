@@ -290,17 +290,16 @@ export default function Resep() {
 
   // ─────────────────────────────────────────────────────────────────────────
   return (
-    <div className="font-sans text-gray-900 dark:text-gray-100 antialiased min-h-screen flex flex-col bg-gray-50 dark:bg-zinc-950">
+    <div className="flex-1 pb-20 lg:pb-0">
 
-      <main className="flex-1 p-4 md:p-6 max-w-6xl mx-auto w-full">
+      <main className="p-6 lg:p-8 max-w-[1400px] mx-auto w-full">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-              <ClipboardText weight="fill" className="w-7 h-7 text-indigo-600" />
+            <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
               Resep Digital
             </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{counts.pending} resep menunggu penebusan</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{counts.pending} resep menunggu penebusan</p>
           </div>
           {profile?.role === 'owner' && (
             <button

@@ -452,9 +452,9 @@ export default function Laporan() {
   };
 
   return (
-    <div className="font-sans text-gray-900 antialiased min-h-screen flex flex-col bg-gray-50 pb-20 lg:pb-0">
+    <div className="flex-1 pb-20 lg:pb-0">
 
-      <main className="flex-1 p-6 lg:p-8 max-w-[1200px] mx-auto w-full">
+      <main className="p-6 lg:p-8 max-w-[1200px] mx-auto w-full">
 
         {/* Feature Gate - show upgrade prompt if not available */}
         {!hasLaporanFeature && (
@@ -482,13 +482,13 @@ export default function Laporan() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900 mb-1">Laporan Penjualan</h1>
-            <p className="text-sm text-gray-500">Pantau omzet, laba kotor, dan riwayat transaksi apotek Anda.</p>
+            <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1">Laporan Penjualan</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Pantau omzet, laba kotor, dan riwayat transaksi apotek Anda.</p>
           </div>
 
           {/* Date Filter */}
           <div className="flex items-center gap-3">
-            <div className="flex bg-white rounded-xl shadow-sm border border-gray-200 p-1">
+            <div className="flex bg-white dark:bg-zinc-800 rounded-xl shadow-sm border border-gray-200 dark:border-zinc-700 p-1">
               {[
                 { value: 'today' as DateFilterType, label: 'Hari Ini' },
                 { value: 'week' as DateFilterType, label: '7 Hari' },
@@ -501,7 +501,7 @@ export default function Laporan() {
                   className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                     dateFilter === f.value
                       ? 'bg-indigo-600 text-white shadow-sm'
-                      : 'text-gray-600 hover:bg-gray-50'
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-700'
                   }`}
                 >
                   {f.label}
@@ -509,15 +509,15 @@ export default function Laporan() {
               ))}
             </div>
             <button onClick={handlePrintReport}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors shadow-sm">
+              className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors shadow-sm">
               <Printer weight="bold" className="w-4 h-4" /> Print
             </button>
             <button onClick={handleExportCSV}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors shadow-sm">
+              className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-700 transition-colors shadow-sm">
               <DownloadSimple weight="bold" className="w-4 h-4" /> CSV
             </button>
             <button onClick={handleExportExcel}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-emerald-600 hover:bg-emerald-50 transition-colors shadow-sm border-emerald-200">
+              className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-zinc-800 border border-emerald-200 dark:border-emerald-800 rounded-xl text-sm font-semibold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors shadow-sm">
               <DownloadSimple weight="bold" className="w-4 h-4" /> Excel
             </button>
           </div>
@@ -525,26 +525,26 @@ export default function Laporan() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
-            <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
+          <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm flex items-center gap-4">
+            <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center flex-shrink-0">
               <Coins weight="fill" className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-500 mb-1">Total Omzet</p>
-              {loading ? <div className="h-7 w-32 bg-gray-100 rounded-lg animate-pulse" /> : (
-                <h3 className="text-xl font-semibold text-gray-900">{formatRupiah(metrics.omset)}</h3>
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Omzet</p>
+              {loading ? <div className="h-7 w-32 bg-gray-100 dark:bg-zinc-800 rounded-lg animate-pulse" /> : (
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(metrics.omset)}</h3>
               )}
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
-            <div className="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0">
+          <div className="bg-white dark:bg-zinc-900 p-6 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm flex items-center gap-4">
+            <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 dark:text-emerald-400 rounded-xl flex items-center justify-center flex-shrink-0">
               <Package weight="fill" className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-500 mb-1">Total Transaksi</p>
-              {loading ? <div className="h-7 w-20 bg-gray-100 rounded-lg animate-pulse" /> : (
-                <h3 className="text-xl font-semibold text-gray-900">{metrics.trxCount} <span className="text-base font-medium text-gray-400">Nota</span></h3>
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Transaksi</p>
+              {loading ? <div className="h-7 w-20 bg-gray-100 dark:bg-zinc-800 rounded-lg animate-pulse" /> : (
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">{metrics.trxCount} <span className="text-base font-medium text-gray-400 dark:text-gray-500">Nota</span></h3>
               )}
             </div>
           </div>
@@ -562,10 +562,10 @@ export default function Laporan() {
 
         {/* Sales Trend Chart */}
         {chartData.length > 1 && (
-          <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-8">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm p-6 mb-8">
             <div className="flex items-center gap-2 mb-4">
-              <ChartBar weight="fill" className="w-5 h-5 text-indigo-600" />
-              <h2 className="text-base font-semibold text-gray-900">Tren Penjualan</h2>
+              <ChartBar weight="fill" className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">Tren Penjualan</h2>
             </div>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -606,31 +606,31 @@ export default function Laporan() {
         )}
 
         {/* Transactions Table */}
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
-          <div className="p-5 border-b border-gray-100 flex flex-col gap-3">
+        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm">
+          <div className="p-5 border-b border-gray-100 dark:border-zinc-800 flex flex-col gap-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <h2 className="text-base font-semibold text-gray-900">Riwayat Transaksi</h2>
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">Riwayat Transaksi</h2>
 
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
                   <input
                     type="text"
                     placeholder="Cari ID atau metode bayar..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-500 w-full sm:w-64"
+                    className="pl-9 pr-4 py-2 border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100 rounded-lg text-sm focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-500 w-full sm:w-64"
                   />
                 </div>
               </div>
             </div>
 
             {/* Payment filter tabs */}
-            <div className="flex gap-1 bg-gray-100 p-1 rounded-xl w-fit">
+            <div className="flex gap-1 bg-gray-100 dark:bg-zinc-800 p-1 rounded-xl w-fit">
               {(['all', 'cash', 'qris', 'transfer'] as const).map(pm => (
                 <button key={pm} onClick={() => setPaymentFilter(pm)}
                   className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
-                    paymentFilter === pm ? 'bg-white text-indigo-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+                    paymentFilter === pm ? 'bg-white dark:bg-zinc-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                   }`}>
                   {pm === 'all' ? 'Semua' : pm === 'cash' ? 'Tunai' : pm === 'qris' ? 'QRIS' : 'Transfer'}
                 </button>
@@ -641,7 +641,7 @@ export default function Laporan() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-gray-50 text-gray-500 text-sm border-b border-gray-100">
+                <tr className="bg-gray-50 dark:bg-zinc-800/50 text-gray-500 dark:text-gray-400 text-sm border-b border-gray-100 dark:border-zinc-800">
                   <th className="px-6 py-4 font-semibold">TANGGAL & WAKTU</th>
                   <th className="px-6 py-4 font-semibold">NO. NOTA</th>
                   <th className="px-6 py-4 font-semibold">METODE</th>
@@ -655,25 +655,25 @@ export default function Laporan() {
               <tbody className="text-sm">
                 {loading ? (
                   Array.from({ length: 5 }).map((_, i) => (
-                    <tr key={i} className="border-b border-gray-50">
+                    <tr key={i} className="border-b border-gray-50 dark:border-zinc-800">
                       {Array.from({ length: 7 }).map((_, j) => (
-                        <td key={j} className="px-6 py-4"><div className="h-4 bg-gray-100 rounded animate-pulse" style={{ width: `${[60, 75, 50, 80, 55, 70, 65][j % 7]}%` }} /></td>
+                        <td key={j} className="px-6 py-4"><div className="h-4 bg-gray-100 dark:bg-zinc-800 rounded animate-pulse" style={{ width: `${[60, 75, 50, 80, 55, 70, 65][j % 7]}%` }} /></td>
                       ))}
                     </tr>
                   ))
                 ) : filteredTrx.length === 0 ? (
-                  <tr><td colSpan={7} className="px-6 py-8 text-center text-gray-500">Belum ada transaksi pada periode ini.</td></tr>
+                  <tr><td colSpan={7} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">Belum ada transaksi pada periode ini.</td></tr>
                 ) : (
                   filteredTrx.map((trx) => {
                     const pm = getPaymentLabel(trx.payment_method || 'cash');
                     const isVoided = trx.status === 'voided';
                     return (
-                      <tr key={trx.id} className={`border-b border-gray-50 transition-colors ${isVoided ? 'opacity-60 bg-rose-50/30' : 'hover:bg-gray-50/50'}`}>
-                        <td className="px-6 py-4 text-gray-600">
+                      <tr key={trx.id} className={`border-b border-gray-50 dark:border-zinc-800 transition-colors ${isVoided ? 'opacity-60 bg-rose-50/30 dark:bg-rose-900/10' : 'hover:bg-gray-50/50 dark:hover:bg-zinc-800/50'}`}>
+                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300">
                           {new Date(trx.created_at).toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
                         </td>
                         <td className="px-6 py-4">
-                          <span className="font-mono text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                          <span className="font-mono text-xs bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">
                             {trx.transaction_number || trx.id.split('-')[0].toUpperCase() + '...'}
                           </span>
                         </td>
@@ -682,18 +682,18 @@ export default function Laporan() {
                         </td>
                         <td className="px-6 py-4">
                           {isVoided ? (
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-semibold bg-rose-100 text-rose-600">
+                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-semibold bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
                               <Prohibit weight="bold" className="w-3 h-3" /> VOID
                             </span>
                           ) : (
-                            <span className="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-semibold bg-emerald-50 text-emerald-600">AKTIF</span>
+                            <span className="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">AKTIF</span>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-gray-600">{trx.itemsCount} Items</td>
-                        <td className="px-6 py-4 text-emerald-600 font-medium">{formatRupiah(trx.laba)}</td>
-                        <td className="px-6 py-4 text-right"><span className={`font-bold ${isVoided ? 'text-gray-400 line-through' : 'text-gray-900'}`}>{formatRupiah(trx.total_amount)}</span></td>
+                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{trx.itemsCount} Items</td>
+                        <td className="px-6 py-4 text-emerald-600 dark:text-emerald-400 font-medium">{formatRupiah(trx.laba)}</td>
+                        <td className="px-6 py-4 text-right"><span className={`font-bold ${isVoided ? 'text-gray-400 line-through' : 'text-gray-900 dark:text-gray-100'}`}>{formatRupiah(trx.total_amount)}</span></td>
                         <td className="px-6 py-4 text-right">
-                          <button onClick={() => setSelectedTrx(trx)} className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                          <button onClick={() => setSelectedTrx(trx)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors">
                             <Eye weight="bold" className="w-4 h-4" />
                           </button>
                         </td>
@@ -707,16 +707,16 @@ export default function Laporan() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100">
-              <span className="text-sm text-gray-500">Halaman {page + 1} dari {totalPages}</span>
+            <div className="flex items-center justify-between px-6 py-4 border-t border-gray-100 dark:border-zinc-800">
+              <span className="text-sm text-gray-500 dark:text-gray-400">Halaman {page + 1} dari {totalPages}</span>
               <div className="flex items-center gap-2">
                 <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
-                  className="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                  <CaretLeft weight="bold" className="w-4 h-4 text-gray-600" />
+                  className="p-2 rounded-lg border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+                  <CaretLeft weight="bold" className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                 </button>
                 <button onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1}
-                  className="p-2 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-                  <CaretRight weight="bold" className="w-4 h-4 text-gray-600" />
+                  className="p-2 rounded-lg border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+                  <CaretRight weight="bold" className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                 </button>
               </div>
             </div>
@@ -729,71 +729,71 @@ export default function Laporan() {
       {/* Transaction Detail Modal */}
       {selectedTrx && !showVoidModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm" onClick={() => setSelectedTrx(null)}>
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
-            <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+            <div className="px-6 py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Receipt weight="fill" className="w-5 h-5 text-indigo-600" />
-                <h3 className="font-bold text-lg text-gray-900">Detail Transaksi</h3>
+                <Receipt weight="fill" className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+                <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100">Detail Transaksi</h3>
                 {selectedTrx.status === 'voided' && (
-                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-semibold bg-rose-100 text-rose-600">
+                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-semibold bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400">
                     <Prohibit weight="bold" className="w-3 h-3" /> VOID
                   </span>
                 )}
               </div>
-              <button onClick={() => setSelectedTrx(null)} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
+              <button onClick={() => setSelectedTrx(null)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
                 <X weight="bold" className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6">
               <div className="flex justify-between mb-3 text-sm">
-                <span className="text-gray-500">No. Nota</span>
-                <span className="font-mono text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded font-semibold">
+                <span className="text-gray-500 dark:text-gray-400">No. Nota</span>
+                <span className="font-mono text-xs bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded font-semibold">
                   {selectedTrx.transaction_number || selectedTrx.id.split('-')[0].toUpperCase() + '...'}
                 </span>
               </div>
               <div className="flex justify-between mb-3 text-sm">
-                <span className="text-gray-500">Tanggal</span>
-                <span className="font-medium text-gray-900">{new Date(selectedTrx.created_at).toLocaleString('id-ID')}</span>
+                <span className="text-gray-500 dark:text-gray-400">Tanggal</span>
+                <span className="font-medium text-gray-900 dark:text-gray-100">{new Date(selectedTrx.created_at).toLocaleString('id-ID')}</span>
               </div>
               <div className="flex justify-between mb-4 text-sm">
-                <span className="text-gray-500">Metode Bayar</span>
+                <span className="text-gray-500 dark:text-gray-400">Metode Bayar</span>
                 <span className={`inline-flex items-center px-2 py-1 rounded-md text-[10px] font-semibold uppercase ${getPaymentLabel(selectedTrx.payment_method || 'cash').class}`}>
                   {getPaymentLabel(selectedTrx.payment_method || 'cash').label}
                 </span>
               </div>
               {selectedTrx.void_reason && (
-                <div className="mb-4 p-3 bg-rose-50 rounded-xl border border-rose-100 text-sm">
-                  <p className="text-xs font-semibold text-rose-600 mb-1">Alasan Pembatalan:</p>
-                  <p className="text-rose-700">{selectedTrx.void_reason}</p>
+                <div className="mb-4 p-3 bg-rose-50 dark:bg-rose-900/20 rounded-xl border border-rose-100 dark:border-rose-800 text-sm">
+                  <p className="text-xs font-semibold text-rose-600 dark:text-rose-400 mb-1">Alasan Pembatalan:</p>
+                  <p className="text-rose-700 dark:text-rose-300">{selectedTrx.void_reason}</p>
                 </div>
               )}
 
-              <div className="bg-gray-50 rounded-xl p-4 mb-4">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Item Belanja</p>
+              <div className="bg-gray-50 dark:bg-zinc-800 rounded-xl p-4 mb-4">
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Item Belanja</p>
                 <div className="space-y-2">
                   {selectedTrx.transaction_items?.map((item: TransactionItem, i: number) => (
                     <div key={i} className="flex justify-between text-sm">
-                      <span className="text-gray-600">{item.medicines?.name || 'Item'} x{item.quantity}</span>
-                      <span className="font-semibold text-gray-900">{formatRupiah(item.price_at_transaction * item.quantity)}</span>
+                      <span className="text-gray-600 dark:text-gray-300">{item.medicines?.name || 'Item'} x{item.quantity}</span>
+                      <span className="font-semibold text-gray-900 dark:text-gray-100">{formatRupiah(item.price_at_transaction * item.quantity)}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="border-t border-gray-100 pt-4 space-y-2 mb-5">
+              <div className="border-t border-gray-100 dark:border-zinc-800 pt-4 space-y-2 mb-5">
                 {selectedTrx.discount_total > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-indigo-600">Diskon</span>
-                    <span className="font-semibold text-indigo-600">-{formatRupiah(selectedTrx.discount_total)}</span>
+                    <span className="text-indigo-600 dark:text-indigo-400">Diskon</span>
+                    <span className="font-semibold text-indigo-600 dark:text-indigo-400">-{formatRupiah(selectedTrx.discount_total)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Laba Kotor</span>
-                  <span className="font-semibold text-emerald-600">{formatRupiah(selectedTrx.laba)}</span>
+                  <span className="text-gray-500 dark:text-gray-400">Laba Kotor</span>
+                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">{formatRupiah(selectedTrx.laba)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-bold text-gray-900">Total</span>
-                  <span className="text-lg font-semibold text-indigo-600">{formatRupiah(selectedTrx.total_amount)}</span>
+                  <span className="font-bold text-gray-900 dark:text-gray-100">Total</span>
+                  <span className="text-lg font-semibold text-indigo-600 dark:text-indigo-400">{formatRupiah(selectedTrx.total_amount)}</span>
                 </div>
               </div>
 
@@ -801,14 +801,14 @@ export default function Laporan() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => handleReprint(selectedTrx)}
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-gray-600 bg-gray-50 border border-gray-200 rounded-xl hover:bg-gray-100 transition-colors"
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-700 transition-colors"
                 >
                   <Printer weight="bold" className="w-4 h-4" /> Cetak Ulang
                 </button>
                 {canVoid(selectedTrx) && (
                   <button
                     onClick={() => setShowVoidModal(true)}
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-rose-600 bg-rose-50 border border-rose-200 rounded-xl hover:bg-rose-100 transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-xl hover:bg-rose-100 dark:hover:bg-rose-900/40 transition-colors"
                   >
                     <Prohibit weight="bold" className="w-4 h-4" /> Batalkan
                   </button>
@@ -822,28 +822,28 @@ export default function Laporan() {
       {/* Void Confirmation Modal */}
       {selectedTrx && showVoidModal && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm">
-          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="px-6 py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Prohibit weight="fill" className="w-5 h-5 text-rose-500" />
-                <h3 className="font-bold text-lg text-gray-900">Batalkan Transaksi</h3>
+                <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100">Batalkan Transaksi</h3>
               </div>
-              <button onClick={() => { setShowVoidModal(false); setVoidReason(''); }} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full">
+              <button onClick={() => { setShowVoidModal(false); setVoidReason(''); }} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full">
                 <X weight="bold" className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6">
-              <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 mb-5">
-                <p className="text-sm font-semibold text-rose-700 mb-1">No. Nota: {selectedTrx.transaction_number || selectedTrx.id.split('-')[0].toUpperCase()}</p>
-                <p className="text-sm text-rose-600">Total: {formatRupiah(selectedTrx.total_amount)}</p>
-                <p className="text-xs text-rose-500 mt-2">⚠ Stok semua item akan dikembalikan secara otomatis.</p>
+              <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800 rounded-xl p-4 mb-5">
+                <p className="text-sm font-semibold text-rose-700 dark:text-rose-300 mb-1">No. Nota: {selectedTrx.transaction_number || selectedTrx.id.split('-')[0].toUpperCase()}</p>
+                <p className="text-sm text-rose-600 dark:text-rose-400">Total: {formatRupiah(selectedTrx.total_amount)}</p>
+                <p className="text-xs text-rose-500 dark:text-rose-400 mt-2">⚠ Stok semua item akan dikembalikan secara otomatis.</p>
               </div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Alasan Pembatalan <span className="text-rose-500">*</span></label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Alasan Pembatalan <span className="text-rose-500">*</span></label>
               <textarea
                 value={voidReason}
                 onChange={(e) => setVoidReason(e.target.value)}
                 rows={3}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 resize-none mb-5"
+                className="w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 resize-none mb-5"
                 placeholder="Contoh: Salah obat, salah harga, permintaan pelanggan..."
                 autoFocus
               />

@@ -84,10 +84,16 @@ export default function Meso() {
         .select('*')
         .eq('user_id', effectiveUserId)
         .order('tanggal', { ascending: false });
-      if (error) throw error;
-      setRecords(data as MesoRecord[] || []);
-    } catch (err: unknown) {
-      toast.error('Gagal memuat data MESO: ' + (err instanceof Error ? err.message : 'Terjadi kesalahan'));
+      if (error) {
+        // If table doesn't exist or permission denied, silently set empty
+        console.warn('MESO fetch error:', error.message);
+        setRecords([]);
+      } else {
+        setRecords(data as MesoRecord[] || []);
+      }
+    } catch {
+      // Network or unexpected error — still don't show intrusive toast on load
+      setRecords([]);
     } finally {
       setLoading(false);
     }
@@ -149,21 +155,20 @@ export default function Meso() {
   const labelClass = 'block text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1';
 
   return (
-    <div className="flex-1 p-4 lg:p-8 max-w-5xl mx-auto w-full pb-20 lg:pb-0">
+    <div className="flex-1 p-6 lg:p-8 max-w-[1400px] mx-auto w-full pb-20 lg:pb-0">
       {/* Header */}
-      <div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
+      <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-            <FirstAidKit weight="fill" className="w-6 h-6 text-rose-500" />
+          <h1 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
             Monitoring Efek Samping Obat (MESO)
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             Dokumentasi dan pelaporan efek samping obat sesuai PMK 73/2016 & Per-BPOM No. 24/2017
           </p>
         </div>
         <button
           onClick={() => { setDraft(emptyDraft()); setShowForm(true); }}
-          className="flex items-center gap-2 px-4 py-2.5 bg-rose-500 hover:bg-rose-600 text-white text-sm font-semibold rounded-xl shadow-[0_4px_12px_rgba(239,68,68,0.3)] transition-all"
+          className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-[0_4px_12px_rgba(59,130,246,0.3)] transition-all shrink-0"
         >
           <Plus weight="bold" className="w-4 h-4" />
           Laporkan MESO
