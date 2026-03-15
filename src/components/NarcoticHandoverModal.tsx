@@ -44,6 +44,9 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
   return (
     <div className="fixed inset-0 z-[60] bg-black/50 flex items-center justify-center p-4" onClick={onClose}>
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="narcotic-handover-title"
         className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl max-w-md w-full max-h-[80vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
@@ -53,7 +56,7 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
             <Warning weight="fill" className="w-5 h-5 text-red-500" />
           </div>
           <div className="flex-1">
-            <h3 className="font-bold text-slate-800 dark:text-slate-100">Bukti Penyerahan Narkotika</h3>
+            <h3 id="narcotic-handover-title" className="font-bold text-slate-800 dark:text-slate-100">Bukti Penyerahan Narkotika</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">Per-BPOM No. 4/2018 — Wajib untuk setiap penyerahan narkotika</p>
           </div>
           <button onClick={onClose} className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
@@ -85,6 +88,7 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
               value={form.penerima_nama}
               onChange={e => setForm({ ...form, penerima_nama: e.target.value })}
               placeholder="Nama lengkap penerima obat"
+              aria-invalid={!!errors.penerima_nama}
               className={`w-full border ${errors.penerima_nama ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20`}
             />
             {errors.penerima_nama && <p className="text-xs text-red-500 mt-1">{errors.penerima_nama}</p>}
@@ -103,6 +107,7 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
                 }}
                 placeholder="16 digit NIK"
                 maxLength={16}
+                aria-invalid={!!errors.penerima_nik}
                 className={`w-full border ${errors.penerima_nik ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 font-mono tracking-wider`}
               />
             </div>

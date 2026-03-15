@@ -42,10 +42,10 @@ const Bantuan          = lazy(() => import('./pages/Bantuan'));
 // Fallback loading UI untuk route publik (Login, ResetPassword)
 function PageLoader() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
       <div className="flex flex-col items-center gap-3">
         <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-        <span className="text-sm text-slate-500 font-medium">Memuat...</span>
+        <span className="text-sm text-slate-500 dark:text-slate-400 font-medium">Memuat...</span>
       </div>
     </div>
   );
@@ -56,12 +56,12 @@ function ContentLoader() {
   return (
     <div className="flex-1 p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
       <div className="animate-pulse space-y-4">
-        <div className="h-8 bg-slate-200 rounded-lg w-48" />
-        <div className="h-4 bg-slate-200 rounded w-32" />
+        <div className="h-8 bg-slate-200 dark:bg-slate-800 rounded-lg w-48" />
+        <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-32" />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-          {[1,2,3,4].map(i => <div key={i} className="h-24 bg-slate-200 rounded-xl" />)}
+          {[1,2,3,4].map(i => <div key={i} className="h-24 bg-slate-200 dark:bg-slate-800 rounded-xl" />)}
         </div>
-        <div className="h-64 bg-slate-200 rounded-xl mt-4" />
+        <div className="h-64 bg-slate-200 dark:bg-slate-800 rounded-xl mt-4" />
       </div>
     </div>
   );
@@ -95,13 +95,13 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
 
   if (!profile && profileError) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 max-w-sm w-full text-center">
-          <p className="font-semibold text-slate-800 mb-2">Gagal memuat profil</p>
-          <p className="text-sm text-slate-500 mb-4">Koneksi ke server bermasalah. Coba refresh halaman.</p>
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 max-w-sm w-full text-center">
+          <p className="font-semibold text-slate-800 dark:text-slate-100 mb-2">Gagal memuat profil</p>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Koneksi ke server bermasalah. Coba refresh halaman.</p>
           <button
             onClick={() => window.location.reload()}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-xl text-sm font-semibold"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-xl text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
           >
             Refresh
           </button>

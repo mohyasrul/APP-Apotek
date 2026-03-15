@@ -174,7 +174,7 @@ export function TopNavigation() {
           >
             <Bell weight="bold" className="w-4 h-4" />
             {notifications.length > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-rose-500 text-white text-[9px] font-bold rounded-full border-2 border-white flex items-center justify-center translate-x-1/4 -translate-y-1/4">
+              <span className="absolute top-0 right-0 w-4 h-4 bg-rose-500 text-white text-[9px] font-bold rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center translate-x-1/4 -translate-y-1/4">
                 {notifications.length > 9 ? '9+' : notifications.length}
               </span>
             )}
@@ -205,9 +205,9 @@ export function TopNavigation() {
                           Stok Kritis ({notifications.filter(n => n.type === 'stock').length})
                         </p>
                         {notifications.filter(n => n.type === 'stock').map((n, i) => (
-                          <div key={i} className="py-2 border-b border-slate-50 last:border-0">
-                            <p className="text-sm font-semibold text-slate-800">{n.name}</p>
-                            <p className="text-xs text-amber-600">{n.detail}</p>
+                          <div key={i} className="py-2 border-b border-slate-50 dark:border-slate-800 last:border-0">
+                            <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">{n.name}</p>
+                            <p className="text-xs text-amber-600 dark:text-amber-400">{n.detail}</p>
                           </div>
                         ))}
                       </div>
@@ -219,9 +219,9 @@ export function TopNavigation() {
                           Mendekati Kadaluarsa ({notifications.filter(n => n.type === 'expiry').length})
                         </p>
                         {notifications.filter(n => n.type === 'expiry').map((n, i) => (
-                          <div key={i} className="py-2 border-b border-slate-50 last:border-0">
-                            <p className="text-sm font-semibold text-slate-800">{n.name}</p>
-                            <p className="text-xs text-rose-600">{n.detail}</p>
+                          <div key={i} className="py-2 border-b border-slate-50 dark:border-slate-800 last:border-0">
+                            <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">{n.name}</p>
+                            <p className="text-xs text-rose-600 dark:text-rose-400">{n.detail}</p>
                           </div>
                         ))}
                       </div>
@@ -230,10 +230,10 @@ export function TopNavigation() {
                 )}
               </div>
               {notifications.length > 0 && (
-                <div className="px-4 py-3 border-t border-slate-100">
+                <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800">
                   <button
                     onClick={() => { setShowNotifPanel(false); navigate('/medicines'); }}
-                    className="w-full text-xs text-blue-600 font-semibold hover:underline text-center"
+                    className="w-full text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline text-center"
                   >
                     Kelola Stok Obat →
                   </button>

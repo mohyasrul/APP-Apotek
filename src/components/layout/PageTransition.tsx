@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 
 const pageVariants = {
-  initial: { opacity: 0, y: 8 },
+  initial: { opacity: 0, y: 6 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -4 },
+  exit: { opacity: 0, y: -3 },
 };
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
@@ -13,7 +13,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{ duration: 0.18, ease: 'easeOut' }}
+      transition={{ duration: 0.15, ease: 'easeOut' }}
       className="flex-1 flex flex-col min-h-0"
     >
       {children}
