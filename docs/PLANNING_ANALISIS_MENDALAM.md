@@ -272,23 +272,17 @@ Fitur Sederhana: Laporan MESO
 
 ---
 
-### 3.10 Pengelolaan Obat Rusak / Recall [MEDIUM]
+### 3.10 Pengelolaan Obat Rusak / Recall [MEDIUM] ✅ IMPLEMENTED
 
 **Regulasi:** Permenkes & Per-BPOM tentang penarikan obat  
 **Kewajiban:** Apotek wajib merespons recall BPOM dengan menarik obat dari rak dan melaporkan sisa stok
 
-**Celah yang ada:**
-- Tidak ada mekanisme drug recall
-- Tidak ada notifikasi recall dari BPOM
-
-**Rekomendasi:**
-```
-Fitur: Manajemen Recall Obat
-- Input nomor recall/peringatan BPOM
-- Cari otomatis stok yang terdampak (berdasarkan nama obat + batch)
-- Proses karantina obat (pindah ke stok "ditahan")
-- Generate laporan stok recall untuk dikirim ke BPOM/distributor
-```
+**Status:** ✅ Sudah diimplementasikan
+- `src/pages/RecallObat.tsx` route `/recall-obat` (owner only)
+- Input nomor recall/peringatan BPOM, nama obat, batch terdampak, produsen
+- Status tracking: aktif → dikarantina → dilaporkan → selesai
+- Generate & cetak laporan recall (PDF/print) dengan tanda tangan APJ
+- DB: tabel `drug_recalls` (migration: `20260326_drug_recalls.sql`)
 
 ---
 
@@ -624,19 +618,16 @@ Fitur: Cetak Etiket Obat
 
 ---
 
-### 5.6 Antrian & Manajemen Pasien [MEDIUM]
+### 5.6 Antrian & Manajemen Pasien [MEDIUM] ✅ IMPLEMENTED
 
-**Status saat ini:** Tidak ada  
-**Konteks:** Apotek yang melayani resep ramai sering butuh manajemen antrian sederhana
-
-**Rekomendasi:**
-```
-Fitur Sederhana: Antrian Racikan/Resep
-- Nomor antrian per hari (001, 002, ...)
-- Status: menunggu | sedang disiapkan | siap diambil
-- Display/panggil nomor antrian (bisa ditampilkan di layar TV)
-- Notifikasi WA ke pasien bahwa obatnya sudah siap
-```
+**Status:** ✅ Sudah diimplementasikan
+- `src/pages/Antrian.tsx` route `/antrian` (semua role)
+- Nomor antrian per hari: 001, 002, ... (reset otomatis tiap hari)
+- Jenis layanan: resep, racikan, konsultasi, umum
+- Status: menunggu → diproses → siap diambil → selesai / dibatalkan
+- Filter per status dan tanggal, cari nama/nomor
+- Statistik ringkas (menunggu, diproses, siap, selesai)
+- DB: tabel `queue_entries` (migration: `20260326_antrian.sql`)
 
 ---
 
@@ -958,7 +949,7 @@ IMPACT TINGGI, EFFORT SEDANG (Core Features - Sprint 1-3):
 ✅ Modul SIPNAP (laporan narkotika/psikotropika)
 🔧 SP Narkotika/Psikotropika khusus
 🔧 Notifikasi WhatsApp (stok kritis, kadaluarsa, reminder SIPNAP)
-🔧 PWA dengan service worker
+✅ PWA dengan service worker
 ✅ Racikan/compounding sederhana
 ✅ Printer termal support (58mm/80mm/A4 configurable)
 
@@ -970,11 +961,12 @@ IMPACT TINGGI, EFFORT TINGGI (Strategic - Sprint 4-8):
 ✅ Skrining resep formal
 ✅ Laporan keuangan (P&L, hutang dagang)
 ✅ Konseling & PIO documentation
+✅ Manajemen Recall Obat
 
 IMPACT SEDANG, EFFORT RENDAH (Nice to Have - Backlog):
 ✅ Keyboard shortcuts POS (F2/F4/F8/Ctrl+Enter/Esc/? help overlay)
 ⬜ Mode sederhana (simple mode)
-⬜ Antrian sederhana
+✅ Antrian sederhana
 ⬜ Referral program
 ⬜ Customer health score
 ```
@@ -1017,16 +1009,16 @@ BULAN 7-9: Growth Features
 ─────────────────────────────────────────
 □ Integrasi database BPOM (autocomplete)
 □ BPJS/klaim management
-□ Drug recall management
+✅ Drug recall management
 □ Referral program
 □ Customer health score & churn prevention
-□ MESO reporting
+✅ MESO reporting
 
 BULAN 10-12: Scale
 ─────────────────────────────────────────
 □ Multi-cabang (multi-branch)
 □ Integrasi akuntansi (Jurnal.id/Accurate export)
-□ Antrian pasien
+✅ Antrian pasien
 □ API publik (untuk integrasi pihak ketiga)
 □ ISO 27001 preparation
 ```
