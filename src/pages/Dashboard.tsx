@@ -277,34 +277,35 @@ export default function Dashboard() {
       <OnboardingWizard onComplete={handleOnboardingComplete} />
     )}
     {!showOnboarding && (
-    <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50 pb-20 lg:pb-0">
+    <div className="font-sans text-slate-800 dark:text-slate-100 antialiased min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 pb-20 lg:pb-0">
       <main className="flex-1 p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <p className="text-sm text-slate-500 mb-0.5">{getGreeting()}, <span className="font-semibold text-slate-700">{profile?.full_name || 'User'}</span></p>
-            <h1 className="text-2xl font-bold text-slate-800">Dashboard {profile?.pharmacy_name ? `— ${profile.pharmacy_name}` : ''}</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mb-0.5">{getGreeting()}, <span className="font-semibold text-slate-700 dark:text-slate-200">{profile?.full_name || 'User'}</span></p>
+            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Dashboard {profile?.pharmacy_name ? `— ${profile.pharmacy_name}` : ''}</h1>
           </div>
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-slate-600">Statistik</span>
+              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Statistik</span>
               <button onClick={() => setShowStats(!showStats)}
-                className={`relative w-10 h-6 rounded-full transition-colors ${showStats ? 'bg-blue-500' : 'bg-slate-300'}`}>
+                aria-label="Toggle statistik"
+                className={`relative w-10 h-6 rounded-full transition-colors ${showStats ? 'bg-blue-500' : 'bg-slate-300 dark:bg-slate-600'}`}>
                 <span className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all ${showStats ? 'left-[18px]' : 'left-0.5'}`} />
               </button>
             </div>
-            <div className="h-6 w-[1px] bg-slate-200" />
+            <div className="h-6 w-[1px] bg-slate-200 dark:bg-slate-700" />
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-slate-600">Periode</span>
+              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Periode</span>
               <select value={dateFilter} onChange={(e) => setDateFilter(e.target.value as DateFilter)}
-                className="border border-slate-200 rounded-lg px-3 py-2 bg-white text-sm text-slate-600 cursor-pointer hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                className="border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 bg-white dark:bg-slate-900 text-sm text-slate-600 dark:text-slate-300 cursor-pointer hover:border-slate-300 dark:hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
                 <option value="week">7 Hari Terakhir</option>
                 <option value="month">30 Hari Terakhir</option>
                 <option value="all">Semua Waktu</option>
               </select>
             </div>
             <button onClick={() => navigate('/pos')}
-              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)]">
+              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-[0_4px_12px_rgba(59,130,246,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
               <Plus weight="bold" className="w-4 h-4" /> Buka Kasir
             </button>
           </div>
@@ -328,12 +329,13 @@ export default function Dashboard() {
               {alerts.map(alert => (
                 <div
                   key={alert.label}
+                  role="alert"
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium ${
                     alert.info.status === 'expired'
-                      ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                      ? 'bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800'
                       : alert.info.status === 'critical'
-                      ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                      : 'bg-yellow-50 text-yellow-700 border border-yellow-200'
+                      ? 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800'
+                      : 'bg-yellow-50 dark:bg-yellow-950 text-yellow-700 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800'
                   }`}
                 >
                   <Warning weight="fill" className="w-4 h-4 flex-shrink-0" />
@@ -355,76 +357,76 @@ export default function Dashboard() {
         {showStats && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
             {/* KPI 1: Total Sales */}
-            <div className="bg-white p-6 rounded-[24px] shadow-soft border border-slate-100 relative group cursor-pointer hover:border-blue-100 transition-colors">
-              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-500 transition-colors">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-e1 border border-slate-100 dark:border-slate-800 relative group cursor-pointer hover:border-blue-200 dark:hover:border-blue-800 transition-colors">
+              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-blue-50 dark:group-hover:bg-blue-950 group-hover:text-blue-500 transition-colors" aria-label="Detail penjualan">
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center"><Coins weight="fill" className="w-4 h-4" /></div>
-                <span className="font-medium text-slate-600">Total Penjualan</span>
+                <div className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-500 flex items-center justify-center"><Coins weight="fill" className="w-4 h-4" /></div>
+                <span className="font-medium text-slate-600 dark:text-slate-400">Total Penjualan</span>
               </div>
-              {loading ? <div className="h-8 bg-slate-100 rounded-lg animate-pulse w-2/3 mb-4" /> : (
-                <h3 className="text-3xl font-bold text-slate-800 mb-4 tracking-tight">{formatRupiah(metrics.totalSales)}</h3>
+              {loading ? <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse w-2/3 mb-4" /> : (
+                <h3 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4 tracking-tight">{formatRupiah(metrics.totalSales)}</h3>
               )}
-              <div className="text-sm"><span className="text-slate-400 font-medium text-xs">{metrics.totalTransactions} transaksi</span></div>
+              <div className="text-sm"><span className="text-slate-400 dark:text-slate-500 font-medium text-xs">{metrics.totalTransactions} transaksi</span></div>
             </div>
 
             {/* KPI 2: Items Sold */}
-            <div className="bg-white p-6 rounded-[24px] shadow-soft border border-slate-100 relative group cursor-pointer hover:border-emerald-100 transition-colors">
-              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-50 group-hover:text-emerald-500 transition-colors">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-e1 border border-slate-100 dark:border-slate-800 relative group cursor-pointer hover:border-emerald-200 dark:hover:border-emerald-800 transition-colors">
+              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-950 group-hover:text-emerald-500 transition-colors" aria-label="Detail obat terjual">
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center"><Package weight="fill" className="w-4 h-4" /></div>
-                <span className="font-medium text-slate-600">Obat Terjual</span>
+                <div className="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-500 flex items-center justify-center"><Package weight="fill" className="w-4 h-4" /></div>
+                <span className="font-medium text-slate-600 dark:text-slate-400">Obat Terjual</span>
               </div>
-              {loading ? <div className="h-8 bg-slate-100 rounded-lg animate-pulse w-1/2 mb-4" /> : (
-                <h3 className="text-3xl font-bold text-slate-800 mb-4 tracking-tight flex items-baseline gap-2">
-                  {metrics.itemsSold} <span className="text-base font-medium text-slate-400">Pcs</span>
+              {loading ? <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse w-1/2 mb-4" /> : (
+                <h3 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4 tracking-tight flex items-baseline gap-2">
+                  {metrics.itemsSold} <span className="text-base font-medium text-slate-400 dark:text-slate-500">Pcs</span>
                 </h3>
               )}
-              <div className="text-sm"><span className="text-emerald-500 font-medium bg-emerald-50 px-2 py-0.5 rounded-md text-xs">Realtime</span></div>
+              <div className="text-sm"><span className="text-emerald-500 font-medium bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-md text-xs">Realtime</span></div>
             </div>
 
             {/* KPI 3: Critical Stock */}
-            <div className="bg-white p-6 rounded-[24px] shadow-soft border border-slate-100 relative group cursor-pointer hover:border-rose-100 transition-colors" onClick={() => navigate('/medicines')}>
-              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-rose-50 group-hover:text-rose-500 transition-colors">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-e1 border border-slate-100 dark:border-slate-800 relative group cursor-pointer hover:border-rose-200 dark:hover:border-rose-800 transition-colors" onClick={() => navigate('/medicines')}>
+              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-rose-50 dark:group-hover:bg-rose-950 group-hover:text-rose-500 transition-colors" aria-label="Detail stok kritis">
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center"><Warning weight="fill" className="w-4 h-4" /></div>
-                <span className="font-medium text-slate-600">Stok Kritis</span>
+                <div className="w-8 h-8 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-500 flex items-center justify-center"><Warning weight="fill" className="w-4 h-4" /></div>
+                <span className="font-medium text-slate-600 dark:text-slate-400">Stok Kritis</span>
               </div>
-              {loading ? <div className="h-8 bg-slate-100 rounded-lg animate-pulse w-1/3 mb-4" /> : (
-                <h3 className={`text-3xl font-bold mb-4 tracking-tight flex items-baseline gap-2 ${metrics.criticalStockCount > 0 ? 'text-rose-600' : 'text-slate-800'}`}>
-                  {metrics.criticalStockCount} <span className="text-base font-medium text-slate-400">Item</span>
+              {loading ? <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse w-1/3 mb-4" /> : (
+                <h3 className={`text-3xl font-bold mb-4 tracking-tight flex items-baseline gap-2 ${metrics.criticalStockCount > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-slate-800 dark:text-slate-100'}`}>
+                  {metrics.criticalStockCount} <span className="text-base font-medium text-slate-400 dark:text-slate-500">Item</span>
                 </h3>
               )}
               <div className="text-sm">
                 {metrics.criticalStockCount > 0
-                  ? <span className="text-rose-500 font-medium bg-rose-50 px-2 py-0.5 rounded-md text-xs">Segera Restock!</span>
-                  : <span className="text-emerald-500 font-medium bg-emerald-50 px-2 py-0.5 rounded-md text-xs">Aman</span>}
+                  ? <span className="text-rose-500 font-medium bg-rose-50 dark:bg-rose-950 px-2 py-0.5 rounded-md text-xs">Segera Restock!</span>
+                  : <span className="text-emerald-500 font-medium bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-md text-xs">Aman</span>}
               </div>
             </div>
 
             {/* KPI 4: Expiry Warning */}
-            <div className="bg-white p-6 rounded-[24px] shadow-soft border border-slate-100 relative group cursor-pointer hover:border-amber-100 transition-colors" onClick={() => navigate('/medicines')}>
-              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-amber-50 group-hover:text-amber-500 transition-colors">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-e1 border border-slate-100 dark:border-slate-800 relative group cursor-pointer hover:border-amber-200 dark:hover:border-amber-800 transition-colors" onClick={() => navigate('/medicines')}>
+              <button className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-amber-50 dark:group-hover:bg-amber-950 group-hover:text-amber-500 transition-colors" aria-label="Detail kedaluwarsa">
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center"><Calendar weight="fill" className="w-4 h-4" /></div>
-                <span className="font-medium text-slate-600">Akan Kedaluwarsa</span>
+                <div className="w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-500 flex items-center justify-center"><Calendar weight="fill" className="w-4 h-4" /></div>
+                <span className="font-medium text-slate-600 dark:text-slate-400">Akan Kedaluwarsa</span>
               </div>
-              {loading ? <div className="h-8 bg-slate-100 rounded-lg animate-pulse w-1/3 mb-4" /> : (
-                <h3 className={`text-3xl font-bold mb-4 tracking-tight flex items-baseline gap-2 ${metrics.expiryCount > 0 ? 'text-amber-600' : 'text-slate-800'}`}>
-                  {metrics.expiryCount} <span className="text-base font-medium text-slate-400">Item</span>
+              {loading ? <div className="h-8 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse w-1/3 mb-4" /> : (
+                <h3 className={`text-3xl font-bold mb-4 tracking-tight flex items-baseline gap-2 ${metrics.expiryCount > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-slate-800 dark:text-slate-100'}`}>
+                  {metrics.expiryCount} <span className="text-base font-medium text-slate-400 dark:text-slate-500">Item</span>
                 </h3>
               )}
               <div className="text-sm">
                 {metrics.expiryCount > 0
-                  ? <span className="text-amber-600 font-medium bg-amber-50 px-2 py-0.5 rounded-md text-xs">Cek Rak Obat (FEFO)</span>
-                  : <span className="text-emerald-500 font-medium bg-emerald-50 px-2 py-0.5 rounded-md text-xs">Aman</span>}
+                  ? <span className="text-amber-600 dark:text-amber-400 font-medium bg-amber-50 dark:bg-amber-950 px-2 py-0.5 rounded-md text-xs">Cek Rak Obat (FEFO)</span>
+                  : <span className="text-emerald-500 font-medium bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-md text-xs">Aman</span>}
               </div>
             </div>
           </div>
@@ -433,11 +435,11 @@ export default function Dashboard() {
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Chart */}
-          <div className="lg:col-span-8 bg-white rounded-[24px] p-6 shadow-soft border border-slate-100">
+          <div className="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm"><ChartLineUp weight="fill" className="w-4 h-4" /></div>
-                <h2 className="text-lg font-bold text-slate-800">{getChartTitle()}</h2>
+                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">{getChartTitle()}</h2>
               </div>
             </div>
 
@@ -470,59 +472,59 @@ export default function Dashboard() {
               )}
             </div>
 
-            <div className="grid grid-cols-3 gap-4 border-t border-slate-100 pt-6">
+            <div className="grid grid-cols-3 gap-4 border-t border-slate-100 dark:border-slate-800 pt-6">
               <div>
-                <p className="text-sm font-medium text-slate-500 mb-1">Total {periodLabel}</p>
-                <h4 className="text-xl font-bold text-slate-800">{formatRupiah(periodTotalSales)}</h4>
+                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Total {periodLabel}</p>
+                <h4 className="text-xl font-bold text-slate-800 dark:text-slate-100">{formatRupiah(periodTotalSales)}</h4>
               </div>
               <div>
-                <p className="text-sm font-medium text-slate-500 mb-1">Rata-rata Harian</p>
-                <h4 className="text-xl font-bold text-slate-800">{formatRupiah(Math.round(avgDailySales))}</h4>
+                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Rata-rata Harian</p>
+                <h4 className="text-xl font-bold text-slate-800 dark:text-slate-100">{formatRupiah(Math.round(avgDailySales))}</h4>
               </div>
               <div>
-                <p className="text-sm font-medium text-slate-500 mb-1">Hari Ini</p>
-                <h4 className="text-xl font-bold text-blue-600">{formatRupiah(chartData.length > 0 ? chartData[chartData.length - 1].sales : 0)}</h4>
+                <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Hari Ini</p>
+                <h4 className="text-xl font-bold text-blue-600 dark:text-blue-400">{formatRupiah(chartData.length > 0 ? chartData[chartData.length - 1].sales : 0)}</h4>
               </div>
             </div>
           </div>
 
           {/* Top Selling */}
-          <div className="lg:col-span-4 bg-white rounded-[24px] p-6 shadow-soft border border-slate-100 flex flex-col">
+          <div className="lg:col-span-4 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800 flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-sm"><Star weight="fill" className="w-4 h-4" /></div>
-                <h2 className="text-lg font-bold text-slate-800">Obat Terlaris</h2>
+                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Obat Terlaris</h2>
               </div>
             </div>
 
-            <div className="flex items-center justify-between bg-slate-50 px-4 py-2.5 rounded-lg mb-2">
-              <span className="text-sm font-medium text-slate-700">Nama Produk</span>
-              <span className="text-sm font-medium text-slate-700">Terjual</span>
+            <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-4 py-2.5 rounded-lg mb-2">
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Nama Produk</span>
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Terjual</span>
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-1">
               {loading ? (
                 Array.from({ length: 5 }).map((_, i) => (
                   <div key={i} className="flex items-center justify-between p-3 animate-pulse">
-                    <div className="flex items-center gap-3"><div className="w-12 h-12 rounded-xl bg-slate-100" /><div><div className="h-4 bg-slate-100 rounded w-24 mb-2" /><div className="h-3 bg-slate-100 rounded w-16" /></div></div>
-                    <div className="h-4 bg-slate-100 rounded w-12" />
+                    <div className="flex items-center gap-3"><div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800" /><div><div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-24 mb-2" /><div className="h-3 bg-slate-100 dark:bg-slate-800 rounded w-16" /></div></div>
+                    <div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-12" />
                   </div>
                 ))
               ) : topSelling.length === 0 ? (
-                <div className="flex-1 flex items-center justify-center text-slate-400 py-8">
-                  <div className="text-center"><Star className="w-10 h-10 text-slate-200 mx-auto mb-2" /><p className="text-sm">Belum ada data penjualan</p></div>
+                <div className="flex-1 flex items-center justify-center text-slate-400 dark:text-slate-500 py-8">
+                  <div className="text-center"><Star className="w-10 h-10 text-slate-200 dark:text-slate-700 mx-auto mb-2" /><p className="text-sm">Belum ada data penjualan</p></div>
                 </div>
               ) : (
                 topSelling.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer">
+                  <div key={index} className="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-800/30 rounded-xl transition-colors cursor-pointer">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200/60 p-1 flex items-center justify-center">{getCategoryIcon(item.category)}</div>
+                      <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 overflow-hidden border border-slate-200/60 dark:border-slate-700 p-1 flex items-center justify-center">{getCategoryIcon(item.category)}</div>
                       <div>
-                        <h4 className="font-bold text-slate-800 text-sm">{item.name}</h4>
+                        <h4 className="font-bold text-slate-800 dark:text-slate-100 text-sm">{item.name}</h4>
                         <span className={`inline-block mt-0.5 px-2 py-0.5 text-[10px] font-semibold rounded-md ${getCategoryBadge(item.category)}`}>{item.category || 'Umum'}</span>
                       </div>
                     </div>
-                    <span className="text-sm font-semibold text-slate-700">{item.totalQty} {item.unit}</span>
+                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">{item.totalQty} {item.unit}</span>
                   </div>
                 ))
               )}
@@ -530,33 +532,33 @@ export default function Dashboard() {
           </div>
 
           {/* Critical Stock Alerts */}
-          <div className="lg:col-span-6 bg-white rounded-[24px] p-6 shadow-soft border border-slate-100 flex flex-col mt-6 lg:mt-0 xl:col-span-6">
+          <div className="lg:col-span-6 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800 flex flex-col mt-6 lg:mt-0 xl:col-span-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center shadow-sm"><Warning weight="fill" className="w-4 h-4" /></div>
-                <h2 className="text-lg font-bold text-slate-800">Peringatan Stok Limit</h2>
+                <div className="w-8 h-8 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-500 flex items-center justify-center shadow-sm"><Warning weight="fill" className="w-4 h-4" /></div>
+                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Peringatan Stok Limit</h2>
               </div>
-              <button onClick={() => navigate('/medicines')} className="text-sm text-blue-500 hover:text-blue-700 font-semibold">Lihat Semua</button>
+              <button onClick={() => navigate('/medicines')} className="text-sm text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 font-semibold">Lihat Semua</button>
             </div>
             
             <div className="flex-1 overflow-y-auto pr-1">
               {loading ? (
-                 <div className="p-4 text-center text-slate-400 text-sm animate-pulse">Memuat data...</div>
+                 <div className="p-4 text-center text-slate-400 dark:text-slate-500 text-sm animate-pulse">Memuat data...</div>
               ) : criticalItems.length === 0 ? (
-                 <div className="p-8 text-center bg-slate-50 rounded-xl border border-dashed border-slate-200">
-                    <Package className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                    <p className="text-sm text-slate-500 font-medium">Stok obat aman</p>
+                 <div className="p-8 text-center bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-700">
+                    <Package className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+                    <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Stok obat aman</p>
                  </div>
               ) : (
                  <div className="space-y-2">
                    {criticalItems.map((med, idx) => (
-                     <div key={idx} className="flex items-center justify-between p-3 bg-rose-50/50 hover:bg-rose-50 border border-rose-100 rounded-xl transition-colors">
+                     <div key={idx} className="flex items-center justify-between p-3 bg-rose-50/50 dark:bg-rose-950/30 hover:bg-rose-50 dark:hover:bg-rose-950/50 border border-rose-100 dark:border-rose-900 rounded-xl transition-colors">
                        <div>
-                         <p className="font-bold text-slate-800 text-sm">{med.name}</p>
-                         <p className="text-xs text-slate-500 mt-0.5">Minimal Stok: {med.min_stock} {med.unit}</p>
+                         <p className="font-bold text-slate-800 dark:text-slate-100 text-sm">{med.name}</p>
+                         <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Minimal Stok: {med.min_stock} {med.unit}</p>
                        </div>
                        <div className="text-right">
-                         <span className="font-bold text-rose-600 px-2.5 py-1 bg-white rounded-lg border border-rose-100 shadow-sm">{med.stock} {med.unit}</span>
+                         <span className="font-bold text-rose-600 dark:text-rose-400 px-2.5 py-1 bg-white dark:bg-slate-900 rounded-lg border border-rose-100 dark:border-rose-800 shadow-sm">{med.stock} {med.unit}</span>
                        </div>
                      </div>
                    ))}
@@ -566,22 +568,22 @@ export default function Dashboard() {
           </div>
 
           {/* Near Expiry Alerts */}
-          <div className="lg:col-span-6 bg-white rounded-[24px] p-6 shadow-soft border border-slate-100 flex flex-col mt-6 lg:mt-0 xl:col-span-6">
+          <div className="lg:col-span-6 bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-e1 border border-slate-100 dark:border-slate-800 flex flex-col mt-6 lg:mt-0 xl:col-span-6">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center shadow-sm"><Calendar weight="fill" className="w-4 h-4" /></div>
-                <h2 className="text-lg font-bold text-slate-800">Segera Kedaluwarsa (FEFO)</h2>
+                <div className="w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-500 flex items-center justify-center shadow-sm"><Calendar weight="fill" className="w-4 h-4" /></div>
+                <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Segera Kedaluwarsa (FEFO)</h2>
               </div>
-              <button onClick={() => navigate('/medicines')} className="text-sm text-blue-500 hover:text-blue-700 font-semibold">Lihat Semua</button>
+              <button onClick={() => navigate('/medicines')} className="text-sm text-blue-500 hover:text-blue-700 dark:hover:text-blue-300 font-semibold">Lihat Semua</button>
             </div>
             
             <div className="flex-1 overflow-y-auto pr-1">
               {loading ? (
-                 <div className="p-4 text-center text-slate-400 text-sm animate-pulse">Memuat data...</div>
+                 <div className="p-4 text-center text-slate-400 dark:text-slate-500 text-sm animate-pulse">Memuat data...</div>
               ) : expiryItems.length === 0 ? (
-                 <div className="p-8 text-center bg-slate-50 rounded-xl border border-dashed border-slate-200">
-                    <Pill className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                    <p className="text-sm text-slate-500 font-medium">Batas kedaluwarsa aman</p>
+                 <div className="p-8 text-center bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-700">
+                    <Pill className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+                    <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">Batas kedaluwarsa aman</p>
                  </div>
               ) : (
                  <div className="space-y-2">
@@ -589,13 +591,13 @@ export default function Dashboard() {
                      const status = getExpiryStatus(med.expiry_date);
                      const isExpired = status === 'expired';
                      return (
-                       <div key={idx} className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${isExpired ? 'bg-rose-50/50 hover:bg-rose-50 border-rose-100' : 'bg-amber-50/50 hover:bg-amber-50 border-amber-100'}`}>
+                       <div key={idx} className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${isExpired ? 'bg-rose-50/50 dark:bg-rose-950/30 hover:bg-rose-50 dark:hover:bg-rose-950/50 border-rose-100 dark:border-rose-900' : 'bg-amber-50/50 dark:bg-amber-950/30 hover:bg-amber-50 dark:hover:bg-amber-950/50 border-amber-100 dark:border-amber-900'}`}>
                          <div>
-                           <p className="font-bold text-slate-800 text-sm">{med.name}</p>
-                           <p className="text-xs text-slate-500 mt-0.5">Sisa Stok: {med.stock} {med.unit}</p>
+                           <p className="font-bold text-slate-800 dark:text-slate-100 text-sm">{med.name}</p>
+                           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Sisa Stok: {med.stock} {med.unit}</p>
                          </div>
                          <div className="text-right">
-                           <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border shadow-sm ${isExpired ? 'bg-rose-100 text-rose-700 border-rose-200' : 'bg-amber-100 text-amber-700 border-amber-200'}`}>
+                           <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border shadow-sm ${isExpired ? 'bg-rose-100 dark:bg-rose-900 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-800' : 'bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800'}`}>
                              {new Date(med.expiry_date).toLocaleDateString('id-ID', { month: 'short', year: 'numeric' })}
                              {isExpired ? ' (Expired)' : ''}
                            </span>
