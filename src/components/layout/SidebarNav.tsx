@@ -24,6 +24,7 @@ import {
   CaretDown,
   Queue,
   WarningOctagon,
+  IdentificationCard,
 } from '@phosphor-icons/react';
 import { useAuth } from '../../lib/AuthContext';
 import { useSidebar } from '../../lib/SidebarContext';
@@ -82,6 +83,7 @@ const navSections: NavSection[] = [
       { label: 'Buku Harian',     to: '/buku-harian-narkotika',    icon: Book },
       { label: 'Pemusnahan Obat', to: '/pemusnahan-obat',          icon: Trash },
       { label: 'Recall Obat',     to: '/recall-obat',              icon: WarningOctagon },
+      { label: 'Klaim BPJS',      to: '/bpjs-klaim',               icon: IdentificationCard },
     ],
   },
   {

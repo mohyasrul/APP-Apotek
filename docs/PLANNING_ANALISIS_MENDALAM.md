@@ -687,22 +687,19 @@ Fallback: Buat internal database obat umum yang bisa dikurasi admin
 
 ---
 
-### 6.2 Integrasi BPJS / E-Klaim [MEDIUM]
+### 6.2 Integrasi BPJS / E-Klaim [MEDIUM] ✅ IMPLEMENTED
 
 **Konteks:** Banyak apotek kecil (terutama Apotek Mandiri) adalah mitra BPJS Kesehatan Program Rujuk Balik (PRB) atau BPJS Faskes Tingkat 1.
 
-**Kewajiban:** Klaim BPJS memerlukan format khusus yang dikirim ke aplikasi PCare/Vedika.
-
-**Rekomendasi:**
-```
-Fitur: Manajemen Klaim BPJS
-- Input transaksi dengan flag "Pasien BPJS"
-- Pilih jenis: Umum / BPJS PRB / BPJS Faskes 1
-- Input nomor kartu BPJS & diagnosis
-- Generate format klaim sesuai format BPJS
-- Tracking status klaim (belum diklaim / sudah diklaim / lunas)
-- Rekap klaim per bulan untuk pengajuan ke BPJS
-```
+**Status:** ✅ Sudah diimplementasikan
+- `src/pages/BpjsKlaim.tsx` route `/bpjs-klaim` (owner only)
+- Jenis klaim: PRB (Program Rujuk Balik) / Faskes 1 / Gawat Darurat / Lainnya
+- Input nomor kartu BPJS, NIK, kode ICD-10 diagnosa, dokter, faskes perujuk
+- Item klaim dengan kalkulasi otomatis (qty × harga/satuan)
+- Status workflow: draft → diklaim → lunas (atau ditolak)
+- Cetak lembar klaim per pasien (printable HTML + tanda tangan APJ)
+- Ekspor rekap klaim bulanan ke CSV
+- DB: tabel `bpjs_claims` (migration: `20260326_bpjs_klaim.sql`)
 
 ---
 
@@ -955,7 +952,7 @@ IMPACT TINGGI, EFFORT SEDANG (Core Features - Sprint 1-3):
 
 IMPACT TINGGI, EFFORT TINGGI (Strategic - Sprint 4-8):
 ⬜ Integrasi database BPOM
-⬜ Modul BPJS/klaim
+✅ Modul BPJS/klaim management
 ✅ Pemusnahan obat (BAP)
 ✅ Buku harian narkotika/psikotropika
 ✅ Skrining resep formal
@@ -1008,7 +1005,7 @@ BULAN 5-6: SaaS Maturity
 BULAN 7-9: Growth Features
 ─────────────────────────────────────────
 □ Integrasi database BPOM (autocomplete)
-□ BPJS/klaim management
+✅ BPJS/klaim management
 ✅ Drug recall management
 □ Referral program
 □ Customer health score & churn prevention

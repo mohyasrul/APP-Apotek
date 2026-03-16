@@ -42,6 +42,7 @@ const Meso             = lazy(() => import('./pages/Meso'));
 const Bantuan          = lazy(() => import('./pages/Bantuan'));
 const RecallObat       = lazy(() => import('./pages/RecallObat'));
 const Antrian          = lazy(() => import('./pages/Antrian'));
+const BpjsKlaim        = lazy(() => import('./pages/BpjsKlaim'));
 
 // Fallback loading UI untuk route publik (Login, ResetPassword)
 function PageLoader() {
@@ -205,6 +206,7 @@ function App() {
                 <Route path="/bantuan"        element={<ProtectedRoute><Bantuan /></ProtectedRoute>} />
                 <Route path="/recall-obat"    element={<ProtectedRoute allowedRoles={['owner']}><RecallObat /></ProtectedRoute>} />
                 <Route path="/antrian"        element={<ProtectedRoute><Antrian /></ProtectedRoute>} />
+                <Route path="/bpjs-klaim"     element={<ProtectedRoute allowedRoles={['owner']}><BpjsKlaim /></ProtectedRoute>} />
                 <Route path="*"               element={<NotFound />} />
               </Routes>
             </Suspense>
