@@ -343,25 +343,24 @@ export default function Racikan() {
         </button>
       </div>
 
+      {/* Info Banner */}
+      <div className="bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800 rounded-xl p-3 mb-3 flex gap-2">
+        <Info weight="fill" className="w-4 h-4 text-violet-500 shrink-0 mt-0.5" />
+        <p className="text-xs text-violet-700 dark:text-violet-300">
+          <span className="font-semibold">PMK 73/2016 Pasal 21-22:</span> Sediaan farmasi racikan harus menggunakan formula terdokumentasi. Cetak etiket obat setelah racikan selesai dibuat.
+        </p>
+      </div>
+
       {/* Search */}
-      <div className="relative mb-6">
+      <div className="relative mb-4">
         <MagnifyingGlass className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
         <input
           type="text"
           placeholder="Cari nama racikan..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-900 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+          className="w-full pl-10 pr-4 py-2.5 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-900 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-600"
         />
-      </div>
-
-      {/* Info Banner */}
-      <div className="bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800 rounded-xl p-4 mb-6 flex gap-3">
-        <Info weight="fill" className="w-5 h-5 text-violet-500 shrink-0 mt-0.5" />
-        <div className="text-sm text-violet-700 dark:text-violet-300">
-          <span className="font-semibold">PMK 73/2016 Pasal 21-22:</span> Pelayanan sediaan farmasi racikan harus menggunakan
-          formula yang terdokumentasi. Cetak etiket obat setelah racikan selesai dibuat.
-        </div>
       </div>
 
       {/* List */}
@@ -460,8 +459,8 @@ export default function Racikan() {
 
       {/* Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50">
-          <div className="bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[95vh] flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full sm:max-w-2xl max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800 shrink-0">
               <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100">
                 {selected ? 'Edit Formula Racikan' : 'Formula Racikan Baru'}
@@ -635,8 +634,8 @@ export default function Racikan() {
 
       {/* Etiket Modal */}
       {showEtiketModal && selectedForEtiket && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60">
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-md">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-md animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800">
               <h2 className="font-bold text-gray-900 dark:text-gray-100">Cetak Etiket Racikan</h2>
               <button onClick={() => setShowEtiketModal(false)} className="p-2 rounded-xl text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">

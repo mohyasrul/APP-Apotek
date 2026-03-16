@@ -46,13 +46,25 @@ interface NavSection {
 const navSections: NavSection[] = [
   {
     items: [
-      { label: 'Dashboard',   to: '/',          icon: SquaresFour },
-      { label: 'Kasir / POS', to: '/pos',        icon: Receipt },
-      { label: 'Resep',       to: '/resep',      icon: ClipboardText },
-      { label: 'Pengadaan',   to: '/pengadaan',  icon: Truck },
-      { label: 'Stok Obat',   to: '/medicines',  icon: Package },
-      { label: 'Pelanggan',   to: '/customers',  icon: UsersFour },
-      { label: 'Antrian',     to: '/antrian',    icon: Queue },
+      { label: 'Dashboard', to: '/', icon: SquaresFour },
+    ],
+  },
+  {
+    sectionLabel: 'TRANSAKSI',
+    collapsible: true,
+    items: [
+      { label: 'Kasir / POS', to: '/pos',       icon: Receipt },
+      { label: 'Resep',       to: '/resep',     icon: ClipboardText },
+      { label: 'Antrian',     to: '/antrian',   icon: Queue },
+      { label: 'Pelanggan',   to: '/customers', icon: UsersFour },
+    ],
+  },
+  {
+    sectionLabel: 'INVENTORI',
+    collapsible: true,
+    items: [
+      { label: 'Stok Obat',  to: '/medicines', icon: Package },
+      { label: 'Pengadaan',  to: '/pengadaan', icon: Truck },
     ],
   },
   {

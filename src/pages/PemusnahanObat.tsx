@@ -411,8 +411,8 @@ export default function PemusnahanObat() {
 
       {/* Detail Modal */}
       {selected && (
-        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={() => setSelected(null)}>
-          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setSelected(null)}>
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800">
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-gray-100">{selected.destruction_number}</h3>
@@ -474,8 +474,8 @@ export default function PemusnahanObat() {
 
       {/* Create Modal */}
       {showCreate && (
-        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={() => setShowCreate(false)}>
-          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setShowCreate(false)}>
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800 shrink-0">
               <h3 className="font-bold text-gray-900 dark:text-gray-100">Buat Berita Acara Pemusnahan</h3>
               <button onClick={() => setShowCreate(false)} className="p-1 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg">

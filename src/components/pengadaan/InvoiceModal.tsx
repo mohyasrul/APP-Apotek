@@ -108,8 +108,8 @@ export function InvoiceModal({ onClose, onSuccess }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm shadow-2xl overflow-y-auto">
-      <div className="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-lg shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm overflow-y-auto">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl w-full max-w-lg shadow-2xl animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-zinc-800">
           <div className="flex items-center gap-3">
             <div className="p-2.5 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-500/20">
@@ -120,7 +120,7 @@ export function InvoiceModal({ onClose, onSuccess }: Props) {
               <p className="text-xs text-gray-500">Record tagihan masuk dari suplier</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
+          <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
             <X weight="bold" className="w-5 h-5" />
           </button>
         </div>

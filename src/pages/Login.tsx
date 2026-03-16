@@ -306,7 +306,7 @@ export default function Login() {
 
       {/* Forgot Password Modal */}
       {showForgotModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div role="dialog" aria-modal="true" aria-labelledby="forgot-pw-title" className="bg-white dark:bg-zinc-900 rounded-2xl shadow-e4 w-full max-w-sm p-6 border border-gray-100 dark:border-zinc-800">
             <div className="flex items-center justify-between mb-4">
               <h2 id="forgot-pw-title" className="text-base font-semibold text-gray-900 dark:text-zinc-100">Reset Password</h2>

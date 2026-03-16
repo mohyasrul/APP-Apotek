@@ -729,7 +729,7 @@ export default function Laporan() {
       {/* Transaction Detail Modal */}
       {selectedTrx && !showVoidModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm" onClick={() => setSelectedTrx(null)}>
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
             <div className="px-6 py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Receipt weight="fill" className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
@@ -822,7 +822,7 @@ export default function Laporan() {
       {/* Void Confirmation Modal */}
       {selectedTrx && showVoidModal && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm">
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="px-6 py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Prohibit weight="fill" className="w-5 h-5 text-rose-500" />

@@ -740,7 +740,7 @@ export default function Settings() {
 
       {/* ── Modal: Undang Kasir ── */}
       {showInviteModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           role="dialog" aria-modal="true" aria-labelledby="invite-modal-title">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6">
             <div className="flex items-center justify-between mb-6">
@@ -834,7 +834,7 @@ export default function Settings() {
 
       {/* ── Modal: Lepas Kasir ── */}
       {deactivateTarget && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           role="dialog" aria-modal="true" aria-label="Konfirmasi Lepas Kasir">
           <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm p-6 text-center">
             <Warning weight="fill" className="w-10 h-10 text-amber-500 mx-auto mb-3" />

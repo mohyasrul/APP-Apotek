@@ -55,7 +55,7 @@ export function SupplierModal({ supplier, onClose, onSuccess }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-xl shadow-xl border border-gray-100 dark:border-zinc-800">
+      <div className="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-xl shadow-2xl border border-gray-100 dark:border-zinc-800 animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-zinc-800">
           <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
             <Buildings className="w-5 h-5 text-indigo-600" />

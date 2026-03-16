@@ -245,14 +245,14 @@ export function PurchaseOrderList() {
       {/* Detail Modal */}
       {selected && (
         <div
-          className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setSelected(null)}
           role="dialog"
           aria-modal="true"
           aria-labelledby="sp-detail-title"
         >
           <div
-            className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl max-w-lg w-full max-h-[80vh] overflow-y-auto"
+            className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200"
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800">

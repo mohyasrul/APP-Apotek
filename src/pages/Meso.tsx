@@ -176,12 +176,11 @@ export default function Meso() {
       </div>
 
       {/* Info box */}
-      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6 flex gap-3">
-        <Info weight="fill" className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-        <div className="text-sm text-amber-700 dark:text-amber-300">
-          <p className="font-semibold mb-1">Kewajiban Farmakovigilans</p>
-          <p>Apotek berperan aktif dalam Farmakovigilans sesuai PMK 73/2016. Setiap MESO yang serius atau baru harus dilaporkan ke BPOM melalui <strong>e-MESO</strong> (<a href="https://e-meso.pom.go.id" target="_blank" rel="noopener noreferrer" className="underline">e-meso.pom.go.id</a>).</p>
-        </div>
+      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3 mb-3 flex gap-2">
+        <Info weight="fill" className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+        <p className="text-xs text-amber-700 dark:text-amber-300">
+          <span className="font-semibold">Farmakovigilans (PMK 73/2016):</span> MESO yang serius atau baru harus dilaporkan ke BPOM melalui <a href="https://e-meso.pom.go.id" target="_blank" rel="noopener noreferrer" className="underline font-medium">e-meso.pom.go.id</a>.
+        </p>
       </div>
 
       {/* Search */}
@@ -280,8 +279,8 @@ export default function Meso() {
 
       {/* Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="meso-form-title" className="bg-white dark:bg-zinc-900 w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh]">
+        <div className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div role="dialog" aria-modal="true" aria-labelledby="meso-form-title" className="bg-white dark:bg-zinc-900 w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-zinc-800 shrink-0">
               <div className="flex items-center gap-2">
                 <Warning weight="fill" className="w-5 h-5 text-rose-500" />
@@ -419,8 +418,8 @@ export default function Meso() {
 
       {/* Delete Confirmation */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="meso-delete-title" className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-2xl max-w-sm w-full border border-gray-100 dark:border-zinc-800">
+        <div className="fixed inset-0 z-50 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div role="dialog" aria-modal="true" aria-labelledby="meso-delete-title" className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-2xl max-w-sm w-full border border-gray-100 dark:border-zinc-800 animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-rose-100 dark:bg-rose-900/40 rounded-xl flex items-center justify-center">
                 <Trash weight="fill" className="w-5 h-5 text-rose-500" />

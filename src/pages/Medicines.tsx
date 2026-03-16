@@ -723,7 +723,7 @@ export default function Medicines() {
       {showForm && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm" onClick={() => setShowForm(false)}
           role="dialog" aria-modal="true" aria-label={editingId ? 'Edit Obat' : 'Tambah Obat'}>
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
             <div className="px-6 py-4 border-b border-gray-100 dark:border-zinc-800 flex items-center justify-between flex-shrink-0">
               <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100">{editingId ? 'Edit Obat' : 'Tambah Obat Baru'}</h3>
               <button onClick={() => setShowForm(false)} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full"><X weight="bold" className="w-5 h-5" /></button>
