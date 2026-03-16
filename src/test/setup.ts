@@ -127,16 +127,18 @@ vi.mock('../lib/supabase', () => ({
 // Renders motion.div etc. as plain divs — avoids animation timers in tests
 vi.mock('framer-motion', async (importOriginal) => {
   const actual = await importOriginal<typeof import('framer-motion')>();
-  const createProxy = (tag: string) => {
-    const { createElement } = await import('react');
+  // Import React once at the async factory level — avoids await inside non-async createProxy
+  const { createElement } = await import('react');
+
+  const createProxy = (tag: string) =>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return ({ children, ...props }: any) => {
+    ({ children, ...props }: any) => {
       // Strip framer-specific props that cause React warnings
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { initial, animate, exit, transition, variants, whileHover, whileTap, whileFocus, layout, layoutId, ...rest } = props;
       return createElement(tag, rest, children);
     };
-  };
+
   return {
     ...actual,
     motion: new Proxy(
