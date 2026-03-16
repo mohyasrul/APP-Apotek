@@ -145,6 +145,76 @@ export default function Sipnap() {
     toast.success('File CSV berhasil diunduh');
   };
 
+  // Export to Excel (XML Spreadsheet format)
+  const handleExportExcel = () => {
+    if (items.length === 0) {
+      toast.error('Tidak ada data untuk diekspor');
+      return;
+    }
+
+    const formLabel = jenis === 'narkotika' ? 'FORM A - NARKOTIKA' : 'FORM B - PSIKOTROPIKA';
+    const pharmacyName = profile?.pharmacy_name || '-';
+    const siaNumber = profile?.sia_number || '-';
+    const period = `${MONTHS[bulan]} ${tahun}`;
+
+    const esc = (s: string | number) =>
+      String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+    const headerRows = `
+      <Row><Cell ss:MergeAcross="7"><Data ss:Type="String">LAPORAN SIPNAP ${esc(formLabel)}</Data></Cell></Row>
+      <Row><Cell ss:MergeAcross="7"><Data ss:Type="String">Apotek: ${esc(pharmacyName)} | SIA: ${esc(siaNumber)} | Periode: ${esc(period)}</Data></Cell></Row>
+      <Row/>
+    `;
+
+    const colHeader = `
+      <Row>
+        <Cell><Data ss:Type="String">No</Data></Cell>
+        <Cell><Data ss:Type="String">Nama Obat</Data></Cell>
+        <Cell><Data ss:Type="String">Satuan</Data></Cell>
+        <Cell><Data ss:Type="String">Saldo Awal</Data></Cell>
+        <Cell><Data ss:Type="String">Penerimaan</Data></Cell>
+        <Cell><Data ss:Type="String">Pengeluaran</Data></Cell>
+        <Cell><Data ss:Type="String">Saldo Akhir</Data></Cell>
+        <Cell><Data ss:Type="String">Keterangan</Data></Cell>
+      </Row>
+    `;
+
+    const dataRows = items.map((item, i) => `
+      <Row>
+        <Cell><Data ss:Type="Number">${i + 1}</Data></Cell>
+        <Cell><Data ss:Type="String">${esc(item.medicine_name)}</Data></Cell>
+        <Cell><Data ss:Type="String">${esc(item.unit)}</Data></Cell>
+        <Cell><Data ss:Type="Number">${item.saldo_awal}</Data></Cell>
+        <Cell><Data ss:Type="Number">${item.penerimaan}</Data></Cell>
+        <Cell><Data ss:Type="Number">${item.pengeluaran}</Data></Cell>
+        <Cell><Data ss:Type="Number">${item.saldo_akhir}</Data></Cell>
+        <Cell><Data ss:Type="String">${esc(item.keterangan)}</Data></Cell>
+      </Row>
+    `).join('');
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name="SIPNAP">
+    <Table>
+      ${headerRows}
+      ${colHeader}
+      ${dataRows}
+    </Table>
+  </Worksheet>
+</Workbook>`;
+
+    const blob = new Blob([xml], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `SIPNAP_${jenis === 'narkotika' ? 'FormA' : 'FormB'}_${MONTHS[bulan]}_${tahun}.xls`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('File Excel berhasil diunduh');
+  };
+
   // Print
   const handlePrint = () => {
     if (items.length === 0) {
@@ -319,6 +389,14 @@ export default function Sipnap() {
           >
             <Download weight="bold" className="w-4 h-4" />
             Export CSV
+          </button>
+          <button
+            onClick={handleExportExcel}
+            disabled={items.length === 0}
+            className="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-xl text-sm font-semibold disabled:opacity-50 transition-colors"
+          >
+            <Download weight="bold" className="w-4 h-4" />
+            Export Excel
           </button>
           <button
             onClick={handlePrint}

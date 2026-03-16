@@ -69,7 +69,9 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
   }, [fetchSubscription]);
 
   const checkFeature = useCallback((feature: string): boolean => {
-    if (!subscription?.plan) return true; // Default allow if no subscription system
+    // DEV MODE: all features unlocked during development (import.meta.env.DEV)
+    if (import.meta.env.DEV) return true;
+    if (!subscription?.plan) return true; // Fail-open if no subscription system
     return subscription.plan.features.includes(feature);
   }, [subscription]);
 

@@ -22,6 +22,9 @@ import {
   ArrowLineLeft,
   ArrowLineRight,
   CaretDown,
+  Queue,
+  WarningOctagon,
+  IdentificationCard,
 } from '@phosphor-icons/react';
 import { useAuth } from '../../lib/AuthContext';
 import { useSidebar } from '../../lib/SidebarContext';
@@ -49,6 +52,7 @@ const navSections: NavSection[] = [
       { label: 'Pengadaan',   to: '/pengadaan',  icon: Truck },
       { label: 'Stok Obat',   to: '/medicines',  icon: Package },
       { label: 'Pelanggan',   to: '/customers',  icon: UsersFour },
+      { label: 'Antrian',     to: '/antrian',    icon: Queue },
     ],
   },
   {
@@ -78,6 +82,8 @@ const navSections: NavSection[] = [
       { label: 'SIPNAP',          to: '/sipnap',                   icon: FileText },
       { label: 'Buku Harian',     to: '/buku-harian-narkotika',    icon: Book },
       { label: 'Pemusnahan Obat', to: '/pemusnahan-obat',          icon: Trash },
+      { label: 'Recall Obat',     to: '/recall-obat',              icon: WarningOctagon },
+      { label: 'Klaim BPJS',      to: '/bpjs-klaim',               icon: IdentificationCard },
     ],
   },
   {
@@ -85,8 +91,8 @@ const navSections: NavSection[] = [
     ownerOnly: true,
     collapsible: true,
     items: [
-      { label: 'Stock Opname', to: '/stock-opname', icon: Clipboard },
-      { label: 'Langganan',    to: '/billing',       icon: CreditCard },
+      { label: 'Stock Opname', to: '/stock-opname',  icon: Clipboard },
+      { label: 'Langganan',    to: '/billing',        icon: CreditCard },
     ],
   },
 ];
@@ -184,7 +190,8 @@ export function SidebarNav() {
         {/* Scrollable nav */}
         <nav className="flex-1 overflow-y-auto py-2 custom-scrollbar" aria-label="Menu utama">
           {navSections.map((section, si) => {
-            if (section.ownerOnly && !isOwner) return null;
+            // DEV MODE: ownerOnly filter bypassed during development (import.meta.env.DEV)
+            if (!import.meta.env.DEV && section.ownerOnly && !isOwner) return null;
 
             const isCollapsible = section.collapsible && section.sectionLabel && !collapsed;
             const isExpanded = section.sectionLabel ? expandedSections[section.sectionLabel] ?? false : true;

@@ -69,16 +69,23 @@ export default function PemusnahanObat() {
   // Detail view
   const [selected, setSelected] = useState<DrugDestruction | null>(null);
 
-  // Load records from localStorage (simulated - no real DB table for this yet)
+  // Load records from Supabase
   useEffect(() => {
     if (!effectiveUserId) return;
-    const stored = localStorage.getItem(`pemusnahan_${effectiveUserId}`);
-    if (stored) {
-      try {
-        setRecords(JSON.parse(stored));
-      } catch { /* ignore */ }
-    }
-    setLoading(false);
+    (async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('drug_destructions')
+        .select('*')
+        .eq('user_id', effectiveUserId)
+        .order('created_at', { ascending: false });
+      if (error) {
+        toast.error('Gagal memuat data pemusnahan');
+      } else {
+        setRecords((data as DrugDestruction[]) || []);
+      }
+      setLoading(false);
+    })();
   }, [effectiveUserId]);
 
   // Load medicines for item picker
@@ -94,14 +101,8 @@ export default function PemusnahanObat() {
     })();
   }, [effectiveUserId, showCreate]);
 
-  const saveRecords = (updated: DrugDestruction[]) => {
-    setRecords(updated);
-    if (effectiveUserId) {
-      localStorage.setItem(`pemusnahan_${effectiveUserId}`, JSON.stringify(updated));
-    }
-  };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!form.penanggung_jawab.trim()) { toast.error('Penanggung jawab wajib diisi'); return; }
     if (!form.saksi_1.trim()) { toast.error('Saksi 1 wajib diisi'); return; }
     if (!form.saksi_2.trim()) { toast.error('Saksi 2 wajib diisi'); return; }
@@ -116,8 +117,7 @@ export default function PemusnahanObat() {
       return med?.category === 'narkotika' || med?.category === 'psikotropika';
     });
 
-    const record: DrugDestruction = {
-      id: crypto.randomUUID(),
+    const record = {
       user_id: effectiveUserId || '',
       destruction_number: generateDestructionNumber(),
       destruction_date: form.destruction_date,
@@ -130,33 +130,81 @@ export default function PemusnahanObat() {
       notes: hasNarcotic
         ? `PERHATIAN: Mengandung narkotika/psikotropika — pemusnahan WAJIB disaksikan petugas BPOM.${form.notes ? ' ' + form.notes : ''}`
         : form.notes,
-      created_at: new Date().toISOString(),
     };
 
-    saveRecords([record, ...records]);
+    const { data, error } = await supabase
+      .from('drug_destructions')
+      .insert(record)
+      .select()
+      .single();
+
+    if (error) {
+      toast.error('Gagal menyimpan: ' + error.message);
+    } else {
+      setRecords([data as DrugDestruction, ...records]);
+      setShowCreate(false);
+      setDraftItems([{ medicine_id: '', medicine_name: '', batch_number: '', expiry_date: '', quantity: 0, unit: '', alasan: 'kadaluarsa' }]);
+      toast.success('Berita Acara Pemusnahan berhasil dibuat');
+    }
     setSaving(false);
-    setShowCreate(false);
-    setDraftItems([{ medicine_id: '', medicine_name: '', batch_number: '', expiry_date: '', quantity: 0, unit: '', alasan: 'kadaluarsa' }]);
-    toast.success('Berita Acara Pemusnahan berhasil dibuat');
   };
 
-  const markCompleted = (id: string) => {
-    const updated = records.map(r => r.id === id ? { ...r, status: 'completed' as const } : r);
-    saveRecords(updated);
+  const markCompleted = async (id: string) => {
+    const record = records.find(r => r.id === id);
+    if (!record) return;
+
+    const { error } = await supabase
+      .from('drug_destructions')
+      .update({ status: 'completed' })
+      .eq('id', id);
+
+    if (error) { toast.error('Gagal memperbarui status'); return; }
+
+    // Decrement stock for each item with a valid medicine_id
+    const stockErrors: string[] = [];
+    for (const item of record.items) {
+      if (item.medicine_id && item.quantity > 0) {
+        const { error: rpcErr } = await supabase.rpc('decrement_stock', {
+          p_medicine_id: item.medicine_id,
+          p_qty: item.quantity,
+        });
+        if (rpcErr) {
+          stockErrors.push(`${item.medicine_name}: ${rpcErr.message}`);
+        }
+      }
+    }
+
+    setRecords(records.map(r => r.id === id ? { ...r, status: 'completed' as const } : r));
     setSelected(null);
-    toast.success('Pemusnahan ditandai selesai');
+    if (stockErrors.length > 0) {
+      toast.warning(`Pemusnahan selesai, namun pengurangan stok gagal untuk: ${stockErrors.join('; ')}`);
+    } else {
+      toast.success('Pemusnahan ditandai selesai & stok dikurangi');
+    }
   };
 
-  const markScheduled = (id: string) => {
-    const updated = records.map(r => r.id === id ? { ...r, status: 'scheduled' as const } : r);
-    saveRecords(updated);
+  const markScheduled = async (id: string) => {
+    const { error } = await supabase
+      .from('drug_destructions')
+      .update({ status: 'scheduled' })
+      .eq('id', id);
+
+    if (error) { toast.error('Gagal memperbarui status'); return; }
+
+    setRecords(records.map(r => r.id === id ? { ...r, status: 'scheduled' as const } : r));
     setSelected(null);
     toast.success('Pemusnahan dijadwalkan');
   };
 
-  const deleteRecord = (id: string) => {
-    const updated = records.filter(r => r.id !== id);
-    saveRecords(updated);
+  const deleteRecord = async (id: string) => {
+    const { error } = await supabase
+      .from('drug_destructions')
+      .delete()
+      .eq('id', id);
+
+    if (error) { toast.error('Gagal menghapus: ' + error.message); return; }
+
+    setRecords(records.filter(r => r.id !== id));
     setSelected(null);
     toast.success('Record dihapus');
   };

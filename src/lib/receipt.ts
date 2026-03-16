@@ -603,3 +603,162 @@ export function printEtiketObat(items: EtiketItem[]): void {
   iframe.contentWindow?.print();
   setTimeout(removeIframe, 60_000);
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Print SP (Surat Pesanan) — Permenkes No. 3/2015
+// Format resmi: header apotek, info SP, tabel item, blok tanda tangan APJ
+// ─────────────────────────────────────────────────────────────────────────────
+export type SPItem = {
+  no: number;
+  medicine_name: string;
+  quantity: number;
+  unit: string;
+  estimated_price: number;
+};
+
+export type SPData = {
+  order_number: string;
+  order_date: string;
+  order_type: string;
+  supplier_name: string;
+  supplier_address?: string | null;
+  pharmacy_name: string;
+  pharmacy_address?: string | null;
+  sia_number?: string | null;
+  apoteker_name?: string | null;
+  sipa_number?: string | null;
+  items: SPItem[];
+};
+
+export function printSuratPesanan(data: SPData): void {
+  const esc = escapeHtml;
+
+  const typeLabel: Record<string, string> = {
+    reguler: 'REGULER',
+    narkotika: 'NARKOTIKA (Per Permenkes No. 3/2015)',
+    psikotropika: 'PSIKOTROPIKA (Per Permenkes No. 3/2015)',
+    prekursor: 'PREKURSOR FARMASI',
+    oot: 'OBAT-OBAT TERTENTU (OOT)',
+  };
+
+  const isNarkPsiko = data.order_type === 'narkotika' || data.order_type === 'psikotropika';
+
+  const rows = data.items.map(item => `
+    <tr>
+      <td class="center">${item.no}</td>
+      <td>${esc(item.medicine_name)}</td>
+      <td class="right">${item.quantity}</td>
+      <td class="center">${esc(item.unit)}</td>
+      <td class="right">${item.estimated_price > 0 ? item.estimated_price.toLocaleString('id-ID') : '-'}</td>
+    </tr>
+  `).join('');
+
+  const narcNote = isNarkPsiko
+    ? `<div class="narco-note">
+        &#9888; SP ${esc(typeLabel[data.order_type])} ini harus dicetak pada kertas resmi (3 rangkap) dan
+        ditandatangani basah oleh Apoteker Penanggung Jawab (APJ) sebelum diserahkan ke PBF.
+       </div>`
+    : '';
+
+  const html = `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>SP ${esc(data.order_number)}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; font-size: 11px; color: #000; padding: 20mm 15mm; }
+    .header { border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start; }
+    .pharmacy-name { font-size: 16px; font-weight: bold; }
+    .pharmacy-info { font-size: 10px; color: #333; line-height: 1.5; }
+    .sp-title { text-align: right; }
+    .sp-title h2 { font-size: 14px; font-weight: bold; text-transform: uppercase; }
+    .sp-title .sp-type { font-size: 11px; color: #444; margin-top: 2px; }
+    .sp-title .sp-number { font-size: 11px; font-weight: bold; margin-top: 4px; }
+    .meta { display: flex; gap: 20px; margin-bottom: 12px; }
+    .meta-block { flex: 1; }
+    .meta-block label { font-weight: bold; font-size: 10px; color: #555; display: block; margin-bottom: 2px; }
+    .meta-block p { font-size: 11px; border-bottom: 1px solid #aaa; padding-bottom: 2px; min-height: 18px; }
+    table.items { width: 100%; border-collapse: collapse; margin: 10px 0; }
+    table.items th { background: #f0f0f0; border: 1px solid #999; padding: 5px 6px; font-size: 10px; text-align: left; }
+    table.items td { border: 1px solid #ccc; padding: 4px 6px; font-size: 10px; }
+    .center { text-align: center; }
+    .right { text-align: right; }
+    .signatures { display: flex; justify-content: space-between; margin-top: 40px; }
+    .sig-box { text-align: center; width: 45%; }
+    .sig-box .role { font-size: 10px; font-weight: bold; margin-bottom: 50px; }
+    .sig-box .name-line { border-top: 1px solid #000; padding-top: 4px; font-size: 10px; min-height: 20px; }
+    .narco-note { background: #fff8e1; border: 1px solid #e6a817; border-radius: 4px; padding: 8px 10px; font-size: 10px; margin: 10px 0; color: #856404; }
+    .footer-note { font-size: 9px; color: #666; margin-top: 8px; }
+    @media print { body { padding: 15mm 12mm; } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="pharmacy-name">${esc(data.pharmacy_name)}</div>
+      <div class="pharmacy-info">
+        ${data.pharmacy_address ? esc(data.pharmacy_address) + '<br>' : ''}
+        ${data.sia_number ? 'No. SIA: ' + esc(data.sia_number) : ''}
+      </div>
+    </div>
+    <div class="sp-title">
+      <h2>SURAT PESANAN</h2>
+      <div class="sp-type">${esc(typeLabel[data.order_type] || data.order_type.toUpperCase())}</div>
+      <div class="sp-number">No: ${esc(data.order_number)}</div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div class="meta-block">
+      <label>KEPADA (PBF)</label>
+      <p>${esc(data.supplier_name)}${data.supplier_address ? ' \u2013 ' + esc(data.supplier_address) : ''}</p>
+    </div>
+    <div class="meta-block">
+      <label>TANGGAL</label>
+      <p>${new Date(data.order_date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+    </div>
+  </div>
+
+  ${narcNote}
+
+  <p style="margin-bottom:8px">Yang bertanda tangan di bawah ini, kami meminta dengan hormat agar Saudara berkenan mengirimkan obat-obatan sebagai berikut:</p>
+
+  <table class="items">
+    <thead>
+      <tr>
+        <th class="center" style="width:30px">No.</th>
+        <th>Nama Obat / Sediaan / Kekuatan</th>
+        <th class="right" style="width:60px">Jml</th>
+        <th class="center" style="width:50px">Satuan</th>
+        <th class="right" style="width:100px">Harga Est. (Rp)</th>
+      </tr>
+    </thead>
+    <tbody>${rows}</tbody>
+  </table>
+
+  <p class="footer-note">* Harga estimasi, dapat berubah sesuai faktur PBF.</p>
+
+  <div class="signatures">
+    <div class="sig-box">
+      <div class="role">Apoteker Pemesan</div>
+      <div class="name-line">
+        ${esc(data.apoteker_name || '-')}<br>
+        ${data.sipa_number ? '<small>SIPA: ' + esc(data.sipa_number) + '</small>' : ''}
+      </div>
+    </div>
+    <div class="sig-box">
+      <div class="role">Mengetahui,</div>
+      <div class="name-line">&nbsp;</div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+  const w = window.open('', '_blank', 'width=960,height=720');
+  if (w) {
+    w.document.write(html);
+    w.document.close();
+    setTimeout(() => { w.focus(); w.print(); }, 400);
+  }
+}

@@ -40,6 +40,9 @@ const LaporanKeuangan  = lazy(() => import('./pages/LaporanKeuangan'));
 const Racikan          = lazy(() => import('./pages/Racikan'));
 const Meso             = lazy(() => import('./pages/Meso'));
 const Bantuan          = lazy(() => import('./pages/Bantuan'));
+const RecallObat       = lazy(() => import('./pages/RecallObat'));
+const Antrian          = lazy(() => import('./pages/Antrian'));
+const BpjsKlaim        = lazy(() => import('./pages/BpjsKlaim'));
 
 // Fallback loading UI untuk route publik (Login, ResetPassword)
 function PageLoader() {
@@ -118,7 +121,8 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
     );
   }
 
-  if (allowedRoles && profile && !allowedRoles.includes(profile.role)) {
+  // DEV MODE: role restriction bypassed during development (import.meta.env.DEV)
+  if (!import.meta.env.DEV && allowedRoles && profile && !allowedRoles.includes(profile.role)) {
     return <Navigate to="/" replace />;
   }
 
@@ -201,6 +205,9 @@ function App() {
                 <Route path="/racikan"        element={<ProtectedRoute><Racikan /></ProtectedRoute>} />
                 <Route path="/meso"           element={<ProtectedRoute><Meso /></ProtectedRoute>} />
                 <Route path="/bantuan"        element={<ProtectedRoute><Bantuan /></ProtectedRoute>} />
+                <Route path="/recall-obat"    element={<ProtectedRoute allowedRoles={['owner']}><RecallObat /></ProtectedRoute>} />
+                <Route path="/antrian"        element={<ProtectedRoute><Antrian /></ProtectedRoute>} />
+                <Route path="/bpjs-klaim"     element={<ProtectedRoute allowedRoles={['owner']}><BpjsKlaim /></ProtectedRoute>} />
                 <Route path="*"               element={<NotFound />} />
               </Routes>
             </Suspense>
