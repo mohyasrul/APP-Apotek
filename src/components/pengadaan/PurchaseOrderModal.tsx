@@ -352,14 +352,14 @@ export function PurchaseOrderModal({ onClose, onSuccess }: Props) {
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-full transition-colors"
+              className="px-5 py-2.5 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-xl transition-colors"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={isSubmitting || items.length === 0 || !selectedSupplier}
-              className="px-8 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-full shadow-lg shadow-indigo-500/30 transition-all active:scale-95 disabled:opacity-50"
+              className="px-8 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all active:scale-95 disabled:opacity-50"
             >
               {isSubmitting ? 'Menyimpan...' : 'Buat SP Draft'}
             </button>

@@ -35,9 +35,8 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
     }
 
     if (payAmount > remaining) {
-      toast.warning(`Jumlah pembayaran (${formatRupiah(payAmount)}) melebih sisa hutang (${formatRupiah(remaining)})`);
-      // Keep going, maybe they are overpaying or something? Actually usually better to cap it or ask confirm.
-      if (!confirm('Jumlah bayar melebihi sisa hutang. Lanjutkan?')) return;
+      toast.error(`Jumlah pembayaran (${formatRupiah(payAmount)}) melebihi sisa hutang (${formatRupiah(remaining)}). Sesuaikan jumlah pembayaran.`);
+      return;
     }
 
     setLoading(true);
@@ -67,7 +66,7 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm">
       <div className="bg-white dark:bg-zinc-900 rounded-xl w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-zinc-800">
           <div className="flex items-center gap-3">
@@ -79,7 +78,7 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
               <p className="text-xs text-gray-500">Bayar hutang faktur ke suplier</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
+          <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg transition-colors">
             <X weight="bold" className="w-5 h-5" />
           </button>
         </div>

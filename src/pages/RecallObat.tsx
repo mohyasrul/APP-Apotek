@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   Warning, Plus, MagnifyingGlass, X, FloppyDisk, Printer,
-  CheckCircle, Archive, ArrowClockwise, Info, Trash
+  CheckCircle, Archive, ArrowClockwise, Trash
 } from '@phosphor-icons/react';
 import { toast } from 'sonner';
 import { supabase } from '../lib/supabase';
@@ -495,9 +495,10 @@ export default function RecallObat() {
                     type="text"
                     value={draft.batch_numbers}
                     onChange={e => setDraft(d => ({ ...d, batch_numbers: e.target.value }))}
-                    placeholder="cth: BT2025001 atau * untuk semua batch"
+                    placeholder="cth: BT2025001, BT2025002"
                     className="w-full px-4 py-2.5 border border-gray-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-200 dark:placeholder-gray-500 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
                   />
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Ketik * untuk menandai semua batch terdampak.</p>
                 </div>
               </div>
 

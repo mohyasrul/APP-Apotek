@@ -67,17 +67,14 @@ export function InvoiceList() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white dark:bg-zinc-800 p-5 rounded-xl border border-gray-100 dark:border-zinc-700 gap-4">
+      <div className="flex justify-between items-center bg-white dark:bg-zinc-800 p-4 rounded-xl border border-gray-100 dark:border-zinc-700 gap-4">
         <div>
-          <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100 flex items-center gap-2">
-            <Receipt weight="fill" className="text-indigo-600" />
-            Daftar Faktur PBF & A/P
-          </h2>
+          <h2 className="font-bold text-gray-900 dark:text-gray-100">Daftar Faktur PBF & A/P</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">Pencatatan tagihan masuk dari Suplier dan jatuh tempo pembayaran</p>
         </div>
         <button
           onClick={() => setShowInvoiceModal(true)}
-          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md active:scale-95"
+          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors shrink-0"
         >
           <Plus weight="bold" /> Catat Faktur Baru
         </button>
@@ -89,7 +86,7 @@ export function InvoiceList() {
           <p className="font-medium">Menyinkronkan data faktur...</p>
         </div>
       ) : invoices.length === 0 ? (
-        <div className="py-20 text-center text-gray-400 flex flex-col items-center border border-dashed border-gray-200 dark:border-zinc-800 rounded-3xl bg-gray-50/50 dark:bg-zinc-900/50">
+        <div className="py-20 text-center text-gray-400 flex flex-col items-center border border-dashed border-gray-200 dark:border-zinc-800 rounded-xl bg-gray-50/50 dark:bg-zinc-900/50">
           <Receipt className="w-16 h-16 text-gray-200 dark:text-gray-900 mb-4" />
           <p className="font-bold text-gray-600 dark:text-gray-300 text-lg">Belum Ada Faktur Tercatat</p>
           <p className="text-sm max-w-xs mx-auto mb-6">Mulai dengan mencatat faktur pembelian yang Anda terima dari PBF (Suplier) untuk melacak hutang dagang.</p>
@@ -98,18 +95,18 @@ export function InvoiceList() {
           </button>
         </div>
       ) : (
-        <div className="bg-white dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 rounded-xl overflow-hidden shadow-sm">
+        <div className="bg-white dark:bg-zinc-800 border border-gray-100 dark:border-zinc-700 rounded-xl overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-gray-50 dark:bg-zinc-900/50 text-gray-500 dark:text-gray-400 uppercase text-[10px] tracking-wider font-bold border-b border-gray-100 dark:border-zinc-800">
+              <thead className="bg-gray-50 dark:bg-zinc-800/50 text-gray-500 dark:text-gray-400 uppercase text-xs font-semibold">
                 <tr>
-                  <th className="px-6 py-4">Nomor Faktur</th>
-                  <th className="px-6 py-4">Suplier</th>
-                  <th className="px-6 py-4">Tgl Faktur & Jatuh Tempo</th>
-                  <th className="px-6 py-4">Status</th>
-                  <th className="px-6 py-4 text-right">Total Tagihan</th>
-                  <th className="px-6 py-4 text-right">Sisa Hutang</th>
-                  <th className="px-6 py-4 text-center">Aksi</th>
+                  <th className="px-5 py-4">Nomor Faktur</th>
+                  <th className="px-5 py-4">Suplier</th>
+                  <th className="px-5 py-4">Tgl Faktur & Jatuh Tempo</th>
+                  <th className="px-5 py-4">Status</th>
+                  <th className="px-5 py-4 text-right">Total Tagihan</th>
+                  <th className="px-5 py-4 text-right">Sisa Hutang</th>
+                  <th className="px-5 py-4 text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-700/50">
@@ -118,10 +115,10 @@ export function InvoiceList() {
                   const remaining = inv.total_amount - inv.amount_paid;
                   
                   return (
-                    <tr key={inv.id} className="hover:bg-gray-50/80 dark:hover:bg-zinc-800/50 transition-colors">
-                      <td className="px-6 py-5">
+                    <tr key={inv.id} className="hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors">
+                      <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="p-2 bg-gray-100 dark:bg-zinc-700 rounded-lg">
+                          <div className="p-1.5 bg-gray-100 dark:bg-zinc-700 rounded-lg">
                             <Receipt className="w-4 h-4 text-gray-500" />
                           </div>
                           <div>
@@ -134,10 +131,10 @@ export function InvoiceList() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-5">
+                      <td className="px-5 py-4">
                         <p className="font-semibold text-gray-700 dark:text-gray-300">{inv.suppliers?.name || '-'}</p>
                       </td>
-                      <td className="px-6 py-5">
+                      <td className="px-5 py-4">
                         <div className="space-y-1">
                           <p className="text-xs text-gray-500 flex items-center gap-1.5">
                             <Calendar className="w-3.5 h-3.5" /> {new Date(inv.invoice_date).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })}
@@ -149,18 +146,18 @@ export function InvoiceList() {
                           </p>
                         </div>
                       </td>
-                      <td className="px-6 py-5">
+                      <td className="px-5 py-4">
                         {getStatusBadge(inv.status)}
                       </td>
-                      <td className="px-6 py-5 text-right font-bold text-gray-900 dark:text-gray-100">
+                      <td className="px-5 py-4 text-right font-bold text-gray-900 dark:text-gray-100">
                         {formatRupiah(inv.total_amount)}
                       </td>
-                      <td className="px-6 py-5 text-right font-bold">
+                      <td className="px-5 py-4 text-right font-bold">
                         <span className={remaining > 0 ? (overdue ? 'text-rose-600' : 'text-amber-600') : 'text-emerald-600'}>
                           {formatRupiah(remaining)}
                         </span>
                       </td>
-                      <td className="px-6 py-5">
+                      <td className="px-5 py-4">
                         <div className="flex justify-center gap-2">
                           <button 
                             onClick={() => {
@@ -168,17 +165,17 @@ export function InvoiceList() {
                               setShowPaymentModal(true);
                             }}
                             disabled={inv.status === 'paid'}
-                            className={`p-2 rounded-xl transition-all flex items-center gap-1.5 text-xs font-bold ${
+                            className={`p-1.5 rounded-lg transition-all flex items-center gap-1.5 text-xs font-semibold ${
                               inv.status === 'paid' 
-                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                : 'bg-indigo-50 text-indigo-600 hover:bg-indigo-700 hover:text-white border border-indigo-100 shadow-sm'
+                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-zinc-700'
+                                : 'bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white dark:bg-indigo-900/30 dark:hover:bg-indigo-600'
                             }`}
                             title="Bayar Hutang"
                           >
                             <HandCoins weight="bold" className="w-4 h-4" />
                             Bayar
                           </button>
-                          <button className="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-xl transition-colors shrink-0">
+                          <button className="p-1.5 text-gray-400 hover:text-indigo-600 bg-gray-100 hover:bg-indigo-50 dark:bg-zinc-700 dark:hover:bg-zinc-600 rounded-lg transition-colors shrink-0" title="Lihat Detail" aria-label="Lihat detail faktur">
                             <Eye className="w-4 h-4" />
                           </button>
                         </div>
