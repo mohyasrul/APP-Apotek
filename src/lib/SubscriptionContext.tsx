@@ -68,11 +68,12 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
     fetchSubscription();
   }, [fetchSubscription]);
 
-  const checkFeature = useCallback((_feature: string): boolean => {
-    // DEV MODE: all features unlocked for testing & debugging
-    void _feature;
-    return true;
-  }, []);
+  const checkFeature = useCallback((feature: string): boolean => {
+    // DEV MODE: all features unlocked during development (import.meta.env.DEV)
+    if (import.meta.env.DEV) return true;
+    if (!subscription?.plan) return true; // Fail-open if no subscription system
+    return subscription.plan.features.includes(feature);
+  }, [subscription]);
 
   const checkEntitlement = useCallback(async (feature: string): Promise<EntitlementResult> => {
     try {
