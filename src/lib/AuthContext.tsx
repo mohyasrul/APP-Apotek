@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (data) {
         setProfile(data as UserProfile);
         setProfileError(false);
-        sessionStorage.setItem('medisir-profile', JSON.stringify(data));
+        try { sessionStorage.setItem('medisir-profile', JSON.stringify(data)); } catch {}
       }
     } catch {
       setProfileError(true);
@@ -61,20 +61,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const refreshProfile = async () => {
-    if (user) {
-      await fetchProfile(user.id);
+    const { data: { session } } = await supabase.auth.getSession();
+    const currentUserId = session?.user?.id || user?.id;
+    if (currentUserId) {
+      await fetchProfile(currentUserId);
     }
   };
 
   useEffect(() => {
     let initialized = false;
 
-    // Baca cache profile untuk instant UI pada reload
-    const cached = sessionStorage.getItem('medisir-profile');
     let cachedProfile: UserProfile | null = null;
-    if (cached) {
-      try { cachedProfile = JSON.parse(cached); } catch { /* ignore */ }
-    }
+    try {
+      const cached = sessionStorage.getItem('medisir-profile');
+      if (cached) {
+        cachedProfile = JSON.parse(cached);
+      }
+    } catch { /* ignore sessionStorage error in strict browsers */ }
 
     const safetyTimer = setTimeout(() => {
       if (!initialized) {
@@ -91,7 +94,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (event === 'TOKEN_REFRESHED' && !session) {
         setUser(null);
         setProfile(null);
-        sessionStorage.removeItem('medisir-profile');
+        try { sessionStorage.removeItem('medisir-profile'); } catch {}
         setLoading(false);
         return;
       }
@@ -109,7 +112,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           // Background refresh — detect role changes (kasir removed, etc.)
           fetchProfile(currentUser.id).then(() => {
             // Check if role or pharmacy link changed
-            const freshProfile = JSON.parse(sessionStorage.getItem('medisir-profile') || 'null') as UserProfile | null;
+            let freshProfile: UserProfile | null = null;
+            try { freshProfile = JSON.parse(sessionStorage.getItem('medisir-profile') || 'null'); } catch {}
             if (freshProfile && cachedProfile &&
               (freshProfile.role !== cachedProfile.role ||
                freshProfile.pharmacy_owner_id !== cachedProfile.pharmacy_owner_id)) {
@@ -127,8 +131,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       } else {
         setProfile(null);
-        sessionStorage.removeItem('medisir-profile');
+        try { sessionStorage.removeItem('medisir-profile'); } catch {}
         setLoading(false);
+        return;
       }
     });
 

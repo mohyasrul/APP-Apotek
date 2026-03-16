@@ -28,7 +28,7 @@ export default function Login() {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, refreshProfile } = useAuth();
 
   // Jika user sudah login, arahkan ke Dashboard
   useEffect(() => {
@@ -53,8 +53,32 @@ export default function Login() {
 
         if (error) throw error;
 
+        // Ketika berhasil Sign Up, pastikan juga profil dasarnya langsung dibuat.
+        if (data.user) {
+          const { data: profile } = await supabase
+            .from('users')
+            .select('id')
+            .eq('id', data.user.id)
+            .single();
+            
+          if (!profile) {
+            // Pembuatan default profil karena belum ada
+            const { error: insertError } = await supabase.from('users').insert([{
+              id: data.user.id,
+              full_name: email.split('@')[0],
+              pharmacy_name: '',
+              pharmacy_address: '',
+              role: 'owner'
+            }]);
+            if (insertError) {
+              console.error("Gagal create profile di isSignUp:", insertError);
+            }
+          }
+        }
+
         if (data.session) {
-          // Auto-confirm aktif — profil akan dibuat via trigger, redirect ke dashboard
+          // Auto-confirm aktif — profil sudah dibuat, redirect ke dashboard (yang akan men-trigger onboarding)
+          await refreshProfile();
           navigate('/');
           return;
         }
@@ -83,13 +107,14 @@ export default function Login() {
             await supabase.from('users').insert([{
               id: data.user.id,
               full_name: email.split('@')[0],
-              pharmacy_name: `Apotek ${email.split('@')[0]}`,
-              pharmacy_address: '-',
+              pharmacy_name: '',
+              pharmacy_address: '',
               role: 'owner'
             }]);
           }
         }
         
+        await refreshProfile();
         // Arahkan ke dashboard
         navigate('/');
       }

@@ -259,9 +259,17 @@ export function TopNavigation() {
             onClick={() => setShowDropdown(!showDropdown)}
             className="flex items-center gap-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800 p-1.5 pr-3 rounded-lg border border-gray-200 dark:border-zinc-700 transition-colors"
           >
-            <div className="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-semibold text-sm uppercase">
-              {displayName.charAt(0)}
-            </div>
+            {profile?.logo_url ? (
+              <img 
+                src={profile.logo_url} 
+                alt="Profile" 
+                className="w-8 h-8 rounded-lg object-cover border border-gray-200 dark:border-zinc-700 bg-white"
+              />
+            ) : (
+              <div className="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-semibold text-sm uppercase">
+                {displayName.charAt(0)}
+              </div>
+            )}
             <div className="flex-col hidden sm:flex">
               <span className="text-sm font-medium leading-tight text-gray-900 dark:text-zinc-100 max-w-[120px] truncate">
                 {displayName}
