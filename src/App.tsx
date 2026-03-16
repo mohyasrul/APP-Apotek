@@ -7,6 +7,7 @@ import { ThemeProvider } from './lib/ThemeContext';
 import { SidebarProvider, useSidebar } from './lib/SidebarContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { TopNavigation } from './components/layout/TopNavigation';
+import { supabase } from './lib/supabase';
 import { MobileBottomNav } from './components/layout/MobileBottomNav';
 import { SidebarNav } from './components/layout/SidebarNav';
 import { PageTransition } from './components/layout/PageTransition';
@@ -100,6 +101,16 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
   if (loading) return <PageLoader />;
 
   if (!user) return <Navigate to="/login" />;
+
+  // ── Penanganan khusus untuk "Dead State" / Profil Hilang ──
+  // Jika auth ada, loading selesai, namun profil tetap `null` tanpa error jaringan (PGRST116),
+  // kemungkinan ini adalah sisa akun lama yang gagal membuat profil. Arahkan pelan-pelan ke /login untuk diperbaiki.
+  if (!loading && !profile && !profileError) {
+    console.warn("Profil tidak ditemukan di database. Mengembalikan user ke sesi login untuk perbaikan.");
+    // Clear state dan lempar kembali ke auth
+    supabase.auth.signOut().then(() => window.location.href = '/login');
+    return <PageLoader />;
+  }
 
   // Still loading profile — wait before rendering protected content
   if (!profile && !profileError) return <PageLoader />;

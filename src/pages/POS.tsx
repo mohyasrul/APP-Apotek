@@ -481,7 +481,10 @@ export default function POS() {
       clearCart();
       fetchInventory();
     } catch (error: unknown) {
-      toast.error('Gagal memproses transaksi: ' + (error instanceof Error ? error.message : 'Terjadi kesalahan'));
+      const errMsg = (typeof error === 'object' && error !== null && 'message' in error) 
+        ? (error as any).message 
+        : 'Terjadi kesalahan';
+      toast.error('Gagal memproses transaksi: ' + errMsg);
     } finally {
       setIsProcessing(false);
     }
