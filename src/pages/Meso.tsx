@@ -176,12 +176,11 @@ export default function Meso() {
       </div>
 
       {/* Info box */}
-      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 mb-6 flex gap-3">
-        <Info weight="fill" className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-        <div className="text-sm text-amber-700 dark:text-amber-300">
-          <p className="font-semibold mb-1">Kewajiban Farmakovigilans</p>
-          <p>Apotek berperan aktif dalam Farmakovigilans sesuai PMK 73/2016. Setiap MESO yang serius atau baru harus dilaporkan ke BPOM melalui <strong>e-MESO</strong> (<a href="https://e-meso.pom.go.id" target="_blank" rel="noopener noreferrer" className="underline">e-meso.pom.go.id</a>).</p>
-        </div>
+      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3 mb-3 flex gap-2">
+        <Info weight="fill" className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+        <p className="text-xs text-amber-700 dark:text-amber-300">
+          <span className="font-semibold">Farmakovigilans (PMK 73/2016):</span> MESO yang serius atau baru harus dilaporkan ke BPOM melalui <a href="https://e-meso.pom.go.id" target="_blank" rel="noopener noreferrer" className="underline font-medium">e-meso.pom.go.id</a>.
+        </p>
       </div>
 
       {/* Search */}
