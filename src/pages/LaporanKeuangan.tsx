@@ -285,7 +285,7 @@ export default function LaporanKeuangan() {
           </div>
 
           {/* Chart */}
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800 mb-8">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800 mb-8">
             <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center gap-2">
               <ChartLine weight="fill" className="w-5 h-5 text-indigo-600" />
               Grafik Laba Rugi per Bulan
@@ -304,7 +304,7 @@ export default function LaporanKeuangan() {
           </div>
 
           {/* Monthly Table */}
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-sm border border-gray-100 dark:border-zinc-800 mb-8 overflow-hidden">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-gray-100 dark:border-zinc-800 mb-8 overflow-hidden">
             <div className="p-5 border-b border-gray-100 dark:border-zinc-800">
               <h2 className="font-bold text-gray-700 dark:text-gray-200">Rincian per Bulan</h2>
             </div>
@@ -358,7 +358,7 @@ export default function LaporanKeuangan() {
 
           {/* AP Summary */}
           {apSummary && (
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800 mb-8">
+            <div className="bg-white dark:bg-zinc-900 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800 mb-8">
               <h2 className="font-bold text-gray-700 dark:text-gray-200 mb-4 flex items-center gap-2">
                 <Receipt weight="fill" className="w-5 h-5 text-amber-500" />
                 Hutang Dagang (Account Payable / PBF)

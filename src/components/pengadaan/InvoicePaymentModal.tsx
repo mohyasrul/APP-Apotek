@@ -68,7 +68,7 @@ export function InvoicePaymentModal({ invoice, onClose, onSuccess }: Props) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm shadow-2xl">
-      <div className="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-zinc-800">
           <div className="flex items-center gap-3">
             <div className="p-2.5 bg-emerald-500 rounded-xl shadow-lg shadow-emerald-500/20">

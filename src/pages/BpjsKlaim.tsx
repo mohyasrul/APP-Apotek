@@ -672,8 +672,8 @@ export default function BpjsKlaim() {
 
       {/* ── Form Modal ─────────────────────────────────────────────────────────── */}
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center p-4 bg-black/50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="bpjs-form-title">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl w-full max-w-2xl my-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="bpjs-form-title">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-2xl my-4 animate-in fade-in zoom-in-95 duration-200">
             {/* Form header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-zinc-800">
               <h2 id="bpjs-form-title" className="font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
@@ -864,8 +864,8 @@ export default function BpjsKlaim() {
 
       {/* ── Delete Confirmation Modal ─────────────────────────────────────────── */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50" role="dialog" aria-modal="true" aria-labelledby="del-title">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl w-full max-w-sm p-6">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="del-title">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-sm p-6 animate-in fade-in zoom-in-95 duration-200">
             <h3 id="del-title" className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Hapus Klaim?</h3>
             <p className="text-sm text-gray-600 dark:text-zinc-400 mb-5">
               Klaim <b>{deleteTarget.claim_number}</b> atas nama <b>{deleteTarget.patient_name}</b> akan dihapus permanen. Tindakan ini tidak bisa dibatalkan.
@@ -890,8 +890,8 @@ export default function BpjsKlaim() {
 
       {/* ── Reject Confirmation Modal ─────────────────────────────────────────── */}
       {rejectTarget && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50" role="dialog" aria-modal="true" aria-labelledby="rej-title">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl w-full max-w-sm p-6">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="rej-title">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-sm p-6 animate-in fade-in zoom-in-95 duration-200">
             <h3 id="rej-title" className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Tolak Klaim?</h3>
             <p className="text-sm text-gray-600 dark:text-zinc-400 mb-3">
               Klaim <b>{rejectTarget.claim_number}</b> akan ditandai sebagai ditolak.

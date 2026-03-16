@@ -460,8 +460,8 @@ export default function Racikan() {
 
       {/* Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50">
-          <div className="bg-white dark:bg-zinc-900 rounded-t-3xl sm:rounded-3xl shadow-2xl w-full sm:max-w-2xl max-h-[95vh] flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full sm:max-w-2xl max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800 shrink-0">
               <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100">
                 {selected ? 'Edit Formula Racikan' : 'Formula Racikan Baru'}
@@ -635,8 +635,8 @@ export default function Racikan() {
 
       {/* Etiket Modal */}
       {showEtiketModal && selectedForEtiket && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60">
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-md">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-md animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800">
               <h2 className="font-bold text-gray-900 dark:text-gray-100">Cetak Etiket Racikan</h2>
               <button onClick={() => setShowEtiketModal(false)} className="p-2 rounded-xl text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors">

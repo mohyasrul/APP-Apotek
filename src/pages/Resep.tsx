@@ -406,8 +406,8 @@ export default function Resep() {
 
       {/* ── Detail Modal ──────────────────────────────────────────────────── */}
       {selected && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800">
               <div>
                 <h3 className="font-bold text-gray-900 dark:text-gray-100">Detail Resep</h3>
@@ -534,8 +534,8 @@ export default function Resep() {
 
       {/* ── Create Modal ──────────────────────────────────────────────────── */}
       {showCreate && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col">
+        <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-zinc-800 shrink-0">
               <h3 className="font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
                 <Storefront weight="fill" className="w-5 h-5 text-indigo-600" /> Buat Resep Baru

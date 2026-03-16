@@ -409,17 +409,17 @@ export default function StockOpname() {
 
       {/* Create Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6">
+        <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-md p-6 animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-base font-semibold">Buat Stock Opname Baru</h2>
-              <button onClick={() => setShowCreateModal(false)} className="p-1.5 hover:bg-gray-100 rounded-lg">
-                <X className="w-5 h-5" />
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">Buat Stock Opname Baru</h2>
+              <button onClick={() => setShowCreateModal(false)} className="p-1.5 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg">
+                <X className="w-5 h-5 text-gray-400 dark:text-gray-500" />
               </button>
             </div>
 
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Catatan (opsional)</label>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5">Catatan (opsional)</label>
               <textarea
                 value={createNotes}
                 onChange={e => setCreateNotes(e.target.value)}
@@ -451,8 +451,8 @@ export default function StockOpname() {
 
       {/* Detail Modal */}
       {selectedOpname && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+        <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200">
             <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
               <div>
                 <h2 className="text-base font-semibold">Detail Stock Opname</h2>

@@ -186,7 +186,7 @@ export function StockCardModal({ medicine, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-[101] flex items-center justify-center p-4 bg-zinc-900/60 backdrop-blur-sm shadow-2xl">
-      <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-zinc-800">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-500/20">

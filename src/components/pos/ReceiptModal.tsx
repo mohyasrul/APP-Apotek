@@ -51,7 +51,7 @@ export function ReceiptModal({ receipt, defaultWANumber, onClose }: Props) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-zinc-900/50 backdrop-blur-sm"
       role="dialog" aria-modal="true" aria-label="Struk Transaksi">
-      <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         <div className="p-6 text-center">
           <div className="w-16 h-16 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-4"><CheckCircle weight="fill" className="w-8 h-8" /></div>
           <h3 className="font-bold text-xl text-gray-900 dark:text-gray-100 mb-1">Transaksi Berhasil!</h3>

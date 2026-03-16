@@ -117,7 +117,7 @@ export function OnboardingWizard({ onComplete }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-xl border border-gray-200 w-full max-w-2xl overflow-hidden">
+      <div className="bg-white rounded-xl shadow-xl border border-gray-200 w-full max-w-2xl overflow-hidden">
         {/* Progress Header */}
         <div className="bg-gray-50 border-b border-gray-200 px-8 py-6">
           <h1 className="text-lg font-semibold text-gray-900 mb-1">Selamat Datang di MediSir! 🎉</h1>

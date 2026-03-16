@@ -42,12 +42,12 @@ export function NarcoticHandoverModal({ narcoticItems, onConfirm, onClose }: Pro
   };
 
   return (
-    <div className="fixed inset-0 z-[60] bg-black/50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-[60] bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="narcotic-handover-title"
-        className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl max-w-md w-full max-h-[80vh] overflow-y-auto"
+        className="bg-white dark:bg-zinc-900 rounded-xl shadow-2xl max-w-md w-full max-h-[85vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
