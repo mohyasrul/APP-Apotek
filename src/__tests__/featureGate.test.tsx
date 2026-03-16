@@ -63,7 +63,7 @@ describe('FeatureGate', () => {
         <span>SIPNAP Content</span>
       </FeatureGate>
     );
-    expect(screen.getByText(/paket/i)).toBeInTheDocument();
+    expect(screen.getByText('Gratis')).toBeInTheDocument();
     mockSubscription = null;
   });
 
