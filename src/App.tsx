@@ -94,7 +94,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode; allowedRoles?: string[] }) {
+function ProtectedRoute({ children, allowedRoles: _allowedRoles }: { children: React.ReactNode; allowedRoles?: string[] }) {
   const { user, profile, loading, profileError } = useAuth();
 
   if (loading) return <PageLoader />;
@@ -121,9 +121,11 @@ function ProtectedRoute({ children, allowedRoles }: { children: React.ReactNode;
     );
   }
 
-  if (allowedRoles && profile && !allowedRoles.includes(profile.role)) {
-    return <Navigate to="/" replace />;
-  }
+  // DEV MODE: role restriction disabled for testing & debugging
+  // if (allowedRoles && profile && !allowedRoles.includes(profile.role)) {
+  //   return <Navigate to="/" replace />;
+  // }
+  void _allowedRoles;
 
   return (
     <SidebarProvider>

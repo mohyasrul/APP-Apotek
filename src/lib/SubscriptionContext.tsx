@@ -68,10 +68,11 @@ export function SubscriptionProvider({ children }: { children: React.ReactNode }
     fetchSubscription();
   }, [fetchSubscription]);
 
-  const checkFeature = useCallback((feature: string): boolean => {
-    if (!subscription?.plan) return true; // Default allow if no subscription system
-    return subscription.plan.features.includes(feature);
-  }, [subscription]);
+  const checkFeature = useCallback((_feature: string): boolean => {
+    // DEV MODE: all features unlocked for testing & debugging
+    void _feature;
+    return true;
+  }, []);
 
   const checkEntitlement = useCallback(async (feature: string): Promise<EntitlementResult> => {
     try {

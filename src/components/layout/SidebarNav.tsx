@@ -137,7 +137,7 @@ export function SidebarNav() {
   const location = useLocation();
   const { profile } = useAuth();
   const { collapsed, toggle } = useSidebar();
-  const isOwner = profile?.role === 'owner';
+  const _isOwner = profile?.role === 'owner'; void _isOwner; // DEV MODE: ownerOnly disabled
 
   const checkActive = (to: string) =>
     to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
@@ -190,7 +190,8 @@ export function SidebarNav() {
         {/* Scrollable nav */}
         <nav className="flex-1 overflow-y-auto py-2 custom-scrollbar" aria-label="Menu utama">
           {navSections.map((section, si) => {
-            if (section.ownerOnly && !isOwner) return null;
+            // DEV MODE: ownerOnly filter disabled for testing & debugging
+            // if (section.ownerOnly && !isOwner) return null;
 
             const isCollapsible = section.collapsible && section.sectionLabel && !collapsed;
             const isExpanded = section.sectionLabel ? expandedSections[section.sectionLabel] ?? false : true;
