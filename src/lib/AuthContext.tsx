@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { supabase } from './supabase';
 import { User } from '@supabase/supabase-js';
 import type { UserProfile } from './types';
@@ -30,14 +30,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [profileError, setProfileError] = useState(false);
+  // Sequence counter to discard stale concurrent fetchProfile results
+  const fetchSeqRef = useRef(0);
 
   const fetchProfile = async (userId: string) => {
+    const seq = ++fetchSeqRef.current;
     try {
       const { data, error } = await supabase
         .from('users')
         .select('*')
         .eq('id', userId)
         .single();
+
+      // A newer fetch has superseded this one — discard result to avoid
+      // a stale PGRST116 (profile not yet created) overwriting a valid profile
+      if (seq !== fetchSeqRef.current) return;
 
       if (error) {
         if (error.code === 'PGRST116') {
@@ -56,6 +63,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         try { sessionStorage.setItem('medisir-profile', JSON.stringify(data)); } catch {}
       }
     } catch {
+      if (seq !== fetchSeqRef.current) return;
       setProfileError(true);
     }
   };

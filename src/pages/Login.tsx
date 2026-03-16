@@ -28,14 +28,15 @@ export default function Login() {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   
   const navigate = useNavigate();
-  const { user, refreshProfile } = useAuth();
+  const { user, profile, refreshProfile } = useAuth();
 
-  // Jika user sudah login, arahkan ke Dashboard
+  // Jika user sudah login DAN profil sudah dimuat, arahkan ke Dashboard
+  // (cek profile mencegah redirect prematur saat pendaftaran baru sedang dibuat)
   useEffect(() => {
-    if (user) {
+    if (user && profile) {
       navigate('/');
     }
-  }, [user, navigate]);
+  }, [user, profile, navigate]);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
