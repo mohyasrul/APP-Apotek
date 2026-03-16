@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (data) {
         setProfile(data as UserProfile);
         setProfileError(false);
-        try { sessionStorage.setItem('medisir-profile', JSON.stringify(data)); } catch {}
+        try { sessionStorage.setItem('medisir-profile', JSON.stringify(data)); } catch { /* ignore sessionStorage error in strict browsers */ }
       }
     } catch {
       if (seq !== fetchSeqRef.current) return;
@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (event === 'TOKEN_REFRESHED' && !session) {
         setUser(null);
         setProfile(null);
-        try { sessionStorage.removeItem('medisir-profile'); } catch {}
+        try { sessionStorage.removeItem('medisir-profile'); } catch { /* ignore sessionStorage error in strict browsers */ }
         setLoading(false);
         return;
       }
@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           fetchProfile(currentUser.id).then(() => {
             // Check if role or pharmacy link changed
             let freshProfile: UserProfile | null = null;
-            try { freshProfile = JSON.parse(sessionStorage.getItem('medisir-profile') || 'null'); } catch {}
+            try { freshProfile = JSON.parse(sessionStorage.getItem('medisir-profile') || 'null'); } catch { /* ignore sessionStorage error in strict browsers */ }
             if (freshProfile && cachedProfile &&
               (freshProfile.role !== cachedProfile.role ||
                freshProfile.pharmacy_owner_id !== cachedProfile.pharmacy_owner_id)) {
@@ -139,7 +139,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       } else {
         setProfile(null);
-        try { sessionStorage.removeItem('medisir-profile'); } catch {}
+        try { sessionStorage.removeItem('medisir-profile'); } catch { /* ignore sessionStorage error in strict browsers */ }
         setLoading(false);
         return;
       }
